@@ -5,3 +5,4 @@ fasdfasdf
 testests
 
 git config --global core.excludesfile
+test2
