@@ -1,9 +1,5 @@
-.DS_Store
-tmp/
-node_modules/
-.c9revisions/
-.settings
-.settings.xml
-npm-debug.log
-.c9/
+#Ignore all .c9 specific files<br>
 /.c9/
+.c9/
+node_modules/
+bower_components/
