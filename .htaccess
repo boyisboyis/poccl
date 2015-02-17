@@ -1,0 +1,16 @@
+php_value mysql.default.password poccl
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.+) - [PT,L]
+
+RewriteRule ^(.*) travels.php
+
+Options -Indexes
+
+php_value auto_prepend_file protal_access.php
+
+
+ErrorDocument 403 public/403.html
+ErrorDocument 404 public/404.html
