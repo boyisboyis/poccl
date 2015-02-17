@@ -1,8 +1,6 @@
 MY PROJECT
 
-test 
-fasdfasdf
-testests
+Please set
+git rm -r --cached .c9/
 
-git config --global core.excludesfile
-test2
+and use git add 
