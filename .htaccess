@@ -1,5 +1,3 @@
-php_value mysql.default.password poccl
-
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
@@ -7,10 +5,11 @@ RewriteRule ^(.+) - [PT,L]
 
 RewriteRule ^(.*) portal_access.php
 
-Options -Indexes
+php_value mysqli.default_pw "123261129"
 
 php_value auto_prepend_file lib/includes.php
 
+Options -Indexes
 
 ErrorDocument 403 public/403.html
 ErrorDocument 404 public/404.html
