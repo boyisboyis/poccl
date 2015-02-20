@@ -10,10 +10,10 @@ INSTALL mysql
 mysql-ctl install
 
 
-# START mysql
+## START mysql
 $ mysql-ctl start
-# STOP MySQL
+## STOP MySQL
 $ mysql-ctl stop
         
-# run the MySQL interactive shell
+## run the MySQL interactive shell
 $ mysql-ctl cli
