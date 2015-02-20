@@ -9,10 +9,15 @@ and use git add and commit
 
 mysql-ctl install
 ### START mysql
-$ mysql-ctl start
+mysql-ctl start
 ### STOP MySQL
-$ mysql-ctl stop
-        
+mysql-ctl stop
 ### run the MySQL interactive shell
-$ mysql-ctl cli
+mysql-ctl cli
+### get username
+echo $C9_USER
+### get host
+echo $IP
+### install phpmyadmin
+phpmyadmin-ctl install
 
