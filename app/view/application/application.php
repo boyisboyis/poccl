@@ -6,7 +6,7 @@
   <body>
     test
     <?php 
-      DB::q("SELECT * FROM a");
+      DB::query("SELECT * FROM a");
     ?>
   </body>
 </html>
