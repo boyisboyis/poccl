@@ -24,9 +24,13 @@ phpmyadmin-ctl install
 
 #### Rebase & Merge Branch
 git checkout dev
+
 git rebase master < or Another branch > < if can't rebase. Please, check commit >
+
 git checkout master
+
 git merge --no-ff dev 
+
 
 #### Show log graph
 git log --oneline --graph
