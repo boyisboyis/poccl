@@ -3,3 +3,5 @@
 .c9/
 node_modules/
 bower_components/
+config/db.ini
+.htaccess
