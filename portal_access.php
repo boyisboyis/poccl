@@ -8,6 +8,7 @@ if($GLOBALS["environment"]["maintain"] == 1){
 
 $uri = ROUTE::getURI()->conPath();
 print_r($uri);
+echo "test";
  // $result =  ROUTE::getURI();
  // echo $result;
  // echo "<br/>";
