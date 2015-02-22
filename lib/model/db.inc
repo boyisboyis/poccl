@@ -3,7 +3,7 @@
 class DB{
   
   public $host, $username, $password, $database;
-  private $con;
+  private static $con;
   
   public function __construct($host, $username, $password, $database){
     $this->host = $host;
@@ -13,14 +13,20 @@ class DB{
   }
   
   public function connect(){
-    $this->con = new mysqli($this->host, $this->username, $this->password, $this->database);
-    if($this->con->connect_errno){
-        echo "test";
+    self::$con = new mysqli($this->host, $this->username, $this->password, $this->database);
+   // print_r($this->con->connect_errno);
+    if(self::$con->connect_errno){
+       echo "test db";
     }
   }
   
+  public static function q($sql){
+   $q = self::$con->query($sql);
+   print_r($q);
+  }
+  
   public function __destruct(){
-    $this->con->close();
+    self::$con->close();
     echo "close";
   }
   
