@@ -38,7 +38,12 @@ class Route {
   public static function getPage($p){
    $route = Route::getPath();
    if(isset($route[$p])){
-     require __DIR__."/../../".$route[$p]["file"];
+     if($route[$p]["type"] == "require"){
+       require __DIR__."/../../".$route[$p]["file"];
+     }
+     else if($route[$p]["type"] == "file_get_contents"){
+       echo file_get_contents( __DIR__."/../../".$route[$p]["file"]);
+     }
    }
   }
   
