@@ -4,6 +4,7 @@ class Route {
   
   private static $_uri = null;
   private static $_path = null;
+  private static $_instance = null;
   
   private function __construct() {}
   
@@ -14,7 +15,31 @@ class Route {
   public static function getURI(){
     $r = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     self::$_uri = urldecode($r);
-    return self::$_uri;
+    if(self::$_instance === null) self::$_instance = new self;
+    return self::$_instance;
+  }
+  
+  public function conPath(){
+    $path = $this->conArray();
+    if(count($path) > 0){
+      return implode("_", $path);
+    }
+    return "";
+  }
+  public function conArray(){
+    $uri = explode("/",self::$_uri);
+    $path = array();
+    foreach($uri as $val){
+      if(trim($val) != "") $path[] = $val;
+    }
+    return $path;
+  }
+  
+  public static function getPage($p){
+   $route = Route::getPath();
+   if(isset($route[$p])){
+     require __DIR__."/../../".$route[$p]["file"];
+   }
   }
   
 }

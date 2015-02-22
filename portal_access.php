@@ -1,11 +1,13 @@
 <?php
   
-  $GLOBALS["environment"] = parse_ini_file('config/env.ini');
-  if($GLOBALS["environment"]["maintain"] == 1){
-    require('public/503.html');
-    die();
-  }
- 
+$GLOBALS["environment"] = parse_ini_file('config/env.ini');
+if($GLOBALS["environment"]["maintain"] == 1){
+  require('public/503.html');
+  die();
+}
+
+$uri = ROUTE::getURI()->conPath();
+print_r($uri);
  // $result =  ROUTE::getURI();
  // echo $result;
  // echo "<br/>";
