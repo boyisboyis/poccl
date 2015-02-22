@@ -2,9 +2,7 @@
 
     Please set
 
-* git rm -r --cached .c9/
-
-    And use
+* git rm -r --cached .c9/q
     
 * git add and commit
 
