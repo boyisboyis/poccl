@@ -20,7 +20,7 @@ class DB{
     }
   }
   
-  public static function q($sql){
+  public static function query($sql){
    $q = self::$con->query($sql);
    print_r($q);
   }
