@@ -20,6 +20,9 @@ echo $C9_USER
 echo $IP
 ### install phpmyadmin
 phpmyadmin-ctl install
+
+---
+
 ### Git Commands
 
 #### Rebase & Merge Branch
