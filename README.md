@@ -1,4 +1,4 @@
-# MY PROJECT
+# MY PROJECT !!
 
 Please set
 git rm -r --cached .c9/
@@ -20,4 +20,6 @@ echo $C9_USER
 echo $IP
 ### install phpmyadmin
 phpmyadmin-ctl install
-
+### Git Commands
+#### Show log graph
+git log --oneline --graph
