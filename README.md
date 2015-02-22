@@ -1,31 +1,40 @@
-# MY PROJECT !!!!!!!!
+# Purchase Order / Contact Check Lists :: Project
 
 Please set
+
 git rm -r --cached .c9/
 
 and use git add and commit
 
-## INSTALL mysql
+---
 
+## INSTALL mysql
 mysql-ctl install
-### START mysql
+
+###### START mysql
 mysql-ctl start
-### STOP MySQL
+
+###### STOP MySQL
 mysql-ctl stop
-### run the MySQL interactive shell
+
+###### Run the MySQL interactive shell
 mysql-ctl cli
-### get username
+
+###### Get username
 echo $C9_USER
-### get host
+
+###### Get host
 echo $IP
-### install phpmyadmin
+
+###### Install phpmyadmin
+
 phpmyadmin-ctl install
 
 ---
 
-### Git Commands
+## Git Commands
 
-#### Rebase & Merge Branch
+###### Rebase & Merge Branch
 git checkout dev
 
 git rebase master < or Another branch > < if can't rebase. Please, check commit >
@@ -34,6 +43,5 @@ git checkout master
 
 git merge --no-ff dev 
 
-
-#### Show log graph
+###### Show log graph
 git log --oneline --graph
