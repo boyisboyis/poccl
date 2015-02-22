@@ -1,10 +1,10 @@
 # Purchase Order / Contact Check Lists
 
---- Please set
+⋅⋅⋅ Please set
 
 * git rm -r --cached .c9/
 
---- and use git add and commit
+⋅⋅⋅ and use git add and commit
 
 ---
 
