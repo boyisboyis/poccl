@@ -5,5 +5,8 @@
   </head>
   <body>
     test
+    <?php 
+      DB::q("SELECT * FROM a");
+    ?>
   </body>
 </html>
