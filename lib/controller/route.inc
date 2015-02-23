@@ -42,6 +42,9 @@ class Route {
        require __DIR__."/../../".$route[$p]["file"];
      }
      else if($route[$p]["type"] == "file_get_contents"){
+       if(isset($route[$p]["header"]) && $route[$p]["header"]!=""){
+         header("Content-type: ".$route[$p]["header"]);
+       }
        echo file_get_contents( __DIR__."/../../".$route[$p]["file"]);
      }
    }

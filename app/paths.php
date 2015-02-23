@@ -21,7 +21,16 @@ return array(
   "jquery-ui" => array(
       "file" => "lib/asset/js/jquery-ui.js",
       "type" => "file_get_contents"
-    ) 
+    ),
+    
+    /*
+    * CSS file
+    */
+    "maincss" => array(
+      "file" => "lib/asset/css/main.css",
+      "header" => "text/css",
+      "type" => "file_get_contents"
+    )
   
 );
 
