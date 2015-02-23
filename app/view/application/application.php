@@ -6,7 +6,7 @@
   <body>
     test
     <?php 
-      DB::query("SELECT * FROM a");
+      $x = DB::query("SELECT * FROM a")->getOne()->get();
     ?>
   </body>
 </html>
