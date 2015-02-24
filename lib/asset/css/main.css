@@ -1,6 +1,35 @@
 /*
+* import Font
+*/
+@font-face {
+  font-family: 'roboto';
+  src: url('lib/asset/font/roboto/Roboto-Regular.ttf');
+}
+
+@font-face{
+  font-weight: normal;
+	font-style: normal;
+	font-family: 'codropsicons';
+	src:url('lib/asset/font/codropsicons/codropsicons.eot');
+	src:url('lib/asset/font/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+		url('lib/asset/font/codropsicons/codropsicons.woff') format('woff'),
+		url('lib/asset/font/codropsicons/codropsicons.ttf') format('truetype'),
+		url('lib/asset/font/codropsicons/codropsicons.svg#codropsicons') format('svg');
+}
+
+/*
 * Main CSS
 */
+*, 
+*:after,
+*:before {
+  font-family: 'roboto', Arial, sans-serif;;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 html,
 body,
 ul,
@@ -8,6 +37,30 @@ ol{
   margin: 0;
   padding: 0;
 }
-#aaa{
-  padding: 0;
+
+button {
+	border: none;
+	padding: 0.6em 1.2em;
+	/*background: #a9a9a9;*/
+	color: #fff;
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	font-size: 1em;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	cursor: pointer;
+	display: inline-block;
+	margin: 11px 10px;
+	border-radius: 2px;
+	font-weight: 400;
+	outline: none;
+}
+button {
+	font-size: 75%;
+	/*background: #ed8151;*/ /* Old Color without mouse over */
+}
+
+button:hover,
+button:active {
+	/*background: #e86a32;*/ /* Old Color within mouse over */
+	background: #ed8151;
 }

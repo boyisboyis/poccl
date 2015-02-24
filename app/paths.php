@@ -22,12 +22,21 @@ return array(
       "file" => "lib/asset/js/jquery-ui.js",
       "type" => "file_get_contents"
     ),
+  "applicationjs" => array(
+      "file" => "app/asset/js/application.js",
+      "type" => "file_get_contents"
+   ),
     
     /*
     * CSS file
     */
     "maincss" => array(
       "file" => "lib/asset/css/main.css",
+      "header" => "text/css",
+      "type" => "file_get_contents"
+    ),
+    "applicationcss" => array(
+      "file" => "app/asset/css/application.css",
       "header" => "text/css",
       "type" => "file_get_contents"
     )
