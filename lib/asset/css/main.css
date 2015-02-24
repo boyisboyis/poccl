@@ -64,3 +64,7 @@ button:active {
 	/*background: #e86a32;*/ /* Old Color within mouse over */
 	background: #ed8151;
 }
+
+.clearfix {
+	clear: both;
+}

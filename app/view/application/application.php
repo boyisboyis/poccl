@@ -16,19 +16,19 @@
       
       <!-- button link to home page -->
       
-      <nav id="wrap-back-home" class="codrops-home">
+      <nav id="wrap-back-home" class="codrops-home clearfix">
         <a class="back-home codrops-icon codrops-icon-prev" href="#home">Home</a>
       </nav>
       
       <!-- Box header -->
       
-      <header id="wrap-header">
+      <header id="wrap-header" class="clearfix">
         <h1>Purchase Order / Contract Check Lists <span>Checking the purchase order</span></h1>
       </header>
       
       <!-- Box search -->
       
-      <div id="wrap-search" class="t1" style="display:none;">
+      <div id="wrap-search" class="t1 clearfix" style="display:none;">
         <div id="search-content">
           <select id="select-search">
             <option value="contract">Purchase order</option>
@@ -41,7 +41,7 @@
       
      <!-- Box content main-->
       
-      <div id="wrap-main">
+      <div id="wrap-main" class="clearfix">
         <section id="main-news" class="t0">
           <h2>News</h2>
           <div></div>
@@ -54,7 +54,7 @@
       
       <!-- Box Footer -->
       
-      <footer id="wrap-footer">
+      <footer id="wrap-footer" class="clearfix">
         
       </footer>
     </div>
