@@ -16,7 +16,7 @@
       
       <!-- button link to home page -->
       
-      <nav id="wrap-back-home" class="codrops-home clearfix">
+      <nav id="wrap-back-home" class="codrops-home clearfix" style="display:none;">
         <a class="back-home codrops-icon codrops-icon-prev" href="#home">Home</a>
       </nav>
       

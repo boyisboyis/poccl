@@ -141,6 +141,10 @@ a:hover, a:focus {
 	#wrap-main{
 		width: 100%;
 	}
+	
+	#wrap-header{
+		padding: 3em;
+	}
 }
 
 @media all and (max-width: 876px){
