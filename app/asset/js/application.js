@@ -34,13 +34,13 @@ $(document).ready(function(){
   function init(type){
     switch (parseInt(type)) {
       case 1:
-          $(".t1").show();
+          $(".t1, #wrap-back-home").show();
           $(".t0").hide();
         break;
       
       default:
           $(".t0").show();
-          $(".t1").hide();
+          $(".t1, #wrap-back-home").hide();
         break;
     }
   }
