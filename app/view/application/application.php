@@ -33,6 +33,7 @@
           <select id="select-search">
             <option value="contract">Purchase order</option>
             <option value="job">Job No</option>
+            <option value="poid">PO No</option>
           </select>
           <input type="search" id="input-search" name="input-search"/>
           <button id="search-now">search</button>
