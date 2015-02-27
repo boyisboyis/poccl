@@ -152,7 +152,7 @@ $(document).ready(function(){
                 var g_content = obj['Guarantee'][i];
                 var g_amount = (g_content['Amount_Actual_Percentage'] == "" || g_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)):g_content['Amount_Actual_Percentage']+"%";
                 tr += "<tr>"+
-                "<td>"+g_content['Guarantee_Type']+"</td><td class='text-center'>"+g_content['Terms']+"</td><td class='text-center>"+g_amount+"</td><td>"+g_content['Start_Plan']+"</td><td>"+g_content['Until_Plan']+"</td>"+
+                "<td>"+g_content['Guarantee_Type']+"</td><td class='text-center'>"+g_content['Terms']+"</td><td class='text-center'>"+g_amount+"</td><td>"+g_content['Start_Plan']+"</td><td>"+g_content['Until_Plan']+"</td>"+
                 "</tr>";
               }
               table_guarantee = "<table border=1 style='width: 70%;' class='purchase-each-detail'><tr><th>Description</th><th>Terms</th><th>Amount</th><th>Start Plan</th><th>Until Plan</th></tr>"+tr+"</table>";
@@ -164,7 +164,7 @@ $(document).ready(function(){
                 var p_content = obj['Payment'][i];
                 var p_amount = (p_content['Amount_Actual_Percentage'] == "" || p_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)):p_content['Amount_Actual_Percentage']+"%";
                 tr += "<tr>"+
-                "<td>"+p_content['Payment_Type']+"</td><td class='text-center'>"+p_content['Terms']+"</td><td class='text-center>"+p_amount+"</td><td>"+p_content['Payment_date_plan']+"</td>"+
+                "<td>"+p_content['Payment_Type']+"</td><td class='text-center'>"+p_content['Terms']+"</td><td class='text-center'>"+p_amount+"</td><td>"+p_content['Payment_date_plan']+"</td>"+
                 "</tr>";
               }
               table_payment = "<table border=1 style='width: 70%;' class='purchase-each-detail'><tr><th>Description</th><th>Terms</th><th>Amount</th><th>Payment Date Plan</th></tr>"+tr+"</table>";
