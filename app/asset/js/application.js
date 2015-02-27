@@ -5,7 +5,14 @@ $(document).ready(function(){
   /*
   * event
   */
-  
+  $("#input-search").on("keyup", function(e){
+    if ( e.which == 13 ) {
+      $("#search-now").click();
+    }
+  });
+  $("#select-search").on("change", function(){
+    $("#input-search").val("");
+  });
   $(".back-home").on("click", function(){
     document.location.hash = $(this).attr("href");
     getHash();
@@ -216,8 +223,10 @@ $(document).ready(function(){
               "</section>"+
               "<section class='content-search-right'>"+
               "<h3>PO info</h3>"+
-              "<p class='purchase-each-detail' style='margin-left: 12px'><span>SPO no</span><span class='t2_desc text_underline'>"+obj['PO_No']+"</span><span>Date</span><span class='t2_desc text_underline'>"+obj['Job']['PO_Date']+"</span></p>"+
+              //"<p class='purchase-each-detail' style='margin-left: 12px'><span>PO no</span><span class='t2_desc text_underline'>"+obj['PO_No']+"</span><span>Date</span><span class='t2_desc text_underline'>"+obj['Job']['PO_Date']+"</span></p>"+
               "<table class='purchase-each-detail'>"+
+              "<tr><td>PO no.</td><td>:</td><td class='text_underline'>"+obj['PO_No']+"</td></tr>"+
+              "<tr><td>PO Date</td><td>:</td><td class='text_underline'>"+obj['Job']['PO_Date']+"</td></tr>"+
               "<tr><td>PO type</td><td>:</td><td class='text_underline'>"+obj['Job']['PO_Type']+"</td></tr>"+
               "<tr><td>PO Amount</td><td>:</td><td><span class='text_underline'>"+thai_bath+"</span> THB</td></tr>"+
               tr_currency+
