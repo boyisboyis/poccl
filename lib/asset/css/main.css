@@ -68,3 +68,14 @@ button:active {
 .clearfix {
 	clear: both;
 }
+
+.text_underline {
+	text-decoration: underline;
+}
+
+.text-center{
+	text-align: center;
+}
+.text-right {
+	text-align: right;
+}

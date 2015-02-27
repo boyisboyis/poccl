@@ -44,11 +44,11 @@
       <div id="wrap-main" class="clearfix">
         <section id="main-news" class="t0">
           <h2>News</h2>
-          <div></div>
+          <div id="content-news"></div>
         </section>
         <section id="main-search" class="t1" style="display: none;">
           <h2>Result</h2>
-          <div></div>
+          <div id="content-search"></div>
         </section>
       </div>
       

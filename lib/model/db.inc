@@ -30,7 +30,7 @@ class DB{
   public function fetchArray(){
     $this->_result = array();
     if(self::$result != null){
-      while($ar = self::$result->fetch_array(MYSQLI_ASSOC)){
+      while($ar = self::$result->fetch_object()){
         $this->_result[] = $ar;
       }  
     }
