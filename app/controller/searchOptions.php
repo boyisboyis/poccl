@@ -6,6 +6,10 @@ if(Check::isAjax()){
 		switch($type){
 			case "job" : searchOptions::search("job", filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING));
 			break;
+			case "contract" : searchOptions::search("contract", filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING));
+			break;
+			case "poid" : searchOptions::search("poid", filter_input(INPUT_POST, 'search', FILTER_SANITIZE_STRING));
+			break;
 		}		
 	}
 }
@@ -17,12 +21,12 @@ else{
 class searchOptions{
 	
 	public static function search($type, $search = ""){
-		$where = array("job" => "JID");
+		$where = array("job" => "JID", "contract" => "Contactor_Name", "poid" => "PO_No");
 		if($search != ""){
-			$result = DB::query("SELECT * FROM po_asso WHERE po_asso.".$where[$type]." LIKE '%".$search."'")->get();
+			$result = DB::query("SELECT * FROM po_asso WHERE po_asso.".$where[$type]." LIKE '%".$search."%'")->get();
 		}
 		else{
-			$result = DB::query("SELECT * FROM $type")->get();
+			$result = DB::query("SELECT * FROM po_asso")->get();
 		}
 		$n = count($result);
 		if($n > 0){

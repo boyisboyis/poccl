@@ -11,6 +11,18 @@ $(document).ready(function(){
     getHash();
   });
   
+  $("#content-search").on("click", ".job-id", function(){
+    $(this).next().toggle();
+  });
+  
+  $("#search-now").on("click", function(){
+    var data = {
+      "type" : $("#select-search").val(),
+      "search" : $("#input-search").val()
+    }
+    searchResult(data);
+  })
+  
   $("#content-payment-news").on("click", '.search-from-news', function(){
     document.location.hash = $(this).attr("href");
     var search = $(this).data('jid');
@@ -118,7 +130,7 @@ $(document).ready(function(){
   }
   
   function searchResult(search){
-    console.log(search);
+    //console.log(search);
     $.ajaxSetup({ cache: false });
     $.ajax({
       type: "POST",
@@ -127,11 +139,11 @@ $(document).ready(function(){
       url : "search_options",
       cache: false,
       success: function(req){
-        console.log(req);
-        console.log(req['status']);
+        //console.log(req);
+        //console.log(req['status']);
         $("#content-search").html("");
         if(req['status'] == true){
-          console.log(req);
+          //console.log(req);
           $.each(req['obj'], function(){
             var obj = $(this)[0];
             var table_guarantee = "<p class='p-warning'>Guarantee is not set</p>";
@@ -159,8 +171,7 @@ $(document).ready(function(){
                 "<td class='td-search-term'>"+
                 "<p class='margin-0'>Description : <span class='text_underline'>"+g_content['Guarantee_Type']+"</span></p>"+
                 "<p class='margin-0'>Amount : <span class='text_underline'>"+g_amount+"</span></p>"+
-                "<p class='margin-0'>Start Plan : <span class='text_underline'>"+g_content['Start_Plan']+"</span></p>"+
-                "<p class='margin-0'>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></p>"+
+                "<p class='margin-0'>Start Plan : <span class='text_underline' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></p>"+
                 "</td>"+
                 "</tr>";
               }
@@ -189,7 +200,8 @@ $(document).ready(function(){
             $("#content-search").append(
               "<article class='purchase-detail'>"+
               "<h2 class='job-id'>"+obj['JID']+"</h2>"+
-              "<div>"+
+              "<div style='width: 100%;display:none;'>"+
+              "<div style='width: 100%'>"+
               "<section class='content-search-left'>"+
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
@@ -204,24 +216,23 @@ $(document).ready(function(){
               "</section>"+
               "<section class='content-search-right'>"+
               "<h3>PO info</h3>"+
-              "<p class='purchase-each-detail'><span>SPO no</span><span class='t2_desc text_underline'>"+obj['PO_No']+"</span><span>Date</span><span class='t2_desc text_underline'>"+obj['Job']['PO_Date']+"</span></p>"+
+              "<p class='purchase-each-detail' style='margin-left: 12px'><span>SPO no</span><span class='t2_desc text_underline'>"+obj['PO_No']+"</span><span>Date</span><span class='t2_desc text_underline'>"+obj['Job']['PO_Date']+"</span></p>"+
               "<table class='purchase-each-detail'>"+
               "<tr><td>PO type</td><td>:</td><td class='text_underline'>"+obj['Job']['PO_Type']+"</td></tr>"+
               "<tr><td>PO Amount</td><td>:</td><td><span class='text_underline'>"+thai_bath+"</span> THB</td></tr>"+
               tr_currency+
               "<tr><td>Goveming Law</td><td>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+
+              "<tr><td>Credit Term</td><td>:</td><td class='text_underline'>"+obj['Job']['Credit_Term']+"</td></tr>"+
+              "<tr><td>Late Payment Financial Charges</td><td>:</td><td class='text_underline'>"+obj['Job']['Late_Pay_Finan_Chage']+"</td></tr>"+
               "</table>"+
               "</section>"+
               "</div>"+
               "<div class='clearfix'></div>"+
-              "<div>"+
+              "<hr>"+
+              "<div style='width:100%'>"+
               "<section class='content-search-left'>"+
               "<h3>Payment Terms</h3>"+
               table_payment+
-              "<table class='purchase-each-detail'>"+
-              "<tr><td>Credit Term</td><td class='text_underline'>"+obj['Job']['Credit_Term']+"</td></tr>"+
-              "<tr><td>Late Payment Financial Charges</td><td class='text_underline'>"+obj['Job']['Late_Pay_Finan_Chage']+"</td></tr>"+
-              "</table>"+
               "</section>"+
               "<section class='content-search-right'>"+
               "<h3>Bank Guarantee</h3>"+
@@ -229,7 +240,9 @@ $(document).ready(function(){
               "</section>"+
               "</div>"+
               "<div class='clearfix' style='height: 10px'></div>"+
-              "</article>"
+              "<hr style='border-color:#ed8151; margin-bottom: 40px;'>"+
+              "</article>"+
+              "</div>"
             );
           });
         }
