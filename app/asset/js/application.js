@@ -151,11 +151,20 @@ $(document).ready(function(){
               for(var i=0;i<n;i++){
                 var g_content = obj['Guarantee'][i];
                 var g_amount = (g_content['Amount_Actual_Percentage'] == "" || g_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)):g_content['Amount_Actual_Percentage']+"%";
-                tr += "<tr>"+
+                /*tr += "<tr>"+
                 "<td>"+g_content['Guarantee_Type']+"</td><td class='text-center'>"+g_content['Terms']+"</td><td class='text-center'>"+g_amount+"</td><td>"+g_content['Start_Plan']+"</td><td>"+g_content['Until_Plan']+"</td>"+
+                "</tr>";*/
+                 tr += "<tr>"+
+                "<td style='vertical-align: text-top;'>Term : "+g_content['Terms']+"</td>"+
+                "<td class='td-search-term'>"+
+                "<p class='margin-0'>Description : <span class='text_underline'>"+g_content['Guarantee_Type']+"</span></p>"+
+                "<p class='margin-0'>Amount : <span class='text_underline'>"+g_amount+"</span></p>"+
+                "<p class='margin-0'>Start Plan : <span class='text_underline'>"+g_content['Start_Plan']+"</span></p>"+
+                "<p class='margin-0'>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></p>"+
+                "</td>"+
                 "</tr>";
               }
-              table_guarantee = "<table border=1 style='width: 70%;' class='purchase-each-detail'><tr><th>Description</th><th>Terms</th><th>Amount</th><th>Start Plan</th><th>Until Plan</th></tr>"+tr+"</table>";
+              table_guarantee = "<table border=0 style='width: 100%;' class='purchase-each-detail'>"+tr+"</table>";
             }
             n = obj['Payment'].length; 
             if(n > 0){
@@ -163,16 +172,25 @@ $(document).ready(function(){
               for(var i=0;i<n;i++){
                 var p_content = obj['Payment'][i];
                 var p_amount = (p_content['Amount_Actual_Percentage'] == "" || p_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)):p_content['Amount_Actual_Percentage']+"%";
-                tr += "<tr>"+
+               /* tr += "<tr>"+
                 "<td>"+p_content['Payment_Type']+"</td><td class='text-center'>"+p_content['Terms']+"</td><td class='text-center'>"+p_amount+"</td><td>"+p_content['Payment_date_plan']+"</td>"+
+                "</tr>";*/
+                tr += "<tr>"+
+                "<td style='vertical-align: text-top;'>Term : "+p_content['Terms']+"</td>"+
+                "<td class='td-search-term'>"+
+                "<p class='margin-0'>Description : <span class='text_underline'>"+p_content['Payment_Type']+"</span></p>"+
+                "<p class='margin-0'>Amount : <span class='text_underline'>"+p_amount+"</span></p>"+
+                "<p class='margin-0'>Payment Date Plan : <span class='text_underline'>"+p_content['Payment_date_plan']+"</span></p>"+
+                "</td>"+
                 "</tr>";
               }
-              table_payment = "<table border=1 style='width: 70%;' class='purchase-each-detail'><tr><th>Description</th><th>Terms</th><th>Amount</th><th>Payment Date Plan</th></tr>"+tr+"</table>";
+              table_payment = "<table border=0 style='width: 100%;' class='purchase-each-detail'>"+tr+"</table>";
             }
             $("#content-search").append(
-              "<section class='purchase-detail'>"+
+              "<article class='purchase-detail'>"+
               "<h2 class='job-id'>"+obj['JID']+"</h2>"+
               "<div>"+
+              "<section class='content-search-left'>"+
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
               "<tr><td>Contract Name</td><td>:</td><td class='text_underline'>"+obj['Contactor_Name']+"</td></tr>"+
@@ -183,6 +201,8 @@ $(document).ready(function(){
               "</table>"+
               "<h3>Working Remark</h3>"+
               "<p class='purchase-each-detail'><span>Start Date</span><span class='t2_desc text_underline'>"+obj['Job']['Work_Start_Date']+"</span><span>Complete Date</span><span class='t2_desc text_underline'>"+obj['Job']['Work_Complete_Date']+"</span></p>"+
+              "</section>"+
+              "<section class='content-search-right'>"+
               "<h3>PO info</h3>"+
               "<p class='purchase-each-detail'><span>SPO no</span><span class='t2_desc text_underline'>"+obj['PO_No']+"</span><span>Date</span><span class='t2_desc text_underline'>"+obj['Job']['PO_Date']+"</span></p>"+
               "<table class='purchase-each-detail'>"+
@@ -191,16 +211,25 @@ $(document).ready(function(){
               tr_currency+
               "<tr><td>Goveming Law</td><td>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+
               "</table>"+
+              "</section>"+
+              "</div>"+
+              "<div class='clearfix'></div>"+
+              "<div>"+
+              "<section class='content-search-left'>"+
               "<h3>Payment Terms</h3>"+
               table_payment+
               "<table class='purchase-each-detail'>"+
               "<tr><td>Credit Term</td><td class='text_underline'>"+obj['Job']['Credit_Term']+"</td></tr>"+
               "<tr><td>Late Payment Financial Charges</td><td class='text_underline'>"+obj['Job']['Late_Pay_Finan_Chage']+"</td></tr>"+
               "</table>"+
+              "</section>"+
+              "<section class='content-search-right'>"+
               "<h3>Bank Guarantee</h3>"+
               table_guarantee+
+              "</section>"+
               "</div>"+
-              "</section>"
+              "<div class='clearfix' style='height: 10px'></div>"+
+              "</article>"
             );
           });
         }

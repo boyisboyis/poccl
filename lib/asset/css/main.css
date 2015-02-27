@@ -79,3 +79,7 @@ button:active {
 .text-right {
 	text-align: right;
 }
+
+.margin-0{
+	margin: 0;
+}

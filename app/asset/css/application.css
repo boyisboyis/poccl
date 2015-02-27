@@ -149,6 +149,23 @@ a:hover, a:focus {
 }
 
 /*
+* Main Search
+*/
+.content-search-left{
+	float: left;
+	width: 50%;
+}
+
+.content-search-right{
+	float: right;
+	width: 50%;
+}
+
+.td-search-term{
+	border-bottom: 1px solid #EEEEEE;
+}
+
+/*
 *Purchase Detail
 */
 
