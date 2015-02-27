@@ -4,7 +4,8 @@ if(Check::isAjax()){
 	if(isset($_POST["type"]) && !empty($_POST["type"])) {
 		$type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING);
 		switch($type){
-			case "news" : News::newsFeed();
+			case "paymentsAlert" : News::paymentsAlert();
+			case "guaranteesAlert" : News::guaranteesAlert();
 			break;
 		}		
 	}
@@ -16,8 +17,8 @@ else{
 
 
 class News {
-	public static function newsFeed(){
-		$result = DB::query("SELECT payment.JID, payment.Invoice_Date, job.Credit_Term FROM payment, job WHERE payment.Invoice_Date < '" . date("Y-m-d") . "' AND payment.Payment_Status = '0' AND payment.JID = job.JID")->get();
+	public static function paymentsAlert(){
+		$result = DB::query("SELECT payment.JID, payment.Invoice_Date, job.Credit_Term FROM payment, job WHERE payment.Invoice_Date <= '" . date("Y-m-d") . "' AND payment.Payment_Status = '0' AND payment.JID = job.JID")->get();
 		$n = count($result);
 		if($n > 0){
 			$time_now = new DateTime("now");
@@ -29,6 +30,26 @@ class News {
 				if($time_now > new DateTime($time_add)){
 					$return['obj'][$i] = $result[$i];
 					$return['obj'][$i]->Payment = $time_add;
+				}
+			}
+		  sort($return['obj']);
+		  echo json_encode($return);die();
+		}
+		else{
+			echo json_encode(array("status" => false));die();
+		}
+	}
+	public static function guaranteesAlert() {
+		$result = DB::query("SELECT guarantee.JID, guarantee.Until_Plan FROM guarantee, job WHERE guarantee.Until_Plan <= '" . date("Y-m-d") . "' AND guarantee.Status_Return is null AND guarantee.JID = job.JID ORDER BY  guarantee.Until_Plan")->get();
+		$n = count($result);
+		if($n > 0){
+			$time_now = new DateTime("now");
+			$return = array('obj' => array(), 'status' => true);
+			for($i=0;$i<$n;$i++){
+				$until = $result[$i]->Until_Plan;
+				if($time_now > new DateTime($until)){
+					$return['obj'][$i] = $result[$i];
+					$return['obj'][$i]->Guarantee = $until;
 				}
 			}
 		  sort($return['obj']);
