@@ -148,6 +148,11 @@ a:hover, a:focus {
 	margin-top: 50px;
 }
 
+.result-topics {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
 /*
 * Main Search
 */

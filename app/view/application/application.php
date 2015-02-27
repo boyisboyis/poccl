@@ -31,7 +31,7 @@
       <div id="wrap-search" class="t1 clearfix" style="display:none;">
         <div id="search-content">
           <select id="select-search">
-            <option value="contract">Purchase order</option>
+            <option value="contract">Contract Name</option>
             <option value="job">Job No</option>
             <option value="poid">PO No</option>
           </select>
@@ -48,7 +48,7 @@
           <div id="content-guarantee-news"></div>
         </section>
         <section id="main-search" class="t1" style="display: none;">
-          <h2>Result</h2>
+          <h2 class="result-topics">Result</h2>
           <div id="content-search"></div>
         </section>
       </div>
