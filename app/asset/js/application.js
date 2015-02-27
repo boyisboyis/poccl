@@ -11,7 +11,18 @@ $(document).ready(function(){
     getHash();
   });
   
-  $("#content-news").on("click", '.search-from-news', function(){
+  $("#content-payment-news").on("click", '.search-from-news', function(){
+    document.location.hash = $(this).attr("href");
+    var search = $(this).data('jid');
+    getHash();
+    var data = {
+      "type" : "job",
+      "search" : search
+    }
+    searchResult(data);
+  });
+  
+  $("#content-guarantee-news").on("click", '.search-from-news', function(){
     document.location.hash = $(this).attr("href");
     var search = $(this).data('jid');
     getHash();
@@ -42,36 +53,68 @@ $(document).ready(function(){
     }
   }
   
-  function getNewFeed(){
+  function getPaymentAlertFeeds(){
     $.ajaxSetup({ cache: false });
     $.ajax({
-       type: "POST",
-			 dataType: "json",
-			 data : {
-			   "type" : "news"
-			 },
-       url : "managenews",
-       cache: false,
-       success: function(req){
-          if(req['status'] == true){
-            var length = req['obj'].length;
-            $("#content-news").html("");
-            $.each(req['obj'], function(){
-              var _obj = $(this)[0];
-              $("#content-news").append(
-                "<p class='p-news'>"+
-                "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
-                "<span>has arrears at</span>"+
-                "<b class='news-payment'>"+_obj['Payment']+"</b>"+
-                "</p>"
-              );
-            });
-          }
-          else{
-            console.log("false");
-          }
-       }
-   });
+      type: "POST",
+			dataType: "json",
+			data : {
+			  "type" : "paymentsAlert"
+			},
+      url : "managenews",
+      cache: false,
+      success: function(req){
+        if(req['status'] == true){
+          var length = req['obj'].length;
+          $("#content-payment-news").html("<h2 class='main-topics'>Payments</h2>");
+          $.each(req['obj'], function(){
+            var _obj = $(this)[0];
+            $("#content-payment-news").append(
+              "<p class='p-news'>"+
+              "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
+              "<span>has arrears at</span>"+
+              "<b class='news-payment'>"+_obj['Payment']+"</b>"+
+              "</p>"
+            );
+          });
+        }
+        else{
+          console.log("false");
+        }
+      }
+    });
+  }
+  
+  function getGuaranteeAlertFeeds() {
+    $.ajaxSetup({ cache: false });
+    $.ajax({
+      type: "POST",
+			dataType: "json",
+			data : {
+			  "type" : "guaranteesAlert"
+			},
+      url : "managenews",
+      cache: false,
+      success: function(req){
+        if(req['status'] == true){
+          var length = req['obj'].length;
+          $("#content-guarantee-news").html("<h2 class='main-topics'>Gurantees</h2>");
+          $.each(req['obj'], function(){
+            var _obj = $(this)[0];
+            $("#content-guarantee-news").append(
+              "<p class='p-news'>"+
+              "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
+              "<span>has until at</span>"+
+              "<b class='news-payment'>"+_obj['Guarantee']+"</b>"+
+              "</p>"
+            );
+          });
+        }
+        else{
+          console.log("false");
+        }
+      }
+    });
   }
   
   function searchResult(search){
@@ -191,7 +234,8 @@ $(document).ready(function(){
       default:
           $(".t0").show();
           $(".t1, #wrap-back-home").hide();
-          getNewFeed();
+          getPaymentAlertFeeds();
+          getGuaranteeAlertFeeds();
         break;
     }
   }

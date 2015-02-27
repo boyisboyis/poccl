@@ -43,8 +43,8 @@
       
       <div id="wrap-main" class="clearfix">
         <section id="main-news" class="t0">
-          <h2>News</h2>
-          <div id="content-news"></div>
+          <div id="content-payment-news"></div>
+          <div id="content-guarantee-news"></div>
         </section>
         <section id="main-search" class="t1" style="display: none;">
           <h2>Result</h2>

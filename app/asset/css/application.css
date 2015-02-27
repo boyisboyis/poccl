@@ -45,7 +45,7 @@ a:hover, a:focus {
 }
 
 #wrap-back-home{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
 }
@@ -137,6 +137,15 @@ a:hover, a:focus {
 }
 #wrap-main .p-news > span{
 	margin: 0 11px;
+}
+
+#main-news {
+	text-align: center;
+}
+
+.main-topics {
+	margin-bottom: 50px;
+	margin-top: 50px;
 }
 
 /*
