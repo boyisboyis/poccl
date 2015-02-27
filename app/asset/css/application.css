@@ -132,6 +132,38 @@ a:hover, a:focus {
   margin: 10px auto 0;
 }
 
+#wrap-main .p-news {
+	margin: 2px 0;
+}
+#wrap-main .p-news > span{
+	margin: 0 11px;
+}
+
+/*
+*Purchase Detail
+*/
+
+.purchase-detail .job-id{
+	margin: 5px 0;
+	cursor:pointer; 
+	color: #ed8151;
+	font-size: 1.1em;
+}
+
+.purchase-detail h3{
+	font-size: 1em;
+	margin: 12px 0;
+	color: #5a5350;
+}
+
+.purchase-detail .purchase-each-detail{
+	margin: 0 0 0 10px;
+	color: #5a5350;
+}
+
+.purchase-detail .t2_desc {
+	margin: 0 10px;
+}
 
 /*
 * Resposive design

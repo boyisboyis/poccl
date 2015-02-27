@@ -9,6 +9,14 @@ return array(
     "file" => "app/view/application/application.php",
     "type" => "require"
   ),
+  "managenews"=> array(
+    "file" => "app/controller/manageNews.php",
+    "type" => "require"
+  ),
+  "search_options" => array(
+    "file" => "app/controller/searchOptions.php",
+    "type" => "require"
+  ),
   
   /*
    *Javascript file

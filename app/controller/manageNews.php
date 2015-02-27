@@ -1,5 +1,46 @@
 <?php
-	include_once("../../config/connectdb.php");
+
+if(Check::isAjax()){
+	if(isset($_POST["type"]) && !empty($_POST["type"])) {
+		$type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING);
+		switch($type){
+			case "news" : News::newsFeed();
+			break;
+		}		
+	}
+}
+else{
+	Redirect::to("/");
+	die();
+}
+
+
+class News {
+	public static function newsFeed(){
+		$result = DB::query("SELECT payment.JID, payment.Invoice_Date, job.Credit_Term FROM payment, job WHERE payment.Invoice_Date < '" . date("Y-m-d") . "' AND payment.Payment_Status = '0' AND payment.JID = job.JID")->get();
+		$n = count($result);
+		if($n > 0){
+			$time_now = new DateTime("now");
+			$return = array('obj' => array(), 'status' => true);
+			for($i=0;$i<$n;$i++){
+				$credit_term = $result[$i]->Credit_Term;
+				$invoice = $result[$i]->Invoice_Date;
+				$time_add = dateTimes::calculationDate($credit_term, $invoice);
+				if($time_now > new DateTime($time_add)){
+					$return['obj'][$i] = $result[$i];
+					$return['obj'][$i]->Payment = $time_add;
+				}
+			}
+		  sort($return['obj']);
+		  echo json_encode($return);die();
+		}
+		else{
+			echo json_encode(array("status" => false));die();
+		}
+	}
+}
+
+/*	include_once("../../config/connectdb.php");
 
 	if(is_ajax()) {
 		if(isset($_POST["data"]) && !empty($_POST["data"])) {
@@ -53,5 +94,5 @@
 
 		}
 		echo json_encode($return);
-	}
+	}*/
 ?>
