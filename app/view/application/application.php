@@ -15,10 +15,12 @@
   <body>
     <div id="wrapper">
       
-      <!-- button link to home page -->
+      <!-- button link to menu -->
       
-      <nav id="wrap-back-home" class="codrops-home clearfix" style="display:none;">
-        <a class="back-home codrops-icon codrops-icon-prev" href="#home">Home</a>
+      <nav id="wrap-nav" class="clearfix">
+        <a class="sub-menu" href="#home"><i class="fa fa-home"></i>Home</a>
+        <a class="sub-menu" href="#search"><i class="fa fa-search"></i>Search</a>
+        <a class="sub-menu" href="#report"><i class="fa fa-file-text-o"></i>Report</a>
       </nav>
       
       <!-- Box header -->
@@ -49,8 +51,12 @@
           <div id="content-guarantee-news"></div>
         </section>
         <section id="main-search" class="t1" style="display: none;">
-          <h2 class="result-topics"><i class="fa fa-camera-retro"></i>Result</h2>
+          <h2 class="result-topics">Result</h2>
           <div id="content-search"></div>
+        </section>
+        <section id="main-report" class="t2" style="display: none;">
+          <h2 class="result-topics">Report</h2>
+          <div id="content-report"></div>
         </section>
       </div>
       

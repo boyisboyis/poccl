@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var hash_str = ["#home", "#search"];
+  var hash_str = ["#home", "#search", "#report"];
   getHash();
   
   /*
@@ -13,7 +13,7 @@ $(document).ready(function(){
   $("#select-search").on("change", function(){
     $("#input-search").val("");
   });
-  $(".back-home").on("click", function(){
+  $(".sub-menu").on("click", function(){
     document.location.hash = $(this).attr("href");
     getHash();
   });
@@ -278,13 +278,16 @@ $(document).ready(function(){
   function init(type){
     switch (parseInt(type)) {
       case 1:
-          $(".t1, #wrap-back-home").show();
-          $(".t0").hide();
+          $(".t1").show();
+          $(".t0, .t2").hide();
         break;
-      
+      case 2:
+        $(".t2").show();
+        $(".t0, .t1").hide();
+        break;
       default:
           $(".t0").show();
-          $(".t1, #wrap-back-home").hide();
+          $(".t1, .t2").hide();
           getPaymentAlertFeeds();
           getGuaranteeAlertFeeds();
         break;
