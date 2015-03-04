@@ -79,6 +79,7 @@ $(document).ready(function(){
       url : "report_options",
       cache: false,
       success: function(req){
+        console.log(req);
       }
     });
   });

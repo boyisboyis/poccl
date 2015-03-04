@@ -15,10 +15,11 @@ else{
 class reportOptions{
     
     public static function report($month, $year) {
+        $sql = array();
         if($month != "" && $year != "") {
             foreach($year as $yy) {
                 foreach($month as $m) {
-                    $sql = "payment.Invoice_Date LIKE '" . $yy . "-" . $m . "-%'";
+                    $sql[] = "payment.Invoice_Date LIKE '" . $yy . "-" . $m . "-%'";
                 }
             }
             $result = DB::query("SELECT * FROM payment WHERE " . implode(" OR ", $sql))->get();
