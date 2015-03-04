@@ -19,6 +19,8 @@ class DB{
   
   public function connect(){
     self::$con = new mysqli($this->host, $this->username, $this->password, $this->database);
+    self::$con->set_charset('utf8');
+    //$mysqli->set_charset("utf8")
   }
   
   public static function query($sql){
