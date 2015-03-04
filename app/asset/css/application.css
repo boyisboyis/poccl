@@ -127,6 +127,9 @@ a:hover, a:focus {
   width: 150px;
   margin: 10px 0;
 }
+.result-topics .fa {
+	margin-right: 10px;
+}
 
 /*
 * Main content
