@@ -17,6 +17,10 @@ return array(
     "file" => "app/controller/searchOptions.php",
     "type" => "require"
   ),
+  "report_options" => array(
+    "file" => "app/controller/reportOptions.php",
+    "type" => "require"
+  ),
   
   /*
    *Javascript file

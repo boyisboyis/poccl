@@ -10,9 +10,11 @@ $(document).ready(function(){
       $("#search-now").click();
     }
   });
+  
   $("#select-search").on("change", function(){
     $("#input-search").val("");
   });
+  
   $(".sub-menu").on("click", function(){
     document.location.hash = $(this).attr("href");
     getHash();
@@ -28,7 +30,7 @@ $(document).ready(function(){
       "search" : $("#input-search").val()
     }
     searchResult(data);
-  })
+  });
   
   $("#content-payment-news").on("click", '.search-from-news', function(){
     document.location.hash = $(this).attr("href");
@@ -50,6 +52,35 @@ $(document).ready(function(){
       "search" : search
     }
     searchResult(data);
+  });
+  
+  $("#submit-report").on("click", function(){
+    var months = $(".reports_month").map(function(){
+      var m = $($(this)[0]);
+      if(m.prop('checked')){
+        return m.val();
+      }
+    }).get();
+    var years = $(".reports_year").map(function(){
+      var m = $($(this)[0]);
+      if(m.prop('checked')){
+        return m.val();
+      }
+    }).get();
+    
+    $.ajaxSetup({ cache: false });
+    $.ajax({
+      type: "POST",
+			dataType: "json",
+			data : {
+			  "month" : months,
+			  "year" : years
+			},
+      url : "report_options",
+      cache: false,
+      success: function(req){
+      }
+    });
   });
   
   /*
