@@ -48,13 +48,55 @@
       
       <div id="wrap-report" class="t2 clearfix" style="display:none;">
         <div class="report-panel">
-          
-        </div>
-        <div class="report-result">
-          <section id="main-report" class="t2" style="display: none;">
-            <h2 class="report-topics">Report</h2>
-            <div id="content-report"></div>
-          </section>
+          <secton>
+            <h3>Month</h3>
+            <p>
+              <input id="reports_month_january" type="checkbox" name="reports_month" class='reports_month' value="01"/>
+              <label for="reports_month_january">January</label>
+              <input id="reports_month_february" type="checkbox" name="reports_month" class='reports_month' value="02"/>
+              <label for="reports_month_february">February</label>
+            </p>
+            <p>
+              <input id="reports_month_march" type="checkbox" name="reports_month" class='reports_month' value="03"/>
+              <label for="reports_month_march">March</label>
+              <input id="reports_month_april" type="checkbox" name="reports_month" class='reports_month' value="04"/>
+              <label for="reports_month_april">April</label>
+            </p>
+            <p>
+              <input id="reports_month_may" type="checkbox" name="reports_month" class='reports_month' value="05"/>
+              <label for="reports_month_may">May</label>
+              <input id="reports_month_june" type="checkbox" name="reports_month" class='reports_month' value="06"/>
+              <label for="reports_month_june">June</label>
+            </p>
+            <p>
+              <input id="reports_month_july" type="checkbox" name="reports_month" class='reports_month' value="07"/>
+              <label for="reports_month_july">July</label>
+              <input id="reports_month_august" type="checkbox" name="reports_month" class='reports_month' value="08"/>
+              <label for="reports_month_august">August</label>
+            </p>
+            <p>
+              <input id="reports_month_september" type="checkbox" name="reports_month" class='reports_month' value="09"/>
+              <label for="reports_month_september">September</label>
+              <input id="reports_month_october" type="checkbox" name="reports_month" class='reports_month' value="10"/>
+              <label for="reports_month_october">October</label>
+            </p>
+            <p>
+              <input id="reports_month_november" type="checkbox" name="reports_month" class='reports_month' value="11"/>
+              <label for="reports_month_november">November</label>
+              <input id="reports_month_december" type="checkbox" name="reports_month" class='reports_month' value="12"/>
+              <label for="reports_month_december">December</label>
+            </p>
+          </secton>
+          <secton>
+            <h3>Year</h3>
+            <p>
+              <label for="reports_year_2015">2015</label>
+              <input id="reports_year_2015" type="checkbox" name="reports_year" class='reports_year' value="2015"/>
+            </p>
+          </secton>
+          <div>
+            <button id="submit-report">SUBMIT</button>
+          </div>
         </div>
       </div>
       
@@ -69,6 +111,10 @@
           <h2 class="result-topics"></h2>
           <div id="content-search"></div>
         </section>
+        <section id="main-report" class="t2" style="display: none;">
+            <h2 class="report-topics">Report</h2>
+            <div id="content-report"></div>
+          </section>
       </div>
       
       <!-- Block Footer -->

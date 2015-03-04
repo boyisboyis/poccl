@@ -61,10 +61,12 @@ a:hover, a:focus {
 
 #wrap-nav{
 	width: 100%;
+	padding: 5px 0;
   position: fixed;
   top: 0;
   left: 0;
   text-align: right;
+  background-color: #333;
 }
 
 #wrap-search{
@@ -74,7 +76,16 @@ a:hover, a:focus {
 }
 
 #wrap-report {
-	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 300px;
+	background-color: #333;
+}
+#wrap-report > .report-panel{
+	margin-top: 260px;
+	height: 100%;
 }
 
 /*
@@ -251,7 +262,17 @@ a:hover, a:focus {
 * Resposive design
 */
 
-@media all and (max-width: 960px){
+@media screen and (max-width:493px){
+	#wrap-search{
+		height: auto;
+		margin: 0 auto;
+	}
+	#front-message{
+		display: block;
+	}
+}
+
+@media screen and (max-width: 960px){
 	#wrap-main{
 		width: 100%;
 	}
@@ -259,21 +280,26 @@ a:hover, a:focus {
 	#wrap-header{
 		padding: 3em;
 	}
+	
+	.content-search-left, .content-search-right{
+		float: none;
+		width: 100%;
+	}
 }
 
-@media all and (max-width: 876px){
+@media screen and (max-width: 876px){
 	h1{
 		font-size: 1.5em!important;
 	}
 }
 
-@media all and (max-width: 381px){
+@media screen and (max-width: 381px){
 	h1{
 		font-size: 1.3em!important;
 	}
 }
 
-@media all and (max-width: 320px){
+@media screen and (max-width: 320px){
 	h1{
 		font-size: 1em!important;
 	}
