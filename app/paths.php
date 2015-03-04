@@ -47,6 +47,11 @@ return array(
       "file" => "app/asset/css/application.css",
       "header" => "text/css",
       "type" => "file_get_contents"
+    ),
+    "fontcss" => array(
+      "file" => "lib/asset/css/font-awesome.min.css",
+      "header" => "text/css",
+      "type" => "file_get_contents"
     )
   
 );

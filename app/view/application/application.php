@@ -7,6 +7,7 @@
 		<title>Purchase Order Contract Check Lists</title>
 		<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="maincss" type="text/css" />
+    <link rel="stylesheet" href="fontcss" type="text/css" />
     <link rel="stylesheet" href="applicationcss" type="text/css" />
     <script type="text/javascript" src="jquery"></script>
     <script type="text/javascript" src="applicationjs"></script>
@@ -48,7 +49,7 @@
           <div id="content-guarantee-news"></div>
         </section>
         <section id="main-search" class="t1" style="display: none;">
-          <h2 class="result-topics">Result</h2>
+          <h2 class="result-topics"><i class="fa fa-camera-retro"></i>Result</h2>
           <div id="content-search"></div>
         </section>
       </div>
