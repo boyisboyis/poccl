@@ -28,7 +28,12 @@ a:hover, a:focus {
 	color: #e86a32;
 	outline: none;
 }
-
+.currency{
+	margin-left: 5px;
+}
+.td-colon {
+	padding: 0 5px 0 0;
+}
 
 #wrap-header{
   width: 100%;

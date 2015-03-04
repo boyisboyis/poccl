@@ -146,12 +146,9 @@ $(document).ready(function(){
       url : "search_options",
       cache: false,
       success: function(req){
-        //console.log(req);
-        //console.log(req['status']);
         $("#content-search").html("");
         if(req['status'] == true){
           $(".result-topics").html("<i class='fa fa-check'></i>Result");
-          //console.log(req);
           $.each(req['obj'], function(){
             var obj = $(this)[0];
             var table_guarantee = "<p class='p-warning'>Guarantee is not set</p>";
@@ -163,7 +160,10 @@ $(document).ready(function(){
               thai_bath = obj['job']['Contract_Value_Rate'] * obj['job']['Contract_Value_Other'];
             }
             if(obj['Job']['Contract_Value_Type'] != ""){
-               tr_currency = "<tr><td></td><td></td><td>Rate <span class='t2_desc text_underline'>"+obj['Job']['Contract_Value_Rate']+"</span><span class='t2_desc text_underline' style='margin-right: 0;'>"+obj['Job']['Contract_Value_Other']+"</span>  "+obj['Job']['Contract_Value_Type']+"</td></tr>"
+              other_currency = addCommas(parseFloat(obj['Job']['Contract_Value_Other']).toFixed(2));
+              tr_currency = "<p class='margin-padding-0 text_underline'>"+other_currency+"<span class='currency'>"+obj['Job']['Contract_Value_Type']+"</span></p><p class='margin-padding-0 text_underline'><span>Rate </span>"+obj['Job']['Contract_Value_Rate']+"</p>";
+             // tr_currency = "<br>"+obj['Job']['Contract_Value_Rate']+"<br><span class='t2_desc text_underline' style='margin-right: 0;'>"+obj['Job']['Contract_Value_Other']+"</span>  "+obj['Job']['Contract_Value_Type'];
+               //tr_currency = "<tr><td></td><td></td><td>Rate <span class='t2_desc text_underline'>"+obj['Job']['Contract_Value_Rate']+"</span><span class='t2_desc text_underline' style='margin-right: 0;'>"+obj['Job']['Contract_Value_Other']+"</span>  "+obj['Job']['Contract_Value_Type']+"</td></tr>"
             }
             thai_bath = addCommas(parseFloat(thai_bath).toFixed(2));
             if(n > 0){
@@ -171,26 +171,20 @@ $(document).ready(function(){
               for(var i=0;i<n;i++){
                 var g_content = obj['Guarantee'][i];
                 var g_amount = (g_content['Amount_Actual_Percentage'] == "" || g_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)):g_content['Amount_Actual_Percentage']+"%";
-                /*tr += "<tr>"+
-                "<td>"+g_content['Guarantee_Type']+"</td><td class='text-center'>"+g_content['Terms']+"</td><td class='text-center'>"+g_amount+"</td><td>"+g_content['Start_Plan']+"</td><td>"+g_content['Until_Plan']+"</td>"+
-                "</tr>";*/
                  tr += "<tr>"+
                 "<td style='vertical-align: text-top;'>Term : "+g_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
                 "<table>"+
                 "<tr>"+
-                "<td>Description</td><td>:</td><td>"+g_content['Guarantee_Type']+"</td>"+
+                "<td>Description</td><td class='td-colon'>:</td><td class='text_underline'>"+g_content['Guarantee_Type']+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td>Amount</td><td>:</td><td>"+g_amount+"</td>"+
+                "<td>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+g_amount+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td>Start Plan</td><td>:</td><td><span class='text_underline' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></td>"+
+                "<td>Start Plan</td><td class='td-colon'>:</td><td><span class='text_underline' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></td>"+
                 "</tr>"+
                 "</table>"+
-               /* "<p class='margin-0'>Description : <span class='text_underline'>"+g_content['Guarantee_Type']+"</span></p>"+
-                "<p class='margin-0'>Amount : <span class='text_underline'>"+g_amount+"</span></p>"+
-                "<p class='margin-0'>Start Plan : <span class='text_underline' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></p>"+*/
                 "</td>"+
                 "</tr>";
               }
@@ -202,26 +196,20 @@ $(document).ready(function(){
               for(var i=0;i<n;i++){
                 var p_content = obj['Payment'][i];
                 var p_amount = (p_content['Amount_Actual_Percentage'] == "" || p_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)):p_content['Amount_Actual_Percentage']+"%";
-               /* tr += "<tr>"+
-                "<td>"+p_content['Payment_Type']+"</td><td class='text-center'>"+p_content['Terms']+"</td><td class='text-center'>"+p_amount+"</td><td>"+p_content['Payment_date_plan']+"</td>"+
-                "</tr>";*/
                 tr += "<tr>"+
                 "<td style='vertical-align: text-top;'>Term : "+p_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
                 "<table>"+
                 "<tr>"+
-                "<td>Description</td><td>:</td><td>"+p_content['Payment_Type']+"</td>"+
+                "<td>Description</td><td class='td-colon'>:</td><td class='text_underline'>"+p_content['Payment_Type']+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td>Amount</td><td>:</td><td>"+p_amount+"</td>"+
+                "<td>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+p_amount+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td>Payment Date Plan</td><td>:</td><td>"+p_content['Payment_date_plan']+"</td>"+
+                "<td>Payment Date Plan</td><td class='td-colon'>:</td><td class='text_underline'>"+p_content['Payment_date_plan']+"</td>"+
                 "</tr>"+
                 "</table>"+
-                /*"<p class='margin-0'>Description : <span class='text_underline'>"+p_content['Payment_Type']+"</span></p>"+
-                "<p class='margin-0'>Amount : <span class='text_underline'>"+p_amount+"</span></p>"+
-                "<p class='margin-0'>Payment Date Plan : <span class='text_underline'>"+p_content['Payment_date_plan']+"</span></p>"+*/
                 "</td>"+
                 "</tr>";
               }
@@ -235,11 +223,11 @@ $(document).ready(function(){
               "<section class='content-search-left'>"+
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
-              "<tr><td>Contract Name</td><td>:</td><td class='text_underline'>"+obj['Contactor_Name']+"</td></tr>"+
-              "<tr><td>Project Name</td><td>:</td><td class='text_underline'>"+obj['Job']['Project_Name']+"</td></tr>"+
-              "<tr><td>Project Location</td><td>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+
-              "<tr><td>Project Owner's Name</td><td>:</td><td class='text_underline'>"+obj['Job']['Project_Owner']+"</td></tr>"+
-              "<tr><td>Secrecy Agreement</td><td>:</td><td class='text_underline'>"+obj['Job']['Secrecy_Agreement']+"</td></tr>"+
+              "<tr><td>Contract Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Contactor_Name']+"</td></tr>"+
+              "<tr><td>Project Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Name']+"</td></tr>"+
+              "<tr><td>Project Location</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+
+              "<tr><td>Project Owner's Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Owner']+"</td></tr>"+
+              "<tr><td>Secrecy Agreement</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Secrecy_Agreement']+"</td></tr>"+
               "</table>"+
               "<h3>Working Remark</h3>"+
               "<p class='purchase-each-detail'><span>Start Date</span><span class='t2_desc text_underline'>"+obj['Job']['Work_Start_Date']+"</span><span>Complete Date</span><span class='t2_desc text_underline'>"+obj['Job']['Work_Complete_Date']+"</span></p>"+
@@ -248,14 +236,14 @@ $(document).ready(function(){
               "<h3>PO info</h3>"+
               //"<p class='purchase-each-detail' style='margin-left: 12px'><span>PO no</span><span class='t2_desc text_underline'>"+obj['PO_No']+"</span><span>Date</span><span class='t2_desc text_underline'>"+obj['Job']['PO_Date']+"</span></p>"+
               "<table class='purchase-each-detail'>"+
-              "<tr><td>PO no.</td><td>:</td><td class='text_underline'>"+obj['PO_No']+"</td></tr>"+
-              "<tr><td>PO Date</td><td>:</td><td class='text_underline'>"+obj['Job']['PO_Date']+"</td></tr>"+
-              "<tr><td>PO type</td><td>:</td><td class='text_underline'>"+obj['Job']['PO_Type']+"</td></tr>"+
-              "<tr><td>PO Amount</td><td>:</td><td><span class='text_underline'>"+thai_bath+"</span> THB</td></tr>"+
-              tr_currency+
-              "<tr><td>Goveming Law</td><td>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+
-              "<tr><td>Credit Term</td><td>:</td><td class='text_underline'>"+obj['Job']['Credit_Term']+"</td></tr>"+
-              "<tr><td>Late Payment Financial Charges</td><td>:</td><td class='text_underline'>"+obj['Job']['Late_Pay_Finan_Chage']+"</td></tr>"+
+              "<tr><td>PO no.</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['PO_No']+"</td></tr>"+
+              "<tr><td>PO Date</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['PO_Date']+"</td></tr>"+
+              "<tr><td>PO type</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['PO_Type']+"</td></tr>"+
+              "<tr><td>PO Amount</td><td class='td-colon'>:</td><td><p class='margin-padding-0 text_underline'>"+thai_bath+"<span class='currency'>THB</span></p>"+tr_currency+"</td></tr>"+
+             // tr_currency+
+              "<tr><td>Goveming Law</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+
+              "<tr><td>Credit Term</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Credit_Term']+"</td></tr>"+
+              "<tr><td>Late Payment Financial Charges</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Late_Pay_Finan_Chage']+"</td></tr>"+
               "</table>"+
               "</section>"+
               "</div>"+
