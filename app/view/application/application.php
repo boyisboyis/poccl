@@ -30,6 +30,7 @@
       
       <div id="wrap-search" class="t1 clearfix" style="display:none;">
         <div id="search-content">
+          <div id="front-message">Search By : </div>
           <select id="select-search">
             <option value="contract">Contract Name</option>
             <option value="job">Job No</option>
