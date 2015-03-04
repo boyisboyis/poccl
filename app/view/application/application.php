@@ -23,13 +23,13 @@
         <a class="sub-menu" href="#report"><i class="fa fa-file-text-o"></i>Report</a>
       </nav>
       
-      <!-- Box header -->
+      <!-- Block header -->
       
       <header id="wrap-header" class="clearfix">
         <h1>Purchase Order / Contract Check Lists <span>Checking the purchase order</span></h1>
       </header>
       
-      <!-- Box search -->
+      <!-- Block search -->
       
       <div id="wrap-search" class="t1 clearfix" style="display:none;">
         <div id="search-content">
@@ -44,7 +44,15 @@
         </div>
       </div>
       
-     <!-- Box content main-->
+      <!-- Block report -->
+      
+      <div id="wrap-report" class="t2 clearfix" style="display:none;">
+        <div id="report-content">
+          
+        </div>
+      </div>
+      
+     <!-- Block content main-->
       
       <div id="wrap-main" class="clearfix">
         <section id="main-news" class="t0">
@@ -56,12 +64,12 @@
           <div id="content-search"></div>
         </section>
         <section id="main-report" class="t2" style="display: none;">
-          <h2 class="result-topics">Report</h2>
+          <h2 class="report-topics">Report</h2>
           <div id="content-report"></div>
         </section>
       </div>
       
-      <!-- Box Footer -->
+      <!-- Block Footer -->
       
       <footer id="wrap-footer" class="clearfix">
         
