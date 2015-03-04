@@ -93,7 +93,14 @@ button:active {
 	text-align: right;
 }
 
+.margin-padding-0{
+	margin: 0;
+	padding: 0;
+}
 .margin-0{
+	margin: 0;
+}
+.padding-0{
 	margin: 0;
 }
 
