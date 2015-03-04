@@ -6,7 +6,7 @@
   src: url('lib/asset/font/roboto/Roboto-Regular.ttf');
 }
 
-@font-face{
+/*@font-face{
   font-weight: normal;
 	font-style: normal;
 	font-family: 'codropsicons';
@@ -15,7 +15,7 @@
 		url('lib/asset/font/codropsicons/codropsicons.woff') format('woff'),
 		url('lib/asset/font/codropsicons/codropsicons.ttf') format('truetype'),
 		url('lib/asset/font/codropsicons/codropsicons.svg#codropsicons') format('svg');
-}
+}*/
 
 @font-face{
 	font-family:'FontAwesome'!important;
