@@ -177,9 +177,20 @@ $(document).ready(function(){
                  tr += "<tr>"+
                 "<td style='vertical-align: text-top;'>Term : "+g_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
-                "<p class='margin-0'>Description : <span class='text_underline'>"+g_content['Guarantee_Type']+"</span></p>"+
+                "<table>"+
+                "<tr>"+
+                "<td>Description</td><td>:</td><td>"+g_content['Guarantee_Type']+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td>Amount</td><td>:</td><td>"+g_amount+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td>Start Plan</td><td>:</td><td><span class='text_underline' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></td>"+
+                "</tr>"+
+                "</table>"+
+               /* "<p class='margin-0'>Description : <span class='text_underline'>"+g_content['Guarantee_Type']+"</span></p>"+
                 "<p class='margin-0'>Amount : <span class='text_underline'>"+g_amount+"</span></p>"+
-                "<p class='margin-0'>Start Plan : <span class='text_underline' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></p>"+
+                "<p class='margin-0'>Start Plan : <span class='text_underline' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></p>"+*/
                 "</td>"+
                 "</tr>";
               }
@@ -197,9 +208,20 @@ $(document).ready(function(){
                 tr += "<tr>"+
                 "<td style='vertical-align: text-top;'>Term : "+p_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
-                "<p class='margin-0'>Description : <span class='text_underline'>"+p_content['Payment_Type']+"</span></p>"+
+                "<table>"+
+                "<tr>"+
+                "<td>Description</td><td>:</td><td>"+p_content['Payment_Type']+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td>Amount</td><td>:</td><td>"+p_amount+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td>Payment Date Plan</td><td>:</td><td>"+p_content['Payment_date_plan']+"</td>"+
+                "</tr>"+
+                "</table>"+
+                /*"<p class='margin-0'>Description : <span class='text_underline'>"+p_content['Payment_Type']+"</span></p>"+
                 "<p class='margin-0'>Amount : <span class='text_underline'>"+p_amount+"</span></p>"+
-                "<p class='margin-0'>Payment Date Plan : <span class='text_underline'>"+p_content['Payment_date_plan']+"</span></p>"+
+                "<p class='margin-0'>Payment Date Plan : <span class='text_underline'>"+p_content['Payment_date_plan']+"</span></p>"+*/
                 "</td>"+
                 "</tr>";
               }
