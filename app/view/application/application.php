@@ -50,7 +50,7 @@
           <div id="content-guarantee-news"></div>
         </section>
         <section id="main-search" class="t1" style="display: none;">
-          <h2 class="result-topics"><i class="fa fa-camera-retro"></i>Result</h2>
+          <h2 class="result-topics"></h2>
           <div id="content-search"></div>
         </section>
       </div>

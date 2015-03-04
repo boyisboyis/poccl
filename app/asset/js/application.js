@@ -150,6 +150,7 @@ $(document).ready(function(){
         //console.log(req['status']);
         $("#content-search").html("");
         if(req['status'] == true){
+          $(".result-topics").html("<i class='fa fa-check'></i>Result");
           //console.log(req);
           $.each(req['obj'], function(){
             var obj = $(this)[0];
@@ -256,6 +257,24 @@ $(document).ready(function(){
           });
         }
         else{
+          $(".result-topics").html("<i class='fa fa-times'></i>Result");
+          var searchType = "";
+          if(search['type'] == 'contract') {
+            searchType = "Contract Name ";
+          }
+          else if(search['type'] == 'job') {
+            searchType = "Job ID ";
+          }
+          else {
+            searchType = "PO ID ";
+          }
+          $("#content-search").html(
+            searchType +
+            "<span class='highlight-text'>" +
+            search['search'] +
+            "</span>" +
+            " not found !! Please, Input again."
+          );
           console.log("false");
         }
       }

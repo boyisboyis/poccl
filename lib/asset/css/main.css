@@ -96,3 +96,7 @@ button:active {
 .margin-0{
 	margin: 0;
 }
+
+.highlight-text {
+	color: #ed8151;
+}
