@@ -107,3 +107,7 @@ button:active {
 .highlight-text {
 	color: #ed8151;
 }
+
+.text-vertical-top {
+	vertical-align: text-top;
+}
