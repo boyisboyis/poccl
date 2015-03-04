@@ -17,13 +17,26 @@
 		url('lib/asset/font/codropsicons/codropsicons.svg#codropsicons') format('svg');
 }
 
+@font-face{
+	font-family:'FontAwesome'!important;
+	src:url('lib/asset/font/fontawesome/fontawesome-webfont.eot?v=4.3.0');
+	src:url('lib/asset/font/fontawesome/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'),
+			url('lib/asset/font/fontawesome/fontawesome-webfont.woff2?v=4.3.0') format('woff2'),
+			url('lib/asset/font/fontawesome/fontawesome-webfont.woff?v=4.3.0') format('woff'),
+			url('lib/asset/font/fontawesome/fontawesome-webfont.ttf?v=4.3.0') format('truetype'),
+			url('lib/asset/font/fontawesome/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
+	font-weight:normal;
+	font-style:normal
+}
+
+
 /*
 * Main CSS
 */
 *, 
 *:after,
 *:before {
-  font-family: 'roboto', Arial, sans-serif;;
+  font-family: 'roboto', 'FontAwesome', Arial, sans-serif;;
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
       -ms-box-sizing: border-box;
