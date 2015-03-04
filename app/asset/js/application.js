@@ -19,7 +19,7 @@ $(document).ready(function(){
   });
   
   $("#content-search").on("click", ".job-id", function(){
-    $(this).next().toggle();
+    $(this).next().slideToggle();
   });
   
   $("#search-now").on("click", function(){

@@ -113,6 +113,10 @@ a:hover, a:focus {
 /*
 * Search Content
 */
+#front-message {
+	display: inline;
+	margin-right: 10px;	
+}
 #search-content {
   text-align: center;
   line-height: 50px;
