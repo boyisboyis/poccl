@@ -52,11 +52,7 @@
           <div id="content-guarantee-news"></div>
         </section>
         <section id="main-search" class="t1" style="display: none;">
-<<<<<<< HEAD
           <h2 class="result-topics"></h2>
-=======
-          <h2 class="result-topics">Result</h2>
->>>>>>> 52cbc7f221c7f43054117ed1b71b833f734c5859
           <div id="content-search"></div>
         </section>
         <section id="main-report" class="t2" style="display: none;">
