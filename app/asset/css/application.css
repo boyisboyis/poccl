@@ -75,6 +75,10 @@ a:hover, a:focus {
   margin: 50px 0;
 }
 
+#wrap-report {
+	width: 100%;
+}
+
 /*
 * Menu navigation
 */
@@ -139,6 +143,17 @@ a:hover, a:focus {
 
 .codrops-icon-prev:before {
 	content: "\e004";
+}
+
+/*
+* Report Content
+*/
+
+.report-panel {
+	background-color: #333;
+	float: left;
+	width: 200px;
+	height: 500px;
 }
 
 /*
