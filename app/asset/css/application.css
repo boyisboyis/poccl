@@ -33,6 +33,7 @@ a:hover, a:focus {
 }
 .td-colon {
 	padding: 0 5px 0 0;
+	vertical-align: text-top;
 }
 
 #wrap-header{
