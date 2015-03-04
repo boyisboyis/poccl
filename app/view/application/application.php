@@ -47,8 +47,14 @@
       <!-- Block report -->
       
       <div id="wrap-report" class="t2 clearfix" style="display:none;">
-        <div id="report-content">
+        <div class="report-panel">
           
+        </div>
+        <div class="report-result">
+          <section id="main-report" class="t2" style="display: none;">
+            <h2 class="report-topics">Report</h2>
+            <div id="content-report"></div>
+          </section>
         </div>
       </div>
       
@@ -62,10 +68,6 @@
         <section id="main-search" class="t1" style="display: none;">
           <h2 class="result-topics"></h2>
           <div id="content-search"></div>
-        </section>
-        <section id="main-report" class="t2" style="display: none;">
-          <h2 class="report-topics">Report</h2>
-          <div id="content-report"></div>
         </section>
       </div>
       
