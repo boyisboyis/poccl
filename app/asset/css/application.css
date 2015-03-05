@@ -86,6 +86,8 @@ a:hover, a:focus {
 #wrap-report > .report-panel{
 	margin-top: 260px;
 	height: 100%;
+	width: 100%;
+	padding: 0 15px;
 }
 
 /*
@@ -99,60 +101,10 @@ a:hover, a:focus {
 	margin: 0 5px 0 0;
 }
 
+
 /*
-* Back Home Menu
+* 
 */
-/*.codrops-home {
-  font-family: 'Lato', Arial, sans-serif;
-  width: 100%;
-	text-transform: uppercase;
-	font-size: 0.69em;
-	line-height: 2.2;
-	font-weight: 700;
-	background-color: #333;
-}
-
-.codrops-home a {
-	display: inline-block;
-	padding: 0 1em;
-	text-decoration: none;
-	letter-spacing: 0.1em;
-}
-
-.codrops-home a:hover {
-	background: rgba(255,255,255,0.4);
-	color: #333;
-}
-
-.codrops-home span.right {
-	float: right;
-}
-
-.codrops-home span.right a {
-	display: block;
-	float: left;
-}*/
-
-
-.codrops-icon:before {
-	margin: 0 4px;
-	text-transform: none;
-	font-weight: normal;
-	font-style: normal;
-	font-variant: normal;
-	font-family: 'codropsicons';
-	line-height: 1;
-	speak: none;
-	-webkit-font-smoothing: antialiased;
-}
-
-.codrops-icon-drop:before {
-	content: "\e001";
-}
-
-.codrops-icon-prev:before {
-	content: "\e004";
-}
 
 /*
 * Report Content
@@ -161,8 +113,23 @@ a:hover, a:focus {
 .report-panel {
 	background-color: #333;
 	float: left;
-	width: 200px;
-	height: 500px;
+}
+
+.report-panel label,.report-panel h3 {
+	color: #FFF;
+}
+.report-panel p{
+	margin: 5px 0;
+}
+
+.report-panel .report-month-left{
+	float: left;
+	width: 50%;
+}
+
+.report-panel .report-month-right{
+	float: right;
+	width: 50%;
 }
 
 /*
