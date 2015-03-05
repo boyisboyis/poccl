@@ -79,6 +79,7 @@ $(document).ready(function(){
       url : "report_options",
       cache: false,
       success: function(req){
+        console.log(req);
       }
     });
   });
@@ -322,8 +323,7 @@ $(document).ready(function(){
     });
   }
   
-  function addCommas(nStr)
-	{
+  function addCommas(nStr){
 		nStr += '';
 		x = nStr.split('.');
 		x1 = x[0];
@@ -342,6 +342,7 @@ $(document).ready(function(){
           $(".t0, .t2").hide();
         break;
       case 2:
+        get_report_years();
         $(".t2").show();
         $(".t0, .t1").hide();
         break;
@@ -353,4 +354,21 @@ $(document).ready(function(){
         break;
     }
   }
+  
+  function get_report_years(){
+    $.ajaxSetup({ cache: false });
+    $.ajax({
+      type: "POST",
+			dataType: "json",
+			data : {
+			  "get_years" : "get_years"
+			},
+      url : "report_options",
+      cache: false,
+      success: function(req){
+        console.log(req);
+      }
+    });
+  }
+  
 });
