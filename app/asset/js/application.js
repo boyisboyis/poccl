@@ -25,6 +25,10 @@ $(document).ready(function(){
     $(this).next().slideToggle();
   });
   
+  $("#content-report").on("click", ".reports-details-years, .reports-details-toggle", function(){
+    $(this).next().slideToggle();
+  })
+  
   $("#search-now").on("click", function(){
     var data = {
       "type" : $("#select-search").val(),
@@ -56,6 +60,7 @@ $(document).ready(function(){
   });
   
   $("#submit-report").on("click", function(){
+    console.log("sss");
     var months = $(".reports_month").map(function(){
       var m = $($(this)[0]);
       if(m.prop('checked')){
@@ -87,12 +92,12 @@ $(document).ready(function(){
           var reports_year = new Array();
           var str = "";
           var save_years = 0, save_month = 0;
-          var i = -1, j =0;
+          var i = -1, j =-1;
           $(obj).each(function(){
             var date = get_date_to_array(this['Invoice_Date']);
             var years = date[0];
             var month = g_Month[parseInt(date[1]) -1 ];
-            console.log(month);
+            
             if(save_years != years){
               save_years = years;
               reports_year.push(years);
@@ -101,12 +106,17 @@ $(document).ready(function(){
               reports[i] = new Array();
               save_month = month;
             }
+            if(save_month != month){
+              save_month = month;
+              j++;
+            }
             if(typeof reports[i][j] == "undefined"){
               reports[i][j] = new Array();
               reports[i][j]['month'] = month;
               reports[i][j]['str'] = "";
               reports[i][j]['sum'] = 0;
             }
+            console.log(month, reports[i][j]['month']);
             var currency = 0;
             if(this['Amount_Actual_Price'] == null){
               if(this['Contract_Value_Rate'] != 0.00){
@@ -120,34 +130,13 @@ $(document).ready(function(){
               currency = this['Amount_Actual_Price'];
             }
             reports[i][j]['sum'] += parseFloat(currency);
-            reports[i][j]['str'] += "<p>"+
+            reports[i][j]['str'] += "<div><p>"+
             this['JID']+
-            "<span class='reports-show-currency'>"+addCommas(parseFloat(currency).toFixed(2))+"</span>"+
-            "</p>";
-            if(save_month != month){
-              save_month = month;
-              j++;
-            }
+            "<span class='reports-show-currency'>"+addCommas(parseFloat(currency).toFixed(2))+"</span></p>"+
+            "</div>";
+            
           });
           
-          /*
-            {
-              0 : {
-                0 : {
-                  month : Jan
-                  element : str
-                }
-                1 : {
-                  month : feb
-                  element : str
-                }
-              }
-            }
-          
-          
-          */
-          //console.log(reports);
-          //addCommas(parseFloat(obj['Job']['Contract_Value_Other']).toFixed(2));
           var currency = 0;
           for(i=0;i<reports_year.length;i++){
             var currency_each_years = 0;
@@ -155,18 +144,14 @@ $(document).ready(function(){
             var str_list = "";
             for(j=0;j<reports[i].length;j++){
               currency_each_years += reports[i][j]['sum'];
-              str_list += "<p class='reports-details-month'>"+reports[i][j]['month']+"<span class='reports-show-currency'>"+addCommas(parseFloat(reports[i][j]['sum']).toFixed(2))+"</span></p>";
+              str_list += "<div class='reports-details-toggle'><p>"+reports[i][j]['month']+"<span class='reports-show-currency'>"+addCommas(parseFloat(reports[i][j]['sum']).toFixed(2))+"</span></p></div>";
               str_list += "<div class='reports-details-jid'>"+reports[i][j]['str']+"</div>";
             }
-            str += "<h4 class='reports-details-years'>"+year+"<span class='reports-show-currency'>"+addCommas(parseFloat(currency_each_years).toFixed(2))+"</span></h4>" + str_list;
+            str += "<h4 class='reports-details-years'>"+year+"<span class='reports-show-currency'>"+addCommas(parseFloat(currency_each_years).toFixed(2))+"</span></h4><div class='reports-details-month'>" + str_list + "</div>";
             currency += currency_each_years;
           }
           str = "<h3>SUMMARY ALL <span class='reports-show-currency'>"+addCommas(parseFloat(currency).toFixed(2))+"</span></h3>" + str
           $("#content-report").html(str);
-          /*$.each(reports, function(){
-            console.log(this)
-            $("#content-report").append()
-          });*/
         }
         else{
           
@@ -457,10 +442,12 @@ $(document).ready(function(){
       url : "report_options",
       cache: false,
       success: function(req){
+        console.log(req);
         if(req['status'] == true){
           var max = parseInt(req['obj']['max']);
           var min = parseInt(req['obj']['min']);
           var diff = max - min;
+          if(diff < 0) diff *= -1;
           var str = "";
           for(i=0; i<=diff;i++){
             var checked = i==0?"checked=checked":"";

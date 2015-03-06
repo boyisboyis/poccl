@@ -131,16 +131,40 @@ a:hover, a:focus {
 	float: right;
 	width: 50%;
 }
-
+.reports-details-years{
+	margin: 8px 0 8px 30px;
+	padding: 0;
+	color: #ed8151;
+	cursor: pointer;
+	
+}
 .reports-details-month {
-	margin-left: 50px;
+	margin: 8px 0 8px 50px;
+	padding: 0;
+	display:none;
+	color: #ed8151;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .reports-details-jid {
-	margin-left: 100px;
+	margin: 8px 0 8px 80px;
+	display:none;
+	border-bottom: 1px solid black;
+	color: #000;
+	font-weight: normal;
+	cursor: default;
+}
+.reports-details-jid p{
+	margin: 8px 0 8px 30px;
+	padding: 0;
 }
 .reports-show-currency{
 	float: right;
+}
+.reports-details-toggle{
+	margin: 8px 0 8px 30px;
+	padding: 0;
 }
 
 /*
