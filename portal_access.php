@@ -1,5 +1,5 @@
 <?php
-  
+
 $GLOBALS["environment"] = parse_ini_file('config/env.ini');
 if($GLOBALS["environment"]["maintain"] == 1){
   require('public/503.html');
