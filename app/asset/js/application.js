@@ -25,7 +25,7 @@ $(document).ready(function(){
     $(this).next().slideToggle();
   });
   
-  $("#content-report").on("click", ".reports-details-years, .reports-details-toggle", function(){
+  $("#content-report").on("click", ".reports-details-years, .reports-details-toggle, .reports-details-jid-detail", function(){
     $(this).next().slideToggle();
   })
   
@@ -119,9 +119,11 @@ $(document).ready(function(){
             // console.log(month, reports[i][j]['month']);
             var currency = this['Amount_Actual_Price'];
             reports[i][j]['sum'] += parseFloat(currency);
-            reports[i][j]['str'] += "<div><p>"+
+            reports[i][j]['str'] += "<div><p class='reports-details-jid-detail'>"+
             this['JID']+
             "<span class='reports-show-currency'>"+addCommas(parseFloat(currency).toFixed(2))+"</span></p>"+
+            "<div>"+
+            "</div>"+
             "</div>";
             
           });
