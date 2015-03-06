@@ -154,6 +154,11 @@ a:hover, a:focus {
 	cursor: pointer;
 	
 }
+.reports-details-each-details{
+	margin: 8px 0 8px 70px;
+	padding: 0;
+	display: none;
+}
 .reports-details-month {
 	margin: 8px 0 8px 50px;
 	padding: 0;
