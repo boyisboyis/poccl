@@ -106,9 +106,25 @@ a:hover, a:focus {
 * 
 */
 
+.color-danger {
+	color: #FA5858;
+}
+
+.color-success {
+	color: #04B404;
+}
+
 /*
 * Report Content
 */
+
+.report-topics {
+	margin: 50px 0;
+}
+
+.report-topics .fa {
+	margin-right: 10px;
+}
 
 .report-panel {
 	background-color: #333;
@@ -150,7 +166,7 @@ a:hover, a:focus {
 .reports-details-jid {
 	margin: 8px 0 8px 80px;
 	display:none;
-	border-bottom: 1px solid black;
+	border-bottom: 3px solid #848484;
 	color: #000;
 	font-weight: normal;
 	cursor: default;
