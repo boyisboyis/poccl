@@ -183,7 +183,6 @@ $(document).ready(function(){
     hashManagement(hash);
   }
   function hashManagement(hash){
-   
     if(hash == ""){
       init(0);
     }
