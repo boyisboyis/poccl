@@ -1,5 +1,6 @@
 $(document).ready(function(){
   var hash_str = ["#home", "#search", "#report"];
+  var g_Month = ["January", "February", "March", "April", "May", "June", "July", "August","September","October","November","December"];
   getHash();
   
   /*
@@ -80,6 +81,96 @@ $(document).ready(function(){
       cache: false,
       success: function(req){
         console.log(req);
+        if(req['status'] == true){
+          var obj = req['obj'];
+          var reports = new Array();
+          var reports_year = new Array();
+          var str = "";
+          var save_years = 0, save_month = 0;
+          var i = -1, j =0;
+          $(obj).each(function(){
+            var date = get_date_to_array(this['Invoice_Date']);
+            var years = date[0];
+            var month = g_Month[parseInt(date[1]) -1 ];
+            console.log(month);
+            if(save_years != years){
+              save_years = years;
+              reports_year.push(years);
+              i++;
+              j=0;
+              reports[i] = new Array();
+              save_month = month;
+            }
+            if(typeof reports[i][j] == "undefined"){
+              reports[i][j] = new Array();
+              reports[i][j]['month'] = month;
+              reports[i][j]['str'] = "";
+              reports[i][j]['sum'] = 0;
+            }
+            var currency = 0;
+            if(this['Amount_Actual_Price'] == null){
+              if(this['Contract_Value_Rate'] != 0.00){
+                currency = this['Contract_Value_Rate'];
+              }
+              else{
+                currency = this['Contract_Value_THB'];
+              }
+            }
+            else{
+              currency = this['Amount_Actual_Price'];
+            }
+            reports[i][j]['sum'] += parseFloat(currency);
+            reports[i][j]['str'] += "<p>"+
+            this['JID']+
+            "<span class='reports-show-currency'>"+addCommas(parseFloat(currency).toFixed(2))+"</span>"+
+            "</p>";
+            if(save_month != month){
+              save_month = month;
+              j++;
+            }
+          });
+          
+          /*
+            {
+              0 : {
+                0 : {
+                  month : Jan
+                  element : str
+                }
+                1 : {
+                  month : feb
+                  element : str
+                }
+              }
+            }
+          
+          
+          */
+          //console.log(reports);
+          //addCommas(parseFloat(obj['Job']['Contract_Value_Other']).toFixed(2));
+          var currency = 0;
+          for(i=0;i<reports_year.length;i++){
+            var currency_each_years = 0;
+            var year = reports_year[i];
+            var str_list = "";
+            for(j=0;j<reports[i].length;j++){
+              currency_each_years += reports[i][j]['sum'];
+              str_list += "<p class='reports-details-month'>"+reports[i][j]['month']+"<span class='reports-show-currency'>"+addCommas(parseFloat(reports[i][j]['sum']).toFixed(2))+"</span></p>";
+              str_list += "<div class='reports-details-jid'>"+reports[i][j]['str']+"</div>";
+            }
+            str += "<h4 class='reports-details-years'>"+year+"<span class='reports-show-currency'>"+addCommas(parseFloat(currency_each_years).toFixed(2))+"</span></h4>" + str_list;
+            currency += currency_each_years;
+          }
+          str = "<h3>SUMMARY ALL <span class='reports-show-currency'>"+addCommas(parseFloat(currency).toFixed(2))+"</span></h3>" + str
+          $("#content-report").html(str);
+          /*$.each(reports, function(){
+            console.log(this)
+            $("#content-report").append()
+          });*/
+        }
+        else{
+          
+        }
       }
     });
   });
@@ -366,9 +457,31 @@ $(document).ready(function(){
       url : "report_options",
       cache: false,
       success: function(req){
-        console.log(req);
+        if(req['status'] == true){
+          var max = parseInt(req['obj']['max']);
+          var min = parseInt(req['obj']['min']);
+          var diff = max - min;
+          var str = "";
+          for(i=0; i<=diff;i++){
+            var checked = i==0?"checked=checked":"";
+            var y = min + i;
+            str += "<p>"+
+            "<input id='reports_year_"+y+"' type='checkbox' name='reports_year' class='reports_year' value='"+y+"' "+checked+"  />"+
+            "<label for='reports_year_"+y+"'>"+y+"</label>"
+            "</p>"
+          }
+          $("#report-update-years").html(str);
+        }
+        else{
+          
+        }
       }
     });
+  }
+  
+  function get_date_to_array(invoice_date){
+     var s = invoice_date.split('-');
+     return s;
   }
   
 });
