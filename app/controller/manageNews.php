@@ -33,7 +33,13 @@ class News {
 				}
 			}
 		  sort($return['obj']);
-		  echo json_encode($return);die();
+		  if(count($return['obj']) > 0) {
+		  	echo json_encode($return);
+		  }
+		  else {
+		  	echo json_encode(array("status" => false));die();
+		  }
+		  die();
 		}
 		else{
 			echo json_encode(array("status" => false));die();
@@ -53,7 +59,13 @@ class News {
 				}
 			}
 		  sort($return['obj']);
-		  echo json_encode($return);die();
+		  if(count($return['obj']) > 0) {
+		  	echo json_encode($return);
+		  }
+		  else {
+		  	echo json_encode(array("status" => false));die();
+		  }
+		  die();
 		}
 		else{
 			echo json_encode(array("status" => false));die();
