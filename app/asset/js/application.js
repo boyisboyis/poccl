@@ -60,7 +60,6 @@ $(document).ready(function(){
   });
   
   $("#submit-report").on("click", function(){
-    console.log("sss");
     var months = $(".reports_month").map(function(){
       var m = $($(this)[0]);
       if(m.prop('checked')){
@@ -87,6 +86,7 @@ $(document).ready(function(){
       success: function(req){
         console.log(req);
         if(req['status'] == true){
+          $(".report-topics").html("<i class='fa fa-check color-success'></i>Report");
           var obj = req['obj'];
           var reports = new Array();
           var reports_year = new Array();
@@ -116,19 +116,8 @@ $(document).ready(function(){
               reports[i][j]['str'] = "";
               reports[i][j]['sum'] = 0;
             }
-            console.log(month, reports[i][j]['month']);
-            var currency = 0;
-            if(this['Amount_Actual_Price'] == null){
-              if(this['Contract_Value_Rate'] != 0.00){
-                currency = this['Contract_Value_Rate'];
-              }
-              else{
-                currency = this['Contract_Value_THB'];
-              }
-            }
-            else{
-              currency = this['Amount_Actual_Price'];
-            }
+            // console.log(month, reports[i][j]['month']);
+            var currency = this['Amount_Actual_Price'];
             reports[i][j]['sum'] += parseFloat(currency);
             reports[i][j]['str'] += "<div><p>"+
             this['JID']+
@@ -154,7 +143,24 @@ $(document).ready(function(){
           $("#content-report").html(str);
         }
         else{
-          
+          $(".report-topics").html("<i class='fa fa-times color-danger'></i>Report");
+          var monthText = "";
+          for(var m in months) {
+            if(m == months.length - 1) {
+              monthText += g_Month[parseInt(months[m] - 1)];
+            }
+            else {
+              monthText += g_Month[parseInt(months[m] - 1)] + ", ";
+            }
+          }
+          $("#content-report").html(
+            "Invoice at " +
+            "<span class='highlight-text'>" +
+            monthText +
+            "</span>" +
+            " not found !! Please, Select again."
+          );
+          console.log("false");
         }
       }
     });
@@ -255,7 +261,7 @@ $(document).ready(function(){
       success: function(req){
         $("#content-search").html("");
         if(req['status'] == true){
-          $(".result-topics").html("<i class='fa fa-check'></i>Result");
+          $(".result-topics").html("<i class='fa fa-check color-success'></i>Result");
           $.each(req['obj'], function(){
             var obj = $(this)[0];
             var table_guarantee = "<p class='p-warning'>Guarantee is not set</p>";
@@ -374,7 +380,7 @@ $(document).ready(function(){
           });
         }
         else{
-          $(".result-topics").html("<i class='fa fa-times'></i>Result");
+          $(".result-topics").html("<i class='fa fa-times color-danger'></i>Result");
           var searchType = "";
           if(search['type'] == 'contract') {
             searchType = "Contract Name ";

@@ -9,6 +9,9 @@ if(Check::isAjax()){
 	else if(isset($_POST["get_years"]) && $_POST["get_years"] == "get_years"){
 	    reportOptions::getYears();
 	}
+	else {
+	    echo json_encode(array("status" => false));die();
+	}
 }
 else{
 	Redirect::to("/");
@@ -25,8 +28,13 @@ class reportOptions{
                     $sql[] = "payment.Invoice_Date LIKE '" . $yy . "-" . $m . "-%'";
                 }
             }
-            $result = DB::query("SELECT * FROM payment JOIN job ON payment.JID = job.JID WHERE " . implode(" OR ", $sql) . " ORDER BY payment.Invoice_Date ASC")->get();
-            echo json_encode(array("status" => true, "obj" => $result));
+            $result = DB::query("SELECT * FROM payment WHERE " . implode(" OR ", $sql) . " ORDER BY payment.Invoice_Date ASC")->get();
+            if(count($result) > 0) {
+                echo json_encode(array("status" => true, "obj" => $result));
+            }
+            else {
+                echo json_encode(array("status" => false));
+            }
             //echo json_encode($result);
         }
         else {
