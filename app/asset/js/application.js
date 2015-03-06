@@ -84,7 +84,6 @@ $(document).ready(function(){
       url : "report_options",
       cache: false,
       success: function(req){
-        console.log(req);
         if(req['status'] == true){
           $(".report-topics").html("<i class='fa fa-check color-success'></i>Report");
           var obj = req['obj'];
@@ -116,13 +115,13 @@ $(document).ready(function(){
               reports[i][j]['str'] = "";
               reports[i][j]['sum'] = 0;
             }
-            // console.log(month, reports[i][j]['month']);
             var currency = this['Amount_Actual_Price'];
             reports[i][j]['sum'] += parseFloat(currency);
             reports[i][j]['str'] += "<div><p class='reports-details-jid-detail'>"+
             this['JID']+
             "<span class='reports-show-currency'>"+addCommas(parseFloat(currency).toFixed(2))+"</span></p>"+
-            "<div>"+
+            "<div class='reports-details-each-details'>"+
+            "<p>Terms "+this['Terms']+"<span class='td-colon'>:</span>"+this['Payment_Type']+"</p>"+
             "</div>"+
             "</div>";
             
@@ -423,11 +422,13 @@ $(document).ready(function(){
       case 1:
           $(".t1").show();
           $(".t0, .t2").hide();
+          $("#content-search, .result-topics").html("");
         break;
       case 2:
         get_report_years();
         $(".t2").show();
         $(".t0, .t1").hide();
+        $("#content-report, .report-topics").html("");
         break;
       default:
           $(".t0").show();
