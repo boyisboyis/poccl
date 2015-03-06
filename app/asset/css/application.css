@@ -132,6 +132,17 @@ a:hover, a:focus {
 	width: 50%;
 }
 
+.reports-details-month {
+	margin-left: 50px;
+}
+
+.reports-details-jid {
+	margin-left: 100px;
+}
+.reports-show-currency{
+	float: right;
+}
+
 /*
 * Search Content
 */

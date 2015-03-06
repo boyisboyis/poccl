@@ -52,7 +52,7 @@
             <h3>Month</h3>
             <div>
               <p class='report-month-left'>
-                <input id="reports_month_january" type="checkbox" name="reports_month" class='reports_month' value="01"/>
+                <input id="reports_month_january" type="checkbox" name="reports_month" class='reports_month' value="01" checked='checked' />
                 <label for="reports_month_january">January</label>
               </p>
               <p class='report-month-right'>
