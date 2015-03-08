@@ -67,6 +67,7 @@ a:hover, a:focus {
   left: 0;
   text-align: right;
   background-color: #333;
+  z-index: 9999;
 }
 
 #wrap-search{
@@ -82,12 +83,14 @@ a:hover, a:focus {
 	height: 100%;
 	width: 300px;
 	background-color: #333;
+	z-index: 9999;
 }
 #wrap-report > .report-panel{
 	margin-top: 260px;
 	height: 100%;
 	width: 100%;
 	padding: 0 15px;
+	
 }
 
 /*
@@ -119,7 +122,7 @@ a:hover, a:focus {
 */
 
 .report-topics {
-	margin: 50px 0;
+	padding: 50px 0;
 }
 
 .report-topics .fa {
@@ -128,7 +131,10 @@ a:hover, a:focus {
 
 .report-panel {
 	background-color: #333;
-	float: left;
+	width: 100%;
+	height: 100%;
+	padding: 261px 5px 0;
+	overflow: auto;
 }
 
 .report-panel label,.report-panel h3 {
@@ -212,7 +218,58 @@ a:hover, a:focus {
 /*
 * Main content
 */
-#wrap-main{
+#wrap-main {
+	width: 100%;
+}
+
+#wrap-main #wrap-main-menu{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 300px;
+	height: 100%;
+}
+
+#wrap-main #wrap-main-content{
+	width: 100%;
+	height: 100%;
+}
+
+#wrap-main-content #main-content{
+	width: 960px;
+	margin: 0 auto;
+	height: 100%;
+}
+
+#main-menu-show-and-hide {
+	width: 100%;
+	height: 40px;
+	background-color: #333;
+	display: none;
+	padding: 5px 0;
+}
+.padding-left-300px{
+	padding-left: 300px!important;
+}
+#show-and-hide {
+	width: 50px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  float: right;
+  margin-right: 10px;
+  background: #333;
+  font-size: 30px;
+}
+
+#submit-report {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    background-color: #ed8151;
+}
+/*#wrap-main{
   width: 960px;
   margin: 10px auto 0;
 }
@@ -222,7 +279,7 @@ a:hover, a:focus {
 }
 #wrap-main .p-news > span{
 	margin: 0 11px;
-}
+}*/
 
 #main-news {
 	text-align: center;
@@ -253,6 +310,10 @@ a:hover, a:focus {
 
 .td-search-term{
 	border-bottom: 1px solid #EEEEEE;
+}
+
+.has-arrears-at{
+	margin: 0 10px;
 }
 
 /*
@@ -327,4 +388,52 @@ a:hover, a:focus {
 		font-size: 1em!important;
 	}
 }
+
+@media screen and (max-width: 1262px){
+	#main-content {
+		width: 100%!important;
+		padding: 0 10px;
+	}
+}
+
+@media screen and (max-width: 786px){
+	#wrapper{
+		margin-bottom: 70px;
+	}
+	
+	#main-content .report-topics {
+		padding: 15px 0;
+	}
+	#wrap-main #wrap-main-menu {
+		position: relative;
+		width: 100%;
+	/*	height: 100px;*/
+	}
+	#wrap-main #wrap-main-menu .report-panel{
+		margin: 0;
+		height: 100%;
+		width: 100%;
+		padding: 0 5px;
+	}
+	.padding-left-300px {
+		padding-left: 0!important;
+	}
+	.report-panel{
+		display: none;
+	}
+	.report-panel h3 {
+		margin: 0;
+	}
+	#main-menu-show-and-hide {
+		display: block;
+	}
+	.reports-details-years ,.reports-details-month{
+		margin:8px 0;
+	}
+	.reports-details-jid, .reports-details-each-details {
+		margin:8px 0 8px 20px;
+	}
+}
+
+
 
