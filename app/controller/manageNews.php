@@ -6,6 +6,7 @@ if(Check::isAjax()){
 		switch($type){
 			case "paymentsAlert" : News::paymentsAlert();
 			case "guaranteesAlert" : News::guaranteesAlert();
+			case "poidnullAlert" : News::poidnullAlert();
 			break;
 		}		
 	}
@@ -66,6 +67,28 @@ class News {
 		  	echo json_encode(array("status" => false));die();
 		  }
 		  die();
+		}
+		else{
+			echo json_encode(array("status" => false));die();
+		}
+	}
+	public static function poidnullAlert() {
+		$result = DB::query("SELECT po_asso.JID FROM po_asso WHERE po_asso.PO_No is null")->get();
+		$n = count($result);
+		if($n > 0){
+			$time_now = new DateTime("now");
+			$return = array('obj' => array(), 'status' => true);
+			for($i=0;$i<$n;$i++){
+				$return['obj'][$i] = $result[$i];
+			}
+		  	sort($return['obj']);
+		  	if(count($return['obj']) > 0) {
+		  		echo json_encode($return);
+		  	}
+		  	else {
+		  		echo json_encode(array("status" => false));die();
+		  	}
+		  	die();
 		}
 		else{
 			echo json_encode(array("status" => false));die();

@@ -37,18 +37,7 @@ $(document).ready(function(){
     searchResult(data);
   });
   
-  $("#content-payment-news").on("click", '.search-from-news', function(){
-    document.location.hash = $(this).attr("href");
-    var search = $(this).data('jid');
-    getHash();
-    var data = {
-      "type" : "job",
-      "search" : search
-    }
-    searchResult(data);
-  });
-  
-  $("#content-guarantee-news").on("click", '.search-from-news', function(){
+  $("#content-payment-news, #content-guarantee-news, #content-poidnull-news").on("click", '.search-from-news', function(){
     document.location.hash = $(this).attr("href");
     var search = $(this).data('jid');
     getHash();
@@ -250,6 +239,38 @@ $(document).ready(function(){
     });
   }
   
+  function getPOIDNullAlertFeeds() {
+    $.ajaxSetup({ cache: false });
+    $.ajax({
+      type: "POST",
+			dataType: "json",
+			data : {
+			  "type" : "poidnullAlert"
+			},
+      url : "managenews",
+      cache: false,
+      success: function(req){
+        if(req['status'] == true){
+          var length = req['obj'].length;
+          $("#content-poidnull-news").html("<h2 class='main-topics'>Purchase Order none</h2>");
+          $.each(req['obj'], function(){
+            var _obj = $(this)[0];
+            $("#content-poidnull-news").append(
+              "<p class='p-news'>"+
+              "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
+              "<span>purchase order none</span>"+
+              // "<b class='news-payment'>"+_obj['Guarantee']+"</b>"+
+              "</p>"
+            );
+          });
+        }
+        else{
+          console.log("false");
+        }
+      }
+    });
+  }
+  
   function searchResult(search){
     //console.log(search);
     $.ajaxSetup({ cache: false });
@@ -435,6 +456,7 @@ $(document).ready(function(){
           $(".t1, .t2").hide();
           getPaymentAlertFeeds();
           getGuaranteeAlertFeeds();
+          getPOIDNullAlertFeeds();
         break;
     }
   }
