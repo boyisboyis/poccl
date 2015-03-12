@@ -2,10 +2,13 @@ $(document).ready(function(){
   var hash_str = ["#home", "#search", "#report"];
   var g_Month = ["January", "February", "March", "April", "May", "June", "July", "August","September","October","November","December"];
   getHash();
+  elementHeight();
   
   /*
   * event
   */
+  
+  
   $("#input-search").on("keyup", function(e){
     if ( e.which == 13 ) {
       $("#search-now").click();
@@ -27,7 +30,13 @@ $(document).ready(function(){
   
   $("#content-report").on("click", ".reports-details-years, .reports-details-toggle, .reports-details-jid-detail", function(){
     $(this).next().slideToggle();
-  })
+    $(this).focus();
+    elementHeight();
+  });
+  
+  $("#show-and-hide").on("click", function(){
+    $(".report-panel").slideToggle();
+  });
   
   $("#search-now").on("click", function(){
     var data = {
@@ -194,7 +203,7 @@ $(document).ready(function(){
             $("#content-payment-news").append(
               "<p class='p-news'>"+
               "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
-              "<span>has arrears at</span>"+
+              "<span class='has-arrears-at'>has arrears at</span>"+
               "<b class='news-payment'>"+_obj['Payment']+"</b>"+
               "</p>"
             );
@@ -442,18 +451,22 @@ $(document).ready(function(){
     switch (parseInt(type)) {
       case 1:
           $(".t1").show();
-          $(".t0, .t2").hide();
+          $(".t0, .t2, #wrap-main-menu").hide();
+          $("#wrap-main-content, #wrap-header").removeClass("padding-left-300px");
           $("#content-search, .result-topics").html("");
         break;
       case 2:
-        get_report_years();
-        $(".t2").show();
-        $(".t0, .t1").hide();
-        $("#content-report, .report-topics").html("");
+          get_report_years();
+          $(".t2, #wrap-main-menu").show();
+          $(".t0, .t1").hide();
+          $("#wrap-main-content").addClass("padding-left-300px");
+          $("#content-report, .report-topics").html("");
+          elementHeight();
         break;
       default:
           $(".t0").show();
-          $(".t1, .t2").hide();
+          $(".t1, .t2, #wrap-main-menu").hide();
+          $("#wrap-main-content, #wrap-header").removeClass("padding-left-300px");
           getPaymentAlertFeeds();
           getGuaranteeAlertFeeds();
           getPOIDNullAlertFeeds();
@@ -500,5 +513,48 @@ $(document).ready(function(){
      var s = invoice_date.split('-');
      return s;
   }
+  /*
+  * resize
+  */
   
+  $(window).on("resize",function(){
+    elementHeight();
+  });
+  $(window).scroll(function (event) {
+    elementScroll();
+  });
+  
+  function elementHeight(){
+    var w_width = $(this).width();
+    var w_height = $(this).height();
+    if(w_width >= 786){
+      if(!$(".report-panel").is(":visible")){
+        $(".report-panel").show();
+      }
+      if($(".report-panel").is(":visible")){
+       $("#wrap-header").addClass("padding-left-300px");
+      }
+    }
+    else {
+      $("#wrap-header").removeClass("padding-left-300px");
+    }
+  }
+  
+  function elementScroll(){
+    var scroll = $(window).scrollTop();
+    if($(".report-panel").is(":visible")){
+      console.log(scroll, $("#wrap-header").outerHeight())
+      var rp = $("#wrap-header").outerHeight() - scroll - 29;
+      if(rp > 29){
+        $(".report-panel").css({"padding-top" : rp+"px"});
+      }
+    }
+    
+  }
+  
+  $( document ).ajaxStart(function() {
+   $(".ajax-loading").show();
+  }).ajaxComplete(function() {
+   $(".ajax-loading").hide();
+  });
 });
