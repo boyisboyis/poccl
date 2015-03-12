@@ -45,6 +45,7 @@ $(document).ready(function(){
       "type" : "job",
       "search" : search
     }
+    $("#select-search").val("job");
     searchResult(data);
   });
   
@@ -350,9 +351,21 @@ $(document).ready(function(){
               }
               table_payment = "<table border=0 style='width: 100%;' class='purchase-each-detail'>"+tr+"</table>";
             }
+            
+            var keySearch;
+            if(search['type'] == "contract") {
+              keySearch = "<h2 class='job-id'>"+obj['Contactor_Name']+"</h2>";
+            }
+            else if(search['type'] == "job") {
+              keySearch = "<h2 class='job-id'>"+obj['JID']+"</h2>" 
+            }
+            else {
+              keySearch = "<h2 class='job-id'>"+obj['PO_No']+"</h2>"
+            }
+            
             $("#content-search").append(
-              "<article class='purchase-detail'>"+
-              "<h2 class='job-id'>"+obj['JID']+"</h2>"+
+              "<article class='purchase-detail'>" +
+              keySearch +
               "<div style='width: 100%;display:none;'>"+
               "<div style='width: 100%'>"+
               "<section class='content-search-left'>"+

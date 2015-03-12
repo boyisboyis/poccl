@@ -23,10 +23,10 @@ class searchOptions{
 	public static function search($type, $search = ""){
 		$where = array("job" => "JID", "contract" => "Contactor_Name", "poid" => "PO_No");
 		if($search != ""){
-			$result = DB::query("SELECT * FROM po_asso WHERE po_asso.".$where[$type]." LIKE '%".$search."%'")->get();
+			$result = DB::query("SELECT * FROM po_asso WHERE po_asso.".$where[$type]." LIKE '%".$search."%' AND po_asso.".$where[$type]." IS NOT null ORDER BY po_asso.".$where[$type])->get();
 		}
 		else{
-			$result = DB::query("SELECT * FROM po_asso")->get();
+			$result = DB::query("SELECT * FROM po_asso WHERE po_asso.".$where[$type]." IS NOT null ORDER BY po_asso.".$where[$type])->get();
 		}
 		$n = count($result);
 		if($n > 0){
@@ -34,7 +34,7 @@ class searchOptions{
 			for($i=0;$i<$n;$i++){
 				$return['obj'][$i] = $result[$i];
 				$jid = $result[$i]->JID;
-				$job = DB::query("SELECT * FROM job WHERE job.JID = '$jid' ORDER BY job.JID")->get();
+				$job = DB::query("SELECT * FROM job WHERE job.JID = '$jid'")->get();
 				$payment = DB::query("SELECT * FROM payment WHERE payment.JID = '$jid' ORDER BY payment.Terms")->get();
 				$job[0]->Secrecy_Agreement = ($job[0]->Secrecy_Agreement == null || $job[0]->Secrecy_Agreement == false)?"NO":"YES";
 				$job[0]->Late_Pay_Finan_Chage = ($job[0]->Late_Pay_Finan_Chage == null)?"-": ($job[0]->Late_Pay_Finan_Chage == false)?"NO":"YES";
