@@ -148,6 +148,12 @@
           </section>
       </div>
       
+      <!--Loading-->
+      
+      <div class='ajax-loading' style="display: none;">
+        <i class="fa fa-refresh fa-spin"></i>
+      </div>
+      
       <!-- Block Footer -->
       
       <footer id="wrap-footer" class="clearfix">
