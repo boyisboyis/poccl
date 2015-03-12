@@ -236,7 +236,7 @@ $(document).ready(function(){
             $("#content-guarantee-news").append(
               "<p class='p-news'>"+
               "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
-              "<span>has until at</span>"+
+              "<span class='has-arrears-at'>has until at</span>"+
               "<b class='news-payment'>"+_obj['Guarantee']+"</b>"+
               "</p>"
             );
@@ -268,7 +268,7 @@ $(document).ready(function(){
             $("#content-poidnull-news").append(
               "<p class='p-news'>"+
               "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
-              "<span>purchase order none</span>"+
+              "<span class='has-arrears-at'>purchase order none</span>"+
               // "<b class='news-payment'>"+_obj['Guarantee']+"</b>"+
               "</p>"
             );
