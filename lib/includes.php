@@ -9,6 +9,7 @@
   
   require 'help/check.inc';
   require 'help/datetimes.inc';
+  require 'help/keys.inc';
   //require 'help/converts.inc';
 
 ?>
