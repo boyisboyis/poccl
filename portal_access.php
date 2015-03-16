@@ -1,5 +1,5 @@
 <?php
-
+session_start();
   //################### Check Mac Address Before Render Page ###################//
  
   // $ipclient = get_client_ip();
@@ -48,7 +48,7 @@
     require('public/503.html');
     die();
   }
-  
+  //unset($_SESSION);
   $uri = ROUTE::getURI()->conPath();
   $db_config = parse_ini_file(__DIR__.'/config/db.ini');
   $DB = new DB($db_config['host'], $db_config['username'], ini_get('mysqli.default_pw'), $db_config['dbname']);
@@ -57,7 +57,7 @@
     ROUTE::getPage("home");
   }
   else{
-   ROUTE::getPage($uri);
+      ROUTE::getPage($uri);
   }
  
 ?>

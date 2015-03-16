@@ -1,3 +1,8 @@
+<?php
+  if(Session::getSessionUID() !== null){
+    Redirect::to("admin");
+  }
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,8 +22,9 @@
       <form id="form-login" action="login_controller" method="POST">
         <section id="wrap-login">
           <h1>Login</h1>
-          <div>
-            
+          <div id="box-error" style="display:none;">
+            <P class='error e-0'>The username and password field is empty</P>
+            <P class='error e-1'>The username or password is incorrect</P>
           </div>
           <div class='input-login'>
             <input type="text" id="username" placeholder = "username"  name="username"/>
@@ -31,30 +37,6 @@
           </div>
         </section>
       </form>
-    </div>
-    <div>
-      <?php
-        $options = [
-          'cost' => 11,
-          'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-          ];
-          $p =  password_hash("123261129", PASSWORD_BCRYPT, $options);
-         /* echo "<br/>";
-          echo strlen($p);
-          echo "<br/>";
-          echo $p;
-          echo "<br/>";*/
-         /* if(password_verify('123261129', $p)){
-            echo "ok";
-          }
-          else{
-            echo "no";
-          }*/
-          $objDateTime = new DateTime('NOW');
-          $str = "boyisboyis@".$objDateTime->format('Y-m-d/H:i');;
-         /* echo $str."<br/>";
-          echo md5($str);*/
-      ?>
     </div>
   </body>
 </html>

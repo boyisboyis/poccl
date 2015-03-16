@@ -7,11 +7,11 @@
 #wrap-login {
   position: fixed;
   width: 400px;
-  min-height: 320px;
+  min-height: 340px;
   background-color: #ecf0f1;
   top: 50%;
   left: 50%;
-  margin-top: -160px;
+  margin-top: -170px;
   margin-left: -200px;
 }
 
@@ -51,6 +51,11 @@
   color: #FFF;
   border-bottom: 5px solid #27ae60;
   cursor: pointer;
+}
+
+#box-error {
+  text-align: center;
+  color: red;
 }
 
 @media screen and (max-width: 420px){
