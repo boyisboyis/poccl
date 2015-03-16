@@ -380,6 +380,7 @@ $(document).ready(function(){
               "<section class='content-search-left'>"+
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
+              "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['JID']+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Contactor_Name']+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Name']+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+

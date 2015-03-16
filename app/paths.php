@@ -29,6 +29,10 @@ return array(
     "file" => "app/controller/loginAdmin.php",
     "type" => "require"
   ),
+  "admin" => array(
+    "file" => "app/view/backends/index.php",
+    "type" => "require"
+  ),
   
   /*
    *Javascript file

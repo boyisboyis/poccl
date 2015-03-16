@@ -1,7 +1,9 @@
 $(document).on("submit", "#form-login", function (e) {
     var u = $(this).find("#username").val();
     var p = $(this).find("#password").val();
+    console.log(u,p);
     if(u == "" || p == ""){
+      openError(1);
     }
     else{
        $.ajax({
@@ -15,10 +17,29 @@ $(document).on("submit", "#form-login", function (e) {
           }
         },
         success: function(req){
-          console.log(req)
+          if(req['status'] == true){
+            setTimeout(function() {
+              window.location = "admin";
+            }, 2000);
+          }
+          else{
+            openError(req['error'])
+          }
         }
       });
     }
    
     return false;
-})
+});
+
+
+function openError(t){
+  if(t==1){
+     $("#box-error .e-1").hide();
+     $("#box-error, #box-error .e-0").show();
+  }
+  else{
+     $("#box-error .e-0").hide();
+     $("#box-error, #box-error .e-1").show();
+  }
+}
