@@ -21,19 +21,19 @@
     <div id="wrapper">
       <form id="form-login" action="login_controller" method="POST">
         <section id="wrap-login">
-          <h1>Login</h1>
-          <div id="box-error" style="display:none;">
-            <P class='error e-0'>The username and password field is empty</P>
-            <P class='error e-1'>The username or password is incorrect</P>
-          </div>
+          <h1>PO / Contract Check Lists</h1>
           <div class='input-login'>
             <input type="text" id="username" placeholder = "username"  name="username"/>
           </div>
           <div class='input-login'>
             <input type="password" id="password" placeholder="password"  name="password"/>
           </div>
+          <div id="box-error" style="display:none;">
+            <P class='error e-0'>The username and password field is empty</P>
+            <P class='error e-1'>The username or password is incorrect</P>
+          </div>
           <div class='input-submit'>
-             <input id="check-login" type="submit" value="Submit"/>
+             <input id="check-login" type="submit" value="Sign In"/>
           </div>
         </section>
       </form>
