@@ -19,7 +19,7 @@ else{
 
 class News {
 	public static function paymentsAlert(){
-		$result = DB::query("SELECT payment.JID, payment.Invoice_Date, job.Credit_Term FROM payment, job WHERE payment.Invoice_Date <= '" . date("Y-m-d") . "' AND payment.Payment_Status = '0' AND payment.JID = job.JID")->get();
+		$result = DB::query("SELECT payment.JID, payment.Invoice_Date, job.Credit_Term FROM payment, job WHERE payment.Invoice_Date <= '" . date("Y-m-d") . "' AND payment.Date_Actual is null AND payment.JID = job.JID")->get();
 		$n = count($result);
 		if($n > 0){
 			$time_now = new DateTime("now");
