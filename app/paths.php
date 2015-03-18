@@ -33,6 +33,14 @@ return array(
     "file" => "app/view/backends/index.php",
     "type" => "require"
   ),
+  "logout" => array(
+    "file" => "app/view/login/logout.php"  ,
+    "type" => "require"
+  ),
+  "addPurchase" => array(
+    "file" => "app/view/backends/add.php" ,
+    "type" => "require"
+  ),
   
   /*
    *Javascript file
@@ -54,10 +62,15 @@ return array(
     "file" => "app/asset/js/login.js",
     "type" => "file_get_contents"
   ),
+  "adminjs" => array(
+    "file" => "app/asset/js/admin.js",
+    "type" => "file_get_contents"
+  ),
   "angular" => array(
     "file" => "lib/asset/js/angular.min.js",
     "type" => "file_get_contents"
   ),
+  
     
     /*
     * CSS file
@@ -79,6 +92,11 @@ return array(
     ),
     "logincss" => array(
       "file" => "app/asset/css/login.css",
+      "header" => "text/css",
+      "type" => "file_get_contents"
+    ),
+    "admincss" => array(
+      "file" => "app/asset/css/admin.css",
       "header" => "text/css",
       "type" => "file_get_contents"
     )

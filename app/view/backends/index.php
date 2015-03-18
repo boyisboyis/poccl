@@ -7,10 +7,394 @@
 ?>
 <!DOCTYPE html>
 <html>
-  <head>
-    
-  </head>
-  <body>
-    <h1>sdad</h1>
-  </body>
+
+<head>
+  <title>Admin</title>
+  <link rel="stylesheet" href="maincss" type="text/css" />
+  <link rel="stylesheet" href="fontcss" type="text/css" />
+  <link rel="stylesheet" href="admincss" type="text/css" />
+  <script type="text/javascript" src="jquery"></script>
+  <script type="text/javascript" src="adminjs"></script>
+</head>
+
+<body>
+  <div id="wrapper-admin">
+    <nav id="content-nav">
+      <ol>
+        <li><a href="#add"><i class="fa fa-plus"></i>Add</a>
+        </li>
+        <li><a href="#add"><i class="fa fa-search"></i>Search</a>
+        </li>
+        <li><a href="#add">Payment Status</a>
+        </li>
+        <li><a href="#add">Gurantee Status</a>
+        </li>
+      </ol>
+    </nav>
+    <div id="content-article">
+      <nav id="wrap-nav">
+        <ul>
+          <li><i class="fa fa-power-off"></i><a href="logout">Logout</a>
+          </li>
+        </ul>
+      </nav>
+      <header id="wrap-header">
+        <section>
+          <h1>Purchase Order Admin Controller</h1>
+        </section>
+      </header>
+
+      <div id="wrap-content">
+        <div id="admin-add">
+          <form id="form_add" name="form_add" method="POST" action="addPurchase">
+            <input type="submit" name="submit"/>
+            <h2>New Purchase Order</h2>
+            <div>
+              <label for="">Job No : </label>
+              <input type="text" name="new[job_no]" />
+            </div>
+            <hr>
+            <div style="float: left;">
+              <div class='table'>
+                <h3>Project Summary</h3>
+                <div class='table-row'>
+                  <div class='table-cell'>Contractor Name</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <input type="text" name="new[contractor_name]" />
+                  </div>
+                </div>
+                <div class='table-row'>
+                  <div class='table-cell'>Project Name</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <input type="text" name="new[project_name]" />
+                  </div>
+                  <div class='table-cell'>
+                    <input type="checkbox" />
+                    <label for="">None</label>
+                  </div>
+                </div>
+                <div class='table-row'>
+                  <div class='table-cell'>Project Location</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <input type="text" name="new[project_location]" />
+                  </div>
+                  <div class='table-cell'>
+                    <input type="checkbox" />
+                    <label for="">None</label>
+                  </div>
+                </div>
+                <div class='table-row'>
+                  <div class='table-cell'>Project Owner's Name</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <input type="text" name="new[project_owner_name]" />
+                  </div>
+                  <div class='table-cell'>
+                    <input type="checkbox" />
+                    <label for="">None</label>
+                  </div>
+                </div>
+                <div class='table-row'>
+                  <div class='table-cell'>Secrecy Agreement</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <input type="radio" name="new[secrecy_agreement]" />
+                    <label for="" class="fa fa-check"></label>
+                    <input type="radio" name="new[secrecy_agreement]" />
+                    <label for="" class='fa fa-times'></label>
+                  </div>
+                  <div class='table-cell'>
+                    <input type="checkbox" />
+                    <label for="">None</label>
+                  </div>
+                </div>
+              </div>
+              <div class="table">
+                <div class='table-row'>
+                  <h3>Working Remark</h3>
+                  <div class='table-row'>
+                    <div class='table-cell'>Start Date</div>
+                    <div class='table-cell colon'></div>
+                    <div class='table-cell'>
+                      <input type="date" name="new[start_date]" />
+                    </div>
+                  </div>
+                  <div class='table-row'>
+                    <div class='table-cell'>Complete Date</div>
+                    <div class='table-cell colon'></div>
+                    <div class='table-cell'>
+                      <input type="date" name="new[complete_date]" />
+                    </div>
+                    <div class='table-cell'>
+                      <input type="checkbox" />
+                      <label for="">None</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="float: left; margin-left: 150px;">
+              <div class='table'>
+                <h3>Po Info.</h3>
+                <div class='table-row'>
+                  <div class='table-cell'>Po No</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <input type="text" name="new[po_no]" />
+                  </div>
+                  <div class='table-cell'>
+                    <input type="checkbox" />
+                    <label for="">None</label>
+                  </div>
+                </div>
+                <div class='table-row'>
+                  <div class='table-cell'>Po Date</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <input type="text" name="new[po_date]" />
+                  </div>
+                  <div class='table-cell'>
+                    <input type="checkbox" />
+                    <label for="">None</label>
+                  </div>
+                </div>
+                <div class='table-row'>
+                  <div class='table-cell'>Po Type</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <select name="new[po_type]">
+                      <option value="0">---</option>
+                    </select>
+                  </div>
+                  <div class='table-cell'>
+                    <input type="checkbox" />
+                    <label for="">None</label>
+                  </div>
+                </div>
+                <div class='table-row'>
+                  <div class='table-cell'>Po Amount</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <input type="text" name="new[contractor_name]" />
+                  </div>
+                </div>
+                <div class='table-row'>
+                  <div class='table-cell'>Goveming Law</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <input type="text" name="new[goveming_law]" />
+                  </div>
+                  <div class='table-cell'>
+                    <input type="checkbox" />
+                    <label for="">None</label>
+                  </div>
+                </div>
+                <div class='table-row'>
+                  <div class='table-cell'>Credit Term</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <input type="text" name="new[credit_term]" />
+                  </div>
+                  <div class='table-cell'>
+                    <input type="checkbox" />
+                    <label for="">None</label>
+                  </div>
+                </div>
+                <div class='table-row'>
+                  <div class='table-cell'>Late Payment Financial Change</div>
+                  <div class='table-cell colon'></div>
+                  <div class='table-cell'>
+                    <input type="radio" name="new[late_payment]" value="yes" />
+                    <label for="" class="fa fa-check"></label>
+                    <input type="radio" name="new[late_payment]" value="no" />
+                    <label for="" class="fa fa-times"></label>
+                  </div>
+                  <div class='table-cell'>
+                    <input type="checkbox" />
+                    <label for="">None</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class='clearfix'></div>
+            <hr>
+            <div>
+              <div style="float: left; width: 50%;">
+                <h3><input type="checkbox" id="check-payment-terms"  name="new[payment_terms_checkbox]" value="check" />Payment Terms</h3>
+                <div id='show-payment-terms' style="display:none;">
+                  <div id="list-payment-terms">
+                    <div class='table'>
+                        <ol class='table-row'>
+                          <li class='table-cell'></li>
+                          <li class='table-cell'>Description</li>
+                          <li class='table-cell colon'></li>
+                          <li class='table-cell'>
+                            <select name="new[payment_terms][0][payment_terms_select]">
+                              <option value="0">----</option>
+                            </select>
+                          </li>
+                        </ol>
+                        <ol class='table-row'>
+                          <li class='table-cell'></li>
+                          <li class='table-cell'>Term</li>
+                          <li class='table-cell colon'></li>
+                          <li class='table-cell' style="text-decoration: underline;">1</li>
+                        </ol>
+                        <ol class='table-row'>
+                          <li class='table-cell'>
+                            <input type="radio" name="new[payment_terms][0][payment_terms_amount_select]" checked='checked' />
+                          </li>
+                          <li class='table-cell'>Amount</li>
+                          <li class='table-cell colon'></li>
+                          <li class='table-cell'>
+                            <input type="text" name="new[payment_terms][0][payment_terms_amount_thb]" /> THB</li>
+                        </ol>
+                        <ol class='table-row'>
+                          <li class='table-cell'>
+                            <input type="radio" name="new[payment_terms][0][payment_terms_amount_select]" />
+                          </li>
+                          <li class='table-cell'>Amount</li>
+                          <li class='table-cell colon'></li>
+                          <li class='table-cell'>
+                            <input type="text" name="new[payment_terms][0][payment_terms_amount_thb]" disabled='disabled' /> %</li>
+                        </ol>
+                        <ol class='table-row'>
+                          <li class="table-cell"></li>
+                          <li class='table-cell'>Payment Date Plan</li>
+                          <li class='table-cell colon'></li>
+                          <li class='table-cell'>
+                            <input type="date" name="new[payment_terms][0][payment_terms_date_plan]" />
+                          </li>
+                        </ol>
+                    </div>
+                  </div>
+                  <p id='add-payment-terms'> + Add Payment Terms.</p>
+                  <p id='test-payment-terms'> + test Payment Terms.</p>
+                </div>
+              </div>
+              <div style="float: left; margin-left: 150px;">
+                <h3><input type="checkbox" id="check-bank-guarantee" name="new[bank_guarantee_checkbox]" value="check" />Bank Guarantee</h3>
+                <div id='show-bank-guarantee' style='display: none;'>
+                  <div id="list-bank-guarantee">
+                    <div class='table'>
+                      <ol class='table-row'>
+                        <li class='table-cell'></li>
+                        <li class='table-cell'>Description</li>
+                        <li class='table-cell colon'></li>
+                        <li class='table-cell'>
+                          <select name="new[bank_guarantee][0][bank_guarantee_select]">
+                            <option value="0">----</option>
+                          </select>
+                        </li>
+                      </ol>
+                      <ol class='table-row'>
+                        <li class='table-cell'></li>
+                        <li class='table-cell'>Term</li>
+                        <li class='table-cell colon'></li>
+                        <li class='table-cell' style="text-decoration: underline;">1</li>
+                      </ol>
+                      <ol class='table-row'>
+                        <li class='table-cell'>
+                          <input type="radio" name="new[bank_guarantee][0][bank_guarantee_amount_select]" checked='checked' />
+                        </li>
+                        <li class='table-cell'>Amount</li>
+                        <li class='table-cell colon'></li>
+                        <li class='table-cell'>
+                          <input type="text" name="new[bank_guarantee][0][bank_guarantee_amount_thb]" /> THB</li>
+                      </ol>
+                      <ol class='table-row'>
+                        <li class='table-cell'>
+                          <input type="radio" name="new[bank_guarantee][0][bank_guarantee_amount_select]" />
+                        </li>
+                        <li class='table-cell'>Amount</li>
+                        <li class='table-cell colon'></li>
+                        <li class='table-cell'>
+                          <input type="text" name="new[bank_guarantee][0][bank_guarantee_amount_thb]" disabled='disabled' /> %</li>
+                      </ol>
+                      <ol class='table-row'>
+                        <li class='table-cell'>
+                          <input type="radio" name="new[bank_guarantee][0][bank_guarantee_amount_select]" />
+                        </li>
+                        <li class='table-cell'>Amount</li>
+                        <li class='table-cell colon'></li>
+                        <li class='table-cell'>None</li>
+                      </ol>
+                      <ol class='table-row'>
+                        <li class="table-cell"></li>
+                        <li class='table-cell'>Start Plan</li>
+                        <li class='table-cell colon'></li>
+                        <li class='table-cell'>
+                          <input type="date" name="new[bank_guarantee][0][bank_guarantee_start_date]" />
+                        </li>
+                      </ol>
+                      <ol class='table-row'>
+                        <li class="table-cell"></li>
+                        <li class='table-cell'>Until Plan</li>
+                        <li class='table-cell colon'></li>
+                        <li class='table-cell'>
+                          <input type="date" name="new[bank_guarantee][0][bank_guarantee_until_date]" />
+                        </li>
+                      </ol>
+                    </div>
+                  </div>
+                  <p> + Add Bank Guarantee.</p>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div id="clone-payment-terms" style='display: none;'>
+                    <div class='table'>
+                        <ol class='table-row'>
+                          <li class='table-cell'></li>
+                          <li class='table-cell'>Description</li>
+                          <li class='table-cell colon'></li>
+                          <li class='table-cell'>
+                            <select name="new[payment_terms][numbers]">
+                              <option value="0">----</option>
+                            </select>
+                          </li>
+                        </ol>
+                        <ol class='table-row'>
+                          <li class='table-cell'></li>
+                          <li class='table-cell'>Term</li>
+                          <li class='table-cell colon'></li>
+                          <li class='table-cell' style="text-decoration: underline;">($number)</li>
+                        </ol>
+                        <ol class='table-row'>
+                          <li class='table-cell'>
+                            <input type="radio" name="new[payment_terms_amount_select][numbers]" checked='checked' />
+                          </li>
+                          <li class='table-cell'>Amount</li>
+                          <li class='table-cell colon'></li>
+                          <li class='table-cell'>
+                            <input type="text" name="new[payment_terms_amount_thb][numbers]" /> THB</li>
+                        </ol>
+                        <ol class='table-row'>
+                          <li class='table-cell'>
+                            <input type="radio" name="new[payment_terms_amount_select][numbers]" />
+                          </li>
+                          <li class='table-cell'>Amount</li>
+                          <li class='table-cell colon'></li>
+                          <li class='table-cell'>
+                            <input type="text" name="new[payment_terms_amount_thb][numbers]" disabled='disabled' /> %</li>
+                        </ol>
+                        <ol class='table-row'>
+                          <li class="table-cell"></li>
+                          <li class='table-cell'>Payment Date Plan</li>
+                          <li class='table-cell colon'></li>
+                          <li class='table-cell'>
+                            <input type="date" name="new[payment_terms_date_plan][numbers]" />
+                          </li>
+                        </ol>
+                    </div>
+                  </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
