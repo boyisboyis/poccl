@@ -137,3 +137,20 @@ button:active {
     margin-left: -28px;
 
 }
+
+.table {
+	display: table;
+}
+
+.table .table-row {
+	display: table-row;
+}
+
+.table .table-cell {
+	display: table-cell;
+}
+
+.colon:before {
+	content: ":";
+	margin: 0 5px;
+}
