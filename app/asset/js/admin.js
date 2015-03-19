@@ -44,8 +44,24 @@ $(document).ready(function(){
   });
   
   $("#form_add").submit(function(e){
-    var obj = $( this ).serializeObject();
-    console.log(obj)
+    var formObj = $( this ).serializeObject();
+    console.log(formObj);
+    for(var elem in formObj) {
+      console.log(formObj[elem]);
+    }
+    
+    $.ajax({
+      method: "POST",
+      url: "adminsController",
+      data: {
+        action: "new",
+        params: formObj
+      },
+      success: function(data) {
+        console.log(data);
+      }
+    });
+    
     return false;
   })
 });
