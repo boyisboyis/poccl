@@ -51,7 +51,7 @@
             <h2>New Purchase Order</h2>
             <div>
               <label for="">Job No : </label>
-              <input type="text" name="new[job_no]" />
+              <input type="text" name="job_no" />
             </div>
             <hr>
             <div style="float: left;">
@@ -61,17 +61,17 @@
                   <div class='table-cell'>Contractor Name</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="text" name="new[contractor_name]" />
+                    <input type="text" name="contractor_name" />
                   </div>
                 </div>
                 <div class='table-row'>
                   <div class='table-cell'>Project Name</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="text" name="new[project_name]" />
+                    <input type="text" name="project_name" />
                   </div>
                   <div class='table-cell'>
-                    <input type="checkbox" name="new[project_name_check]" value="project_name_check" />
+                    <input type="checkbox" name="project_name" value="none" />
                     <label for="">None</label>
                   </div>
                 </div>
@@ -79,10 +79,10 @@
                   <div class='table-cell'>Project Location</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="text" name="new[project_location]" />
+                    <input type="text" name="project_location" />
                   </div>
                   <div class='table-cell'>
-                    <input type="checkbox" name="new[project_location_check]" value="project_location" />
+                    <input type="checkbox" name="project_location" value="none" />
                     <label for="">None</label>
                   </div>
                 </div>
@@ -90,10 +90,10 @@
                   <div class='table-cell'>Project Owner's Name</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="text" name="new[project_owner_name]" />
+                    <input type="text" name="project_owner_name" />
                   </div>
                   <div class='table-cell'>
-                    <input type="checkbox" name="new[project_owner_name_check]" value="project_owner_name" />
+                    <input type="checkbox" name="project_owner_name" value="none" />
                     <label for="">None</label>
                   </div>
                 </div>
@@ -101,13 +101,13 @@
                   <div class='table-cell'>Secrecy Agreement</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="radio" name="new[secrecy_agreement]" value="true" />
+                    <input type="radio" name="secrecy_agreement" value="true" />
                     <label for="" class="fa fa-check"></label>
-                    <input type="radio" name="new[secrecy_agreement]" value="false" />
+                    <input type="radio" name="secrecy_agreement" value="false" />
                     <label for="" class='fa fa-times'></label>
                   </div>
                   <div class='table-cell'>
-                    <input type="checkbox" name="new[secrecy_agreement_check]" value="secrecy_agreement" />
+                    <input type="checkbox" name="secrecy_agreement" value="none" />
                     <label for="">None</label>
                   </div>
                 </div>
@@ -119,17 +119,17 @@
                     <div class='table-cell'>Start Date</div>
                     <div class='table-cell colon'></div>
                     <div class='table-cell'>
-                      <input type="date" name="new[start_date]" />
+                      <input type="date" name="start_date" />
                     </div>
                   </div>
                   <div class='table-row'>
                     <div class='table-cell'>Complete Date</div>
                     <div class='table-cell colon'></div>
                     <div class='table-cell'>
-                      <input type="date" name="new[complete_date]" />
+                      <input type="date" name="complete_date" />
                     </div>
                     <div class='table-cell'>
-                      <input type="checkbox" name="new[complete_date_check]" value="complete_date" />
+                      <input type="checkbox" name="complete_date" value="none" />
                       <label for="">None</label>
                     </div>
                   </div>
@@ -143,10 +143,10 @@
                   <div class='table-cell'>Po No</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="text" name="new[po_no]" />
+                    <input type="text" name="po_no" />
                   </div>
                   <div class='table-cell'>
-                    <input type="checkbox" name="new[po_no_check]" value="po_no" />
+                    <input type="checkbox" name="po_no" value="none" />
                     <label for="">None</label>
                   </div>
                 </div>
@@ -154,10 +154,10 @@
                   <div class='table-cell'>Po Date</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="text" name="new[po_date]" />
+                    <input type="text" name="po_date" />
                   </div>
                   <div class='table-cell'>
-                    <input type="checkbox" name="new[po_date_check]" value="po_date" />
+                    <input type="checkbox" name="po_date" value="none" />
                     <label for="">None</label>
                   </div>
                 </div>
@@ -165,12 +165,12 @@
                   <div class='table-cell'>Po Type</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <select name="new[po_type]">
+                    <select name="po_type">
                       <option value="0">---</option>
                     </select>
                   </div>
                   <div class='table-cell'>
-                    <input type="checkbox" name="new[po_type_check]" value="po_type" />
+                    <input type="checkbox" name="po_type" value="none" />
                     <label for="">None</label>
                   </div>
                 </div>
@@ -178,7 +178,7 @@
                   <div class='table-cell'>Po Amount</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="text" name="new[contractor_name]" />
+                    <input type="text" name="contractor_name" />
                   </div>
                 </div>
                 <div class='table-row'>
@@ -191,7 +191,7 @@
                   <div class='table-cell'></div>
                   <div class='table-cell'>
                     <label for="foreign_currency_value">Value : </label>
-                    <input type="text" id="foreign_currency_value" name="new[foreign_currency_value]" />
+                    <input type="text" id="foreign_currency_value" name="foreign_currency_value" />
                   </div>
                 </div>
                 <div class='table-row foreign_currency' style="display:none;">
@@ -199,21 +199,21 @@
                   <div class='table-cell'></div>
                   <div class='table-cell'>
                     <label for="foreign_currency_type">Type : </label>
-                    <input type="text" id="foreign_currency_type" name="new[foreign_currency_type]" />
+                    <input type="text" id="foreign_currency_type" name="foreign_currency_type" />
                   </div>
                   <div class='table-cell'>
                     <label for="foreign_currency_rate">Rate : </label>
-                    <input type="text" id="foreign_currency_rate" name="new[foreign_currency_rate]" />
+                    <input type="text" id="foreign_currency_rate" name="foreign_currency_rate" />
                   </div>
                 </div>
                 <div class='table-row'>
                   <div class='table-cell'>Goveming Law</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="text" name="new[goveming_law]" />
+                    <input type="text" name="goveming_law" />
                   </div>
                   <div class='table-cell'>
-                    <input type="checkbox" name="new[goveming_law_check]" value="goveming_law" />
+                    <input type="checkbox" name="goveming_law" value="none" />
                     <label for="">None</label>
                   </div>
                 </div>
@@ -221,10 +221,10 @@
                   <div class='table-cell'>Credit Term</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="text" name="new[credit_term]" />
+                    <input type="text" name="credit_term" />
                   </div>
                   <div class='table-cell'>
-                    <input type="checkbox" name="new[credit_term_check]" value="credit_term" />
+                    <input type="checkbox" name="credit_term" value="none" />
                     <label for="">None</label>
                   </div>
                 </div>
@@ -232,13 +232,13 @@
                   <div class='table-cell'>Late Payment Financial Change</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="radio" name="new[late_payment]" value="yes" />
+                    <input type="radio" name="late_payment" value="yes" />
                     <label for="" class="fa fa-check"></label>
-                    <input type="radio" name="new[late_payment]" value="no" />
+                    <input type="radio" name="late_payment" value="no" />
                     <label for="" class="fa fa-times"></label>
                   </div>
                   <div class='table-cell'>
-                    <input type="checkbox" name="new[late_payment_check]" value="late_payment" />
+                    <input type="checkbox" name="late_payment" value="none" />
                     <label for="">None</label>
                   </div>
                 </div>
@@ -248,7 +248,7 @@
             <hr>
             <div>
               <div style="float: left; width: 50%;">
-                <h3><input type="checkbox" id="check-payment-terms"  name="new[payment_terms_checkbox]" value="check" />Payment Terms</h3>
+                <h3><input type="checkbox" id="check-payment-terms"  name="payment_terms_checkbox" value="check" />Payment Terms</h3>
                 <div id='show-payment-terms' style="display:none;">
                   <div id="list-payment-terms">
                     <div class='table'>
@@ -257,7 +257,7 @@
                         <li class='table-cell'>Description</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <select name="new[payment_terms][0][payment_terms_select]">
+                          <select name="payment_terms[0][payment_terms_select]">
                             <option value="0">----</option>
                           </select>
                         </li>
@@ -270,28 +270,28 @@
                       </ol>
                       <ol class='table-row'>
                         <li class='table-cell'>
-                          <input type="radio" class='payment_amount' name="new[payment_terms][0][payment_terms_amount_select]" checked='checked' />
+                          <input type="radio" class='payment_amount' name="payment_terms[0][payment_terms_amount_select]" checked='checked' />
                         </li>
                         <li class='table-cell'>Amount</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <input type="text" class='payment_amount_value' name="new[payment_terms][0][payment_terms_amount_thb]" /> THB</li>
+                          <input type="text" class='payment_amount_value' name="payment_terms[0][payment_terms_amount_thb]" /> THB</li>
                       </ol>
                       <ol class='table-row'>
                         <li class='table-cell'>
-                          <input type="radio" class='payment_amount' name="new[payment_terms][0][payment_terms_amount_select]" />
+                          <input type="radio" class='payment_amount' name="payment_terms[0][payment_terms_amount_select]" />
                         </li>
                         <li class='table-cell'>Amount</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <input type="text" class='payment_amount_value' name="new[payment_terms][0][payment_terms_amount_thb]" disabled='disabled' /> %</li>
+                          <input type="text" class='payment_amount_value' name="payment_terms[0][payment_terms_amount_thb]" disabled='disabled' /> %</li>
                       </ol>
                       <ol class='table-row'>
                         <li class="table-cell"></li>
                         <li class='table-cell'>Payment Date Plan</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <input type="date" name="new[payment_terms][0][payment_terms_date_plan]" />
+                          <input type="date" name="payment_terms[0][payment_terms_date_plan]" />
                         </li>
                       </ol>
                     </div>
@@ -300,7 +300,7 @@
                 </div>
               </div>
               <div style="float: left; margin-left: 150px;">
-                <h3><input type="checkbox" id="check-bank-guarantee" name="new[bank_guarantee_checkbox]" value="check" />Bank Guarantee</h3>
+                <h3><input type="checkbox" id="check-bank-guarantee" name="bank_guarantee_checkbox]" value="check" />Bank Guarantee</h3>
                 <div id='show-bank-guarantee' style='display: none;'>
                   <div id="list-bank-guarantee">
                     <div class='table'>
@@ -309,7 +309,7 @@
                         <li class='table-cell'>Description</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <select name="new[bank_guarantee][0][bank_guarantee_select]">
+                          <select name="bank_guarantee[0][bank_guarantee_select]">
                             <option value="0">----</option>
                           </select>
                         </li>
@@ -322,25 +322,25 @@
                       </ol>
                       <ol class='table-row'>
                         <li class='table-cell'>
-                          <input type="radio" name="new[bank_guarantee][0][bank_guarantee_amount_select]" checked='checked' />
+                          <input type="radio" name="bank_guarantee[0][bank_guarantee_amount_select]" checked='checked' />
                         </li>
                         <li class='table-cell'>Amount</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <input type="text" name="new[bank_guarantee][0][bank_guarantee_amount_thb]" /> THB</li>
+                          <input type="text" name="bank_guarantee[0][bank_guarantee_amount_thb]" /> THB</li>
                       </ol>
                       <ol class='table-row'>
                         <li class='table-cell'>
-                          <input type="radio" name="new[bank_guarantee][0][bank_guarantee_amount_select]" />
+                          <input type="radio" name="bank_guarantee[0][bank_guarantee_amount_select]" />
                         </li>
                         <li class='table-cell'>Amount</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <input type="text" name="new[bank_guarantee][0][bank_guarantee_amount_thb]" disabled='disabled' /> %</li>
+                          <input type="text" name="bank_guarantee[0][bank_guarantee_amount_thb]" disabled='disabled' /> %</li>
                       </ol>
                       <ol class='table-row'>
                         <li class='table-cell'>
-                          <input type="radio" name="new[bank_guarantee][0][bank_guarantee_amount_select]" />
+                          <input type="radio" name="bank_guarantee[0][bank_guarantee_amount_select]" />
                         </li>
                         <li class='table-cell'>Amount</li>
                         <li class='table-cell colon'></li>
@@ -351,7 +351,7 @@
                         <li class='table-cell'>Start Plan</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <input type="date" name="new[bank_guarantee][0][bank_guarantee_start_date]" />
+                          <input type="date" name="bank_guarantee[0][bank_guarantee_start_date]" />
                         </li>
                       </ol>
                       <ol class='table-row'>
@@ -359,7 +359,7 @@
                         <li class='table-cell'>Until Plan</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <input type="date" name="new[bank_guarantee][0][bank_guarantee_until_date]" />
+                          <input type="date" name="bank_guarantee[0][bank_guarantee_until_date]" />
                         </li>
                       </ol>
                     </div>
@@ -376,7 +376,7 @@
                 <li class='table-cell'>Description</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <select name="new[payment_terms][numbers][payment_terms_select]">
+                  <select name="payment_terms[numbers][payment_terms_select]">
                     <option value="0">----</option>
                   </select>
                 </li>
@@ -389,28 +389,28 @@
               </ol>
               <ol class='table-row'>
                 <li class='table-cell'>
-                  <input type="radio" class='payment_amount'  name="new[payment_terms][numbers][payment_terms_amount_select]" checked='checked' />
+                  <input type="radio" class='payment_amount'  name="payment_terms[numbers][payment_terms_amount_select]" checked='checked' />
                 </li>
                 <li class='table-cell'>Amount</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <input type="text" class='payment_amount_value' name="new[payment_terms][numbers][payment_terms_amount_thb]" /> THB</li>
+                  <input type="text" class='payment_amount_value' name="payment_terms[numbers][payment_terms_amount_thb]" /> THB</li>
               </ol>
               <ol class='table-row'>
                 <li class='table-cell'>
-                  <input type="radio" class='payment_amount' name="new[payment_terms][numbers][payment_terms_amount_select]" />
+                  <input type="radio" class='payment_amount' name="payment_terms[numbers][payment_terms_amount_select]" />
                 </li>
                 <li class='table-cell'>Amount</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <input type="text" class='payment_amount_value' name="new[payment_terms][numbers][payment_terms_amount_thb]" disabled='disabled' /> %</li>
+                  <input type="text" class='payment_amount_value' name="payment_terms[numbers][payment_terms_amount_thb]" disabled='disabled' /> %</li>
               </ol>
               <ol class='table-row'>
                 <li class="table-cell"></li>
                 <li class='table-cell'>Payment Date Plan</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <input type="date" name="new[payment_terms][numbers][payment_terms_date_plan]" />
+                  <input type="date" name="payment_terms[numbers][payment_terms_date_plan]" />
                 </li>
               </ol>
             </div>
@@ -422,7 +422,7 @@
                 <li class='table-cell'>Description</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <select name="new[bank_guarantee][numbers][bank_guarantee_select]">
+                  <select name="bank_guarantee[numbers][bank_guarantee_select]">
                     <option value="0">----</option>
                   </select>
                 </li>
@@ -435,25 +435,25 @@
               </ol>
               <ol class='table-row'>
                 <li class='table-cell'>
-                  <input type="radio" name="new[bank_guarantee][numbers][bank_guarantee_amount_select]" checked='checked' />
+                  <input type="radio" name="bank_guarantee[numbers][bank_guarantee_amount_select]" checked='checked' />
                 </li>
                 <li class='table-cell'>Amount</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <input type="text" name="new[bank_guarantee][numbers][bank_guarantee_amount_thb]" /> THB</li>
+                  <input type="text" name="bank_guarantee[numbers][bank_guarantee_amount_thb]" /> THB</li>
               </ol>
               <ol class='table-row'>
                 <li class='table-cell'>
-                  <input type="radio" name="new[bank_guarantee][numbers][bank_guarantee_amount_select]" />
+                  <input type="radio" name="bank_guarantee[numbers][bank_guarantee_amount_select]" />
                 </li>
                 <li class='table-cell'>Amount</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <input type="text" name="new[bank_guarantee][numbers][bank_guarantee_amount_thb]" disabled='disabled' /> %</li>
+                  <input type="text" name="bank_guarantee[numbers][bank_guarantee_amount_thb]" disabled='disabled' /> %</li>
               </ol>
               <ol class='table-row'>
                 <li class='table-cell'>
-                  <input type="radio" name="new[bank_guarantee][numbers][bank_guarantee_amount_select]" />
+                  <input type="radio" name="bank_guarantee[numbers][bank_guarantee_amount_select]" />
                 </li>
                 <li class='table-cell'>Amount</li>
                 <li class='table-cell colon'></li>
@@ -464,7 +464,7 @@
                 <li class='table-cell'>Start Plan</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <input type="date" name="new[bank_guarantee][numbers][bank_guarantee_start_date]" />
+                  <input type="date" name="bank_guarantee[numbers][bank_guarantee_start_date]" />
                 </li>
               </ol>
               <ol class='table-row'>
@@ -472,7 +472,7 @@
                 <li class='table-cell'>Until Plan</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <input type="date" name="new[bank_guarantee][numbers][bank_guarantee_until_date]" />
+                  <input type="date" name="bank_guarantee[numbers][bank_guarantee_until_date]" />
                 </li>
               </ol>
             </div>
