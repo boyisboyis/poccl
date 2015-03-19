@@ -178,7 +178,7 @@
                   <div class='table-cell'>Po Amount</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="text" name="contractor_name" />
+                    <input type="text" name="po_amount" />
                   </div>
                 </div>
                 <div class='table-row'>

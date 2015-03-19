@@ -44,24 +44,28 @@ $(document).ready(function(){
   });
   
   $("#form_add").submit(function(e){
+    var checkInput = true;
+    $(this).find('input').removeClass('input-error');
     var formObj = $( this ).serializeObject();
-    console.log(formObj);
     for(var elem in formObj) {
-      console.log(formObj[elem]);
-    }
-    
-    $.ajax({
-      method: "POST",
-      url: "adminsController",
-      data: {
-        action: "new",
-        params: formObj
-      },
-      success: function(data) {
-        console.log(data);
+      if(formObj[elem] == "") {
+        $('input[name=' + elem + ']').first().addClass('input-error');
+        checkInput = false;
       }
-    });
-    
+    }
+    if(checkInput) {
+      $.ajax({
+        method: "POST",
+        url: "adminsController",
+        data: {
+          action: "new",
+          params: formObj
+        },
+        success: function(data) {
+          console.log(data);
+        }
+      });
+    }
     return false;
   })
 });
