@@ -36,10 +36,15 @@ a:hover, a:focus {
 	vertical-align: text-top;
 }
 
+#wrapper{
+	width: 100%;
+	height: 100%;
+}
+
 #wrap-header{
   width: 100%;
   margin: 0 auto;
-	padding: 5em;
+	padding: 2em;
 	text-align: center;
 	background-color: #333;
 }
@@ -67,6 +72,7 @@ a:hover, a:focus {
   left: 0;
   text-align: right;
   background-color: #333;
+  z-index: 999;
 }
 
 #wrap-search{
@@ -76,18 +82,33 @@ a:hover, a:focus {
 }
 
 #wrap-report {
-	position: fixed;
+	position: absolute;
+	top: 165px;
+	left: 0;
+	min-height: 100%; /* Minimum height for modern browsers */
+  height:100%; /* Minimum height for IE */ 
+  width:300px;
+  overflow:hidden;
+  background-color: #333;
+  padding-top: 10px;
+	/*position: absolute;
 	top: 0;
 	left: 0;
 	height: 100%;
 	width: 300px;
-	background-color: #333;
+	background-color: #333;*/
 }
 #wrap-report > .report-panel{
-	margin-top: 260px;
 	height: 100%;
 	width: 100%;
 	padding: 0 15px;
+}
+
+#main-report-content {
+	width: 960px;
+	margin-left: 350px;
+	padding:0 10px;
+	padding-top: 205px;
 }
 
 /*
@@ -213,8 +234,23 @@ a:hover, a:focus {
 * Main content
 */
 #wrap-main{
-  width: 960px;
+  /*width: 960px;*/
+  width: 100%;
+  height: 100%;
   margin: 10px auto 0;
+}
+
+#wrap-main > section {
+	width: 960px;
+	margin: 0 auto;
+}
+
+#wrap-main > #main-report {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	margin-top: -175px;
+	margin-bottom: 150px;
 }
 
 #wrap-main .p-news {
@@ -280,7 +316,11 @@ a:hover, a:focus {
 .purchase-detail .t2_desc {
 	margin: 0 10px;
 }
-
+#wrap-report.wrap-fixed {
+	position: fixed;
+	top: 0;
+	padding-top: 50px;
+}
 /*
 * Resposive design
 */
@@ -295,13 +335,55 @@ a:hover, a:focus {
 	}
 }
 
+@media screen and (max-width: 1325px){
+	#main-report-content {
+		width: 100%;
+		padding-left: 350px;
+		margin-left:0;
+	}
+}
 @media screen and (max-width: 960px){
+	#wrap-main > section {
+		width: 100%;
+	}
 	#wrap-main{
 		width: 100%;
 	}
 	
 	#wrap-header{
 		padding: 3em;
+	}
+	
+	#wrap-report {
+		position: relative;
+		width: 100%;
+		margin-top: -50px;
+		min-height: 0;
+		height: auto;
+		overflow: none;
+		margin-bottom: 180px;
+	}
+	
+	#main-report-content{
+		padding: 0 10px;
+		margin-bottom: 100px;
+	}
+	
+	#wrap-report.wrap-fixed {
+		position: relative;
+		top: 0;
+		padding-top: 10px;
+	}
+	
+	#wrap-report input[type=checkbox]{
+		width: 1.5em;
+		height: 1.5em;
+	}
+	
+	#wrap-report #submit-report{
+		width: 80%;
+		margin: 40px auto;
+		display: block;
 	}
 	
 	.content-search-left, .content-search-right{

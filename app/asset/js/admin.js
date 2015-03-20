@@ -38,9 +38,14 @@ $(document).ready(function(){
     $(".foreign_currency").slideToggle()
   });
   
-  $(".payment_amount").on("click", function(){
+  $("#show-payment-terms").on("click", ".payment_amount", function(){
     $(this).parent().parent().parent().find('.payment_amount_value').prop('disabled', true).val('');
-    console.log($(this).parent().parent().find('input[type=text]').prop('disabled', false));
+    $(this).parent().parent().find('input[type=text]').prop('disabled', false);
+  });
+  
+  $("#show-bank-guarantee").on("click", ".bank_guarantee", function(){
+    $(this).parent().parent().siblings().find('.bank_guarantee_value').prop('disabled', true).val('');
+    $(this).parent().parent().find('input[type=text]').prop('disabled', false);
   });
   
   $("#form_add").submit(function(e){
