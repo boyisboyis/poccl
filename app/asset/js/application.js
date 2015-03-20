@@ -304,18 +304,21 @@ $(document).ready(function(){
             if(thai_bath == "" || thai_bath == null){
               thai_bath = obj['job']['Contract_Value_Rate'] * obj['job']['Contract_Value_Other'];
             }
-            if(obj['Job']['Contract_Value_Type'] != ""){
+            if(obj['Job']['Contract_Value_Type'] != "" && obj['Job']['Contract_Value_Type'] != null){
               other_currency = addCommas(parseFloat(obj['Job']['Contract_Value_Other']).toFixed(2));
               tr_currency = "<p class='margin-padding-0 text_underline'>"+other_currency+"<span class='currency'>"+obj['Job']['Contract_Value_Type']+"</span></p><p class='margin-padding-0 text_underline'><span>Rate </span>"+obj['Job']['Contract_Value_Rate']+"</p>";
-             // tr_currency = "<br>"+obj['Job']['Contract_Value_Rate']+"<br><span class='t2_desc text_underline' style='margin-right: 0;'>"+obj['Job']['Contract_Value_Other']+"</span>  "+obj['Job']['Contract_Value_Type'];
-               //tr_currency = "<tr><td></td><td></td><td>Rate <span class='t2_desc text_underline'>"+obj['Job']['Contract_Value_Rate']+"</span><span class='t2_desc text_underline' style='margin-right: 0;'>"+obj['Job']['Contract_Value_Other']+"</span>  "+obj['Job']['Contract_Value_Type']+"</td></tr>"
             }
             thai_bath = addCommas(parseFloat(thai_bath).toFixed(2));
             if(n > 0){
               var tr = "";
               for(var i=0;i<n;i++){
                 var g_content = obj['Guarantee'][i];
-                var g_amount = (g_content['Amount_Actual_Percentage'] == "" || g_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)):g_content['Amount_Actual_Percentage']+"%";
+                if(g_content['Amount_Actual_Percentage'] != null && g_content['Amount_Actual_Price'] != null){
+                  var g_amount = (g_content['Amount_Actual_Percentage'] == "" || g_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)):g_content['Amount_Actual_Percentage']+"%";
+                }
+                else{
+                  var g_amount = '-';
+                }
                  tr += "<tr>"+
                 "<td class='text-vertical-top'>Term : "+g_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
@@ -340,7 +343,7 @@ $(document).ready(function(){
               var tr = "";
               for(var i=0;i<n;i++){
                 var p_content = obj['Payment'][i];
-                var p_amount = (p_content['Amount_Actual_Percentage'] == "" || p_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)):p_content['Amount_Actual_Percentage']+"%";
+               // var p_amount = (p_content['Amount_Actual_Percentage'] == "" || p_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)):p_content['Amount_Actual_Percentage']+"%";
                 tr += "<tr>"+
                 "<td style='vertical-align: text-top;'>Term : "+p_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
@@ -349,7 +352,7 @@ $(document).ready(function(){
                 "<td class='text-vertical-top'>Description</td><td class='td-colon'>:</td><td class='text_underline'>"+p_content['Payment_Type']+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+p_amount+"</td>"+
+                "<td class='text-vertical-top'>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+ addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)) + ' (' +p_content['Amount_Actual_Percentage']+"%)"+"</td>"+
                 "</tr>"+
                 "<tr>"+
                 "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon'>:</td><td class='text_underline'>"+p_content['Payment_date_plan']+"</td>"+
@@ -372,6 +375,8 @@ $(document).ready(function(){
               keySearch = "<h2 class='job-id'>"+obj['PO_No']+"</h2>"
             }
             
+            console.log(obj)
+            
             $("#content-search").append(
               "<article class='purchase-detail'>" +
               keySearch +
@@ -388,19 +393,19 @@ $(document).ready(function(){
               "<tr><td class='text-vertical-top'>Secrecy Agreement</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Secrecy_Agreement']+"</td></tr>"+
               "</table>"+
               "<h3>Working Remark</h3>"+
-              "<p class='purchase-each-detail'><span>Start Date</span><span class='t2_desc text_underline'>"+obj['Job']['Work_Start_Date']+"</span><span>Complete Date</span><span class='t2_desc text_underline'>"+obj['Job']['Work_Complete_Date']+"</span></p>"+
+              "<p class='purchase-each-detail'><span>Start Date</span><span class='t2_desc text_underline'>"+(obj['Job']['Work_Start_Date']==null?'-':obj['Job']['Work_Start_Date'])+"</span><span>Complete Date</span><span class='t2_desc text_underline'>"+(obj['Job']['Work_Complete_Date']==null?'-':obj['Job']['Work_Complete_Date'])+"</span></p>"+
               "</section>"+
               "<section class='content-search-right'>"+
               "<h3>PO info</h3>"+
               //"<p class='purchase-each-detail' style='margin-left: 12px'><span>PO no</span><span class='t2_desc text_underline'>"+obj['PO_No']+"</span><span>Date</span><span class='t2_desc text_underline'>"+obj['Job']['PO_Date']+"</span></p>"+
               "<table class='purchase-each-detail'>"+
-              "<tr><td class='text-vertical-top'>PO no.</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['PO_No']+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>PO Date</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['PO_Date']+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['PO_Type']+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>PO no.</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['PO_No']==null?'-':obj['PO_No'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>PO Date</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['PO_Date']==null?'-':obj['Job']['PO_Date'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['PO_Type']==null?'-':obj['Job']['PO_Type'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>PO Amount</td><td class='td-colon'>:</td><td><p class='margin-padding-0 text_underline'>"+thai_bath+"<span class='currency'>THB</span></p>"+tr_currency+"</td></tr>"+
              // tr_currency+
               "<tr><td class='text-vertical-top'>Goveming Law</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Credit Term</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Credit_Term']+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Credit Term</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Credit_Term']==null?'-':obj['Job']['Credit_Term'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Late Payment Financial Charges</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Late_Pay_Finan_Chage']+"</td></tr>"+
               "</table>"+
               "</section>"+
@@ -556,13 +561,20 @@ $(document).ready(function(){
   
   function elementScroll(){
     var scroll = $(window).scrollTop();
-    if($(".report-panel").is(":visible")){
-      console.log(scroll, $("#wrap-header").outerHeight())
-      var rp = $("#wrap-header").outerHeight() - scroll - 29;
-      if(rp > 29){
-        $(".report-panel").css({"padding-top" : rp+"px"});
+    var cheight = $("#main-report-content").height();
+    console.log($("#main-report-content").height())
+    if(cheight > 800){
+      if(scroll >= 135){
+        $("#wrap-report").addClass('wrap-fixed');
+      }
+      else if(scroll <= 100){
+        $("#wrap-report").removeClass('wrap-fixed');
       }
     }
+    else{
+      $("#wrap-report").removeClass('wrap-fixed');
+    }
+   // console.log(scroll)
     
   }
   

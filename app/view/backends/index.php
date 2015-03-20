@@ -322,25 +322,25 @@
                       </ol>
                       <ol class='table-row'>
                         <li class='table-cell'>
-                          <input type="radio" name="bank_guarantee[0][bank_guarantee_amount_select]" checked='checked' />
+                          <input type="radio" class='bank_guarantee' name="bank_guarantee[0][bank_guarantee_amount_select]" checked='checked' />
                         </li>
                         <li class='table-cell'>Amount</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <input type="text" name="bank_guarantee[0][bank_guarantee_amount_thb]" /> THB</li>
+                          <input type="text" class='bank_guarantee_value'  name="bank_guarantee[0][bank_guarantee_amount_thb]" /> THB</li>
                       </ol>
                       <ol class='table-row'>
                         <li class='table-cell'>
-                          <input type="radio" name="bank_guarantee[0][bank_guarantee_amount_select]" />
+                          <input type="radio" class='bank_guarantee' name="bank_guarantee[0][bank_guarantee_amount_select]" />
                         </li>
                         <li class='table-cell'>Amount</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <input type="text" name="bank_guarantee[0][bank_guarantee_amount_thb]" disabled='disabled' /> %</li>
+                          <input type="text" class='bank_guarantee_value' name="bank_guarantee[0][bank_guarantee_amount_thb]" disabled='disabled' /> %</li>
                       </ol>
                       <ol class='table-row'>
                         <li class='table-cell'>
-                          <input type="radio" name="bank_guarantee[0][bank_guarantee_amount_select]" />
+                          <input type="radio" class='bank_guarantee' name="bank_guarantee[0][bank_guarantee_amount_select]" />
                         </li>
                         <li class='table-cell'>Amount</li>
                         <li class='table-cell colon'></li>
@@ -435,25 +435,25 @@
               </ol>
               <ol class='table-row'>
                 <li class='table-cell'>
-                  <input type="radio" name="bank_guarantee[numbers][bank_guarantee_amount_select]" checked='checked' />
+                  <input type="radio" class='bank_guarantee' name="bank_guarantee[numbers][bank_guarantee_amount_select]" checked='checked' />
                 </li>
                 <li class='table-cell'>Amount</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <input type="text" name="bank_guarantee[numbers][bank_guarantee_amount_thb]" /> THB</li>
+                  <input type="text" class='bank_guarantee_value' name="bank_guarantee[numbers][bank_guarantee_amount_thb]" /> THB</li>
               </ol>
               <ol class='table-row'>
                 <li class='table-cell'>
-                  <input type="radio" name="bank_guarantee[numbers][bank_guarantee_amount_select]" />
+                  <input type="radio" class='bank_guarantee' name="bank_guarantee[numbers][bank_guarantee_amount_select]" />
                 </li>
                 <li class='table-cell'>Amount</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <input type="text" name="bank_guarantee[numbers][bank_guarantee_amount_thb]" disabled='disabled' /> %</li>
+                  <input type="text" class='bank_guarantee_value' name="bank_guarantee[numbers][bank_guarantee_amount_thb]" disabled='disabled' /> %</li>
               </ol>
               <ol class='table-row'>
                 <li class='table-cell'>
-                  <input type="radio" name="bank_guarantee[numbers][bank_guarantee_amount_select]" />
+                  <input type="radio" class='bank_guarantee' name="bank_guarantee[numbers][bank_guarantee_amount_select]" />
                 </li>
                 <li class='table-cell'>Amount</li>
                 <li class='table-cell colon'></li>
