@@ -49,8 +49,28 @@ $(document).ready(function(){
   });
   
   $("#form_add").submit(function(e){
-    var obj = $( this ).serializeObject();
-    console.log(obj)
+    var checkInput = true;
+    $(this).find('input').removeClass('input-error');
+    var formObj = $( this ).serializeObject();
+    for(var elem in formObj) {
+      if(formObj[elem] == "") {
+        $('input[name=' + elem + ']').first().addClass('input-error');
+        checkInput = false;
+      }
+    }
+    if(checkInput) {
+      $.ajax({
+        method: "POST",
+        url: "adminsController",
+        data: {
+          action: "new",
+          params: formObj
+        },
+        success: function(data) {
+          console.log(data);
+        }
+      });
+    }
     return false;
   })
 });

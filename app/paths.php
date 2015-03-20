@@ -37,8 +37,8 @@ return array(
     "file" => "app/view/login/logout.php"  ,
     "type" => "require"
   ),
-  "addPurchase" => array(
-    "file" => "app/view/backends/add.php" ,
+  "adminsController" => array(
+    "file" => "app/controller/admins_controller.php" ,
     "type" => "require"
   ),
   

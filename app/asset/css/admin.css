@@ -97,3 +97,7 @@ div#content-article {
   width: 100%;
   height: 30px;
 }
+
+.input-error {
+  outline: 2px solid red !important;
+}
