@@ -47,14 +47,14 @@
       <div id="wrap-content">
         <div id="admin-add">
           <form id="form_add" name="form_add" method="POST" action="addPurchase">
-            <input type="submit" name="submit" />
+            <button type="submit" name="submit"><i class="fa fa-plus">Add</i></button>
             <h2>New Purchase Order</h2>
             <div>
               <label for="">Job No : </label>
               <input type="text" name="job_no" />
             </div>
             <hr>
-            <div style="float: left;">
+            <div style="float: left; width: 50%;">
               <div class='table'>
                 <h3>Project Summary</h3>
                 <div class='table-row'>
@@ -136,7 +136,7 @@
                 </div>
               </div>
             </div>
-            <div style="float: left; margin-left: 150px;">
+            <div style="float: left; width: 50%;">
               <div class='table'>
                 <h3>Po Info.</h3>
                 <div class='table-row'>
@@ -166,7 +166,7 @@
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
                     <select name="po_type">
-                      <option value="0">---</option>
+                      <option value="">---</option>
                     </select>
                   </div>
                   <div class='table-cell'>
@@ -258,7 +258,7 @@
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
                           <select name="payment_terms[0][payment_terms_select]">
-                            <option value="0">----</option>
+                            <option value="">----</option>
                           </select>
                         </li>
                       </ol>
@@ -284,7 +284,7 @@
                         <li class='table-cell'>Amount</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <input type="text" class='payment_amount_value' name="payment_terms[0][payment_terms_amount_thb]" disabled='disabled' /> %</li>
+                          <input type="text" class='payment_amount_value' name="payment_terms[0][payment_terms_amount_percentage]" disabled='disabled' /> %</li>
                       </ol>
                       <ol class='table-row'>
                         <li class="table-cell"></li>
@@ -299,7 +299,7 @@
                   <p id='add-payment-terms'> + Add Payment Terms.</p>
                 </div>
               </div>
-              <div style="float: left; margin-left: 150px;">
+              <div style="float: left; width: 50%;">
                 <h3><input type="checkbox" id="check-bank-guarantee" name="bank_guarantee_checkbox]" value="check" />Bank Guarantee</h3>
                 <div id='show-bank-guarantee' style='display: none;'>
                   <div id="list-bank-guarantee">
@@ -310,7 +310,7 @@
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
                           <select name="bank_guarantee[0][bank_guarantee_select]">
-                            <option value="0">----</option>
+                            <option value="">----</option>
                           </select>
                         </li>
                       </ol>
@@ -336,7 +336,7 @@
                         <li class='table-cell'>Amount</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
-                          <input type="text" class='bank_guarantee_value' name="bank_guarantee[0][bank_guarantee_amount_thb]" disabled='disabled' /> %</li>
+                          <input type="text" class='bank_guarantee_value' name="bank_guarantee[0][bank_guarantee_amount_percentage]" disabled='disabled' /> %</li>
                       </ol>
                       <ol class='table-row'>
                         <li class='table-cell'>
@@ -377,7 +377,7 @@
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
                   <select name="payment_terms[numbers][payment_terms_select]">
-                    <option value="0">----</option>
+                    <option value="">----</option>
                   </select>
                 </li>
               </ol>
@@ -403,7 +403,7 @@
                 <li class='table-cell'>Amount</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <input type="text" class='payment_amount_value' name="payment_terms[numbers][payment_terms_amount_thb]" disabled='disabled' /> %</li>
+                  <input type="text" class='payment_amount_value' name="payment_terms[numbers][payment_terms_amount_percentage]" disabled='disabled' /> %</li>
               </ol>
               <ol class='table-row'>
                 <li class="table-cell"></li>
@@ -423,7 +423,7 @@
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
                   <select name="bank_guarantee[numbers][bank_guarantee_select]">
-                    <option value="0">----</option>
+                    <option value="">----</option>
                   </select>
                 </li>
               </ol>
@@ -449,7 +449,7 @@
                 <li class='table-cell'>Amount</li>
                 <li class='table-cell colon'></li>
                 <li class='table-cell'>
-                  <input type="text" class='bank_guarantee_value' name="bank_guarantee[numbers][bank_guarantee_amount_thb]" disabled='disabled' /> %</li>
+                  <input type="text" class='bank_guarantee_value' name="bank_guarantee[numbers][bank_guarantee_amount_percentage]" disabled='disabled' /> %</li>
               </ol>
               <ol class='table-row'>
                 <li class='table-cell'>

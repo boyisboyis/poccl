@@ -53,10 +53,35 @@ $(document).ready(function(){
     $(this).find('input').removeClass('input-error');
     var formObj = $( this ).serializeObject();
     for(var elem in formObj) {
-      if(formObj[elem] == "") {
-        $('input[name=' + elem + ']').first().addClass('input-error');
-        checkInput = false;
+      if(typeof(formObj[elem]) == 'object') {
+        for(var counter in formObj[elem]) {
+          for(var elemWithin in formObj[elem][counter]) {
+            if(formObj[elem][counter][elemWithin] == "") {
+              $('input[name*=' + elemWithin + ']:not(input[type=checkbox])').first().addClass('input-error');
+              $('select[name*=' + elemWithin + ']').first().addClass('input-error');
+              checkInput = false;
+            }
+            console.log(elemWithin + ' => ' + formObj[elem][counter][elemWithin]);
+          }
+        }
       }
+      else {
+        if(formObj[elem] == '') {
+          $('input[name=' + elem + ']:not(input[type=checkbox])').first().addClass('input-error');
+          $('select[name=' + elem + ']').first().addClass('input-error');
+          checkInput = false;
+        }
+        console.log(elem + ' => ' + formObj[elem]);
+      }
+      console.log('===============================');
+    }
+    if(formObj['secrecy_agreement'] == undefined) {
+      $('input[name=secrecy_agreement][type=checkbox]').first().addClass('input-error');
+      checkInput = false;
+    }
+    if(formObj['late_payment'] == undefined) {
+      $('input[name=late_payment][type=checkbox]').first().addClass('input-error');
+      checkInput = false;
     }
     if(checkInput) {
       $.ajax({
