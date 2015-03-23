@@ -21,7 +21,7 @@ $(document).ready(function(){
   $("#add-payment-terms").on('click', function(){
     var len = $("#list-payment-terms .table").length;
     var html = $("#clone-payment-terms").html();
-    html = html.replace("($number)",len + 1);
+    html = html.replace(/next_number/g,len + 1);
     html = html.replace(/numbers/g,len);
     $("#list-payment-terms").append(html);
   });
@@ -29,7 +29,7 @@ $(document).ready(function(){
   $("#add-bank-guarantee").on("click", function(){
     var len = $("#list-bank-guarantee .table").length;
     var html = $("#clone-bank-guarantee").html();
-    html = html.replace("($number)",len + 1);
+    html = html.replace(/next_number/g,len + 1);
     html = html.replace(/numbers/g,len);
     $("#list-bank-guarantee").append(html);
   });
@@ -51,29 +51,40 @@ $(document).ready(function(){
   $("#form_add").submit(function(e){
     var checkInput = true;
     $(this).find('input').removeClass('input-error');
+    $(this).find('select').removeClass('input-error');
     var formObj = $( this ).serializeObject();
+    console.log(formObj);
     for(var elem in formObj) {
-      if(typeof(formObj[elem]) == 'object') {
-        for(var counter in formObj[elem]) {
-          for(var elemWithin in formObj[elem][counter]) {
-            if(formObj[elem][counter][elemWithin] == "") {
-              $('input[name*=' + elemWithin + ']:not(input[type=checkbox])').first().addClass('input-error');
-              $('select[name*=' + elemWithin + ']').first().addClass('input-error');
-              checkInput = false;
-            }
-            console.log(elemWithin + ' => ' + formObj[elem][counter][elemWithin]);
+      if(formObj[elem] == '') {
+        $('input[name=' + elem + ']:not(input[type=checkbox])').first().addClass('input-error');
+        $('select[name=' + elem + ']').first().addClass('input-error');
+        checkInput = false;
+      }
+      console.log(elem + ' => ' + formObj[elem]);
+    }
+    if(formObj['payment_terms_checkbox'] == 'check') {
+      for(var counter in formObj['payment_terms']) {
+        for(var elemWithin in formObj['payment_terms'][counter]) {
+          if(formObj['payment_terms'][counter][elemWithin] == "") {
+            $('input[name*="[' + counter + ']"][name*=' + elemWithin + ']:not(input[type=checkbox])').first().addClass('input-error');
+            $('select[name*="[' + counter + ']"][name*=' + elemWithin + ']').first().addClass('input-error');
+            checkInput = false;
           }
+          console.log(elemWithin + ' => ' + formObj['payment_terms'][counter][elemWithin]);
         }
       }
-      else {
-        if(formObj[elem] == '') {
-          $('input[name=' + elem + ']:not(input[type=checkbox])').first().addClass('input-error');
-          $('select[name=' + elem + ']').first().addClass('input-error');
-          checkInput = false;
+    }
+    if(formObj['bank_guarantee_checkbox'] == 'check') {
+      for(var counter in formObj['bank_guarantee']) {
+        for(var elemWithin in formObj['bank_guarantee'][counter]) {
+          if(formObj['bank_guarantee'][counter][elemWithin] == "") {
+            $('input[name*="[' + counter + ']"][name=' + counter + '][name*=' + elemWithin + ']:not(input[type=checkbox])').first().addClass('input-error');
+            $('select[name*="[' + counter + ']"][name=' + counter + '][name*=' + elemWithin + ']').first().addClass('input-error');
+            checkInput = false;
+          }
+          console.log(elemWithin + ' => ' + formObj['bank_guarantee'][counter][elemWithin]);
         }
-        console.log(elem + ' => ' + formObj[elem]);
       }
-      console.log('===============================');
     }
     if(formObj['secrecy_agreement'] == undefined) {
       $('input[name=secrecy_agreement][type=checkbox]').first().addClass('input-error');
@@ -83,6 +94,7 @@ $(document).ready(function(){
       $('input[name=late_payment][type=checkbox]').first().addClass('input-error');
       checkInput = false;
     }
+    console.log('====================================');
     if(checkInput) {
       $.ajax({
         method: "POST",
