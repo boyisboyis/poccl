@@ -259,6 +259,7 @@
                         <li class='table-cell'>
                           <select name="payment_terms[0][payment_terms_select]">
                             <option value="">----</option>
+                            <option value="Advance Payment">Advance Payment</option>
                           </select>
                         </li>
                       </ol>
@@ -266,7 +267,10 @@
                         <li class='table-cell'></li>
                         <li class='table-cell'>Term</li>
                         <li class='table-cell colon'></li>
-                        <li class='table-cell' style="text-decoration: underline;">1</li>
+                        <li class='table-cell'>
+                          <input type="hidden" name="payment_terms[0][payment_term]" value="1" />
+                          <input type="text" class="payment_term" disabled="disabled" value="1" />
+                        </li>
                       </ol>
                       <ol class='table-row'>
                         <li class='table-cell'>
@@ -300,7 +304,7 @@
                 </div>
               </div>
               <div style="float: left; width: 50%;">
-                <h3><input type="checkbox" id="check-bank-guarantee" name="bank_guarantee_checkbox]" value="check" />Bank Guarantee</h3>
+                <h3><input type="checkbox" id="check-bank-guarantee" name="bank_guarantee_checkbox" value="check" />Bank Guarantee</h3>
                 <div id='show-bank-guarantee' style='display: none;'>
                   <div id="list-bank-guarantee">
                     <div class='table'>
@@ -311,6 +315,7 @@
                         <li class='table-cell'>
                           <select name="bank_guarantee[0][bank_guarantee_select]">
                             <option value="">----</option>
+                            <option value="Advance Guarantee">Advance Guarantee</option>
                           </select>
                         </li>
                       </ol>
@@ -318,7 +323,10 @@
                         <li class='table-cell'></li>
                         <li class='table-cell'>Term</li>
                         <li class='table-cell colon'></li>
-                        <li class='table-cell' style="text-decoration: underline;">1</li>
+                        <li class='table-cell'>
+                          <input type="hidden" name="bank_guarantee[0][bank_guarantee_term]" value="1" />
+                          <input type="text" class="bank_guarantee_term" disabled="disabled" value="1" />
+                        </li>
                       </ol>
                       <ol class='table-row'>
                         <li class='table-cell'>
@@ -385,7 +393,10 @@
                 <li class='table-cell'></li>
                 <li class='table-cell'>Term</li>
                 <li class='table-cell colon'></li>
-                <li class='table-cell' style="text-decoration: underline;">($number)</li>
+                <li class='table-cell' style="text-decoration: underline;">
+                  <input type="hidden" name="payment_terms[numbers][payment_term]" value="next_number" />
+                  <input type="text" class="payment_term" disabled="disabled" value="next_number" />
+                </li>
               </ol>
               <ol class='table-row'>
                 <li class='table-cell'>
@@ -431,7 +442,10 @@
                 <li class='table-cell'></li>
                 <li class='table-cell'>Term</li>
                 <li class='table-cell colon'></li>
-                <li class='table-cell' style="text-decoration: underline;">($number)</li>
+                <li class='table-cell' style="text-decoration: underline;">
+                  <input type="hidden" name="bank_guarantee[numbers][bank_guarantee_term]" value="next_number" />
+                  <input type="text" class="bank_guarantee_term" disabled="disabled" value="next_number" />
+                </li>
               </ol>
               <ol class='table-row'>
                 <li class='table-cell'>

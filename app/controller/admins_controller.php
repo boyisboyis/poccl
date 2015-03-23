@@ -16,7 +16,18 @@
     
     class adminController {
         public static function create($params) {
-            echo json_encode(array("status" => "adminController"));
+            $sql = 'INSERT INTO `po_asso` (`JID`, `Contractor_Name`, `PO_No`) VALUES (' . self::nullValue($params['job_no']) . ', ' . self::nullValue($params['contractor_name']) . ', ' . self::nullValue($params['po_no']) . ')';
+            $result = DB::query($sql)->get();
+            // echo json_encode(array("status" => "adminController"));
+            echo json_encode($sql);
+        }
+        public static function nullValue($str) {
+            if($str == 'none') {
+                return 'null';
+            }
+            else {
+                return '\'' . $str . '\'';
+            }
         }
     }
 ?>
