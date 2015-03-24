@@ -173,7 +173,7 @@ $(document).ready(function(){
             $(data).each(function(){
               str += "<tr>" +
                 "<td>"+this.JID+"</td>"+
-                "<td>"+this.Contactor_Name+"</td>"+
+                "<td>"+this.Contractor_Name+"</td>"+
                 "<td>"+(this.PO_No==null?'-':this.PO_No)+"</td>"+
                 "<td><a>Edit</a></td>"+
                 "<td><a>Delete</a></td>"+
