@@ -50,7 +50,15 @@ $(document).ready(function(){
   });
   
   $("#show_foreign_currency").on("click", function(){
-    $(".foreign_currency").slideToggle();
+    if($(".foreign_currency").is(":visible")){
+      $(this).find(".fa").removeClass("fa-minus").addClass("fa-plus");
+      $("#add_foreign_currency_checkbox").val("hide");
+    }
+    else{
+      $(this).find(".fa").removeClass("fa-plus").addClass("fa-minus");
+      $("#add_foreign_currency_checkbox").val("show");
+    }
+    $(".foreign_currency").toggle();
   });
   
   $("#show-payment-terms").on("click", ".payment_amount", function(){
