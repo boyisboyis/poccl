@@ -61,7 +61,7 @@
                   <div class='table-cell'>Contractor Name</div>
                   <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <input type="text" name="contractor_name" />
+                    <input type="text" name="contractor_name"  />
                   </div>
                 </div>
                 <div class='table-row'>
@@ -184,21 +184,22 @@
                 <div class='table-row'>
                   <div class='table-cell'></div>
                   <div class='table-cell'></div>
-                  <div id="show_foreign_currency" class='table-cell'>+ Add Foreign Currency</div>
+                  <div id="show_foreign_currency" class='table-cell' style="cursor: pointer; color: #ed8151">
+                    <i class="fa fa-plus"></i> Add Foreign Currency
+                    <input id="add_foreign_currency_checkbox" type="hidden" name="add_foreign_currency_checkbox" value="hide" />
+                  </div>
                 </div>
                 <div class='table-row foreign_currency' style="display:none;">
-                  <div class='table-cell'></div>
-                  <div class='table-cell'></div>
+                  <div class='table-cell' style="text-align: right;">Value</div>
+                  <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <label for="foreign_currency_value">Value : </label>
                     <input type="text" id="foreign_currency_value" name="foreign_currency_value" />
                   </div>
                 </div>
                 <div class='table-row foreign_currency' style="display:none;">
-                  <div class='table-cell'></div>
-                  <div class='table-cell'></div>
+                  <div class='table-cell' style="text-align: right;">Type</div>
+                  <div class='table-cell colon'></div>
                   <div class='table-cell'>
-                    <label for="foreign_currency_type">Type : </label>
                     <input type="text" id="foreign_currency_type" name="foreign_currency_type" />
                   </div>
                   <div class='table-cell'>
@@ -300,7 +301,7 @@
                       </ol>
                     </div>
                   </div>
-                  <p id='add-payment-terms'> + Add Payment Terms.</p>
+                  <p id='add-payment-terms' style="color: #ed8151; cursor: pointer;"> <i class="fa fa-plus"></i> Add Payment Terms.</p>
                 </div>
               </div>
               <div style="float: left; width: 50%;">
