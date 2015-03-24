@@ -1,4 +1,19 @@
 $(document).ready(function(){
+  var hash_str = ["#add", "#search", "#payment", "#guarantee"];
+  getHash();
+  
+  $(".sub-menu").on("click", function(){
+    document.location.hash = $(this).attr("href");
+    getHash();
+  });
+  
+  $("#search-now").on("click", function(){
+    var data = {
+      "type" : $("#select-search").val(),
+      "search" : $("#input-search").val()
+    }
+    searchResult(data);
+  });
   
   $("#check-payment-terms").on('click', function(){
     if($(this).prop('checked')){
@@ -35,7 +50,7 @@ $(document).ready(function(){
   });
   
   $("#show_foreign_currency").on("click", function(){
-    $(".foreign_currency").slideToggle()
+    $(".foreign_currency").slideToggle();
   });
   
   $("#show-payment-terms").on("click", ".payment_amount", function(){
@@ -72,8 +87,77 @@ $(document).ready(function(){
       });
     }
     return false;
-  })
+  });
+  
+  function getHash(){
+    var hash = location.hash;
+    hashManagement(hash);
+  }
+  function hashManagement(hash){
+    if(hash == ""){
+      init(0);
+    }
+    else{
+      var index = hash_str.indexOf(hash);
+      if(index >= 0){
+        init(index);
+      }
+    }
+  }
+  
+  function init(index){
+    switch (index) {
+      case 0:
+        $(".t1").hide();
+        $(".t0").show();
+        break;
+      case 1:
+        $(".t0").hide();
+        $(".t1").show();
+        break;
+      default:
+        // code
+    }
+  }
+  
+  function searchResult(data){
+    $.ajax({
+        method: "POST",
+        url: "adminsController",
+        dataType: "json",
+        data: {
+          action: "search",
+          params: data
+        },
+        success: function(response) {
+          if(response['status'] == true){//admin-search-box-result
+            var data = response['obj'];
+            var str = "";
+            $(data).each(function(){
+              str += "<tr>" +
+                "<td>"+this.JID+"</td>"+
+                "<td>"+this.Contactor_Name+"</td>"+
+                "<td>"+(this.PO_No==null?'-':this.PO_No)+"</td>"+
+                "<td><a>Edit</a></td>"+
+                "<td><a>Delete</a></td>"+
+              "</tr>;"
+            });
+            if(str != "") {
+              $("#admin-search-box-result tbody").html("");
+              $("#admin-search-box-result tbody").append(str);
+            }
+            console.log(str)
+          }
+          else{
+            
+          }
+          console.log(response);
+        }
+      });
+  }
 });
+
+
 
 
 (function($){

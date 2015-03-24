@@ -2,12 +2,29 @@ $(document).ready(function(){
   var hash_str = ["#home", "#search", "#report"];
   var g_Month = ["January", "February", "March", "April", "May", "June", "July", "August","September","October","November","December"];
   getHash();
-  elementHeight();
+  //elementHeight();
   
   /*
   * event
   */
   
+  $(".report-month").on("click", function(e) {
+      var checkbox = $(this).find("input");
+     if(checkbox.prop("checked")){
+       checkbox.prop("checked", false);
+       $(this).removeClass("shadow");
+       $(this).find(".fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");
+     } 
+     else{
+       checkbox.prop("checked", true);
+       $(this).addClass("shadow");
+       $(this).find(".fa").removeClass("fa-circle-o").addClass("fa-check-circle-o");
+     }
+  });
+  
+  $("#btn-show-hide-report").on("click", function(e) {
+     $("#wrap-report-show").slideToggle();
+  });
   
   $("#input-search").on("keyup", function(e){
     if ( e.which == 13 ) {
@@ -58,6 +75,7 @@ $(document).ready(function(){
     searchResult(data);
   });
   
+  $(".nano").nanoScroller();
   $("#submit-report").on("click", function(){
     var months = $(".reports_month").map(function(){
       var m = $($(this)[0]);
@@ -480,7 +498,7 @@ $(document).ready(function(){
           $(".t0, .t1").hide();
           $("#wrap-main-content").addClass("padding-left-300px");
           $("#content-report, .report-topics").html("");
-          elementHeight();
+         // elementHeight();
         break;
       default:
           $(".t0").show();
@@ -537,27 +555,11 @@ $(document).ready(function(){
   */
   
   $(window).on("resize",function(){
-    elementHeight();
-  });
-  $(window).scroll(function (event) {
-    elementScroll();
-  });
-  
-  function elementHeight(){
-    var w_width = $(this).width();
-    var w_height = $(this).height();
-    if(w_width >= 786){
-      if(!$(".report-panel").is(":visible")){
-        $(".report-panel").show();
-      }
-      if($(".report-panel").is(":visible")){
-       $("#wrap-header").addClass("padding-left-300px");
-      }
+    var w = $(window).width();
+    if(w > 960){
+      $("#wrap-report-show").show();
     }
-    else {
-      $("#wrap-header").removeClass("padding-left-300px");
-    }
-  }
+  });
   
   function elementScroll(){
     var scroll = $(window).scrollTop();
