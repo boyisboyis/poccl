@@ -18,10 +18,10 @@
         public static function create($params) {
             
             $sql_po_asso = 'INSERT INTO `po_asso` (`JID`, `Contractor_Name`, `PO_No`)' .
-                           'VALUES (' . self::nullValue($params['job_no']) . ', ' . 
+                          'VALUES (' . self::nullValue($params['job_no']) . ', ' . 
                                         self::nullValue($params['contractor_name']) . ', ' . 
                                         self::nullValue($params['po_no']) . 
-                                        ')';
+                                    ')';
             DB::query($sql_po_asso)->get();
             
             $sql_job = 'INSERT INTO `job` (`JID`, `Project_Name`, `Project_Location`, `Project_Owner`, `Secrecy_Agreement`, `Work_Start_Date`, `Work_Complete_Date`, `PO_Date`, `PO_Type`, `Contract_Value_THB`, `Contract_Value_Other`, `Contract_Value_Type`, `Contract_Value_Rate`, `Goveming_Law`, `Credit_Term` ,`Late_Pay_Finan_Charge`) ' .
@@ -40,12 +40,11 @@
                                     self::nullValue($params['foreign_currency_rate']) . ', ' .
                                     self::nullValue($params['goveming_law']) . ', ' .
                                     self::nullValue($params['credit_term']) . ', ' .
-                                    self::nullValue($params['credit_term']) . ', ' .
-                                    self::nullValue($params['late_payment']) . ', ' .
+                                    self::nullValue($params['late_payment']) .
                                 ')';
              DB::query($sql_job)->get();
             
-            echo json_encode($sql);
+            echo json_encode($sql_job);
         }
         public static function nullValue($str) {
             if($str == 'none' || $str == '') {
