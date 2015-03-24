@@ -37,7 +37,7 @@ nav#wrap-nav a {
 
 div#wrap-content {
   position: relative;
-  padding: 5px 10px;
+  padding: 5px 50px;
 }
 
 nav#content-nav{
@@ -45,9 +45,9 @@ nav#content-nav{
   top: 0;
   left:0;
   width: 150px;
-  height: 800%;
+  height: 100%;
   background-color: #333;
-  padding-top: 30px;
+  padding-top: 150px;
 }
 
 nav#content-nav li {
@@ -120,4 +120,12 @@ div#content-article {
 #admin-search #admin-search-box-result {
   border-collapse: separate;
   border-spacing: 0;
+  outline: 2px solid #FA5858 !important;
+}
+
+#wrapper-admin button {
+  width: 150px;
+  position: absolute;
+  top: 10px;
+  right: 50px;
 }
