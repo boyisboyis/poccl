@@ -70,6 +70,10 @@ return array(
     "file" => "lib/asset/js/angular.min.js",
     "type" => "file_get_contents"
   ),
+  "nanojs" => array(
+    "file" => "lib/asset/js/nanoscroller.min.js",
+    "type" => "file_get_contents"
+  ),
   
     
     /*

@@ -21,13 +21,13 @@
   <div id="wrapper-admin">
     <nav id="content-nav">
       <ol>
-        <li><a href="#add"><i class="fa fa-plus"></i>Add</a>
+        <li><a href="#add" class='sub-menu'><i class="fa fa-plus"></i>Add</a>
         </li>
-        <li><a href="#add"><i class="fa fa-search"></i>Search</a>
+        <li><a href="#search" class='sub-menu'><i class="fa fa-search"></i>Search</a>
         </li>
-        <li><a href="#add">Payment Status</a>
+        <li><a href="#payment" class='sub-menu'>Payment Status</a>
         </li>
-        <li><a href="#add">Gurantee Status</a>
+        <li><a href="#guarantee" class='sub-menu'>Guarantee Status</a>
         </li>
       </ol>
     </nav>
@@ -45,7 +45,7 @@
       </header>
 
       <div id="wrap-content">
-        <div id="admin-add">
+        <div id="admin-add" class='t0'>
           <form id="form_add" name="form_add" method="POST" action="addPurchase">
             <input type="submit" name="submit" />
             <h2>New Purchase Order</h2>
@@ -478,6 +478,7 @@
             </div>
           </div>
         </div>
+        <?php include('_search.php'); ?>
       </div>
     </div>
   </div>

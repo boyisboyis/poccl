@@ -101,3 +101,23 @@ div#content-article {
 .input-error {
   outline: 2px solid red !important;
 }
+
+
+#admin-search #admin-search-box-search {
+  width: 100%;
+  text-align: center;
+}
+
+#admin-search #admin-search-box-result{
+  width: 100%;
+}
+
+#admin-search #admin-search-box-result, #admin-search #admin-search-box-result tr, #admin-search #admin-search-box-result td, #admin-search #admin-search-box-result th{
+  border: 1px solid black;
+  
+}
+
+#admin-search #admin-search-box-result {
+  border-collapse: separate;
+  border-spacing: 0;
+}

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="fontcss" type="text/css" />
     <link rel="stylesheet" href="applicationcss" type="text/css" />
     <script type="text/javascript" src="jquery"></script>
+    <script type="text/javascript" src="nanojs"></script>
     <script type="text/javascript" src="applicationjs"></script>
   </head>
   <body>
