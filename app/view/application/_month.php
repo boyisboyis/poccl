@@ -6,6 +6,12 @@
      <div class='nano-content' style="padding: 0 17px; outline: none;">
        <secton>
         <h3>Month</h3>
+          <p id="report-month-all"  class='report-month-big'>
+             <label for="reports_month_all">Check All</label>
+          </p>
+          <p id="report-month-unall"  class='report-month-big' style='display:none;'>
+             <label for="reports_month_all">Uncheck All</label>
+          </p>
           <p class='report-month shadow'>
             <i class="fa fa-check-circle-o"></i>
             <input id="reports_month_january" type="checkbox" name="reports_month" class='reports_month' value="01" checked='checked' style="display: none;" />
