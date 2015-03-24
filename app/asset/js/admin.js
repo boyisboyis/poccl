@@ -84,12 +84,29 @@ $(document).ready(function(){
     var formObj = $( this ).serializeObject();
     console.log(formObj);
     for(var elem in formObj) {
-      if(formObj[elem] == '') {
+      if(formObj[elem] == '' && elem != 'foreign_currency_value' && elem != 'foreign_currency_type' && elem != 'foreign_currency_rate') {
         $('input[name=' + elem + ']:not(input[type=checkbox])').first().addClass('input-error');
         $('select[name=' + elem + ']').first().addClass('input-error');
         checkInput = false;
+        console.log(elem + ' => ' + formObj[elem]);
       }
-      console.log(elem + ' => ' + formObj[elem]);
+    }
+    if(formObj['add_foreign_currency_checkbox'] != 'hide') {
+      if(formObj['foreign_currency_value'] == '') {
+        $('input[name=foreign_currency_value]:not(input[type=checkbox])').first().addClass('input-error');
+        checkInput = false;
+        console.log('foreign_currency_value => ' + formObj['foreign_currency_value']);
+      }
+      if(formObj['foreign_currency_type'] == '') {
+        $('input[name=foreign_currency_type]:not(input[type=checkbox])').first().addClass('input-error');
+        checkInput = false;
+        console.log('foreign_currency_type => ' + formObj['foreign_currency_type']);
+      }
+      if(formObj['foreign_currency_rate'] == '') {
+        $('input[name=foreign_currency_rate]:not(input[type=checkbox])').first().addClass('input-error');
+        checkInput = false;
+        console.log('foreign_currency_rate => ' + formObj['foreign_currency_rate']);
+      }
     }
     if(formObj['payment_terms_checkbox'] == 'check') {
       for(var counter in formObj['payment_terms']) {
