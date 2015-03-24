@@ -19,10 +19,37 @@ $(document).ready(function(){
        $(this).addClass("shadow");
        $(this).find(".fa").removeClass("fa-circle-o").addClass("fa-check-circle-o");
      }
+     if($(".report-month.shadow").length == 12){
+       $("#report-month-all").hide();
+       $("#report-month-unall").show();
+     }
+     else{
+       $("#report-month-all").show();
+       $("#report-month-unall").hide();
+     }
   });
   
   $("#btn-show-hide-report").on("click", function(e) {
      $("#wrap-report-show").slideToggle();
+  });
+  
+  $("#report-month-all").on("click", function(){
+      $(".report-month").each(function(){
+        $(this).addClass("shadow");
+        $(this).find("input").prop("checked", true);
+        $(this).find(".fa").removeClass("fa-circle-o").addClass("fa-check-circle-o");
+      });
+      $("#report-month-all").hide();
+      $("#report-month-unall").show();
+  });
+  $("#report-month-unall").on("click", function(){
+      $(".report-month").each(function(){
+        $(this).removeClass("shadow");
+        $(this).find("input").prop("checked", false);
+        $(this).find(".fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");
+      });
+      $("#report-month-unall").hide();
+      $("#report-month-all").show();
   });
   
   $("#input-search").on("keyup", function(e){
@@ -519,7 +546,6 @@ $(document).ready(function(){
       url : "report_options",
       cache: false,
       success: function(req){
-        console.log(req);
         if(req['status'] == true){
           var max = parseInt(req['obj']['max']);
           var min = parseInt(req['obj']['min']);
