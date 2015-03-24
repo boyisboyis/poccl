@@ -15,6 +15,12 @@ $(document).ready(function(){
     searchResult(data);
   });
   
+  $("#list-payment-terms").on("click", ".delete-payment", function() {
+    if($("#list-payment-terms .table").length > 1){
+      console.log($(this).parent(".table"));
+    }
+  });
+  
   $("#check-payment-terms").on('click', function(){
     if($(this).prop('checked')){
       $("#show-payment-terms").slideDown();

@@ -2,7 +2,6 @@ $(document).ready(function(){
   var hash_str = ["#home", "#search", "#report"];
   var g_Month = ["January", "February", "March", "April", "May", "June", "July", "August","September","October","November","December"];
   getHash();
-  //elementHeight();
   
   /*
   * event
@@ -48,7 +47,6 @@ $(document).ready(function(){
   $("#content-report").on("click", ".reports-details-years, .reports-details-toggle, .reports-details-jid-detail", function(){
     $(this).next().slideToggle();
     $(this).focus();
-    elementHeight();
   });
   
   $("#show-and-hide").on("click", function(){
@@ -384,7 +382,7 @@ $(document).ready(function(){
             
             var keySearch;
             if(search['type'] == "contract") {
-              keySearch = "<h2 class='job-id'>"+obj['Contactor_Name']+"</h2>";
+              keySearch = "<h2 class='job-id'>"+obj['Contractor_Name']+"</h2>";
             }
             else if(search['type'] == "job") {
               keySearch = "<h2 class='job-id'>"+obj['JID']+"</h2>" 
@@ -404,7 +402,7 @@ $(document).ready(function(){
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
               "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['JID']+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Contactor_Name']+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Contractor_Name']+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Name']+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Owner']+"</td></tr>"+
@@ -424,7 +422,7 @@ $(document).ready(function(){
              // tr_currency+
               "<tr><td class='text-vertical-top'>Goveming Law</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Credit Term</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Credit_Term']==null?'-':obj['Job']['Credit_Term'])+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Late Payment Financial Charges</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Late_Pay_Finan_Chage']+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Late Payment Financial Charges</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Late_Pay_Finan_Charge']+"</td></tr>"+
               "</table>"+
               "</section>"+
               "</div>"+
@@ -498,7 +496,6 @@ $(document).ready(function(){
           $(".t0, .t1").hide();
           $("#wrap-main-content").addClass("padding-left-300px");
           $("#content-report, .report-topics").html("");
-         // elementHeight();
         break;
       default:
           $(".t0").show();
