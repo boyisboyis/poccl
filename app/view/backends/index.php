@@ -253,6 +253,7 @@
                 <div id='show-payment-terms' style="display:none;">
                   <div id="list-payment-terms">
                     <div class='table'>
+                      <i class='fa fa-minus delete-payment'></i>
                       <ol class='table-row'>
                         <li class='table-cell'></li>
                         <li class='table-cell'>Description</li>
@@ -380,6 +381,7 @@
           </form>
           <div id="clone-payment-terms" style='display: none;'>
             <div class='table'>
+              <i class='fa fa-minus delete-payment'></i>
               <ol class='table-row'>
                 <li class='table-cell'></li>
                 <li class='table-cell'>Description</li>

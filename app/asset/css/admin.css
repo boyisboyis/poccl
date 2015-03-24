@@ -129,3 +129,13 @@ div#content-article {
   top: 10px;
   right: 50px;
 }
+
+#list-payment-terms .table:not(:first-child) {
+  border-top: 1px solid black;
+  margin-top: 20px;
+}
+
+#list-payment-terms i.fa.fa-minus {
+  color: red;
+  cursor: pointer;
+}
