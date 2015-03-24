@@ -249,7 +249,7 @@
             <hr>
             <div>
               <div style="float: left; width: 50%;">
-                <h3><input type="checkbox" id="check-payment-terms"  name="payment_terms_checkbox" value="check" />Payment Terms</h3>
+                <h3><input type="checkbox" id="check-payment-terms"  name="payment_terms_checkbox" value="check" />Payments</h3>
                 <div id='show-payment-terms' style="display:none;">
                   <div id="list-payment-terms">
                     <div class='table'>
