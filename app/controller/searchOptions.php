@@ -21,7 +21,7 @@ else{
 class searchOptions{
 	
 	public static function search($type, $search = ""){
-		$where = array("job" => "JID", "contract" => "Contactor_Name", "poid" => "PO_No");
+		$where = array("job" => "JID", "contract" => "Contractor_Name", "poid" => "PO_No");
 		if($search != ""){
 			$result = DB::query("SELECT * FROM po_asso WHERE po_asso.".$where[$type]." LIKE '%".$search."%' AND po_asso.".$where[$type]." IS NOT null ORDER BY po_asso.".$where[$type])->get();
 		}
@@ -37,7 +37,7 @@ class searchOptions{
 				$job = DB::query("SELECT * FROM job WHERE job.JID = '$jid'")->get();
 				$payment = DB::query("SELECT * FROM payment WHERE payment.JID = '$jid' ORDER BY payment.Terms")->get();
 				$job[0]->Secrecy_Agreement = ($job[0]->Secrecy_Agreement == null || $job[0]->Secrecy_Agreement == false)?"NO":"YES";
-				$job[0]->Late_Pay_Finan_Chage = ($job[0]->Late_Pay_Finan_Chage == null)?"-": ($job[0]->Late_Pay_Finan_Chage == false)?"NO":"YES";
+				$job[0]->Late_Pay_Finan_Charge = ($job[0]->Late_Pay_Finan_Charge == null)?"-": ($job[0]->Late_Pay_Finan_Charge == false)?"NO":"YES";
 				$np = count($payment);
 				for($j=0;$j<$np;$j++){
 				 	$payment[$j]->Payment_date_plan = dateTimes::calculationDate($job[0]->Credit_Term, $payment[$j]->Invoice_Date);
