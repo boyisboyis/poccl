@@ -18,11 +18,11 @@
         public static function create($params) {
             
             $sql_po_asso = 'INSERT INTO `po_asso` (`JID`, `Contractor_Name`, `PO_No`)' .
-                          'VALUES (' . self::nullValue($params['job_no']) . ', ' . 
+                           'VALUES (' . self::nullValue($params['job_no']) . ', ' . 
                                         self::nullValue($params['contractor_name']) . ', ' . 
                                         self::nullValue($params['po_no']) . 
                                     ')';
-            DB::query($sql_po_asso)->get();
+            DB::puts($sql_po_asso);
             
             $sql_job = 'INSERT INTO `job` (`JID`, `Project_Name`, `Project_Location`, `Project_Owner`, `Secrecy_Agreement`, `Work_Start_Date`, `Work_Complete_Date`, `PO_Date`, `PO_Type`, `Contract_Value_THB`, `Contract_Value_Other`, `Contract_Value_Type`, `Contract_Value_Rate`, `Goveming_Law`, `Credit_Term` ,`Late_Pay_Finan_Charge`) ' .
                        'VALUES (' . self::nullValue($params['job_no']) . ', ' .
@@ -42,17 +42,36 @@
                                     self::nullValue($params['credit_term']) . ', ' .
                                     self::nullValue($params['late_payment']) .
                                 ')';
-             DB::query($sql_job)->get();
+            DB::query($sql_job);
             
-            echo json_encode($sql_job);
-        }
-        public static function nullValue($str) {
-            if($str == 'none' || $str == '') {
-                return 'null';
+            if($params['payment_terms'] != '') {
+                foreach($params['payment_terms'] as &$payment) {
+                    $sql_payment = 'INSERT INTO `payment` (`JID`, `Terms`, `Payment_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Invoice_Date`) ' .
+                                   'VALUES (' . self::nullValue($params['job_no']) . ', ' .
+                                                self::nullValue($payment['payment_term']) . ', ' .
+                                                self::nullValue($payment['payment_terms_select']) . ', ' .
+                                                self::amountValue($payment['payment_terms_amount_thb'], $payment['payment_terms_amount_percentage'], $params['po_amount']) . ', ' .
+                                                self::nullValue($payment['payment_terms_date_plan']) .
+                                            ')';
+                    DB::puts($sql_payment);
+                }
             }
-            else {
-                return '\'' . $str . '\'';
+            
+            if($params['bank_guarantee'] != '') {
+                foreach($params['bank_guarantee'] as &$guarantee) {
+                    $sql_guarantee = 'INSERT INTO `guarantee` (`JID`, `Terms`, `Guarantee_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Start_Plan`, `Until_Plan`) ' .
+                                   'VALUES (' . self::nullValue($params['job_no']) . ', ' .
+                                                self::nullValue($guarantee['bank_guarantee_term']) . ', ' .
+                                                self::nullValue($guarantee['bank_guarantee_select']) . ', ' .
+                                                self::amountValue($guarantee['bank_guarantee_amount_thb'], $guarantee['bank_guarantee_amount_percentage'], $params['po_amount']) . ', ' .
+                                                self::nullValue($guarantee['bank_guarantee_start_date']) . ', ' .
+                                                self::nullValue($guarantee['bank_guarantee_until_date']) .
+                                            ')';
+                    DB::puts($sql_guarantee);
+                }
             }
+           
+            echo json_encode(array("status" => false));
         }
         
         public static function search($params) {
@@ -66,6 +85,29 @@
     			$result = DB::query("SELECT * FROM po_asso WHERE po_asso.".$where[$type]." IS NOT null ORDER BY po_asso.".$where[$type])->get();
     		}
             echo json_encode(array("status" => true, "obj" => $result));
+        }
+        
+        public static function nullValue($str) {
+            if($str == 'none' || $str == '') {
+                return 'null';
+            }
+            else {
+                return '\'' . $str . '\'';
+            }
+        }
+        
+        public static function amountValue($amount_thb, $amount_percentage, $full_price) {
+            if(is_null($amount_thb) && !is_null($amount_percentage)) {
+                $baht = intval($full_price) * (intval($amount_percentage) / 100);
+                return '\'' . $baht . '\', \'' . $amount_percentage . '\'';
+            }
+            else if(!is_null($amount_thb) && is_null($amount_percentage)) {
+                $percent = (intval($amount_thb) * 100) / intval($full_price);
+                return '\'' . $amount_thb . '\', \'' . $percent . '\'';
+            }
+            else {
+                return 'null, null';
+            }
         }
     }
 ?>
