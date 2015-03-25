@@ -130,12 +130,16 @@ div#content-article {
   right: 50px;
 }
 
-#list-payment-terms .table:not(:first-child) {
+#list-payment-terms .table, #list-bank-guarantee .table {
+  position: relative;
+}
+
+#list-payment-terms .table:not(:first-child), #list-bank-guarantee .table:not(:first-child) {
   border-top: 1px solid black;
   margin-top: 20px;
 }
 
-#list-payment-terms i.fa.fa-minus {
+#list-payment-terms i.fa.fa-minus, #list-bank-guarantee i.fa.fa-minus {
   color: red;
   cursor: pointer;
 }

@@ -17,8 +17,25 @@ $(document).ready(function(){
   
   $("#list-payment-terms").on("click", ".delete-payment", function() {
     if($("#list-payment-terms .table").length > 1){
-      console.log($(this).parent(".table"));
+      //console.log($(this).parent(".table"));
+      $(this).parent(".table").remove();
+      $("#list-payment-terms .delete-payment").show();
     }
+    if($("#list-payment-terms .table").length <= 1){
+      $("#list-payment-terms .delete-payment").hide();
+    }
+    payment_terms_delete()
+  });
+
+  $("#list-bank-guarantee").on("click", ".delete-guarantee", function() {
+    if($("#list-bank-guarantee .table").length > 1){
+      $(this).parent(".table").remove();
+      $("#list-bank-guarantee .delete-guarantee").show();
+    }
+    if($("#list-bank-guarantee .table").length <= 1){
+      $("#list-bank-guarantee .delete-guarantee").hide();
+    }
+    payment_terms_delete()
   });
   
   $("#check-payment-terms").on('click', function(){
@@ -28,6 +45,7 @@ $(document).ready(function(){
     else{
       $("#show-payment-terms").slideUp();
     }
+    payment_terms_delete();
   });
   
   $("#check-bank-guarantee").on('click', function(){
@@ -37,6 +55,7 @@ $(document).ready(function(){
     else{
       $("#show-bank-guarantee").slideUp();
     }
+    bank_guarantee_delete();
   });
   
   $("#add-payment-terms").on('click', function(){
@@ -45,6 +64,7 @@ $(document).ready(function(){
     html = html.replace(/next_number/g,len + 1);
     html = html.replace(/numbers/g,len);
     $("#list-payment-terms").append(html);
+    payment_terms_delete();
   });
   
   $("#add-bank-guarantee").on("click", function(){
@@ -53,6 +73,7 @@ $(document).ready(function(){
     html = html.replace(/next_number/g,len + 1);
     html = html.replace(/numbers/g,len);
     $("#list-bank-guarantee").append(html);
+    bank_guarantee_delete();
   });
   
   $("#show_foreign_currency").on("click", function(){
@@ -161,6 +182,21 @@ $(document).ready(function(){
     var hash = location.hash;
     hashManagement(hash);
   }
+  
+  function payment_terms_delete(){
+    $("#show-payment-terms .delete-payment").hide();
+    if($("#show-payment-terms .delete-payment").length > 1){
+      $("#show-payment-terms .delete-payment").last().show();
+    }
+  }
+  
+  function bank_guarantee_delete(){
+    $("#show-bank-guarantee .delete-guarantee").hide();
+    if($("#show-bank-guarantee .delete-guarantee").length > 1){
+      $("#show-bank-guarantee .delete-guarantee").last().show();
+    }
+  }
+  
   function hashManagement(hash){
     if(hash == ""){
       init(0);
