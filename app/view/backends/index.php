@@ -310,6 +310,7 @@
                 <div id='show-bank-guarantee' style='display: none;'>
                   <div id="list-bank-guarantee">
                     <div class='table'>
+                      <i class='fa fa-minus delete-guarantee'></i>
                       <ol class='table-row'>
                         <li class='table-cell'></li>
                         <li class='table-cell'>Description</li>
@@ -374,7 +375,7 @@
                       </ol>
                     </div>
                   </div>
-                  <p id="add-bank-guarantee"> + Add Bank Guarantee.</p>
+                  <p id="add-bank-guarantee" style="color: #ed8151; cursor: pointer;"> <i class="fa fa-plus"></i> Add Bank Guarantee.</p>
                 </div>
               </div>
             </div>
@@ -431,6 +432,7 @@
           </div>
           <div id="clone-bank-guarantee" style='display: none;'>
             <div class='table'>
+              <i class='fa fa-minus delete-guarantee'></i>
               <ol class='table-row'>
                 <li class='table-cell'></li>
                 <li class='table-cell'>Description</li>
