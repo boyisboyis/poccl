@@ -103,7 +103,6 @@ $(document).ready(function(){
     $(this).find('input').removeClass('input-error');
     $(this).find('select').removeClass('input-error');
     var formObj = $( this ).serializeObject();
-    console.log(formObj);
     for(var elem in formObj) {
       if(formObj[elem] == '' && elem != 'foreign_currency_value' && elem != 'foreign_currency_type' && elem != 'foreign_currency_rate') {
         $('input[name=' + elem + ']:not(input[type=checkbox])').first().addClass('input-error');
@@ -141,17 +140,23 @@ $(document).ready(function(){
         }
       }
     }
+    else {
+      formObj['payment_terms'] = "";
+    }
     if(formObj['bank_guarantee_checkbox'] == 'check') {
       for(var counter in formObj['bank_guarantee']) {
         for(var elemWithin in formObj['bank_guarantee'][counter]) {
           if(formObj['bank_guarantee'][counter][elemWithin] == "") {
-            $('input[name*="[' + counter + ']"][name=' + counter + '][name*=' + elemWithin + ']:not(input[type=checkbox])').first().addClass('input-error');
-            $('select[name*="[' + counter + ']"][name=' + counter + '][name*=' + elemWithin + ']').first().addClass('input-error');
+            $('input[name*="[' + counter + ']"][name*=' + elemWithin + ']:not(input[type=checkbox])').first().addClass('input-error');
+            $('select[name*="[' + counter + ']"][name*=' + elemWithin + ']').first().addClass('input-error');
             checkInput = false;
           }
           console.log(elemWithin + ' => ' + formObj['bank_guarantee'][counter][elemWithin]);
         }
       }
+    }
+    else {
+      formObj['bank_guarantee'] = "";
     }
     if(formObj['secrecy_agreement'] == undefined) {
       $('input[name=secrecy_agreement][type=checkbox]').first().addClass('input-error');
@@ -161,6 +166,7 @@ $(document).ready(function(){
       $('input[name=late_payment][type=checkbox]').first().addClass('input-error');
       checkInput = false;
     }
+    console.log(formObj);
     console.log('====================================');
     if(checkInput) {
       $.ajax({

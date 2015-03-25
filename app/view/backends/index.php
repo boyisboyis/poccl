@@ -294,7 +294,7 @@
                       </ol>
                       <ol class='table-row'>
                         <li class="table-cell"></li>
-                        <li class='table-cell'>Payment Date Plan</li>
+                        <li class='table-cell'>Invoice Date</li>
                         <li class='table-cell colon'></li>
                         <li class='table-cell'>
                           <input type="date" name="payment_terms[0][payment_terms_date_plan]" />
@@ -390,6 +390,7 @@
                 <li class='table-cell'>
                   <select name="payment_terms[numbers][payment_terms_select]">
                     <option value="">----</option>
+                    <option value="Advance Payment">Advance Payment</option>
                   </select>
                 </li>
               </ol>
@@ -440,6 +441,7 @@
                 <li class='table-cell'>
                   <select name="bank_guarantee[numbers][bank_guarantee_select]">
                     <option value="">----</option>
+                    <option value="Advance Guarantee">Advance Guarantee</option>
                   </select>
                 </li>
               </ol>

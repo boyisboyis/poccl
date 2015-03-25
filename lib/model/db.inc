@@ -29,6 +29,11 @@ class DB{
     return self::$_instant;
   }
   
+  public static function puts($sql){
+    self::$result = self::$con->query($sql);
+    return self::$result;
+  }
+  
   public function fetchArray(){
     $this->_result = array();
     if(self::$result != null){
