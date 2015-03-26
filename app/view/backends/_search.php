@@ -8,6 +8,7 @@
     </select>
     <input type="search" id="input-search" name="input-search" />
     <button id="search-now">search</button>
+		<button class="admin-search-delete" style="margin-right: 200px;">delete test</button>
   </div>
   <table id="admin-search-box-result">
     <thead>

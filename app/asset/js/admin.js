@@ -11,7 +11,7 @@ $(document).ready(function(){
     var data = {
       "type" : $("#select-search").val(),
       "search" : $("#input-search").val()
-    }
+    };
     searchResult(data);
   });
   
@@ -24,7 +24,7 @@ $(document).ready(function(){
     if($("#list-payment-terms .table").length <= 1){
       $("#list-payment-terms .delete-payment").hide();
     }
-    payment_terms_delete()
+    payment_terms_delete();
   });
 
   $("#list-bank-guarantee").on("click", ".delete-guarantee", function() {
@@ -35,7 +35,7 @@ $(document).ready(function(){
     if($("#list-bank-guarantee .table").length <= 1){
       $("#list-bank-guarantee .delete-guarantee").hide();
     }
-    payment_terms_delete()
+    payment_terms_delete();
   });
   
   $("#check-payment-terms").on('click', function(){
@@ -183,6 +183,21 @@ $(document).ready(function(){
     }
     return false;
   });
+	
+ 	$('#admin-search-box-result').on('click', '.admin-search-delete', function() { 
+/* 	$('.admin-search-delete').on('click', function() { */
+		$.ajax({
+			method: "POST",
+			url: "adminsController",
+			data: {
+				action: "delete",
+	 			params: $(this).data('jid')
+			},
+			success: function(data) {
+				console.log(data);
+			}
+		});
+	});
   
   function getHash(){
     var hash = location.hash;
@@ -250,13 +265,13 @@ $(document).ready(function(){
                 "<td>"+(this.PO_No==null?'-':this.PO_No)+"</td>"+
                 "<td><a>Edit</a></td>"+
                 "<td><a>Delete</a></td>"+
-              "</tr>;"
+              "</tr>;";
             });
             if(str != "") {
               $("#admin-search-box-result tbody").html("");
               $("#admin-search-box-result tbody").append(str);
             }
-            console.log(str)
+            console.log(str);
           }
           else{
             
