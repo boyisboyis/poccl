@@ -145,25 +145,25 @@ class News {
 	    }
 	}
 	public static function checkListsAlert() {
-		// $result = DB::query("SELECT job.JID FROM job WHERE job.Check_List = '0'")->get();
-		// $n = count($result);
-		// if($n > 0){
-		// 	$return = array('obj' => array(), 'status' => true);
-		// 	for($i = 0; $i < $n; $i++){
-		// 		$return['obj'][$i] = $result[$i];
-		// 	}
-		//   	sort($return['obj']);
-		//   	if(count($return['obj']) > 0) {
-		//   		echo json_encode($return);
-		//   	}
-		//   	else {
-		//   		echo json_encode(array("status" => false));die();
-		//   	}
-		//   	die();
-		// }
-		// else{
-		// 	echo json_encode(array("status" => false));die();
-		// }
+		$result = DB::query("SELECT job.JID FROM job WHERE job.Check_List = '0'")->get();
+		$n = count($result);
+		if($n > 0){
+			$return = array('obj' => array(), 'status' => true);
+			for($i = 0; $i < $n; $i++){
+				$return['obj'][$i] = $result[$i];
+			}
+		  	sort($return['obj']);
+		  	if(count($return['obj']) > 0) {
+		  		echo json_encode($return);
+		  	}
+		  	else {
+		  		echo json_encode(array("status" => false));die();
+		  	}
+		  	die();
+		}
+		else{
+			echo json_encode(array("status" => false));die();
+		}
 	}
 }
 
