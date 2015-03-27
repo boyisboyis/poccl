@@ -88,8 +88,9 @@ $(document).ready(function(){
     searchResult(data);
   });
 	
-	$("#main-news").pagenavi({showPerPage: 10, position: "center"});
+	$("#content-poidnull-news").pagenavi({showPerPage: 10, position: "center"});
   $("#main-search").pagenavi({showPerPage: 15, position: "center"});
+	$("#content-comingsoon-news").pagenavi({showPerPage: 10, position: "center"});
 	
   $("#content-payment-news, #content-guarantee-news, #content-poidnull-news").on("click", '.search-from-news', function(){
     document.location.hash = $(this).attr("href");
@@ -338,7 +339,19 @@ $(document).ready(function(){
       url : "managenews",
       cache: false,
       success: function(req){
-        console.log(req);
+        //console.log(req);
+				var length = req.length;
+          $("#content-comingsoon-news").html("<h2 class='main-topics'>Payment is coming soon</h2><div class='page-list'></div>");
+          $.each(req, function(){
+            var _obj = $(this)[0];
+            $("#content-comingsoon-news > div").append(
+              "<p class='p-news'>"+
+              "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
+              "<span class='has-arrears-at'>purchase order is nil</span>"+
+              // "<b class='news-payment'>"+_obj['Guarantee']+"</b>"+
+              "</p>"
+            );
+          });
       }
     });
   }

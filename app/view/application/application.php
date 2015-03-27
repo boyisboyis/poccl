@@ -57,6 +57,7 @@
           <div id="content-payment-news"></div>
           <div id="content-guarantee-news"></div>
           <div id="content-poidnull-news"></div>
+					<div id="content-comingsoon-news"></div>
         </section>
         <section id="main-search" class="t1" style="display: none;">
           <h2 class="result-topics"></h2>
