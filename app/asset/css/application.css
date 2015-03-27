@@ -9,7 +9,7 @@ h2{
   
 }
 table{
-	border-spacing: 2px 0;
+	border-spacing: 2px 10px;
 }
 table,
 td,
@@ -180,11 +180,14 @@ a:hover, a:focus {
 	-webkit-box-shadow:inset 0px 0px 66px #000000;
 	box-shadow:inset 0px 0px 66px #000000;
 }
-.report-month .fa{
+.report-month .fa , .report-month-big .fa{
 	font-size: 1.5em;
 	vertical-align: middle;
 	margin: 0 10px;
 	color: #FFF;
+}
+.report-month .fa {
+	padding-left: 10px;
 }
 
 .reports-details-years{
@@ -269,7 +272,6 @@ a:hover, a:focus {
 	height: 100%;
 	position: relative;
 	margin-top: 0;
-	margin-bottom: 150px;
 }
 
 #wrap-main .p-news {
@@ -286,6 +288,10 @@ a:hover, a:focus {
 .main-topics {
 	margin-bottom: 50px;
 	margin-top: 50px;
+}
+
+.p-warning {
+	margin: 0 0 0 10px;
 }
 
 .result-topics {
@@ -315,7 +321,7 @@ a:hover, a:focus {
 */
 
 .purchase-detail .job-id{
-	margin: 5px 0;
+	margin: 10px 0;
 	cursor:pointer; 
 	color: #ed8151;
 	font-size: 1.1em;
@@ -339,6 +345,14 @@ a:hover, a:focus {
 	position: fixed;
 	top: 0;
 	padding-top: 50px;
+}
+
+#wrap-footer {
+	display: none;
+}
+#wrap-footer div {
+	border: 3px solid #FFF;
+	width: 100%;
 }
 /*
 * Resposive design
@@ -366,9 +380,10 @@ a:hover, a:focus {
 		width: 100%;
 		padding: 0 20px;
 	}
+	
 	#wrap-main{
 		width: 100%;
-		
+		margin-bottom: 50px;	
 	}
 	.nano-pane {
 		display: none;
@@ -419,6 +434,9 @@ a:hover, a:focus {
 	#wrap-report #wrap-report-show-hide-button{
 		display: initial;
 	}
+	#wrap-footer {
+		display: block;
+	}
 	
 	.nano > .nano-content {
 		  position: static;
@@ -450,6 +468,11 @@ a:hover, a:focus {
 	
 	.reports-details-each-details{
 		margin: 8px 0 8px 10px;
+	}
+	.purchase-each-detail span {
+		display: inline-block;
+		width: 50%;
+		margin: 0!important;
 	}
 }
 

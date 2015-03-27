@@ -7,10 +7,10 @@
        <secton>
         <h3>Month</h3>
           <p id="report-month-all"  class='report-month-big'>
-             <label for="reports_month_all">Check All</label>
+             <i class="fa fa-check-circle-o"></i><label for="reports_month_all">Check All</label>
           </p>
           <p id="report-month-unall"  class='report-month-big' style='display:none;'>
-             <label for="reports_month_all">Uncheck All</label>
+            <i class="fa fa-times-circle-o"></i><label for="reports_month_all">Uncheck All</label>
           </p>
           <p class='report-month shadow'>
             <i class="fa fa-check-circle-o"></i>

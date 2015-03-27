@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
 		<title>Purchase Order Contract Check Lists</title>
 		<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="maincss" type="text/css" />
     <link rel="stylesheet" href="fontcss" type="text/css" />
     <link rel="stylesheet" href="applicationcss" type="text/css" />
     <script type="text/javascript" src="jquery"></script>
+		<script type="text/javascript" src="pagenavi"></script>
     <script type="text/javascript" src="nanojs"></script>
     <script type="text/javascript" src="applicationjs"></script>
   </head>
@@ -51,7 +52,7 @@
       
      <!-- Block content main-->
       
-      <div id="wrap-main" class="clearfix">
+      <div id="wrap-main" class="clearfix pagenavi">
         <section id="main-news" class="t0">
           <div id="content-payment-news"></div>
           <div id="content-guarantee-news"></div>
@@ -59,7 +60,7 @@
         </section>
         <section id="main-search" class="t1" style="display: none;">
           <h2 class="result-topics"></h2>
-          <div id="content-search"></div>
+          <div id="content-search" class='page-list' data-numperpage=15></div>
         </section>
         <div id="main-report" class="t2" style="display: none;">
             <?php include("_month.php"); ?>
@@ -80,7 +81,7 @@
       <!-- Block Footer -->
       <div class='clearfix'></div>
       <footer id="wrap-footer" class="clearfix">
-        
+				<div></div>
       </footer>
     </div>
   </body>

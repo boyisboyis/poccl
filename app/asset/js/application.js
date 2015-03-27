@@ -84,10 +84,13 @@ $(document).ready(function(){
     var data = {
       "type" : $("#select-search").val(),
       "search" : $("#input-search").val()
-    }
+    };
     searchResult(data);
   });
-  
+	
+	$("#main-news").pagenavi({showPerPage: 10, position: "center"});
+  $("#main-search").pagenavi({showPerPage: 15, position: "center"});
+	
   $("#content-payment-news, #content-guarantee-news, #content-poidnull-news").on("click", '.search-from-news', function(){
     document.location.hash = $(this).attr("href");
     var search = $(this).data('jid');
@@ -95,7 +98,7 @@ $(document).ready(function(){
     var data = {
       "type" : "job",
       "search" : search
-    }
+    };
     $("#select-search").val("job");
     searchResult(data);
   });
@@ -126,11 +129,11 @@ $(document).ready(function(){
       url : "report_options",
       cache: false,
       success: function(req){
-        if(req['status'] == true){
+        if(req['status'] === true){
           $(".report-topics").html("<i class='fa fa-check color-success'></i>Report");
-          var obj = req['obj'];
-          var reports = new Array();
-          var reports_year = new Array();
+          var obj = req["obj"];
+          var reports = [];
+          var reports_year = [];
           var str = "";
           var save_years = 0, save_month = 0;
           var i = -1, j =-1;
@@ -303,12 +306,12 @@ $(document).ready(function(){
       url : "managenews",
       cache: false,
       success: function(req){
-        if(req['status'] == true){
+        if(req['status'] === true){
           var length = req['obj'].length;
-          $("#content-poidnull-news").html("<h2 class='main-topics'>Purchase Order none</h2>");
+          $("#content-poidnull-news").html("<h2 class='main-topics'>Purchase Order none</h2><div class='page-list' data-numperpage=10></div>");
           $.each(req['obj'], function(){
             var _obj = $(this)[0];
-            $("#content-poidnull-news").append(
+            $("#content-poidnull-news > div").append(
               "<p class='p-news'>"+
               "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
               "<span class='has-arrears-at'>purchase order none</span>"+
@@ -392,7 +395,7 @@ $(document).ready(function(){
                 "<td class='td-search-term'>"+
                 "<table>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Description</td><td class='td-colon'>:</td><td class='text_underline'>"+p_content['Payment_Type']+"</td>"+
+                "<td class='text-vertical-top'>Description</td><td class='td-colon'>:</td><td class='text_underline text-vertical-top'>"+p_content['Payment_Type']+"</td>"+
                 "</tr>"+
                 "<tr>"+
                 "<td class='text-vertical-top'>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+ addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)) + ' (' +p_content['Amount_Actual_Percentage']+"%)"+"</td>"+
@@ -418,7 +421,7 @@ $(document).ready(function(){
               keySearch = "<h2 class='job-id'>"+obj['PO_No']+"</h2>"
             }
             
-            console.log(obj)
+           // console.log(obj)
             
             $("#content-search").append(
               "<article class='purchase-detail'>" +
@@ -428,15 +431,15 @@ $(document).ready(function(){
               "<section class='content-search-left'>"+
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
-              "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['JID']+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Contractor_Name']+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Name']+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Owner']+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Secrecy Agreement</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Secrecy_Agreement']+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['JID']==null?'-':obj['Job']['JID'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Contractor_Name']==null?'-':obj['Job']['Contractor_Name'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Name']==null?'-':obj['Job']['Project_Name'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Location']==null?'-':obj['Job']['Project_Location'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Owner']==null?'-':obj['Job']['Project_Owner'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Secrecy Agreement</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Secrecy_Agreement']==null?'-':obj['Job']['Secrecy_Agreement'] == 0?"NO":"YES")+"</td></tr>"+
               "</table>"+
               "<h3>Working Remark</h3>"+
-              "<p class='purchase-each-detail'><span>Start Date</span><span class='t2_desc text_underline'>"+(obj['Job']['Work_Start_Date']==null?'-':obj['Job']['Work_Start_Date'])+"</span><span>Complete Date</span><span class='t2_desc text_underline'>"+(obj['Job']['Work_Complete_Date']==null?'-':obj['Job']['Work_Complete_Date'])+"</span></p>"+
+              "<p class='purchase-each-detail'><span>Start Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Start_Date']==null?'-':obj['Job']['Work_Start_Date'])+"</span></span><span>Complete Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Complete_Date']==null?'-':obj['Job']['Work_Complete_Date'])+"</span></span></p>"+
               "</section>"+
               "<section class='content-search-right'>"+
               "<h3>PO info</h3>"+
@@ -447,9 +450,9 @@ $(document).ready(function(){
               "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['PO_Type']==null?'-':obj['Job']['PO_Type'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>PO Amount</td><td class='td-colon'>:</td><td><p class='margin-padding-0 text_underline'>"+thai_bath+"<span class='currency'>THB</span></p>"+tr_currency+"</td></tr>"+
              // tr_currency+
-              "<tr><td class='text-vertical-top'>Goveming Law</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Project_Location']+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Goveming Law</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Location']==null?'-':obj['Job']['Project_Location'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Credit Term</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Credit_Term']==null?'-':obj['Job']['Credit_Term'])+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Late Payment Financial Charges</td><td class='td-colon'>:</td><td class='text_underline'>"+obj['Job']['Late_Pay_Finan_Charge']+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Late Payment Financial Charges</td><td class='td-colon'>:</td><td class='text_underline text-vertical-top'>"+(obj['Job']['Late_Pay_Finan_Charge']==null?'-':obj['Job']['Late_Pay_Finan_Charge'] == 0?"NO":"YES")+"</td></tr>"+
               "</table>"+
               "</section>"+
               "</div>"+
