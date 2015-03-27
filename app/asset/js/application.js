@@ -339,19 +339,24 @@ $(document).ready(function(){
       url : "managenews",
       cache: false,
       success: function(req){
-        //console.log(req);
-				var length = req.length;
-          $("#content-comingsoon-news").html("<h2 class='main-topics'>Payment is coming soon</h2><div class='page-list'></div>");
-          $.each(req, function(){
-            var _obj = $(this)[0];
-            $("#content-comingsoon-news > div").append(
-              "<p class='p-news'>"+
-              "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
-              "<span class='has-arrears-at'>purchase order is nil</span>"+
-              // "<b class='news-payment'>"+_obj['Guarantee']+"</b>"+
-              "</p>"
-            );
-          });
+        console.log(req);
+				if(req['status'] === true){
+					var length = req['obj'].length;
+					$("#content-comingsoon-news").html("<h2 class='main-topics'>Payment is coming soon</h2><div class='page-list'></div>");
+					$.each(req['obj'], function(){
+						var _obj = $(this)[0];
+						$("#content-comingsoon-news > div").append(
+							"<p class='p-news'>"+
+							"<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
+							"<span class='has-arrears-at'>day to payment</span>"+
+							"<b class='news-payment'>"+_obj['Invoice_plus_credit_date']+"</b>"+
+							"</p>"
+						);
+					});
+				}
+				else {
+					console.log("false");
+				}
       }
     });
   }
