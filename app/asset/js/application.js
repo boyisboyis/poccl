@@ -340,6 +340,22 @@ $(document).ready(function(){
     });
   }
   
+  function getCheckListsAlertFeeds(){
+    $.ajaxSetup({ cache: false });
+    $.ajax({
+      type: "POST",
+			dataType: "json",
+			data : {
+			  "type" : "checkListsAlert"
+			},
+      url : "managenews",
+      cache: false,
+      success: function(req){
+        console.log(req);
+      }
+    });
+  }
+  
   function searchResult(search){
     //console.log(search);
     $.ajaxSetup({ cache: false });
@@ -548,6 +564,7 @@ $(document).ready(function(){
           getGuaranteeAlertFeeds();
           getPOIDNullAlertFeeds();
           getPaymentNearAlertFeeds();
+          getCheckListsAlertFeeds();
         break;
     }
   }
