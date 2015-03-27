@@ -36,8 +36,8 @@ class searchOptions{
 				$jid = $result[$i]->JID;
 				$job = DB::query("SELECT * FROM job WHERE job.JID = '$jid'")->get();
 				$payment = DB::query("SELECT * FROM payment WHERE payment.JID = '$jid' ORDER BY payment.Terms")->get();
-				$job[0]->Secrecy_Agreement = ($job[0]->Secrecy_Agreement == null || $job[0]->Secrecy_Agreement == false)?"NO":"YES";
-				$job[0]->Late_Pay_Finan_Charge = ($job[0]->Late_Pay_Finan_Charge == null)?"-": ($job[0]->Late_Pay_Finan_Charge == false)?"NO":"YES";
+				//$job[0]->Secrecy_Agreement = $job[0]->Secrecy_Agreement === null? null : $job[0]->Secrecy_Agreement == false || $job[0]->Secrecy_Agreement == 0?"NO":"YES";
+				//$job[0]->Late_Pay_Finan_Charge = ($job[0]->Late_Pay_Finan_Charge === null)? null : ($job[0]->Late_Pay_Finan_Charge == false || $job[0]->Late_Pay_Finan_Charge == 0)?"NO":"YES";
 				$np = count($payment);
 				for($j=0;$j<$np;$j++){
 				 	$payment[$j]->Payment_date_plan = dateTimes::calculationDate($job[0]->Credit_Term, $payment[$j]->Invoice_Date);

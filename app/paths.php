@@ -74,6 +74,10 @@ return array(
     "file" => "lib/asset/js/nanoscroller.min.js",
     "type" => "file_get_contents"
   ),
+  "pagenavi" => array(
+  	"file" => "lib/asset/js/pagenavi.js",
+	  "type" => "file_get_contents"
+  ),
   
     
     /*

@@ -209,7 +209,72 @@ button:active {
   -webkit-border-radius : 3px;
   border-radius         : 3px;
 }
+
 .nano:hover > .nano-pane, .nano-pane.active, .nano-pane.flashed {
   visibility : visible\9; /* Target only IE7 and IE8 with this hack */
   opacity    : 0.99;
+}
+
+
+
+
+/* page nave */
+.page-list {
+/*	text-align: center;*/
+}
+.page-list .div-page {
+	float: left;
+	width: 100%;
+}
+.page-list .navlist ol{
+	display: inline-block;
+	text-align: center;
+}
+.page-list .navlist > i {
+	display: inline-block;
+	cursor: pointer;
+	color: #ed8151;
+}
+
+.page-list .div-page.hide {
+	display: none;
+}
+.navlist .switch-page.fbig {
+	font-weight: bold;
+}
+.page-list .navlist {
+	clear: both;
+	padding-top: 10px;
+}
+.page-list .navlist.left{
+	text-align: left;
+}
+.page-list .navlist.right{
+	text-align: right;
+}
+.page-list .navlist.center{
+	text-align: center;
+}
+.page-list .navlist li{
+	list-style: none;
+	display: inline-block;
+	margin: 0 5px;
+}
+
+.page-list .navlist li.hide {
+	display: none;
+}
+
+.page-list .page-prevent {
+	margin-right: 10px;
+}
+
+.page-list .page-next {
+	margin-left: 10px;
+}
+
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
 }

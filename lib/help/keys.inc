@@ -9,7 +9,7 @@ class Keys {
   
   public static function encryptId($username){
     $objDateTime = new DateTime('NOW');
-    return $username."@".$objDateTime->format('Y-m-d/H:i');;
+    return md5($username."@".$objDateTime->format('Y-m-d/H:i'));
   }
 }
 

@@ -48,6 +48,11 @@ session_start();
     require('public/503.html');
     die();
   }
+
+	//echo Keys::encryptPassword("admin");
+	//echo "<br/>";
+	//echo Keys::encryptId("admin");
+	//die();
   //unset($_SESSION);
   $uri = ROUTE::getURI()->conPath();
   $db_config = parse_ini_file(__DIR__.'/config/db.ini');
