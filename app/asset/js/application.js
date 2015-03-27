@@ -308,7 +308,7 @@ $(document).ready(function(){
       success: function(req){
         if(req['status'] === true){
           var length = req['obj'].length;
-          $("#content-poidnull-news").html("<h2 class='main-topics'>Purchase Order none</h2><div class='page-list'></div>");
+          $("#content-poidnull-news").html("<h2 class='main-topics'>Purchase Order is nil</h2><div class='page-list'></div>");
           $.each(req['obj'], function(){
             var _obj = $(this)[0];
             $("#content-poidnull-news > div").append(
