@@ -244,7 +244,7 @@ $(document).ready(function(){
       success: function(req){
         if(req['status'] == true){
           var length = req['obj'].length;
-          $("#content-payment-news").html("<h2 class='main-topics'>Payments</h2>");
+          $("#content-payment-news").html("<h2 class='main-topics'>Arrears of payments</h2>");
           $.each(req['obj'], function(){
             var _obj = $(this)[0];
             $("#content-payment-news").append(
@@ -308,13 +308,13 @@ $(document).ready(function(){
       success: function(req){
         if(req['status'] === true){
           var length = req['obj'].length;
-          $("#content-poidnull-news").html("<h2 class='main-topics'>Purchase Order none</h2><div class='page-list' data-numperpage=10></div>");
+          $("#content-poidnull-news").html("<h2 class='main-topics'>Purchase Order none</h2><div class='page-list'></div>");
           $.each(req['obj'], function(){
             var _obj = $(this)[0];
             $("#content-poidnull-news > div").append(
               "<p class='p-news'>"+
               "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
-              "<span class='has-arrears-at'>purchase order none</span>"+
+              "<span class='has-arrears-at'>purchase order is nil</span>"+
               // "<b class='news-payment'>"+_obj['Guarantee']+"</b>"+
               "</p>"
             );
@@ -323,6 +323,22 @@ $(document).ready(function(){
         else{
           console.log("false");
         }
+      }
+    });
+  }
+  
+  function getPaymentNearAlertFeeds(){
+    $.ajaxSetup({ cache: false });
+    $.ajax({
+      type: "POST",
+			dataType: "json",
+			data : {
+			  "type" : "paymentsNearAlert"
+			},
+      url : "managenews",
+      cache: false,
+      success: function(req){
+        console.log(req);
       }
     });
   }
@@ -534,6 +550,7 @@ $(document).ready(function(){
           getPaymentAlertFeeds();
           getGuaranteeAlertFeeds();
           getPOIDNullAlertFeeds();
+          getPaymentNearAlertFeeds();
         break;
     }
   }

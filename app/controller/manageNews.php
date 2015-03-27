@@ -7,6 +7,7 @@ if(Check::isAjax()){
 			case "paymentsAlert" : News::paymentsAlert();
 			case "guaranteesAlert" : News::guaranteesAlert();
 			case "poidnullAlert" : News::poidnullAlert();
+			case "paymentsNearAlert" : News::paymentsNearAlert();
 			break;
 		}		
 	}
@@ -93,6 +94,47 @@ class News {
 		else{
 			echo json_encode(array("status" => false));die();
 		}
+	}
+	public static function paymentsNearAlert() {
+		$respond = array();
+		$today = date('Y-m-d');
+		$next30day = date('Y-m-d', strtotime('+30 days'));
+		$result = DB::query("SELECT payment.JID, payment.Invoice_Date, job.Credit_Term FROM payment LEFT JOIN job ON payment.JID = job.JID WHERE payment.Invoice_Date BETWEEN '" . $today . "' AND '" . $next30day . "'")->get();
+
+		if(count($result) > 0) {
+			for($count = 0; $count < count($result); $count++) {
+				if($count + 1 < count($result)) {
+					for($countIn = $count + 1; $countIn < count($result); $countIn++) {
+						if(!self::findMinDate($result[$count]->Invoice_Date, $result[$countIn]->Invoice_Date)) {
+							$temp = $result[$count];
+							$result[$count] = $result[$countIn];
+							$result[$countIn] = $temp;
+						}
+					}
+				}
+			}
+			for($count = 0; $count < count($result); $count++) {
+				if(is_null($result[$count]->Credit_Term)) {
+					$result[$count]->Credit_Term = 0;
+				}
+				if((strtotime(date('Y-m-d', strtotime($result[$count]->Invoice_Date . '+' . $result[$count]->Credit_Term . ' days'))) - strtotime(date('Y-m-d'))) >= 0) {
+					array_push($respond, array("JID" => $result[$count]->JID, "Invoice_plus_credit_date" => $result[$count]->Invoice_Date));
+				}
+			}
+			echo json_encode($respond);
+		}
+		else {
+			echo json_encode(array("status" => false));
+			die();
+		}
+	}
+	public static function findMinDate($oldMin, $check) {
+	    if(strtotime($oldMin) - strtotime($check) < 0){
+	    	return true;
+	    }
+	    else {
+	    	return false;
+	    }
 	}
 }
 
