@@ -8,6 +8,7 @@ if(Check::isAjax()){
 			case "guaranteesAlert" : News::guaranteesAlert();
 			case "poidnullAlert" : News::poidnullAlert();
 			case "paymentsNearAlert" : News::paymentsNearAlert();
+			case "checkListsAlert" : News::checkListsAlert();
 			break;
 		}		
 	}
@@ -96,7 +97,7 @@ class News {
 		}
 	}
 	public static function paymentsNearAlert() {
-		$respond = array();
+		$respond = array('obj' => array(), 'status' => true);
 		$today = date('Y-m-d');
 		$next30day = date('Y-m-d', strtotime('+30 days'));
 		$result = DB::query("SELECT payment.JID, payment.Invoice_Date, job.Credit_Term FROM payment LEFT JOIN job ON payment.JID = job.JID WHERE payment.Invoice_Date BETWEEN '" . $today . "' AND '" . $next30day . "'")->get();
@@ -113,15 +114,22 @@ class News {
 					}
 				}
 			}
+			$generate = 0;
 			for($count = 0; $count < count($result); $count++) {
 				if(is_null($result[$count]->Credit_Term)) {
 					$result[$count]->Credit_Term = 0;
 				}
 				if((strtotime(date('Y-m-d', strtotime($result[$count]->Invoice_Date . '+' . $result[$count]->Credit_Term . ' days'))) - strtotime(date('Y-m-d'))) >= 0) {
-					array_push($respond, array("JID" => $result[$count]->JID, "Invoice_plus_credit_date" => $result[$count]->Invoice_Date));
+					$respond['obj'][$generate] = array("JID" => $result[$count]->JID, "Invoice_plus_credit_date" => $result[$count]->Invoice_Date);
+					$generate += 1;
 				}
 			}
-			echo json_encode($respond);
+			if(!empty($respond['obj'])) {
+				echo json_encode($respond);
+			}
+			else {
+				echo json_encode(array("status" => false));
+			}
 		}
 		else {
 			echo json_encode(array("status" => false));
@@ -135,6 +143,27 @@ class News {
 	    else {
 	    	return false;
 	    }
+	}
+	public static function checkListsAlert() {
+		// $result = DB::query("SELECT job.JID FROM job WHERE job.Check_List = '0'")->get();
+		// $n = count($result);
+		// if($n > 0){
+		// 	$return = array('obj' => array(), 'status' => true);
+		// 	for($i = 0; $i < $n; $i++){
+		// 		$return['obj'][$i] = $result[$i];
+		// 	}
+		//   	sort($return['obj']);
+		//   	if(count($return['obj']) > 0) {
+		//   		echo json_encode($return);
+		//   	}
+		//   	else {
+		//   		echo json_encode(array("status" => false));die();
+		//   	}
+		//   	die();
+		// }
+		// else{
+		// 	echo json_encode(array("status" => false));die();
+		// }
 	}
 }
 
