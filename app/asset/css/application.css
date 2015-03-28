@@ -353,6 +353,7 @@ a:hover, a:focus {
 #wrap-footer div {
 	border: 3px solid #FFF;
 	width: 100%;
+	height: 30px;
 }
 /*
 * Resposive design
