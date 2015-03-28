@@ -4,11 +4,11 @@ if(Check::isAjax()){
 	if(isset($_POST["type"]) && !empty($_POST["type"])) {
 		$type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING);
 		switch($type){
-			case "paymentsAlert" : News::paymentsAlert();
-			case "guaranteesAlert" : News::guaranteesAlert();
-			case "poidnullAlert" : News::poidnullAlert();
-			case "paymentsNearAlert" : News::paymentsNearAlert();
-			case "checkListsAlert" : News::checkListsAlert();
+			case "paymentsAlert" : News::paymentsAlert();break;
+			case "guaranteesAlert" : News::guaranteesAlert();break;
+			case "poidnullAlert" : News::poidnullAlert();break;
+			case "paymentsNearAlert" : News::paymentsNearAlert();break;
+			case "checkListsAlert" : News::checkListsAlert();break;
 			break;
 		}		
 	}

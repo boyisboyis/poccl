@@ -91,6 +91,9 @@ $(document).ready(function(){
 	$("#content-poidnull-news").pagenavi({showPerPage: 10, position: "center"});
   $("#main-search").pagenavi({showPerPage: 15, position: "center"});
 	$("#content-comingsoon-news").pagenavi({showPerPage: 10, position: "center"});
+	$("#content-checklistnil-news").pagenavi({showPerPage: 10, position: "center"});
+	$("#content-payment-news").pagenavi({showPerPage: 10, position: "center"});
+	$("#content-guarantee-news").pagenavi({showPerPage: 10, position: "center"});
 	
   $("#content-payment-news, #content-guarantee-news, #content-poidnull-news").on("click", '.search-from-news', function(){
     document.location.hash = $(this).attr("href");
@@ -245,10 +248,10 @@ $(document).ready(function(){
       success: function(req){
         if(req['status'] == true){
           var length = req['obj'].length;
-          $("#content-payment-news").html("<h2 class='main-topics'>Arrears of payments</h2>");
+          $("#content-payment-news").html("<h2 class='main-topics'>Arrears of payments</h2><div class='page-list'></div>");
           $.each(req['obj'], function(){
             var _obj = $(this)[0];
-            $("#content-payment-news").append(
+            $("#content-payment-news > div").append(
               "<p class='p-news'>"+
               "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
               "<span class='has-arrears-at'>has arrears at</span>"+
@@ -277,10 +280,10 @@ $(document).ready(function(){
       success: function(req){
         if(req['status'] == true){
           var length = req['obj'].length;
-          $("#content-guarantee-news").html("<h2 class='main-topics'>Gurantees</h2>");
+          $("#content-guarantee-news").html("<h2 class='main-topics'>Gurantees</h2><div class='page-list'></div>");
           $.each(req['obj'], function(){
             var _obj = $(this)[0];
-            $("#content-guarantee-news").append(
+            $("#content-guarantee-news > div").append(
               "<p class='p-news'>"+
               "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
               "<span class='has-arrears-at'>has until at</span>"+
@@ -329,6 +332,7 @@ $(document).ready(function(){
   }
   
   function getPaymentNearAlertFeeds(){
+		console.log("test");
     $.ajaxSetup({ cache: false });
     $.ajax({
       type: "POST",
@@ -339,7 +343,7 @@ $(document).ready(function(){
       url : "managenews",
       cache: false,
       success: function(req){
-        console.log(req);
+
 				if(req['status'] === true){
 					var length = req['obj'].length;
 					$("#content-comingsoon-news").html("<h2 class='main-topics'>Payment is coming soon</h2><div class='page-list'></div>");
@@ -372,7 +376,24 @@ $(document).ready(function(){
       url : "managenews",
       cache: false,
       success: function(req){
-        console.log(req);
+        //console.log(req);
+				if(req['status'] === true){
+					var length = req['obj'].length;
+					$("#content-checklistnil-news").html("<h2 class='main-topics'>Checklist is nil</h2><div class='page-list'></div>");
+					$.each(req['obj'], function(){
+						var _obj = $(this)[0];
+						$("#content-checklistnil-news > div").append(
+							"<p class='p-news'>"+
+							"<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
+							"<span class='has-arrears-at'>checklist is nil</span>"+
+							//"<b class='news-payment'>"+_obj['Invoice_plus_credit_date']+"</b>"+
+							"</p>"
+						);
+					});
+				}
+				else {
+					console.log("false");
+				}
       }
     });
   }
