@@ -28,6 +28,21 @@ $(document).ready(function(){
        $("#report-month-unall").hide();
      }
   });
+	
+	$("#report-update-years").on("click", ".report-year", function(e){
+		 var checkbox = $(this).find("input");
+		 console.log($(this));
+     if(checkbox.prop("checked")){
+       checkbox.prop("checked", false);
+       $(this).removeClass("shadow");
+       $(this).find(".fa").removeClass("fa-check-circle-o").addClass("fa-circle-o");
+     } 
+     else{
+       checkbox.prop("checked", true);
+       $(this).addClass("shadow");
+       $(this).find(".fa").removeClass("fa-circle-o").addClass("fa-check-circle-o");
+     }
+	});
   
   $("#btn-show-hide-report").on("click", function(e) {
      $("#wrap-report-show").slideToggle();
@@ -630,9 +645,11 @@ $(document).ready(function(){
           var str = "";
           for(i=0; i<=diff;i++){
             var checked = i==0?"checked=checked":"";
+						var class_check = i==0?"fa-check-circle-o":"fa-circle-o";
             var y = min + i;
-            str += "<p>"+
-            "<input id='reports_year_"+y+"' type='checkbox' name='reports_year' class='reports_year' value='"+y+"' "+checked+"  />"+
+            str += "<p class='report-year shadow'>"+
+						"<i class='fa "+class_check+"'></i>"+
+            "<input id='reports_year_"+y+"' type='checkbox' name='reports_year' class='reports_year' value='"+y+"' "+checked+"  style='display:none' />"+
             "<label for='reports_year_"+y+"'>"+y+"</label>"
             "</p>"
           }
