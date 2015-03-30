@@ -10,6 +10,31 @@
     <button id="search-now">search</button>
 		<button class="admin-search-delete" style="margin-right: 200px;">delete test</button>
   </div>
+	<div id="admin-search-box-content">
+		
+	</div>
+	<div id="admin-search-box-alert" style="display: none;">
+		<section>
+			<h3>Are you sure?</h3>
+			<div>
+				<button>Yes</button>
+				<button>NO</button>
+			</div>
+		</section>
+	</div>
+</div>
+<!-- <div id="admin-search" class='t1'>
+  <div id='admin-search-box-search'>
+    <div id="front-message">Search By : </div>
+    <select id="select-search">
+      <option value="contract">Contract Name</option>
+      <option value="job">Job No</option>
+      <option value="poid">PO No</option>
+    </select>
+    <input type="search" id="input-search" name="input-search" />
+    <button id="search-now">search</button>
+		<button class="admin-search-delete" style="margin-right: 200px;">delete test</button>
+  </div>
   <table id="admin-search-box-result">
     <thead>
       <tr>
@@ -24,4 +49,4 @@
       
     </tbody>
   </table>
-</div>
+</div> -->
