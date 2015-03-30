@@ -45,7 +45,7 @@
       </header>
 
       <div id="wrap-content">
-        
+        <?php include('_add.php'); ?>
         <?php include('_search.php'); ?>
       </div>
     </div>

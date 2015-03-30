@@ -6,6 +6,10 @@ $(document).ready(function(){
     document.location.hash = $(this).attr("href");
     getHash();
   });
+	
+	 $("#admin-search-box-content").on("click", ".job-id-toggle", function(){
+    $(this).parent().next().slideToggle();
+  });
   
   $("#search-now").on("click", function(){
     var data = {
@@ -186,7 +190,7 @@ $(document).ready(function(){
 	
  	$('#admin-search-box-result').on('click', '.admin-search-delete', function() { 
 /* 	$('.admin-search-delete').on('click', function() { */
-		$.ajax({
+/* 		$.ajax({
 			method: "POST",
 			url: "adminsController",
 			data: {
@@ -196,7 +200,7 @@ $(document).ready(function(){
 			success: function(data) {
 				console.log(data);
 			}
-		});
+		}); */
 	});
   
   function getHash(){
@@ -245,44 +249,192 @@ $(document).ready(function(){
     }
   }
   
-  function searchResult(data){
+  function searchResult(search){
+    $.ajaxSetup({ cache: false });
     $.ajax({
-        method: "POST",
-        url: "adminsController",
-        dataType: "json",
-        data: {
-          action: "search",
-          params: data
-        },
-        success: function(response) {
-          if(response['status'] == true){//admin-search-box-result
-            var data = response['obj'];
-            var str = "";
-            $(data).each(function(){
-              str += "<tr>" +
-                "<td>"+this.JID+"</td>"+
-                "<td>"+this.Contractor_Name+"</td>"+
-                "<td>"+(this.PO_No==null?'-':this.PO_No)+"</td>"+
-                "<td><a>Edit</a></td>"+
-                "<td><a>Delete</a></td>"+
-              "</tr>;";
-            });
-            if(str != "") {
-              $("#admin-search-box-result tbody").html("");
-              $("#admin-search-box-result tbody").append(str);
+      type: "POST",
+      dataType: "json",
+      data: search,
+      url : "search_options",
+      cache: false,
+      success: function(req){
+        $("#admin-search-box-content").html("");
+        if(req['status'] == true){
+          $(".result-topics").html("<i class='fa fa-check color-success'></i>Result");
+          $.each(req['obj'], function(){
+            var obj = $(this)[0];
+            var table_guarantee = "<p class='p-warning'>Guarantee is not set</p>";
+            var table_payment = "<p class='p-warning'>Payment is not set</p>";
+            var n = obj['Guarantee'].length;
+            var thai_bath = obj['Job']['Contract_Value_THB'];
+            var tr_currency = "";
+            if(thai_bath == "" || thai_bath == null){
+              thai_bath = obj['job']['Contract_Value_Rate'] * obj['job']['Contract_Value_Other'];
             }
-            console.log(str);
-          }
-          else{
+            if(obj['Job']['Contract_Value_Type'] != "" && obj['Job']['Contract_Value_Type'] != null){
+              other_currency = addCommas(parseFloat(obj['Job']['Contract_Value_Other']).toFixed(2));
+              tr_currency = "<p class='margin-padding-0 text_underline'>"+other_currency+"<span class='currency'>"+obj['Job']['Contract_Value_Type']+"</span></p><p class='margin-padding-0 text_underline'><span>Rate </span>"+obj['Job']['Contract_Value_Rate']+"</p>";
+            }
+            thai_bath = addCommas(parseFloat(thai_bath).toFixed(2));
+            if(n > 0){
+              var tr = "";
+              for(var i=0;i<n;i++){
+                var g_content = obj['Guarantee'][i];
+                if(g_content['Amount_Actual_Percentage'] != null && g_content['Amount_Actual_Price'] != null){
+                  var g_amount = (g_content['Amount_Actual_Percentage'] == "" || g_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)):g_content['Amount_Actual_Percentage']+"%";
+                }
+                else{
+                  var g_amount = '-';
+                }
+                 tr += "<tr>"+
+                "<td class='text-vertical-top'>Term : "+g_content['Terms']+"</td>"+
+                "<td class='td-search-term'>"+
+                "<table>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Description</td><td class='td-colon'>:</td><td class='text_underline'>"+g_content['Guarantee_Type']+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+g_amount+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Start Plan</td><td class='td-colon'>:</td><td><span class='text_underline' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></td>"+
+                "</tr>"+
+                "</table>"+
+                "</td>"+
+                "</tr>";
+              }
+              table_guarantee = "<table border=0 style='width: 100%;' class='purchase-each-detail'>"+tr+"</table>";
+            }
+            n = obj['Payment'].length; 
+            if(n > 0){
+              var tr = "";
+              for(var i=0;i<n;i++){
+                var p_content = obj['Payment'][i];
+               // var p_amount = (p_content['Amount_Actual_Percentage'] == "" || p_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)):p_content['Amount_Actual_Percentage']+"%";
+                tr += "<tr>"+
+                "<td style='vertical-align: text-top;'>Term : "+p_content['Terms']+"</td>"+
+                "<td class='td-search-term'>"+
+                "<table>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Description</td><td class='td-colon'>:</td><td class='text_underline text-vertical-top'>"+p_content['Payment_Type']+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+ addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)) + ' (' +p_content['Amount_Actual_Percentage']+"%)"+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon'>:</td><td class='text_underline'>"+p_content['Payment_date_plan']+"</td>"+
+                "</tr>"+
+                "</table>"+
+                "</td>"+
+                "</tr>";
+              }
+              table_payment = "<table border=0 style='width: 100%;' class='purchase-each-detail'>"+tr+"</table>";
+            }
             
-          }
-          console.log(response);
+            var keySearch;
+            if(search['type'] == "contract") {
+              keySearch = obj['Contractor_Name'];
+            }
+            else if(search['type'] == "job") {
+              keySearch = obj['JID'];
+            }
+            else {
+              keySearch = obj['PO_No'];
+            }
+            
+           // console.log(obj)
+            
+            $("#admin-search-box-content").append(
+              "<article class='purchase-detail'>" +
+              "<h2 class='job-id'><span class='job-id-toggle'>"+keySearch+"</span>"+
+							"<i class='fa fa-trash-o admin-search-delete' alt='delete'></i>"+
+							"</h2>"+
+              "<div style='width: 100%;display:none;'>"+
+              "<div style='width: 100%'>"+
+              "<section class='content-search-left'>"+
+              "<h3>Project Summary</h3>"+
+              "<table class='purchase-each-detail'>"+
+              "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['JID']==null?'-':obj['Job']['JID'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Contractor_Name']==null?'-':obj['Job']['Contractor_Name'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Name']==null?'-':obj['Job']['Project_Name'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Location']==null?'-':obj['Job']['Project_Location'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Owner']==null?'-':obj['Job']['Project_Owner'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Secrecy Agreement</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Secrecy_Agreement']==null?'-':obj['Job']['Secrecy_Agreement'] == 0?"NO":"YES")+"</td></tr>"+
+              "</table>"+
+              "<h3>Working Remark</h3>"+
+              "<p class='purchase-each-detail'><span>Start Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Start_Date']==null?'-':obj['Job']['Work_Start_Date'])+"</span></span><span>Complete Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Complete_Date']==null?'-':obj['Job']['Work_Complete_Date'])+"</span></span></p>"+
+              "</section>"+
+              "<section class='content-search-right'>"+
+              "<h3>PO info</h3>"+
+              //"<p class='purchase-each-detail' style='margin-left: 12px'><span>PO no</span><span class='t2_desc text_underline'>"+obj['PO_No']+"</span><span>Date</span><span class='t2_desc text_underline'>"+obj['Job']['PO_Date']+"</span></p>"+
+              "<table class='purchase-each-detail'>"+
+              "<tr><td class='text-vertical-top'>PO no.</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['PO_No']==null?'-':obj['PO_No'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>PO Date</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['PO_Date']==null?'-':obj['Job']['PO_Date'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['PO_Type']==null?'-':obj['Job']['PO_Type'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>PO Amount</td><td class='td-colon'>:</td><td><p class='margin-padding-0 text_underline'>"+thai_bath+"<span class='currency'>THB</span></p>"+tr_currency+"</td></tr>"+
+             // tr_currency+
+              "<tr><td class='text-vertical-top'>Goveming Law</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Location']==null?'-':obj['Job']['Project_Location'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Credit Term</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Credit_Term']==null?'-':obj['Job']['Credit_Term'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Late Payment Financial Charges</td><td class='td-colon'>:</td><td class='text_underline text-vertical-top'>"+(obj['Job']['Late_Pay_Finan_Charge']==null?'-':obj['Job']['Late_Pay_Finan_Charge'] == 0?"NO":"YES")+"</td></tr>"+
+              "</table>"+
+              "</section>"+
+              "</div>"+
+              "<div class='clearfix'></div>"+
+              "<hr>"+
+              "<div style='width:100%'>"+
+              "<section class='content-search-left'>"+
+              "<h3>Payment Terms</h3>"+
+              table_payment+
+              "</section>"+
+              "<section class='content-search-right'>"+
+              "<h3>Bank Guarantee</h3>"+
+              table_guarantee+
+              "</section>"+
+              "</div>"+
+              "<div class='clearfix' style='height: 10px'></div>"+
+              "<hr style='border-color:#ed8151; margin-bottom: 40px;'>"+
+              "</article>"+
+              "</div>"
+            );
+          });
         }
-      });
+        else{
+          $(".result-topics").html("<i class='fa fa-times color-danger'></i>Result");
+          var searchType = "";
+          if(search['type'] == 'contract') {
+            searchType = "Contract Name ";
+          }
+          else if(search['type'] == 'job') {
+            searchType = "Job ID ";
+          }
+          else {
+            searchType = "PO ID ";
+          }
+          $("#content-search").html(
+            searchType +
+            "<span class='highlight-text'>" +
+            search['search'] +
+            "</span>" +
+            " not found !! Please, Input again."
+          );
+          console.log("false");
+        }
+      }
+    });
   }
 });
 
-
+  function addCommas(nStr){
+		nStr += '';
+		x = nStr.split('.');
+		x1 = x[0];
+		x2 = x.length > 1 ? '.' + x[1] : '';
+		var rgx = /(\d+)(\d{3})/;
+		while (rgx.test(x1)) {
+			x1 = x1.replace(rgx, '$1' + ',' + '$2');
+		}
+		return x1 + x2;
+	}
 
 
 (function($){

@@ -62,7 +62,7 @@
         </section>
         <section id="main-search" class="t1" style="display: none;">
           <h2 class="result-topics"></h2>
-          <div id="content-search" class='page-list' data-numperpage=15></div>
+          <div id="content-search" class='page-list'></div>
         </section>
         <div id="main-report" class="t2" style="display: none;">
             <?php include("_month.php"); ?>
