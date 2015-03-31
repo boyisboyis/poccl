@@ -209,11 +209,24 @@ div#content-article {
 	position: absolute;
 	z-index: 9998;
 	width: 500px;
-	height: 300px;
+	height: 200px;
 	top: 50%;
 	left: 50%;
 	margin-left: -250px;
-	margin-top: -150px;
+	margin-top: -100px;
 	background-color: #ecf0f1;
 	border-radius: 10px;
+}
+
+#admin-search-box-alert h3 {
+	text-align: center;
+	margin-top: 50px;
+	font-size: 1.5em;
+}
+#admin-search-box-alert div {
+	text-align: center;
+}
+#admin-search-box-alert button {
+	position: static;
+	
 }

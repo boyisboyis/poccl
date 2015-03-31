@@ -48,6 +48,13 @@
         <?php include('_add.php'); ?>
         <?php include('_search.php'); ?>
       </div>
+			
+			<!--Loading-->
+      
+      <div class='ajax-loading' style="display: none;">
+        <i class="fa fa-refresh fa-spin"></i>
+      </div>
+			
     </div>
   </div>
 </body>

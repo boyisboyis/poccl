@@ -1,5 +1,7 @@
 $(document).ready(function(){
   var hash_str = ["#add", "#search", "#payment", "#guarantee"];
+	var delete_jid = "";
+	var delete_index = "";
   getHash();
   
   $(".sub-menu").on("click", function(){
@@ -188,7 +190,10 @@ $(document).ready(function(){
     return false;
   });
 	
- 	$('#admin-search-box-result').on('click', '.admin-search-delete', function() { 
+ 	$('#admin-search-box-content').on('click', '.admin-search-delete', function() { 
+		delete_jid = $(this).data('jid');
+		delete_index = $(this).data("index");
+		$("#admin-search-box-alert").show();
 /* 	$('.admin-search-delete').on('click', function() { */
 /* 		$.ajax({
 			method: "POST",
@@ -201,6 +206,35 @@ $(document).ready(function(){
 				console.log(data);
 			}
 		}); */
+	});
+	
+	$("#confirm-yes").on("click", function() {
+			$.ajax({
+				method: "POST",
+				url: "adminsController",
+				dataType: "json",
+				data: {
+					action: "delete",
+					params: delete_jid
+			},
+			success: function(data) {
+				if(data['status']){
+					$("#"+delete_index).remove();
+				}
+				$("#confirm-no").click();
+				console.log(data);
+			},
+			error: function (error){
+				$("#confirm-no").click();
+			}
+		});
+			
+	});
+	
+	$("#confirm-no").on("click", function() {
+		delete_jid = "";
+		delete_index = "";
+		$("#admin-search-box-alert").hide();
 	});
   
   function getHash(){
@@ -261,6 +295,7 @@ $(document).ready(function(){
         $("#admin-search-box-content").html("");
         if(req['status'] == true){
           $(".result-topics").html("<i class='fa fa-check color-success'></i>Result");
+					var index = -1;
           $.each(req['obj'], function(){
             var obj = $(this)[0];
             var table_guarantee = "<p class='p-warning'>Guarantee is not set</p>";
@@ -343,11 +378,11 @@ $(document).ready(function(){
             }
             
            // console.log(obj)
-            
+            index++;
             $("#admin-search-box-content").append(
-              "<article class='purchase-detail'>" +
+              "<article class='purchase-detail' id='serach-"+index+"'>" +
               "<h2 class='job-id'><span class='job-id-toggle'>"+keySearch+"</span>"+
-							"<i class='fa fa-trash-o admin-search-delete' alt='delete'></i>"+
+							"<i class='fa fa-trash-o admin-search-delete' data-jid='"+obj['Job']['JID']+"' data-index='serach-"+index+"'></i>"+
 							"</h2>"+
               "<div style='width: 100%;display:none;'>"+
               "<div style='width: 100%'>"+
@@ -422,6 +457,11 @@ $(document).ready(function(){
       }
     });
   }
+	$( document ).ajaxStart(function() {
+   $(".ajax-loading").show();
+  }).ajaxComplete(function() {
+   $(".ajax-loading").hide();
+  });
 });
 
   function addCommas(nStr){

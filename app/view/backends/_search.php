@@ -8,7 +8,6 @@
     </select>
     <input type="search" id="input-search" name="input-search" />
     <button id="search-now">search</button>
-		<button class="admin-search-delete" style="margin-right: 200px;">delete test</button>
   </div>
 	<div id="admin-search-box-content">
 		
@@ -17,8 +16,8 @@
 		<section>
 			<h3>Are you sure?</h3>
 			<div>
-				<button>Yes</button>
-				<button>NO</button>
+				<button id="confirm-yes">Yes</button>
+				<button id="confirm-no">NO</button>
 			</div>
 		</section>
 	</div>
