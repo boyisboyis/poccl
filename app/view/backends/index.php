@@ -55,6 +55,11 @@
         <i class="fa fa-refresh fa-spin"></i>
       </div>
 			
+			<!---Save--->
+			<div id="show-save" style="display: none;">
+				<p>Save</p>
+			</div>
+			
     </div>
   </div>
 </body>

@@ -228,5 +228,14 @@ div#content-article {
 }
 #admin-search-box-alert button {
 	position: static;
-	
 }
+
+#show-save {
+	position: fixed;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	text-align: center;
+	color: green;
+}
+
