@@ -106,7 +106,11 @@
 		}
 		
 		public static function update($params) {
-		    $sql_po_asso = "UPDATE po_asso SET ";
+		    $sql_update = "UPDATE " . $params['table'] . " SET " . $params['table'] . "." . $params['type'] . " = '" . $params['value'] . "' WHERE " . $params['table'] . ".jid" . " = '" . $params['jid'] . "'";
+		    DB::puts($sql_update);
+		    
+		    $sql_select_check = "";
+		    
 		    print_r($params);
 		}
         
