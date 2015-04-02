@@ -157,12 +157,6 @@ $(document).ready(function(){
 		console.log("save");
 		$("#show-save p").html("Saving").show();
 		$("#show-save").show();
-		setTimeout(function(){
-			$("#show-save p").html("Save");
-			setTimeout(function(){
-				$("#show-save").hide();
-				}, 2000);
-		}, 5000);
 		$.ajax({
 		  method: 'POST',
 		  url: "adminsController",
@@ -177,6 +171,10 @@ $(document).ready(function(){
       },
       success: function(data) {
         console.log(data);
+	    	$("#show-save p").html("Saved");
+	    	setTimeout(function(){
+				  $("#show-save").hide();
+				}, 2000);
       }
 		});
 	}
@@ -456,7 +454,7 @@ $(document).ready(function(){
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
               "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td><input name='job_no-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='JID' class='input-readonly' type='text' value='"+(obj['Job']['JID']==null?'':obj['Job']['JID'])+"' readonly='readonly'></td></tr>"+
-              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td><input name='contractor_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contractor_Name' data-table='po_asso'  class='input-readonly' type='text' value='"+(obj['Job']['Contractor_Name']==null?'':obj['Job']['Contractor_Name'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td><input name='contractor_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contractor_Name' data-table='po_asso'  class='input-readonly' type='text' value='"+(obj['Contractor_Name']==null?'':obj['Contractor_Name'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td><input name='project_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Name' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Name']==null?'':obj['Job']['Project_Name'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td><input name='project_location-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Location' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Location']==null?'':obj['Job']['Project_Location'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon'>:</td><td><input name='project_owner_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Owner' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Owner']==null?'':obj['Job']['Project_Owner'])+"' readonly='true'></td></tr>"+
