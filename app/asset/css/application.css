@@ -64,17 +64,7 @@ a:hover, a:focus {
 	color: #aca89a;
 }
 
-#wrap-nav{
-	width: 100%;
-	padding: 5px 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  text-align: right;
-  background-color: #333;
-  z-index: 999;
-  font-size: 1em;
-}
+
 
 #wrap-search{
   width: 100%;
@@ -113,16 +103,7 @@ a:hover, a:focus {
 
 .nano > .nano-pane > .nano-slider { background: red; }
 
-/*
-* Menu navigation
-*/
-.sub-menu {
-	margin: 0 10px;
-}
 
-.sub-menu .fa {
-	margin: 0 5px 0 0;
-}
 
 
 /*

@@ -34,7 +34,8 @@
     <div id="content-article">
       <nav id="wrap-nav">
         <ul>
-          <li><i class="fa fa-power-off"></i><a href="logout">Logout</a>
+					<li><a href="logout"><i class="fa fa-power-off"></i><a href="logout">Logout</a>
+					<li><a href="home"><i class="fa fa-home"></i>Home</a>
           </li>
         </ul>
       </nav>
