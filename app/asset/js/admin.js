@@ -464,7 +464,7 @@ $(document).ready(function(){
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
 
-              "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td><input name='job_no-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='JID' class='input-readonly' type='text' value='"+(obj['Job']['JID']==null?'':obj['Job']['JID'])+"' readonly='readonly'></td></tr>"+
+              "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td>"+(obj['Job']['JID']==null?'':obj['Job']['JID'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td><input name='contractor_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contractor_Name' data-table='po_asso'  class='input-readonly' type='text' value='"+(obj['Contractor_Name']==null?'':obj['Contractor_Name'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td><input name='project_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Name' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Name']==null?'':obj['Job']['Project_Name'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td><input name='project_location-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Location' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Location']==null?'':obj['Job']['Project_Location'])+"' readonly='true'></td></tr>"+
