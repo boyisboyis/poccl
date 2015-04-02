@@ -518,7 +518,7 @@ $(document).ready(function(){
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
               "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['JID']==null?'-':obj['Job']['JID'])+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Contractor_Name']==null?'-':obj['Job']['Contractor_Name'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Contractor_Name']==null?'-':obj['Contractor_Name'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Name']==null?'-':obj['Job']['Project_Name'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Location']==null?'-':obj['Job']['Project_Location'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Owner']==null?'-':obj['Job']['Project_Owner'])+"</td></tr>"+
