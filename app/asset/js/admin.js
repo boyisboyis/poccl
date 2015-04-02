@@ -341,11 +341,13 @@ $(document).ready(function(){
       url : "search_options",
       cache: false,
       success: function(req){
+				var jobj = JSON.parse(JSON.stringify(req));
+				//console.log(j.status);
         $("#admin-search-box-content").html("");
-        if(req['status'] == true){
+        if(jobj.status === true){
           $(".result-topics").html("<i class='fa fa-check color-success'></i>Result");
 					var index = -1;
-          $.each(req['obj'], function(){
+          $.each(jobj.obj, function(){
             var obj = $(this)[0];
             var table_guarantee = "<p class='p-warning'>Guarantee is not set</p>";
             var table_payment = "<p class='p-warning'>Payment is not set</p>";

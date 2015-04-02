@@ -17,13 +17,7 @@
   <body>
     <div id="wrapper">
       
-      <!-- button link to menu -->
-      
-      <nav id="wrap-nav" class="clearfix">
-        <a class="sub-menu" href="#home"><i class="fa fa-home"></i>Home</a>
-        <a class="sub-menu" href="#search"><i class="fa fa-search"></i>Search</a>
-        <a class="sub-menu" href="#report"><i class="fa fa-file-text-o"></i>Report</a>
-      </nav>
+      <?php include_once(__DIR__.'/../layout/nav_top.php'); ?>
       
       <!-- Block header -->
       
