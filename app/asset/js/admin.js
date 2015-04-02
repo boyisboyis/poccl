@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var hash_str = ["#add", "#search", "#payment", "#guarantee"];
+  var hash_str = ["#add", "#search", "#update_status", "#config_type", "#add_user" ];
 	var delete_jid = "";
 	var delete_index = "";
 	
@@ -341,13 +341,16 @@ $(document).ready(function(){
   function init(index){
     switch (index) {
       case 0:
-        $(".t1").hide();
+        $(".t1, .t4").hide();
         $(".t0").show();
         break;
       case 1:
-        $(".t0").hide();
+        $(".t0, .t4").hide();
         $(".t1").show();
         break;
+      case 4:
+        $(".t0, .t1").hide();
+        $(".t4").show();
       default:
         // code
     }
