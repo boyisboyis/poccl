@@ -21,13 +21,20 @@
   <div id="wrapper-admin">
     <nav id="content-nav">
       <ol>
-        <li><a href="#add" class='sub-menu'><i class="fa fa-plus"></i>Add</a>
+        <li>
+          <a href="#add" class='sub-menu'><i class="fa fa-plus"></i></a>
         </li>
-        <li><a href="#search" class='sub-menu'><i class="fa fa-search"></i>Search</a>
+        <li>
+          <a href="#search" class='sub-menu'><i class="fa fa-search"></i></a>
         </li>
-        <li><a href="#payment" class='sub-menu'>Payment Status</a>
+        <li>
+          <a href="#update_status" class='sub-menu'><i class="fa fa-upload"></i></a>
         </li>
-        <li><a href="#guarantee" class='sub-menu'>Guarantee Status</a>
+        <li>
+          <a href="#config_type" class='sub-menu'><i class="fa fa-wrench"></i></i></a>
+        </li>
+        <li>
+          <a href="#add_user" class='sub-menu'><i class="fa fa-user-plus"></i></a>
         </li>
       </ol>
     </nav>
@@ -48,6 +55,7 @@
       <div id="wrap-content">
         <?php include('_add.php'); ?>
         <?php include('_search.php'); ?>
+        <?php include('_add_user.php'); ?>
       </div>
 			
 			<!--Loading-->
