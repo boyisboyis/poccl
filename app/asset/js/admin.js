@@ -280,7 +280,7 @@ $(document).ready(function(){
 	
 	$("#confirm-yes").on("click", function() {
 			$.ajax({
-			  dataType: 'json'
+			  dataType: 'json',
 				method: "POST",
 				url: "adminsController",
 				dataType: "json",
@@ -463,7 +463,7 @@ $(document).ready(function(){
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
               "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td><input name='job_no-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='jid' class='input-readonly' type='text' value='"+(obj['Job']['JID']==null?'':obj['Job']['JID'])+"' readonly='readonly'></td></tr>"+
-              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td><input name='contractor_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='contractor_name'  class='input-readonly' type='text' value='"+(obj['Job']['Contractor_Name']==null?'':obj['Job']['Contractor_Name'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td><input name='contractor_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='contractor_name'  class='input-readonly' type='text' value='"+(obj['Contractor_Name']==null?'':obj['Contractor_Name'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td><input name='project_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='project_name' class='input-readonly' type='text' value='"+(obj['Job']['Project_Name']==null?'':obj['Job']['Project_Name'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td><input name='project_location-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='project_location' class='input-readonly' type='text' value='"+(obj['Job']['Project_Location']==null?'':obj['Job']['Project_Location'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon'>:</td><td><input name='project_owner_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='project_owner_name' class='input-readonly' type='text' value='"+(obj['Job']['Project_Owner']==null?'':obj['Job']['Project_Owner'])+"' readonly='true'></td></tr>"+
