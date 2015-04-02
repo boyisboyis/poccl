@@ -158,6 +158,7 @@ $(document).ready(function(){
 		$("#show-save p").html("Saving").show();
 		$("#show-save").show();
 		$.ajax({
+		  dataType: 'json',
 		  method: 'POST',
 		  url: "adminsController",
       data: {
@@ -171,7 +172,12 @@ $(document).ready(function(){
       },
       success: function(data) {
         console.log(data);
-	    	$("#show-save p").html("Saved");
+        if(data['status'] == true) {
+  	    	$("#show-save p").html("Saved");
+        }
+        else {
+          $("#show-save p").html("Failed");
+        }
 	    	setTimeout(function(){
 				  $("#show-save").hide();
 				}, 2000);
@@ -251,6 +257,7 @@ $(document).ready(function(){
     console.log('====================================');
     if(checkInput) {
       $.ajax({
+        dataType: 'json',
         method: "POST",
         url: "adminsController",
         data: {
@@ -273,6 +280,7 @@ $(document).ready(function(){
 	
 	$("#confirm-yes").on("click", function() {
 			$.ajax({
+			  dataType: 'json'
 				method: "POST",
 				url: "adminsController",
 				dataType: "json",
