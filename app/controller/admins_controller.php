@@ -6,7 +6,8 @@
     		switch($action){
     			case "new" : adminController::create($params);break;
     			case "search" : adminController::search($params);break;
-					case "delete" : adminController::delete($params);break;
+				case "delete" : adminController::delete($params);break;
+				case "update" : adminController::update($params);break;
     		}		
     	}
     }
@@ -88,21 +89,30 @@
             echo json_encode(array("status" => true, "obj" => $result));
         }
 			
-			public static function delete($params) {
-				$sql_po_asso = "DELETE FROM po_asso WHERE po_asso.JID = '$params'";
-				DB::puts($sql_po_asso);
-				
-				$sql_job = "DELETE FROM job WHERE job.JID = '$params'";
-				DB::puts($sql_job);
-				
-				$sql_payment = "DELETE FROM payment WHERE payment.JID = '$params'";
-				DB::puts($sql_payment);
-				
-				$sql_guarantee = "DELETE FROM guarantee WHERE guarantee.JID = '$params'";
-				DB::puts($sql_guarantee);
-				
-				echo json_encode(array("status" => true));
-			}
+		public static function delete($params) {
+			$sql_po_asso = "DELETE FROM po_asso WHERE po_asso.JID = '$params'";
+			DB::puts($sql_po_asso);
+			
+			$sql_job = "DELETE FROM job WHERE job.JID = '$params'";
+			DB::puts($sql_job);
+			
+			$sql_payment = "DELETE FROM payment WHERE payment.JID = '$params'";
+			DB::puts($sql_payment);
+			
+			$sql_guarantee = "DELETE FROM guarantee WHERE guarantee.JID = '$params'";
+			DB::puts($sql_guarantee);
+			
+			echo json_encode(array("status" => true));
+		}
+		
+		public static function update($params) {
+		    $sql_update = "UPDATE " . $params['table'] . " SET " . $params['table'] . "." . $params['type'] . " = '" . $params['value'] . "' WHERE " . $params['table'] . ".jid" . " = '" . $params['jid'] . "'";
+		    DB::puts($sql_update);
+		    
+		    $sql_select_check = "";
+		    
+		    print_r($params);
+		}
         
         public static function nullValue($str) {
             if($str == 'none' || $str == '') {

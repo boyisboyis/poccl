@@ -150,19 +150,33 @@ $(document).ready(function(){
 	function save_element(){
 		var jid = update.data('jid');
 		var type = update.data('type');
+		var table = update.data('table');
 		var value = update.val();
 		$(".input-readonly").prop("readonly", true);
 		console.log(jid, type, value);
 		console.log("save");
 		$("#show-save p").html("Saving").show();
 		$("#show-save").show();
-		setTimeout(function(){
-			$("#show-save p").html("Save");
-			setTimeout(function(){
-				$("#show-save").hide();
+		$.ajax({
+		  method: 'POST',
+		  url: "adminsController",
+      data: {
+        action: "update",
+        params: {
+          jid: jid, 
+          type: type,
+          table: table,
+          value: value
+        }
+      },
+      success: function(data) {
+        console.log(data);
+	    	$("#show-save p").html("Saved");
+	    	setTimeout(function(){
+				  $("#show-save").hide();
 				}, 2000);
-		}, 5000);
-		
+      }
+		});
 	}
   
   $("#form_add").submit(function(e){
@@ -441,27 +455,27 @@ $(document).ready(function(){
               "<section class='content-search-left'>"+
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
-              "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td><input name='job_no-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='jid' class='input-readonly' type='text' value='"+(obj['Job']['JID']==null?'':obj['Job']['JID'])+"' readonly='readonly'></td></tr>"+
-              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td><input name='contractor_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='contractor_name'  class='input-readonly' type='text' value='"+(obj['Job']['Contractor_Name']==null?'':obj['Job']['Contractor_Name'])+"' readonly='true'></td></tr>"+
-              "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td><input name='project_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='project_name' class='input-readonly' type='text' value='"+(obj['Job']['Project_Name']==null?'':obj['Job']['Project_Name'])+"' readonly='true'></td></tr>"+
-              "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td><input name='project_location-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='project_location' class='input-readonly' type='text' value='"+(obj['Job']['Project_Location']==null?'':obj['Job']['Project_Location'])+"' readonly='true'></td></tr>"+
-              "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon'>:</td><td><input name='project_owner_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='project_owner_name' class='input-readonly' type='text' value='"+(obj['Job']['Project_Owner']==null?'':obj['Job']['Project_Owner'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td><input name='job_no-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='JID' class='input-readonly' type='text' value='"+(obj['Job']['JID']==null?'':obj['Job']['JID'])+"' readonly='readonly'></td></tr>"+
+              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td><input name='contractor_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contractor_Name' data-table='po_asso'  class='input-readonly' type='text' value='"+(obj['Contractor_Name']==null?'':obj['Contractor_Name'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td><input name='project_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Name' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Name']==null?'':obj['Job']['Project_Name'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td><input name='project_location-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Location' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Location']==null?'':obj['Job']['Project_Location'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon'>:</td><td><input name='project_owner_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Owner' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Owner']==null?'':obj['Job']['Project_Owner'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>Secrecy Agreement</td><td class='td-colon'>:</td><td>"+
-              "<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='secrecy_agreement' class='input-readonly' type='radio' value='true' "+(obj['Job']['Secrecy_Agreement'] == 1?"checked":"")+" />"+
+              "<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Secrecy_Agreement' data-table='job' class='input-readonly' type='radio' value='true' "+(obj['Job']['Secrecy_Agreement'] == 1?"checked":"")+" />"+
 							"<label for='' class='fa fa-check'></label>"+
-							"<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='secrecy_agreement' class='input-readonly' type='radio' value='false' "+(obj['Job']['Secrecy_Agreement'] == 0?"checked":"")+" />"+
+							"<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Secrecy_Agreement' data-table='job' class='input-readonly' type='radio' value='false' "+(obj['Job']['Secrecy_Agreement'] == 0?"checked":"")+" />"+
 							"<label for='' class='fa fa-times'></label>"+
 							"</td><td>"+
-							"<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='secrecy_agreement' class='input-readonly' type='checkbox' value='none' "+(obj['Job']['Secrecy_Agreement'] == null?"checked":"")+"><label for=''>None</label>"+
+							"<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Secrecy_Agreement' data-table='job' class='input-readonly' type='checkbox' value='none' "+(obj['Job']['Secrecy_Agreement'] == null?"checked":"")+"><label for=''>None</label>"+
 							"</td></tr>"+
 							"</table>"+
               "<h3>Working Remark</h3>"+
 							"<table>"+
 							"<tr>"+
-							"<td class='text-vertical-top'>Start Date</td><td class='td-colon'>:</td><td><input name='start_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='start_date' class='input-readonly' type='date' value='"+(obj['Job']['Work_Start_Date']==null?'':obj['Job']['Work_Start_Date'])+"' readonly='true'></td>"+
+							"<td class='text-vertical-top'>Start Date</td><td class='td-colon'>:</td><td><input name='start_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Work_Start_Date' data-table='job' class='input-readonly' type='date' value='"+(obj['Job']['Work_Start_Date']==null?'':obj['Job']['Work_Start_Date'])+"' readonly='true'></td>"+
 							"</tr>"+
 							"<tr>"+
-							"<td class='text-vertical-top'>Complete Date</td><td class='td-colon'>:</td><td><input name='complete_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='complete_date' class='input-readonly' type='date' value='"+(obj['Job']['Work_Complete_Date']==null?'':obj['Job']['Work_Complete_Date'])+"' readonly='true'></td>"+
+							"<td class='text-vertical-top'>Complete Date</td><td class='td-colon'>:</td><td><input name='complete_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Work_Complete_Date' data-table='job' class='input-readonly' type='date' value='"+(obj['Job']['Work_Complete_Date']==null?'':obj['Job']['Work_Complete_Date'])+"' readonly='true'></td>"+
 							"</tr>"+
 							"</table>"+
               //"<p class='purchase-each-detail'><span>Start Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Start_Date']==null?'-':obj['Job']['Work_Start_Date'])+"</span></span><span>Complete Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Complete_Date']==null?'-':obj['Job']['Work_Complete_Date'])+"</span></span></p>"+
