@@ -107,7 +107,7 @@
 					<div class='table-cell'>Po Date</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" name="po_date" />
+						<input type="date" name="po_date" />
 					</div>
 					<div class='table-cell'>
 						<input type="checkbox" name="po_date" value="none" />
