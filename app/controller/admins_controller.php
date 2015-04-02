@@ -109,9 +109,15 @@
 		    $sql_update = "UPDATE " . $params['table'] . " SET " . $params['table'] . "." . $params['type'] . " = '" . $params['value'] . "' WHERE " . $params['table'] . ".jid" . " = '" . $params['jid'] . "'";
 		    DB::puts($sql_update);
 		    
-		    $sql_select_check = "";
+		    $sql_select_check = "SELECT " .  $params['table'] . "." . $params['type'] . " FROM " . $params['table'] .  " WHERE " . $params['table'] . ".jid" . " = '" . $params['jid'] . "'";
+		    $result = DB::query($sql_select_check)->get();
 		    
-		    print_r($params);
+		    if($result[0]->$params['type'] == $params['value']) {
+		        echo json_encode(array("status" => true));
+		    }
+		    else {
+		        echo json_encode(array("status" => false));
+		    }
 		}
         
         public static function nullValue($str) {
