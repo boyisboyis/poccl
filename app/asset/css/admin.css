@@ -149,6 +149,14 @@ div#content-article {
   cursor: pointer;
 }
 
+.search-delete-payment, .search-delete-guarantee{
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: -15px;
+  color: red;
+  cursor: pointer;
+}
 
 
 
@@ -175,6 +183,10 @@ div#content-article {
 .purchase-detail .job-id .fa.fa-trash-o {
 	color: red;
 }
+.purchase-detail input[type="text"], .purchase-detail input[type="date"] {
+  width: 200px;
+  height: 30px;
+}
 
 .purchase-detail h3{
 	font-size: 1em;
@@ -185,6 +197,9 @@ div#content-article {
 .purchase-detail .purchase-each-detail{
 	margin: 0 0 0 10px;
 	color: #5a5350;
+}
+.purchase-detail .purchase-each-detail tr{
+  height: 35px;
 }
 
 .purchase-detail .t2_desc {
@@ -201,7 +216,7 @@ div#content-article {
 	width: 50%;
 }
 
-#admin-search-box-alert {
+#admin-search-box-alert, #box-alert{
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -210,6 +225,44 @@ div#content-article {
 	background-color: rgba(0,0,0,0.5);
 	z-index: 9999;
 }
+
+#box-alert #alert-box-payment-terms {
+  position: absolute;
+	z-index: 9998;
+	width: 500px;
+	height: 400px;
+	top: 50%;
+	left: 50%;
+	margin-left: -250px;
+	margin-top: -200px;
+	background-color: #ecf0f1;
+	border-radius: 10px;
+	padding: 20px;
+}
+
+
+#box-alert #alert-box-payment-terms > div:last-child {
+  text-align: center;
+}
+
+#box-alert #alert-box-payment-terms p {
+  margin: 5px 0;
+}
+
+#box-alert #alert-box-payment-terms > div {
+  text-align: center;
+}
+
+#box-alert #alert-box-payment-terms > div > select, #box-alert #alert-box-payment-terms  input {
+  width: 200px;
+  height: 30px;
+}
+
+#box-alert button {
+  position: static;
+  
+}
+
 #admin-search-box-alert > section {
 	position: absolute;
 	z-index: 9998;

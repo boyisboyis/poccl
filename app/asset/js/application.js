@@ -122,6 +122,7 @@ $(document).ready(function(){
     searchResult(data);
   });
   
+ 
   $(".nano").nanoScroller();
   $("#submit-report").on("click", function(){
     var months = $(".reports_month").map(function(){
@@ -445,12 +446,13 @@ $(document).ready(function(){
               var tr = "";
               for(var i=0;i<n;i++){
                 var g_content = obj['Guarantee'][i];
-                if(g_content['Amount_Actual_Percentage'] != null && g_content['Amount_Actual_Price'] != null){
-                  var g_amount = (g_content['Amount_Actual_Percentage'] == "" || g_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)):g_content['Amount_Actual_Percentage']+"%";
-                }
-                else{
-                  var g_amount = '-';
-                }
+                //console.log(g_content);
+                //if(g_content['Amount_Actual_Percentage'] != null && g_content['Amount_Actual_Price'] != null){
+                  //var g_amount = (g_content['Amount_Actual_Percentage'] == "" || g_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)):g_content['Amount_Actual_Percentage']+"%";
+                //}
+                //else{
+                 // var g_amount = '-';
+               // }
                  tr += "<tr>"+
                 "<td class='text-vertical-top'>Term : "+g_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
@@ -459,7 +461,7 @@ $(document).ready(function(){
                 "<td class='text-vertical-top'>Description</td><td class='td-colon'>:</td><td class='text_underline'>"+g_content['Guarantee_Type']+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+g_amount+"</td>"+
+                "<td class='text-vertical-top'>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+ addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)) + ' (' +g_content['Amount_Actual_Percentage']+"%)</td>"+
                 "</tr>"+
                 "<tr>"+
                 "<td class='text-vertical-top'>Start Plan</td><td class='td-colon'>:</td><td><span class='text_underline' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></td>"+
@@ -536,7 +538,7 @@ $(document).ready(function(){
               "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['PO_Type']==null?'-':obj['Job']['PO_Type'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>PO Amount</td><td class='td-colon'>:</td><td><p class='margin-padding-0 text_underline'>"+thai_bath+"<span class='currency'>THB</span></p>"+tr_currency+"</td></tr>"+
              // tr_currency+
-              "<tr><td class='text-vertical-top'>Goveming Law</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Location']==null?'-':obj['Job']['Project_Location'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Goveming Law</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Goveming_Law']==null?'-':obj['Job']['Goveming_Law'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Credit Term</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Credit_Term']==null?'-':obj['Job']['Credit_Term'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Late Payment Financial Charges</td><td class='td-colon'>:</td><td class='text_underline text-vertical-top'>"+(obj['Job']['Late_Pay_Finan_Charge']==null?'-':obj['Job']['Late_Pay_Finan_Charge'] == 0?"NO":"YES")+"</td></tr>"+
               "</table>"+
