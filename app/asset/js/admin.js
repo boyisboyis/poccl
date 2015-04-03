@@ -443,6 +443,80 @@ $(document).ready(function(){
      $("#alert-box-payment-terms, #box-alert").hide();
   });
   
+  $("#update-save-guarantee-terms").on("click", function(){
+    
+    var temrs = $("#new-guarantee-terms").text();
+    var id = $("#alert-box-guarantee-terms input[name=guarantee-temrs-id]").val();
+    var index = $("#alert-box-guarantee-terms input[name=guarantee-temrs-index]").val();
+    var jid = $("#alert-box-guarantee-terms input[name=guarantee-temrs-jid]").val();
+    var desc = $("#alert-box-guarantee-terms select[name=guarantee-description]").val();
+    var amount = $("#alert-box-guarantee-terms input[name=Amount_Actual_Price]").val();
+    var amount_percentage = $("#alert-box-guarantee-terms input[name=Amount_Actual_Percentage]").val();
+    var start_date = $("#alert-box-guarantee-terms input[name=Start_plan]").val();
+    var until_date = $("#alert-box-guarantee-terms input[name=until_plan]").val();
+    var i = $("#"+id).find(".content-search-right .purchase-each-detail .td-search-term").length + 1;
+    var full_price = $("#"+id).find("input[name*=contract_value_thb]").val();
+    console.log(temrs, id,index , jid, desc, amount, amount_percentage, start_date, until_date)
+    if(true){
+      var tr = "<tr>"+
+                "<td style='vertical-align: text-top; position: relative;'>"+
+                "<i class='fa fa-trash-o search-delete-guarantee' style='display: inline-block;'></i>"+
+                "Term : "+temrs+"</td>"+
+                "<td class='td-search-term'>"+
+                "<table>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+desc+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(amount).toFixed(2))+"' readonly='true'></td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+amount_percentage+"' readonly='true'>%"+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Start Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><span class='text_underline text-vertical-top' style='margin-right: 10px;'>"+start_date+"</span>Until Plan : <span class='text_underline'>"+until_date+"</span></td>"+
+                "</tr>"+
+                "</table>"+
+                "</td>"+
+                "</tr>";
+      
+      $("#"+id).find(".content-search-right .search-delete-payment").hide();
+      $("#"+id).find(".content-search-right table.guarantee_terms_add").append(tr);
+    }
+    else {
+      console.log('false');
+    }
+
+     $("#new-guarantee-terms").text(0);
+     $("#alert-box-guarantee-terms input[name=guarantee-temrs-id]").val("");
+     $("#alert-box-guarantee-terms input[name=guarantee-temrs-index]").val("");
+     $("#alert-box-guarantee-terms input[name=guarantee-temrs-jid]").val("");
+     $("#alert-box-guarantee-terms select[name=guarantee-description]").val("");
+     $("#alert-box-guarantee-terms input[name=Amount_Actual_Price]").val("");
+     $("#alert-box-guarantee-terms input[name=Amount_Actual_Percentage]").val("");
+     $("#alert-box-guarantee-terms input[name=Start_plan]").val("");
+     $("#alert-box-guarantee-terms input[name=until_plan]").val("");
+     $("#alert-box-guarantee-terms, #box-alert").hide();
+  });
+  
+  $("#alert-box-guarantee-terms").on("change", ".guarantee_description", function(){
+    //var jid = $(this).parent().parent().find("input[name=payment-temrs-jid]").val();
+    console.log("test");
+    var id = $(this).parent().parent().find("input[name=guarantee-temrs-id]").val();
+    var description = $(this).val().toLowerCase();
+    var count = 1;
+	  var guarantee_type_select = $("#"+id).find(".content-search-right .purchase-each-detail .td-search-term");
+	  console.log($("#"+id).find(".content-search-right"))
+	  if(guarantee_type_select.length > 0){
+	    guarantee_type_select.each(function(){
+	      console.log($(this).find(".guarantee_type").text().toLowerCase(), description)
+	      if($(this).find(".guarantee_type").text().toLowerCase() == description) {
+          count++	         
+	      }
+	    });
+	  }
+	  $("#new-guarantee-terms").text(count);
+  });
   
   $("#alert-box-payment-terms").on("change", ".payment_description", function(){
     //var jid = $(this).parent().parent().find("input[name=payment-temrs-jid]").val();
@@ -606,7 +680,7 @@ $(document).ready(function(){
                 "<td class='td-search-term'>"+
                 "<table>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+g_content['Guarantee_Type']+"</td>"+
+                "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top guarantee_type'>"+g_content['Guarantee_Type']+"</td>"+
                 "</tr>"+
                 "<tr>"+
                 "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Price' data-table='guarantee' class='input-readonly' type='text' value='"+g_content["Amount_Actual_Price"]+"' readonly='true'></td>"+
@@ -622,7 +696,7 @@ $(document).ready(function(){
                 "</tr>";
               }
             }
-            table_guarantee = "<table border=0 style='width: 100%;' class='purchase-each-detail'>"+tr+"</table>";
+            table_guarantee = "<table border=0 style='width: 100%;' class='purchase-each-detail guarantee_terms_add'>"+tr+"</table>";
             table_guarantee += "<p id='search-add-guarantee-terms' data-jid='"+obj['Job']['JID']+"' data-index='"+index+"' data-id='serach-"+index+"'  style='color: #ed8151; cursor: pointer;'> <i class='fa fa-plus'></i> Add Guarantee Terms.</p>";
             n = obj['Payment'].length; 
             var tr = "";

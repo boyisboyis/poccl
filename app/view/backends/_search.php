@@ -61,11 +61,11 @@
 	    <input type="hidden" id="guarantee-temrs-index" name="guarantee-temrs-index" value=""/>
 	    <div>
 	        <p>Description</p>
-    	    <select class='payment_description' name="guarantee-description">
+    	    <select class='guarantee_description' name="guarantee-description">
     	      <option value="">-</option>
-      	    <option value="Milestone Payment">Milestone Payment</option>
-      	    <option value="Retention Payment">Retention Payment</option>
-      	    <option value="Other Payment">Other Payment</option>
+      	    <option value="Mechanical Guarantee">Mechanical Guarantee</option>
+      	    <option value="Performance Guarante">Performance Guarante</option>
+      	    <option value="Other Payment">Other Guarante</option>
       	  </select>
       	  <p>Amount</p>
       	  <div>
@@ -77,11 +77,11 @@
       	  </div>
       	  <p>Start Plan</p>
       	  <div>
-      	    <input type="text" name="Payment_date_plan" data-type="Payment_date_plan" value="" class='datepicker' />
+      	    <input type="text" name="Start_plan" data-type="Start_plan" value="" class='datepicker' />
       	  </div>
-      	  <p>Start Plan</p>
+      	  <p>Until Plan</p>
       	  <div>
-      	    <input type="text" name="Payment_date_plan" data-type="Payment_date_plan" value="" class='datepicker' />
+      	    <input type="text" name="until_plan" data-type="until_plan" value="" class='datepicker' />
       	  </div>
 	    </div>
 	    <div>

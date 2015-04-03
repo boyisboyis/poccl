@@ -265,11 +265,11 @@ div#content-article {
   position: absolute;
 	z-index: 9998;
 	width: 500px;
-	height: 500px;
+	height: 450px;
 	top: 50%;
 	left: 50%;
 	margin-left: -250px;
-	margin-top: -250px;
+	margin-top: -225px;
 	background-color: #ecf0f1;
 	border-radius: 10px;
 	padding: 20px;
