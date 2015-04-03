@@ -10,6 +10,7 @@
 				case "update" : adminController::update($params);break;
 				case "add_user" : adminController::addUser($params);break;
 				case "update_payment" : adminController::updatePayment($params);break;
+				case "update_guarantee" : adminController::updateGuarantee($params);break;
     		}		
     	}
     }
@@ -175,6 +176,34 @@
             DB::puts($sql_payment);
             
             $sql_select = "SELECT * FROM payment WHERE payment.JID = '" . $params['jid'] . "' AND payment.Payment_Type = '" . $params['desc'] . "' AND payment.Terms = '" . $params['terms'] . "'";
+            $result = DB::query($sql_select)->get();
+            if(count($result) > 0) {
+                echo json_encode(array("status" => true, "obj" => $result));
+            }
+            else {
+                echo json_encode(array("status" => false));
+            }
+		}
+		
+		public static function updateGuarantee($params) {
+		    $params['full_price'] = str_replace(',', '', $params['full_price']);
+		    if($params['amount'] == "") {
+		        $params['amount'] = null;
+		    }
+		    if($params['amount_percentage'] == "") {
+		        $params['amount_percentage'] = null;
+		    }
+		    $sql_guarantee = 'INSERT INTO `guarantee` (`JID`, `Terms`, `Guarantee_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Start_Plan`, `Until_Plan`) ' .
+                           'VALUES (' . self::nullValue($params['jid']) . ', ' .
+                                        self::nullValue($params['terms']) . ', ' .
+                                        self::nullValue($params['desc']) . ', ' .
+                                        self::amountValue($params['amount'], $params['amount_percentage'], $params['full_price']) . ', ' .
+                                        self::nullValue($params['start_date']) . ', ' .
+                                        self::nullValue($params['until_date']) .
+                                    ')';
+            DB::puts($sql_guarantee);
+            
+            $sql_select = "SELECT * FROM guarantee WHERE guarantee.JID = '" . $params['jid'] . "' AND guarantee.Guarantee_Type = '" . $params['desc'] . "' AND guarantee.Terms = '" . $params['terms'] . "'";
             $result = DB::query($sql_select)->get();
             if(count($result) > 0) {
                 echo json_encode(array("status" => true, "obj" => $result));
