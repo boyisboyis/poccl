@@ -51,7 +51,7 @@ return array(
       "type" => "file_get_contents"
     ),
   "jquery-ui" => array(
-      "file" => "lib/asset/js/jquery-ui.js",
+      "file" => "lib/asset/js/jquery-ui.min.js",
       "type" => "file_get_contents"
     ),
   "applicationjs" => array(
@@ -85,6 +85,11 @@ return array(
     */
     "maincss" => array(
       "file" => "lib/asset/css/main.css",
+      "header" => "text/css",
+      "type" => "file_get_contents"
+    ),
+    "jquery-ui-css" => array(
+      "file" => "lib/asset/css/jquery-ui.css",
       "header" => "text/css",
       "type" => "file_get_contents"
     ),
