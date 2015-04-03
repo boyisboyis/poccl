@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var hash_str = ["#add", "#search", "#update_status", "#config_type", "#add_user" ];
+  var hash_str = ["#add", "#search", "#config_type", "#add_user" ];
 	var delete_jid = "";
 	var delete_index = "";
 	
@@ -401,19 +401,38 @@ $(document).ready(function(){
   function init(index){
     switch (index) {
       case 0:
-        $(".t1, .t4").hide();
+        $(".t1, .t2, .t3").hide();
         $(".t0").show();
         break;
       case 1:
-        $(".t0, .t4").hide();
+        $(".t0, .t2, .t3").hide();
         $(".t1").show();
         break;
-      case 4:
-        $(".t0, .t1").hide();
-        $(".t4").show();
+      case 2:
+        $(".t0, .t1, .t3").hide();
+        get_po_type();
+        get_payment_type();
+        get_guarantee_type();
+        $(".t2").show();
+        break;
+      case 3:
+        $(".t0, .t1, .t2").hide();
+        $(".t3").show();
       default:
         // code
     }
+  }
+  
+  function get_po_type() {
+    
+  }
+  
+  function get_payment_type() {
+    
+  }
+  
+  function get_guarantee_type() {
+    
   }
   
   function searchResult(search){

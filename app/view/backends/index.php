@@ -45,13 +45,17 @@
       </nav>
       <header id="wrap-header">
         <section>
-          <h1>Purchase Order Admin Controller</h1>
+          <h1>
+            Purchase Order / Contract Check List
+            <span>Manage purchase order / contract check list system</span>
+          </h1>
         </section>
       </header>
 
       <div id="wrap-content">
         <?php include('_add.php'); ?>
         <?php include('_search.php'); ?>
+        <?php include('_config_type.php'); ?>
         <?php include('_add_user.php'); ?>
       </div>
 			
