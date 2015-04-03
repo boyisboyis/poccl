@@ -1,19 +1,25 @@
 <div id="admin-add-user" class='t3'>
-  <div id='admin-add-user-block'>
-    <div id="front-message" class="front-msg">Username : </div>
-    <input type="username" id="input-username" name="input-username" /><br>
-    <div id="front-message" class="front-msg">Password : </div>
-    <input type="password" id="input-password" name="input-password" /><br>
-    <div id="front-message" class="front-msg">Confirm Password : </div>
-    <input type="password" id="input-confirm" name="input-confirm" /><br>
-    <div id="front-message" class="front-msg">Authentication : </div>
+  <section id='admin-add-user-block'>
+    <h2>Add New User</h2>
+    <div>
+      <input type="username" id="input-username" name="input-username" placeholder="Username" />
+    </div>
+    <div>
+      <input type="password" id="input-password" name="input-password" placeholder="Password" />
+    </div>
+    <div> 
+      <input type="password" id="input-confirm" name="input-confirm" placeholder="Confirm Password" />
+    </div>
+    <h3 id="front-message" class="front-msg">Authentication</h3>
     <select id="select-auth">
       <option value="2">Viewer</option>
       <option value="1">Author</option>
       <option value="0">Administator</option>
     </select>
-    <button id="add-user">ADD USER</button>
-  </div>
+    <div>
+      <button id="add-user">ADD USER</button>
+    </div>
+  </section>
   <div id="admin-add-user-box-alert" style="display: none;">
 		<section>
 			<h3 id="msg-alert"></h3>
