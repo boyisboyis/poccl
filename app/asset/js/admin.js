@@ -138,6 +138,42 @@ $(document).ready(function(){
 	
 	$(window).on('click', function(e) {
 		if(update){
+		  console.log(e.target.className);
+			if(e.target.localName === 'input' && e.target.className === 'input-readonly' && e.target.className.indexOf("datepicker") < 0){
+				if(update.data('jid') == $(e.target).data('jid')){
+					if(update.data('type') != $(e.target).data('type')){
+						save_element();
+					}
+				}
+				else {
+					save_element();
+				}
+				$(e.target).prop("readonly", false);
+				update = $(e.target);
+			}
+			else if(e.target.localName === 'input' && e.target.className.indexOf("datepicker") >= 0){
+			  update = "";
+			}
+			else{
+				save_element();
+				update = "";
+			}
+		}
+	}).on("keyup", function(e){
+		var key_code = e.which || e.keyCode;
+		if(key_code == 13 && update !== "") {
+			save_element();
+			update = "";
+		}
+	}).on('change',".datepicker", function(){
+	  console.log($(this))
+    //$(this).datepicker({"dateFormat": "yy-mm-dd"});
+  });
+	
+	$("#admin-search-box-content").on("change",".datepicker , input[type=radio]",function(e){
+	  console.log(e);
+	  update = $(this)
+	  if(update){
 			if(e.target.localName === 'input' && e.target.className === 'input-readonly'){
 				if(update.data('jid') == $(e.target).data('jid')){
 					if(update.data('type') != $(e.target).data('type')){
@@ -155,13 +191,8 @@ $(document).ready(function(){
 				update = "";
 			}
 		}
-	}).on("keyup", function(e){
-		var key_code = e.which || e.keyCode;
-		if(key_code == 13 && update !== "") {
-			save_element();
-			update = "";
-		}
-	});
+	})
+
 	
 	function save_element(){
 		var jid = update.data('jid');
@@ -173,7 +204,7 @@ $(document).ready(function(){
 		console.log("save");
 		$("#show-save p").html("Saving").show();
 		$("#show-save").show();
-		/*$.ajax({
+		$.ajax({
 		  dataType: 'json',
 		  method: 'POST',
 		  url: "adminsController",
@@ -198,7 +229,7 @@ $(document).ready(function(){
 				  $("#show-save").hide();
 				}, 2000);
       }
-		});*/
+		});
 	}
   
   $("#form_add").submit(function(e){
@@ -281,6 +312,7 @@ $(document).ready(function(){
           params: formObj
         },
         success: function(data) {
+          reset_form_add()
           console.log(data);
         }
       });
@@ -639,11 +671,18 @@ $(document).ready(function(){
     }
   }
   
+  function reset_form_add(){
+    $('#form_add')[0].reset();
+    $("#list-payment-terms .table").not(':first').remove();
+    $("#list-bank-guarantee .table").not(':first').remove();
+  }
+  
   function init(index){
     switch (index) {
       case 0:
         $(".t1, .t2, .t3").hide();
         $(".t0").show();
+        reset_form_add()
         break;
       case 1:
         $(".t0, .t2, .t3").hide();
@@ -703,11 +742,18 @@ $(document).ready(function(){
             }
             if(obj['Job']['Contract_Value_Type'] !== "" && obj['Job']['Contract_Value_Type'] !== null){
               other_currency = addCommas(parseFloat(obj['Job']['Contract_Value_Other']).toFixed(2));
-              tr_currency = "<p class='margin-padding-0 text_underline'>"+
+              tr_currency = "<p class='margin-padding-0 text_underline' style='margin: 5px 10px 5px 0;'>"+
               "<input name='contract_value_other-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_Other' data-table='job' class='input-readonly' type='text' value='"+other_currency+"' readonly='true'>"+
-              "<span class='currency'>"+
+              "<span class='currency' style='margin-left: 5px;'>"+
               "<input name='contract_value_type-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_Type' data-table='job' class='input-readonly' type='text' value='"+obj['Job']['Contract_Value_Type']+"' readonly='true'>"+
-              "</span></p><p class='margin-padding-0 text_underline'><span>Rate </span><input name='contract_value_rate-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_Rate' data-table='job' class='input-readonly' type='text' value='"+obj['Job']['Contract_Value_Rate']+"' readonly='true'></p>";
+              "</span></p><p class='margin-padding-0'><span>Rate </span><input style='margin-left: 10px;' name='contract_value_rate-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_Rate' data-table='job' class='input-readonly' type='text' value='"+obj['Job']['Contract_Value_Rate']+"' readonly='true'></p>";
+            }
+            else {
+               tr_currency = "<p class='margin-padding-0 text_underline' style='margin: 5px 10px 5px 0;'>"+
+              "<input name='contract_value_other-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_Other' data-table='job' class='input-readonly' type='text' value='' readonly='true'>"+
+              "<span class='currency' style='margin-left: 5px;'>"+
+              "<input name='contract_value_type-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_Type' data-table='job' class='input-readonly' type='text' value='' readonly='true'>"+
+              "</span></p><p class='margin-padding-0'><span>Rate </span><input style='margin-left: 10px;' name='contract_value_rate-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_Rate' data-table='job' class='input-readonly' type='text' value='' readonly='true'></p>";
             }
             thai_bath = addCommas(parseFloat(thai_bath).toFixed(2));
             var tr = "";
@@ -798,7 +844,7 @@ $(document).ready(function(){
             $("#admin-search-box-content").append(
               "<article class='purchase-detail' id='serach-"+index+"'>" +
               "<h2 class='job-id'><span class='job-id-toggle'>"+keySearch+"</span>"+
-							"<i class='fa fa-wheelchair purchase_status' data-jid='"+obj['Job']['JID']+"' data-index='serach-"+index+"'></i><i class='fa fa-trash-o admin-search-delete' data-jid='"+obj['Job']['JID']+"' data-index='serach-"+index+"'></i>"+
+							"<i class='fa fa-trash-o admin-search-delete' data-jid='"+obj['Job']['JID']+"' data-index='serach-"+index+"'></i>"+
 							"</h2>"+
 							/*"<div id='purchase_status_"+index+"' class='purchase_status_box'>"+
 							"<div>"+
@@ -819,13 +865,13 @@ $(document).ready(function(){
               "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='project_owner_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Owner' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Owner']==null?'':obj['Job']['Project_Owner'])+"' readonly='true'></td></tr>"+
 
               "<tr><td class='text-vertical-top'>Secrecy Agreement</td><td class='td-colon'>:</td><td>"+
-              "<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Secrecy_Agreement' data-table='job' class='input-readonly' type='radio' value='true' "+(obj['Job']['Secrecy_Agreement'] == 1?"checked":"")+" />"+
+              "<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Secrecy_Agreement' data-table='job' class='input-readonly' type='radio' value='1' "+(obj['Job']['Secrecy_Agreement'] == 1?"checked":"")+" />"+
 							"<label for='' class='fa fa-check'></label>"+
-							"<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Secrecy_Agreement' data-table='job' class='input-readonly' type='radio' value='false' "+(obj['Job']['Secrecy_Agreement'] == 0?"checked":"")+" />"+
+							"<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Secrecy_Agreement' data-table='job' class='input-readonly' type='radio' value='0' "+(obj['Job']['Secrecy_Agreement'] == 0?"checked":"")+" />"+
 							"<label for='' class='fa fa-times'></label>"+
-							"</td><td>"+
-							"<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Secrecy_Agreement' data-table='job' class='input-readonly' type='checkbox' value='none' "+(obj['Job']['Secrecy_Agreement'] == null?"checked":"")+"><label for=''>None</label>"+
-							"</td></tr>"+
+							/*"</td><td>"+
+							"<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Secrecy_Agreement' data-table='job' class='input-readonly' type='checkbox' value='none' "+(obj['Job']['Secrecy_Agreement'] == null?"checked":"")+">"+
+							"</td></tr>"+*/
 							"</table>"+
               "<h3>Working Remark</h3>"+
 							"<table>"+
@@ -851,13 +897,13 @@ $(document).ready(function(){
               "<tr><td class='text-vertical-top'>Goveming Law</td><td class='td-colon'>:</td><td><input name='goveming_law-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Goveming_Law' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Goveming_Law']==null?'':obj['Job']['Goveming_Law'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>Credit Term</td><td class='td-colon'>:</td><td><input name='credit_term-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Credit_Term' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Credit_Term']==null?'':obj['Job']['Credit_Term'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>Late Payment Financial Charges</td><td class='td-colon'>:</td><td text-vertical-top'>"+
-              "<input name='late_pay_finan_change-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Late_Pay_Finan_Charge' data-table='job' class='input-readonly' type='radio' value='true' "+(obj['Job']['Late_Pay_Finan_Charge'] == 1?"checked":"")+" />"+
+              "<input name='late_pay_finan_change-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Late_Pay_Finan_Charge' data-table='job' class='input-readonly' type='radio' value='1' "+(obj['Job']['Late_Pay_Finan_Charge'] == 1?"checked":"")+" />"+
 							"<label for='' class='fa fa-check'></label>"+
-							"<input name='late_pay_finan_change-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Late_Pay_Finan_Charge' data-table='job' class='input-readonly' type='radio' value='false' "+(obj['Job']['Late_Pay_Finan_Charge'] == 0?"checked":"")+" />"+
+							"<input name='late_pay_finan_change-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Late_Pay_Finan_Charge' data-table='job' class='input-readonly' type='radio' value='0' "+(obj['Job']['Late_Pay_Finan_Charge'] == 0?"checked":"")+" />"+
 							"<label for='' class='fa fa-times'></label>"+
-							"</td><td>"+
-							"<input name='late_pay_finan_change-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Late_Pay_Finan_Charge' data-table='job' class='input-readonly' type='checkbox' value='none' "+(obj['Job']['Late_Pay_Finan_Charge'] == null?"checked":"")+"><label for=''>None</label>"+
-							"</td></tr>"+
+							/*"</td><td>"+
+							"<input name='late_pay_finan_change-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Late_Pay_Finan_Charge' data-table='job' class='input-readonly' type='checkbox' value='none' "+(obj['Job']['Late_Pay_Finan_Charge'] == null?"checked":"")+">"+
+							"</td></tr>"+*/
               "</table>"+
               "</section>"+
               "</div>"+
