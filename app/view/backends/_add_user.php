@@ -1,4 +1,4 @@
-<div id="admin-add-user" class='t4'>
+<div id="admin-add-user" class='t3'>
   <div id='admin-add-user-block'>
     <div id="front-message" class="front-msg">Username : </div>
     <input type="username" id="input-username" name="input-username" /><br>
