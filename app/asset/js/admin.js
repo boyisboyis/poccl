@@ -37,6 +37,10 @@ $(document).ready(function(){
     }
     payment_terms_delete();
   });
+  
+  $("#update-close-payment-terms").on("click", function(){
+    $("#update-close-payment-terms, #box-alert").hide();
+  });
 
   $("#list-bank-guarantee").on("click", ".delete-guarantee", function() {
     if($("#list-bank-guarantee .table").length > 1){
@@ -157,7 +161,7 @@ $(document).ready(function(){
 		console.log("save");
 		$("#show-save p").html("Saving").show();
 		$("#show-save").show();
-		$.ajax({
+		/*$.ajax({
 		  dataType: 'json',
 		  method: 'POST',
 		  url: "adminsController",
@@ -182,7 +186,7 @@ $(document).ready(function(){
 				  $("#show-save").hide();
 				}, 2000);
       }
-		});
+		});*/
 	}
   
   $("#form_add").submit(function(e){
@@ -278,6 +282,109 @@ $(document).ready(function(){
 		$("#admin-search-box-alert").show();
 	});
 	
+	$('#admin-search-box-content').on("click", "#search-add-payment-terms",function(){
+	  $("#update-close-payment-terms, #box-alert").show();
+	  $("#alert-box-payment-terms input[name=payment-temrs-jid]").val($(this).data("jid"));
+	  $("#alert-box-payment-terms input[name=payment-temrs-id]").val($(this).data("id"));
+	  $("#alert-box-payment-terms input[name=payment-temrs-index]").val($(this).data("index"));
+  });
+	$('#admin-search-box-content').on("click", "#search-add-guarantee-terms",function(){
+	  var table = $(this).prev();
+	  table.find("i").hide();
+	  var index = $(this).data("index");
+	  var i = $(this).data("i");
+	  var jid = $(this).data("jid");
+    var  tr = "<tr>"+
+        "<td class='text-vertical-top' style='position: relative;'>"+
+        "<i class='fa fa-trash-o search-delete-payment' style='display: inline-block;'></i>"+
+        "Term : <span class='search-payment-term'>0</span><input name='terms-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Terms' data-table='guarantee' class='input-no-readonly' type='hidden' value='' readonly='true'></td>"+
+        "<td class='td-search-term'>"+
+        "<table>"+
+        "<tr>"+
+        "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'>"+
+        $("#payment_description_clone").html()+
+        "</td>"+
+        "</tr>"+
+        "<tr>"+
+        "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='guarantee' class='input-readonly' type='text' value='' readonly='true'></td>"+
+        "</tr>"+
+        "<tr>"+
+        "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='guarantee' class='input-readonly' type='text' value='' readonly='true'>%</td>"+
+        "</tr>"+
+        "<tr>"+
+        "<td class='text-vertical-top'Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td><input name='payment_date_plan-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Payment_date_plan' data-table='guarantee' class='input-readonly' type='date' value='' readonly='true'></td>"+
+        "</tr>"+
+        "</table>"+
+        "</td>"+
+        "</tr>";
+      table.append(tr)
+  });
+  
+  $("#update-save-payment-terms").on("click", function(){
+    
+    var temrs = $("#new-payment-terms").text();
+    var id = $("#alert-box-payment-terms input[name=payment-temrs-id]").val();
+    var index = $("#alert-box-payment-terms input[name=payment-temrs-index]").val();
+    var jid = $("#alert-box-payment-terms input[name=payment-temrs-jid]").val();
+    var desc = $("#alert-box-payment-terms select[name=payment-description]").val();
+    var amount = $("#alert-box-payment-terms input[name=Amount_Actual_Price]").val();
+    var amount_percentang = $("#alert-box-payment-terms input[name=Amount_Actual_Percentage]").val();
+    var payment_date = $("#alert-box-payment-terms input[name=Payment_date_plan]").val();
+    var i = $("#"+id).find(".content-search-left .purchase-each-detail .td-search-term").length + 1;
+    if(true){
+      var tr = "<tr>"+
+                "<td style='vertical-align: text-top; position: relative;'>"+
+                "<i class='fa fa-trash-o search-delete-payment' style='display: inline-block;'></i>"+
+                "Term : "+temrs+"</td>"+
+                "<td class='td-search-term'>"+
+                "<table>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+desc+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(amount).toFixed(2))+"' readonly='true'></td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+amount_percentang+"' readonly='true'>%"+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+payment_date+"</td>"+
+                "</tr>"+
+                "</table>"+
+                "</td>"+
+                "</tr>";
+      
+      $("#"+id).find(".content-search-left .search-delete-payment").hide();
+      $("#"+id).find(".content-search-left table.payment_terms_add").append(tr);
+    }
+     $("#new-payment-terms").text(0);
+     $("#alert-box-payment-terms input[name=payment-temrs-id]").val("");
+     $("#alert-box-payment-terms input[name=payment-temrs-index]").val("");
+     $("#alert-box-payment-terms input[name=payment-temrs-jid]").val("");
+     $("#alert-box-payment-terms select[name=payment-description]").val("");
+     $("#alert-box-payment-terms input[name=Amount_Actual_Price]").val("");
+     $("#alert-box-payment-terms input[name=Amount_Actual_Percentage]").val("");
+     $("#alert-box-payment-terms input[name=Payment_date_plan]").val("");
+     $("#update-close-payment-terms, #box-alert").hide();
+  });
+  
+  
+  $("#alert-box-payment-terms").on("change", ".payment_description", function(){
+    //var jid = $(this).parent().parent().find("input[name=payment-temrs-jid]").val();
+    var id = $(this).parent().parent().find("input[name=payment-temrs-id]").val();
+    var description = $(this).val().toLowerCase();
+    var count = 1;
+	  var payment_type_select = $("#"+id).find(".content-search-left .purchase-each-detail .td-search-term");
+	  if(payment_type_select.length > 0){
+	    payment_type_select.each(function(){
+	      if($(this).find(".payment_type").text().toLowerCase() == description) {
+          count++	         
+	      }
+	    });
+	  }
+	  $("#new-payment-terms").text(count);
+  });
+	
 	$("#confirm-yes").on("click", function() {
 			$.ajax({
 				method: "POST",
@@ -367,74 +474,94 @@ $(document).ready(function(){
           $(".result-topics").html("<i class='fa fa-check color-success'></i>Result");
 					var index = -1;
           $.each(req['obj'], function(){
+            index++;
             var obj = $(this)[0];
             var table_guarantee = "<p class='p-warning'>Guarantee is not set</p>";
             var table_payment = "<p class='p-warning'>Payment is not set</p>";
             var n = obj['Guarantee'].length;
             var thai_bath = obj['Job']['Contract_Value_THB'];
+            var other_currency = 0;
             var tr_currency = "";
             if(thai_bath === "" || thai_bath === null){
               thai_bath = obj['job']['Contract_Value_Rate'] * obj['job']['Contract_Value_Other'];
             }
             if(obj['Job']['Contract_Value_Type'] !== "" && obj['Job']['Contract_Value_Type'] !== null){
               other_currency = addCommas(parseFloat(obj['Job']['Contract_Value_Other']).toFixed(2));
-              tr_currency = "<p class='margin-padding-0 text_underline'>"+other_currency+"<span class='currency'>"+obj['Job']['Contract_Value_Type']+"</span></p><p class='margin-padding-0 text_underline'><span>Rate </span>"+obj['Job']['Contract_Value_Rate']+"</p>";
+              tr_currency = "<p class='margin-padding-0 text_underline'>"+
+              "<input name='contract_value_other-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_Other' data-table='job' class='input-readonly' type='text' value='"+other_currency+"' readonly='true'>"+
+              "<span class='currency'>"+
+              "<input name='contract_value_type-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_Type' data-table='job' class='input-readonly' type='text' value='"+obj['Job']['Contract_Value_Type']+"' readonly='true'>"+
+              "</span></p><p class='margin-padding-0 text_underline'><span>Rate </span><input name='contract_value_rate-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_Rate' data-table='job' class='input-readonly' type='text' value='"+obj['Job']['Contract_Value_Rate']+"' readonly='true'></p>";
             }
             thai_bath = addCommas(parseFloat(thai_bath).toFixed(2));
+            var tr = "";
             if(n > 0){
-              var tr = "";
               for(var i=0;i<n;i++){
+                var minus = '';
+                if (i + 1 == n) {
+                  minus = "<i class='fa fa-trash-o search-delete-guarantee' style='display: inline-block;'></i>"
+                }
                 var g_content = obj['Guarantee'][i];
-                if(g_content['Amount_Actual_Percentage'] != null && g_content['Amount_Actual_Price'] != null){
-                  var g_amount = (g_content['Amount_Actual_Percentage'] == "" || g_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)):g_content['Amount_Actual_Percentage']+"%";
-                }
-                else{
-                  var g_amount = '-';
-                }
                  tr += "<tr>"+
-                "<td class='text-vertical-top'>Term : "+g_content['Terms']+"</td>"+
+                "<td class='text-vertical-top' style='position: relative;'>"+
+                minus+
+                "Term : "+g_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
                 "<table>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Description</td><td class='td-colon'>:</td><td class='text_underline'>"+g_content['Guarantee_Type']+"</td>"+
+                "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+g_content['Guarantee_Type']+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+g_amount+"</td>"+
+                "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Price' data-table='guarantee' class='input-readonly' type='text' value='"+g_content["Amount_Actual_Price"]+"' readonly='true'></td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Start Plan</td><td class='td-colon'>:</td><td><span class='text_underline' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></td>"+
+                "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Percentage' data-table='guarantee' class='input-readonly' type='text' value='"+g_content["Amount_Actual_Percentage"]+"' readonly='true'>%</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Start Plan</td><td class='td-colon text-vertical-top'>:</td><td><span class='text_underline text-vertical-top' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></td>"+
                 "</tr>"+
                 "</table>"+
                 "</td>"+
                 "</tr>";
               }
-              table_guarantee = "<table border=0 style='width: 100%;' class='purchase-each-detail'>"+tr+"</table>";
             }
+            table_guarantee = "<table border=0 style='width: 100%;' class='purchase-each-detail'>"+tr+"</table>";
+            table_guarantee += "<p id='search-add-guarantee-terms' data-jid='"+obj['Job']['JID']+"' data-index='"+index+"' data-n='"+n+"'  style='color: #ed8151; cursor: pointer;'> <i class='fa fa-plus'></i> Add Guarantee Terms.</p>";
             n = obj['Payment'].length; 
+            var tr = "";
             if(n > 0){
-              var tr = "";
-              for(var i=0;i<n;i++){
+              for(var i=0; i<n; i++){
+                var minus = '';
+                if (i + 1 == n) {
+                  minus = "<i class='fa fa-trash-o search-delete-payment' style='display: inline-block;'></i>";
+                }
                 var p_content = obj['Payment'][i];
                // var p_amount = (p_content['Amount_Actual_Percentage'] == "" || p_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)):p_content['Amount_Actual_Percentage']+"%";
                 tr += "<tr>"+
-                "<td style='vertical-align: text-top;'>Term : "+p_content['Terms']+"</td>"+
+                "<td style='vertical-align: text-top; position: relative;'>"+
+                minus+
+                "Term : "+p_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
                 "<table>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Description</td><td class='td-colon'>:</td><td class='text_underline text-vertical-top'>"+p_content['Payment_Type']+"</td>"+
+                "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+p_content['Payment_Type']+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+ addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)) + ' (' +p_content['Amount_Actual_Percentage']+"%)"+"</td>"+
+                "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2))+"' readonly='true'></td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon'>:</td><td class='text_underline'>"+p_content['Payment_date_plan']+"</td>"+
+                "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+p_content['Amount_Actual_Percentage']+"' readonly='true'>%"+"</td>"+
+                "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+p_content['Payment_date_plan']+"</td>"+
                 "</tr>"+
                 "</table>"+
                 "</td>"+
                 "</tr>";
               }
-              table_payment = "<table border=0 style='width: 100%;' class='purchase-each-detail'>"+tr+"</table>";
             }
+            table_payment = "<table border=0 style='width: 100%;' class='purchase-each-detail payment_terms_add'>"+tr+"</table>";
+            table_payment += "<p id='search-add-payment-terms' data-jid='"+obj['Job']['JID']+"' data-index='"+index+"' data-id='serach-"+index+"'  style='color: #ed8151; cursor: pointer;'> <i class='fa fa-plus'></i> Add Payment Terms.</p>";
             
             var keySearch;
             if(search['type'] == "contract") {
@@ -449,7 +576,7 @@ $(document).ready(function(){
             
            // console.log(obj)
 						
-            index++;
+            
             $("#admin-search-box-content").append(
               "<article class='purchase-detail' id='serach-"+index+"'>" +
               "<h2 class='job-id'><span class='job-id-toggle'>"+keySearch+"</span>"+
@@ -461,11 +588,11 @@ $(document).ready(function(){
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
 
-              "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td>"+(obj['Job']['JID']==null?'':obj['Job']['JID'])+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td><input name='contractor_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contractor_Name' data-table='po_asso'  class='input-readonly' type='text' value='"+(obj['Contractor_Name']==null?'':obj['Contractor_Name'])+"' readonly='true'></td></tr>"+
-              "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td><input name='project_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Name' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Name']==null?'':obj['Job']['Project_Name'])+"' readonly='true'></td></tr>"+
-              "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td><input name='project_location-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Location' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Location']==null?'':obj['Job']['Project_Location'])+"' readonly='true'></td></tr>"+
-              "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon'>:</td><td><input name='project_owner_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Owner' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Owner']==null?'':obj['Job']['Project_Owner'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'>"+(obj['Job']['JID']==null?'':obj['Job']['JID'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='contractor_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contractor_Name' data-table='po_asso'  class='input-readonly' type='text' value='"+(obj['Contractor_Name']==null?'':obj['Contractor_Name'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='project_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Name' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Name']==null?'':obj['Job']['Project_Name'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='project_location-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Location' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Location']==null?'':obj['Job']['Project_Location'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='project_owner_name-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Project_Owner' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Project_Owner']==null?'':obj['Job']['Project_Owner'])+"' readonly='true'></td></tr>"+
 
               "<tr><td class='text-vertical-top'>Secrecy Agreement</td><td class='td-colon'>:</td><td>"+
               "<input name='secrecy_agreement-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Secrecy_Agreement' data-table='job' class='input-readonly' type='radio' value='true' "+(obj['Job']['Secrecy_Agreement'] == 1?"checked":"")+" />"+
@@ -491,14 +618,22 @@ $(document).ready(function(){
               "<h3>PO info</h3>"+
               //"<p class='purchase-each-detail' style='margin-left: 12px'><span>PO no</span><span class='t2_desc text_underline'>"+obj['PO_No']+"</span><span>Date</span><span class='t2_desc text_underline'>"+obj['Job']['PO_Date']+"</span></p>"+
               "<table class='purchase-each-detail'>"+
-              "<tr><td class='text-vertical-top'>PO no.</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['PO_No']==null?'-':obj['PO_No'])+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>PO Date</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['PO_Date']==null?'-':obj['Job']['PO_Date'])+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['PO_Type']==null?'-':obj['Job']['PO_Type'])+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>PO Amount</td><td class='td-colon'>:</td><td><p class='margin-padding-0 text_underline'>"+thai_bath+"<span class='currency'>THB</span></p>"+tr_currency+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>PO no.</td><td class='td-colon'>:</td><td><input name='po_no-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_No' data-table='po_asso' class='input-readonly' type='text' value='"+(obj['PO_No']==null?'':obj['PO_No'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>PO Date</td><td class='td-colon'>:</td><td><input name='po_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Date' data-table='job' class='input-readonly' type='date' value='"+(obj['Job']['PO_Date']==null?'':obj['Job']['PO_Date'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td><input name='po_type-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Type' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['PO_Type']==null?'':obj['Job']['PO_Type'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>PO Amount</td><td class='td-colon'>:</td><td><p class='margin-padding-0'><input name='contract_value_thb-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_THB' data-table='job' class='input-readonly' type='text' value='"+thai_bath+"' readonly='true'>"+
+              "<span class='currency'>THB</span></p>"+tr_currency+"</td></tr>"+
              // tr_currency+
-              "<tr><td class='text-vertical-top'>Goveming Law</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Location']==null?'-':obj['Job']['Project_Location'])+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Credit Term</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Credit_Term']==null?'-':obj['Job']['Credit_Term'])+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Late Payment Financial Charges</td><td class='td-colon'>:</td><td class='text_underline text-vertical-top'>"+(obj['Job']['Late_Pay_Finan_Charge']==null?'-':obj['Job']['Late_Pay_Finan_Charge'] == 0?"NO":"YES")+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Goveming Law</td><td class='td-colon'>:</td><td><input name='goveming_law-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Goveming_Law' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Goveming_Law']==null?'':obj['Job']['Goveming_Law'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>Credit Term</td><td class='td-colon'>:</td><td><input name='credit_term-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Credit_Term' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['Credit_Term']==null?'':obj['Job']['Credit_Term'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>Late Payment Financial Charges</td><td class='td-colon'>:</td><td text-vertical-top'>"+
+              "<input name='late_pay_finan_change-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Late_Pay_Finan_Charge' data-table='job' class='input-readonly' type='radio' value='true' "+(obj['Job']['Late_Pay_Finan_Charge'] == 1?"checked":"")+" />"+
+							"<label for='' class='fa fa-check'></label>"+
+							"<input name='late_pay_finan_change-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Late_Pay_Finan_Charge' data-table='job' class='input-readonly' type='radio' value='false' "+(obj['Job']['Late_Pay_Finan_Charge'] == 0?"checked":"")+" />"+
+							"<label for='' class='fa fa-times'></label>"+
+							"</td><td>"+
+							"<input name='late_pay_finan_change-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Late_Pay_Finan_Charge' data-table='job' class='input-readonly' type='checkbox' value='none' "+(obj['Job']['Late_Pay_Finan_Charge'] == null?"checked":"")+"><label for=''>None</label>"+
+							"</td></tr>"+
               "</table>"+
               "</section>"+
               "</div>"+
