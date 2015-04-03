@@ -8,6 +8,7 @@
     			case "search" : adminController::search($params);break;
 				case "delete" : adminController::delete($params);break;
 				case "update" : adminController::update($params);break;
+				case "add_user" : adminController::addUser($params);break;
     		}		
     	}
     }
@@ -114,6 +115,41 @@
 		    
 		    if($result[0]->$params['type'] == $params['value']) {
 		        echo json_encode(array("status" => true));
+		    }
+		    else {
+		        echo json_encode(array("status" => false));
+		    }
+		}
+		
+		public static function addUser($params) {
+		    $not_same_user = true;
+		    $sql_username = "SELECT user.Username FROM user";
+		    $result = DB::query($sql_username)->get();
+		    for($i = 0; $i < count($result); $i++) {
+		        if($params['username'] == $result[$i]->Username) {
+		            $not_same_user = false;
+		        }
+		    }
+		    if($not_same_user) {
+		        $encode_username = Keys::encryptId($params['username']);
+		        $encode_password = Keys::encryptPassword($params['password']);
+		        $sql_add_user = 'INSERT INTO `user` (`UID`, `Username`, `Password`, `Authen`) ' .
+                                'VALUES (' . self::nullValue($encode_username) . ', ' . 
+                                            self::nullValue($params['username']) . ', ' . 
+                                            self::nullValue($encode_password) . ', ' . 
+                                            self::nullValue($params['auth']) . 
+                                        ')';
+                DB::puts($sql_add_user);
+                
+                $sql_username = "SELECT * FROM user WHERE user.Username = '" . $params['username'] . "'";
+		        $result = DB::query($sql_username)->get();
+		        if(count($result) > 0) {
+		            echo json_encode(array("status" => true));
+		        }
+		        else {
+		            echo json_encode(array("status" => false));
+		        }
+		        
 		    }
 		    else {
 		        echo json_encode(array("status" => false));

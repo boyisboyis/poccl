@@ -28,9 +28,6 @@
           <a href="#search" class='sub-menu'><i class="fa fa-search"></i></a>
         </li>
         <li>
-          <a href="#update_status" class='sub-menu'><i class="fa fa-upload"></i></a>
-        </li>
-        <li>
           <a href="#config_type" class='sub-menu'><i class="fa fa-wrench"></i></i></a>
         </li>
         <li>
