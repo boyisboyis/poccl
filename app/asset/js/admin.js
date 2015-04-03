@@ -372,7 +372,7 @@ $(document).ready(function(){
   
   $("#update-save-payment-terms").on("click", function(){
     
-    var temrs = $("#new-payment-terms").text();
+    var terms = $("#new-payment-terms").text();
     var id = $("#alert-box-payment-terms input[name=payment-temrs-id]").val();
     var index = $("#alert-box-payment-terms input[name=payment-temrs-index]").val();
     var jid = $("#alert-box-payment-terms input[name=payment-temrs-jid]").val();
@@ -390,7 +390,7 @@ $(document).ready(function(){
         action: "update_payment",
         params: {
           jid: jid,
-          temrs: temrs,
+          terms: terms,
           desc: desc,
           amount: amount,
           amount_percentage: amount_percentage,
@@ -404,20 +404,20 @@ $(document).ready(function(){
           var tr = "<tr>"+
                     "<td style='vertical-align: text-top; position: relative;'>"+
                     "<i class='fa fa-trash-o search-delete-payment' style='display: inline-block;'></i>"+
-                    "Term : "+temrs+"</td>"+
+                    "Term : " + data['obj'][0]['Terms'] + "</td>"+
                     "<td class='td-search-term'>"+
                     "<table>"+
                     "<tr>"+
-                    "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+desc+"</td>"+
+                    "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+data['obj'][0]['Payment_Type']+"</td>"+
                     "</tr>"+
                     "<tr>"+
-                    "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(amount).toFixed(2))+"' readonly='true'></td>"+
+                    "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(data['obj'][0]['Amount_Actual_Price']).toFixed(2))+"' readonly='true'></td>"+
                     "</tr>"+
                     "<tr>"+
-                    "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+amount_percentage+"' readonly='true'>%"+"</td>"+
+                    "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+data['obj'][0]['Amount_Actual_Percentage']+"' readonly='true'>%"+"</td>"+
                     "</tr>"+
                     "<tr>"+
-                    "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+payment_date+"</td>"+
+                    "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+data['obj'][0]['Invoice_Date']+"</td>"+
                     "</tr>"+
                     "</table>"+
                     "</td>"+
