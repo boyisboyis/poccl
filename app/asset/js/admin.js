@@ -13,7 +13,7 @@ $(document).ready(function(){
   /*$("#form_add input[type=text][name=start_date]").datepicker();
   $("#form_add input[type=text][name=complete_date]").datepicker();*/
   $('body').on('focus',".datepicker", function(){
-    $(this).datepicker();
+    $(this).datepicker({"dateFormat": "yy-mm-dd"});
   });
   
   
@@ -352,40 +352,18 @@ $(document).ready(function(){
 	
 	$('#admin-search-box-content').on("click", "#search-add-payment-terms",function(){
 	  $("#update-close-payment-terms, #box-alert").show();
+	  $("#update-close-guarantee-terms").hide();
 	  $("#alert-box-payment-terms input[name=payment-temrs-jid]").val($(this).data("jid"));
 	  $("#alert-box-payment-terms input[name=payment-temrs-id]").val($(this).data("id"));
 	  $("#alert-box-payment-terms input[name=payment-temrs-index]").val($(this).data("index"));
   });
+  
 	$('#admin-search-box-content').on("click", "#search-add-guarantee-terms",function(){
-	  var table = $(this).prev();
-	  table.find("i").hide();
-	  var index = $(this).data("index");
-	  var i = $(this).data("i");
-	  var jid = $(this).data("jid");
-    var  tr = "<tr>"+
-        "<td class='text-vertical-top' style='position: relative;'>"+
-        "<i class='fa fa-trash-o search-delete-payment' style='display: inline-block;'></i>"+
-        "Term : <span class='search-payment-term'>0</span><input name='terms-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Terms' data-table='guarantee' class='input-no-readonly' type='hidden' value='' readonly='true'></td>"+
-        "<td class='td-search-term'>"+
-        "<table>"+
-        "<tr>"+
-        "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'>"+
-        $("#payment_description_clone").html()+
-        "</td>"+
-        "</tr>"+
-        "<tr>"+
-        "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='guarantee' class='input-readonly' type='text' value='' readonly='true'></td>"+
-        "</tr>"+
-        "<tr>"+
-        "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='guarantee' class='input-readonly' type='text' value='' readonly='true'>%</td>"+
-        "</tr>"+
-        "<tr>"+
-        "<td class='text-vertical-top'Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td><input name='payment_date_plan-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Payment_date_plan' data-table='guarantee' class='input-readonly datepicker' type='text' value='' readonly='true'></td>"+
-        "</tr>"+
-        "</table>"+
-        "</td>"+
-        "</tr>";
-      table.append(tr)
+	  $("#update-close-guarantee-terms, #box-alert").show();
+	  $("#update-close-payment-terms").hide();
+	  $("#alert-box-guarantee-terms input[name=guarantee-temrs-jid]").val($(this).data("jid"));
+	  $("#alert-box-guarantee-terms input[name=guarantee-temrs-id]").val($(this).data("id"));
+	  $("#alert-box-guarantee-terms input[name=guarantee-temrs-index]").val($(this).data("index"));
   });
   
   $("#update-save-payment-terms").on("click", function(){
@@ -641,7 +619,7 @@ $(document).ready(function(){
               }
             }
             table_guarantee = "<table border=0 style='width: 100%;' class='purchase-each-detail'>"+tr+"</table>";
-            table_guarantee += "<p id='search-add-guarantee-terms' data-jid='"+obj['Job']['JID']+"' data-index='"+index+"' data-n='"+n+"'  style='color: #ed8151; cursor: pointer;'> <i class='fa fa-plus'></i> Add Guarantee Terms.</p>";
+            table_guarantee += "<p id='search-add-guarantee-terms' data-jid='"+obj['Job']['JID']+"' data-index='"+index+"' data-id='serach-"+index+"'  style='color: #ed8151; cursor: pointer;'> <i class='fa fa-plus'></i> Add Guarantee Terms.</p>";
             n = obj['Payment'].length; 
             var tr = "";
             if(n > 0){

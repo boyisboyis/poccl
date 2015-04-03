@@ -54,6 +54,41 @@
 	    </div>
 
 	  </div>
+	  <div id="alert-box-guarantee-terms">
+	    <h3>Term : <span id="new-guarantee-terms"></span></h3>
+	    <input type="hidden" id="guarantee-temrs-jid" name="guarantee-temrs-jid" value=""/>
+	    <input type="hidden" id="guarantee-temrs-id" name="guarantee-temrs-id" value=""/>
+	    <input type="hidden" id="guarantee-temrs-index" name="guarantee-temrs-index" value=""/>
+	    <div>
+	        <p>Description</p>
+    	    <select class='payment_description' name="guarantee-description">
+    	      <option value="">-</option>
+      	    <option value="Milestone Payment">Milestone Payment</option>
+      	    <option value="Retention Payment">Retention Payment</option>
+      	    <option value="Other Payment">Other Payment</option>
+      	  </select>
+      	  <p>Amount</p>
+      	  <div>
+      	   <input type="text" name="Amount_Actual_Price" data-type="Amount_Actual_Price" value="" />
+      	  </div>
+      	  <p>Amount Percentang</p>
+      	  <div>
+      	    <input type="text" name="Amount_Actual_Percentage" data-type="Amount_Actual_Percentage" value="" />
+      	  </div>
+      	  <p>Start Plan</p>
+      	  <div>
+      	    <input type="text" name="Payment_date_plan" data-type="Payment_date_plan" value="" class='datepicker' />
+      	  </div>
+      	  <p>Start Plan</p>
+      	  <div>
+      	    <input type="text" name="Payment_date_plan" data-type="Payment_date_plan" value="" class='datepicker' />
+      	  </div>
+	    </div>
+	    <div>
+	      <button id="update-save-guarantee-terms">Save</button><button id="update-close-guarantee-terms">Close</button>
+	    </div>
+
+	  </div>
 	</div>
 	
 	<div id='search-clone' style="display: none;">
