@@ -47,7 +47,11 @@ $(document).ready(function(){
   });
   
   $("#update-close-payment-terms").on("click", function(){
-    $("#update-close-payment-terms, #box-alert").hide();
+    $("#alert-box-payment-terms, #box-alert").hide();
+  });
+  
+  $("#update-close-guarantee-terms").on("click", function(){
+     $("#alert-box-guarantee-terms, #box-alert").hide();
   });
 
   $("#list-bank-guarantee").on("click", ".delete-guarantee", function() {
@@ -351,16 +355,16 @@ $(document).ready(function(){
 	});
 	
 	$('#admin-search-box-content').on("click", "#search-add-payment-terms",function(){
-	  $("#update-close-payment-terms, #box-alert").show();
-	  $("#update-close-guarantee-terms").hide();
+	  $("#alert-box-payment-terms, #box-alert").show();
+	  $("#alert-box-guarantee-terms").hide();
 	  $("#alert-box-payment-terms input[name=payment-temrs-jid]").val($(this).data("jid"));
 	  $("#alert-box-payment-terms input[name=payment-temrs-id]").val($(this).data("id"));
 	  $("#alert-box-payment-terms input[name=payment-temrs-index]").val($(this).data("index"));
   });
   
 	$('#admin-search-box-content').on("click", "#search-add-guarantee-terms",function(){
-	  $("#update-close-guarantee-terms, #box-alert").show();
-	  $("#update-close-payment-terms").hide();
+	  $("#alert-box-guarantee-terms, #box-alert").show();
+	  $("#alert-box-payment-terms").hide();
 	  $("#alert-box-guarantee-terms input[name=guarantee-temrs-jid]").val($(this).data("jid"));
 	  $("#alert-box-guarantee-terms input[name=guarantee-temrs-id]").val($(this).data("id"));
 	  $("#alert-box-guarantee-terms input[name=guarantee-temrs-index]").val($(this).data("index"));
@@ -411,7 +415,7 @@ $(document).ready(function(){
      $("#alert-box-payment-terms input[name=Amount_Actual_Price]").val("");
      $("#alert-box-payment-terms input[name=Amount_Actual_Percentage]").val("");
      $("#alert-box-payment-terms input[name=Payment_date_plan]").val("");
-     $("#update-close-payment-terms, #box-alert").hide();
+     $("#alert-box-payment-terms, #box-alert").hide();
   });
   
   
