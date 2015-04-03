@@ -399,6 +399,7 @@ div#content-article {
   left: 0;
   width: 300px;
   height: 40px;
+  font-size: 1.2em;
 }
 
 /*======================= */
@@ -412,3 +413,22 @@ div#content-article {
 	color: green;
 }
 
+
+#admin-search-box-search > div {
+  display: inline-block;
+}
+
+#admin-search-box-search input, #admin-search-box-search select {
+  width: 150px;
+  height: 30px;
+}
+
+#admin-search-box-search button {
+  position: static;
+  top: 0;
+  left: 0;
+}
+
+.purchase-detail input[type=text] {
+
+}
