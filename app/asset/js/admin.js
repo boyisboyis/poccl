@@ -589,10 +589,26 @@ $(document).ready(function(){
     var type = $(this).data("type");
     var terms = $(this).data("terms");
     console.log(jid, type, terms)
-    if(true){
-      $(this).parent().parent().prev().find(".search-delete-guarantee").show();
-      $(this).parent().parent().remove();
-    }
+    $.ajax({
+      method: "POST",
+				url: "adminsController",
+				dataType: "json",
+				data: {
+					action: "delete_guarantee",
+					params: {
+					  jid: jid,
+					  type: type,
+					  terms: terms
+					}
+  			},
+  			success: function(data) {
+  			  console.log(data['status']);
+  			  if(data['status']){
+            $(this).parent().parent().prev().find(".search-delete-guarantee").show();
+            $(this).parent().parent().remove();
+          }
+  			}
+    });
   });
 	
 	$("#confirm-yes").on("click", function() {

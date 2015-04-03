@@ -12,6 +12,7 @@
 				case "update_payment" : adminController::updatePayment($params);break;
 				case "update_guarantee" : adminController::updateGuarantee($params);break;
 				case "delete_payment" : adminController::deletePayment($params);break;
+				case "delete_guarantee" : adminController::deleteGuarantee($params);break;
     		}		
     	}
     }
@@ -229,8 +230,17 @@
 		}
 		
 		public static function deleteGuarantee($params) {
-		    $sql_guarantee = "DELETE FROM guarantee WHERE guarantee.JID = '" . $params . "'";
+		    $sql_guarantee = "DELETE FROM guarantee WHERE guarantee.JID = '" . $params['jid'] . "' AND guarantee.Guarantee_Type = '" . $params['type'] . "' AND guarantee.Terms = '" . $params['terms'] . "'";
 			DB::puts($sql_guarantee);
+			
+			$sql_select = "SELECT * FROM guarantee WHERE guarantee.JID = '" . $params['jid'] . "' AND guarantee.Guarantee_Type = '" . $params['type'] . "' AND guarantee.Terms = '" . $params['terms'] . "'";
+            $result = DB::query($sql_select)->get();
+            if(count($result) == 0) {
+                echo json_encode(array("status" => true));
+            }
+            else {
+                echo json_encode(array("status" => false));
+            }
 		}
         
         public static function nullValue($str) {
