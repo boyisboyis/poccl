@@ -372,7 +372,7 @@ $(document).ready(function(){
   
   $("#update-save-payment-terms").on("click", function(){
     
-    var temrs = $("#new-payment-terms").text();
+    var terms = $("#new-payment-terms").text();
     var id = $("#alert-box-payment-terms input[name=payment-temrs-id]").val();
     var index = $("#alert-box-payment-terms input[name=payment-temrs-index]").val();
     var jid = $("#alert-box-payment-terms input[name=payment-temrs-jid]").val();
@@ -390,7 +390,7 @@ $(document).ready(function(){
         action: "update_payment",
         params: {
           jid: jid,
-          temrs: temrs,
+          terms: terms,
           desc: desc,
           amount: amount,
           amount_percentage: amount_percentage,
@@ -404,20 +404,20 @@ $(document).ready(function(){
           var tr = "<tr>"+
                     "<td style='vertical-align: text-top; position: relative;'>"+
                     "<i class='fa fa-trash-o search-delete-payment' style='display: inline-block;'></i>"+
-                    "Term : "+temrs+"</td>"+
+                    "Term : " + data['obj'][0]['Terms'] + "</td>"+
                     "<td class='td-search-term'>"+
                     "<table>"+
                     "<tr>"+
-                    "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+desc+"</td>"+
+                    "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+data['obj'][0]['Payment_Type']+"</td>"+
                     "</tr>"+
                     "<tr>"+
-                    "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(amount).toFixed(2))+"' readonly='true'></td>"+
+                    "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(data['obj'][0]['Amount_Actual_Price']).toFixed(2))+"' readonly='true'></td>"+
                     "</tr>"+
                     "<tr>"+
-                    "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+amount_percentage+"' readonly='true'>%"+"</td>"+
+                    "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+data['obj'][0]['Amount_Actual_Percentage']+"' readonly='true'>%"+"</td>"+
                     "</tr>"+
                     "<tr>"+
-                    "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+payment_date+"</td>"+
+                    "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+data['obj'][0]['Invoice_Date']+"</td>"+
                     "</tr>"+
                     "</table>"+
                     "</td>"+
@@ -445,7 +445,7 @@ $(document).ready(function(){
   
   $("#update-save-guarantee-terms").on("click", function(){
     
-    var temrs = $("#new-guarantee-terms").text();
+    var terms = $("#new-guarantee-terms").text();
     var id = $("#alert-box-guarantee-terms input[name=guarantee-temrs-id]").val();
     var index = $("#alert-box-guarantee-terms input[name=guarantee-temrs-index]").val();
     var jid = $("#alert-box-guarantee-terms input[name=guarantee-temrs-jid]").val();
@@ -456,36 +456,60 @@ $(document).ready(function(){
     var until_date = $("#alert-box-guarantee-terms input[name=until_plan]").val();
     var i = $("#"+id).find(".content-search-right .purchase-each-detail .td-search-term").length + 1;
     var full_price = $("#"+id).find("input[name*=contract_value_thb]").val();
-    console.log(temrs, id,index , jid, desc, amount, amount_percentage, start_date, until_date)
-    if(true){
-      var tr = "<tr>"+
-                "<td style='vertical-align: text-top; position: relative;'>"+
-                "<i class='fa fa-trash-o search-delete-guarantee' style='display: inline-block;'></i>"+
-                "Term : "+temrs+"</td>"+
-                "<td class='td-search-term'>"+
-                "<table>"+
-                "<tr>"+
-                "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+desc+"</td>"+
-                "</tr>"+
-                "<tr>"+
-                "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(amount).toFixed(2))+"' readonly='true'></td>"+
-                "</tr>"+
-                "<tr>"+
-                "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+amount_percentage+"' readonly='true'>%"+"</td>"+
-                "</tr>"+
-                "<tr>"+
-                "<td class='text-vertical-top'>Start Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><span class='text_underline text-vertical-top' style='margin-right: 10px;'>"+start_date+"</span>Until Plan : <span class='text_underline'>"+until_date+"</span></td>"+
-                "</tr>"+
-                "</table>"+
-                "</td>"+
-                "</tr>";
-      
-      $("#"+id).find(".content-search-right .search-delete-payment").hide();
-      $("#"+id).find(".content-search-right table.guarantee_terms_add").append(tr);
-    }
-    else {
-      console.log('false');
-    }
+    // console.log(temrs, id,index , jid, desc, amount, amount_percentage, start_date, until_date)
+    
+    $.ajax({
+      method: "POST",
+      url: "adminsController",
+      dataType: "json",
+      data: {
+        action: "update_guarantee",
+        params: {
+          jid: jid,
+          terms: terms,
+          desc: desc,
+          amount: amount,
+          amount_percentage: amount_percentage,
+          start_date: start_date,
+          until_date: until_date,
+          full_price: full_price
+        }
+      },
+      success: function(data) {
+        console.log(data);
+        if(data['status']){
+          var tr = "<tr>"+
+                    "<td style='vertical-align: text-top; position: relative;'>"+
+                    "<i class='fa fa-trash-o search-delete-guarantee' style='display: inline-block;'></i>"+
+                    "Term : "+ data['obj'][0]['Terms'] +"</td>"+
+                    "<td class='td-search-term'>"+
+                    "<table>"+
+                    "<tr>"+
+                    "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+ data['obj'][0]['Guarantee_Type'] +"</td>"+
+                    "</tr>"+
+                    "<tr>"+
+                    "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(data['obj'][0]['Amount_Actual_Price']).toFixed(2))+"' readonly='true'></td>"+
+                    "</tr>"+
+                    "<tr>"+
+                    "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+data['obj'][0]['Amount_Actual_Percentage']+"' readonly='true'>%"+"</td>"+
+                    "</tr>"+
+                    "<tr>"+
+                    "<td class='text-vertical-top'>Start Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><span class='text_underline text-vertical-top' style='margin-right: 10px;'>"+data['obj'][0]['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+data['obj'][0]['Until_Plan']+"</span></td>"+
+                    "</tr>"+
+                    "</table>"+
+                    "</td>"+
+                    "</tr>";
+          
+          $("#"+id).find(".content-search-right .search-delete-payment").hide();
+          $("#"+id).find(".content-search-right table.guarantee_terms_add").append(tr);
+        }
+        else {
+          console.log('false');
+        }
+      }
+    });
+    
+    
 
      $("#new-guarantee-terms").text(0);
      $("#alert-box-guarantee-terms input[name=guarantee-temrs-id]").val("");
