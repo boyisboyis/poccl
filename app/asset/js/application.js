@@ -296,7 +296,7 @@ $(document).ready(function(){
       success: function(req){
         if(req['status'] == true){
           var length = req['obj'].length;
-          $("#content-guarantee-news").html("<h2 class='main-topics'>Gurantees</h2><div class='page-list'></div>");
+          $("#content-guarantee-news").html("<h2 class='main-topics'>Bank Gurantees is not return</h2><div class='page-list'></div>");
           $.each(req['obj'], function(){
             var _obj = $(this)[0];
             $("#content-guarantee-news > div").append(

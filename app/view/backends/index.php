@@ -11,9 +11,11 @@
 <head>
   <title>Admin</title>
   <link rel="stylesheet" href="maincss" type="text/css" />
+  <link rel="stylesheet" href="jquery-ui-css" type="text/css" />
   <link rel="stylesheet" href="fontcss" type="text/css" />
   <link rel="stylesheet" href="admincss" type="text/css" />
   <script type="text/javascript" src="jquery"></script>
+  <script type="text/javascript" src="jquery-ui"></script>
   <script type="text/javascript" src="adminjs"></script>
 </head>
 

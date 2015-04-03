@@ -46,7 +46,7 @@
       	  </div>
       	  <p>Payment Date Plan</p>
       	  <div>
-      	    <input type="date" name="Payment_date_plan" data-type="Payment_date_plan" value="" />
+      	    <input type="text" name="Payment_date_plan" data-type="Payment_date_plan" value="" class='datepicker' />
       	  </div>
 	    </div>
 	    <div>

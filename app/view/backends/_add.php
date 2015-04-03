@@ -72,14 +72,14 @@
 						<div class='table-cell'>Start Date</div>
 						<div class='table-cell colon'></div>
 						<div class='table-cell'>
-							<input type="date" name="start_date" />
+							<input type="text" name="start_date" class='datepicker' />
 						</div>
 					</div>
 					<div class='table-row'>
 						<div class='table-cell'>Complete Date</div>
 						<div class='table-cell colon'></div>
 						<div class='table-cell'>
-							<input type="date" name="complete_date" />
+							<input type="text" name="complete_date" class='datepicker' />
 						</div>
 						<div class='table-cell'>
 							<input type="checkbox" name="complete_date" value="none" />
@@ -107,7 +107,7 @@
 					<div class='table-cell'>Po Date</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="date" name="po_date" />
+						<input type="text" name="po_date" class='datepicker' />
 					</div>
 					<div class='table-cell'>
 						<input type="checkbox" name="po_date" value="none" />
@@ -250,7 +250,7 @@
 								<li class='table-cell'>Invoice Date</li>
 								<li class='table-cell colon'></li>
 								<li class='table-cell'>
-									<input type="date" name="payment_terms[0][payment_terms_date_plan]" />
+									<input type="text" name="payment_terms[0][payment_terms_date_plan]" class='datepicker' />
 								</li>
 							</ol>
 						</div>
@@ -315,7 +315,7 @@
 								<li class='table-cell'>Start Plan</li>
 								<li class='table-cell colon'></li>
 								<li class='table-cell'>
-									<input type="date" name="bank_guarantee[0][bank_guarantee_start_date]" />
+									<input type="text" name="bank_guarantee[0][bank_guarantee_start_date]" class='datepicker' />
 								</li>
 							</ol>
 							<ol class='table-row'>
@@ -323,7 +323,7 @@
 								<li class='table-cell'>Until Plan</li>
 								<li class='table-cell colon'></li>
 								<li class='table-cell'>
-									<input type="date" name="bank_guarantee[0][bank_guarantee_until_date]" />
+									<input type="text" name="bank_guarantee[0][bank_guarantee_until_date]" class='datepicker' />
 								</li>
 							</ol>
 						</div>
@@ -379,7 +379,7 @@
 				<li class='table-cell'>Payment Date Plan</li>
 				<li class='table-cell colon'></li>
 				<li class='table-cell'>
-					<input type="date" name="payment_terms[numbers][payment_terms_date_plan]" />
+					<input type="text" name="payment_terms[numbers][payment_terms_date_plan]" class='datepicker' />
 				</li>
 			</ol>
 		</div>
@@ -438,7 +438,7 @@
 				<li class='table-cell'>Start Plan</li>
 				<li class='table-cell colon'></li>
 				<li class='table-cell'>
-					<input type="date" name="bank_guarantee[numbers][bank_guarantee_start_date]" />
+					<input type="text" name="bank_guarantee[numbers][bank_guarantee_start_date]" class='datepicker' />
 				</li>
 			</ol>
 			<ol class='table-row'>
@@ -446,7 +446,7 @@
 				<li class='table-cell'>Until Plan</li>
 				<li class='table-cell colon'></li>
 				<li class='table-cell'>
-					<input type="date" name="bank_guarantee[numbers][bank_guarantee_until_date]" />
+					<input type="text" name="bank_guarantee[numbers][bank_guarantee_until_date]" class='datepicker' />
 				</li>
 			</ol>
 		</div>

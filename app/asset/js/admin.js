@@ -9,6 +9,14 @@ $(document).ready(function(){
 	var update = "";
   getHash();
   
+  //$(".datepicker").datepicker();
+  /*$("#form_add input[type=text][name=start_date]").datepicker();
+  $("#form_add input[type=text][name=complete_date]").datepicker();*/
+  $('body').on('focus',".datepicker", function(){
+    $(this).datepicker();
+  });
+  
+  
   $(".sub-menu").on("click", function(){
     document.location.hash = $(this).attr("href");
     getHash();
@@ -372,7 +380,7 @@ $(document).ready(function(){
         "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='guarantee' class='input-readonly' type='text' value='' readonly='true'>%</td>"+
         "</tr>"+
         "<tr>"+
-        "<td class='text-vertical-top'Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td><input name='payment_date_plan-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Payment_date_plan' data-table='guarantee' class='input-readonly' type='date' value='' readonly='true'></td>"+
+        "<td class='text-vertical-top'Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td><input name='payment_date_plan-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Payment_date_plan' data-table='guarantee' class='input-readonly datepicker' type='text' value='' readonly='true'></td>"+
         "</tr>"+
         "</table>"+
         "</td>"+
@@ -688,10 +696,10 @@ $(document).ready(function(){
               "<h3>Working Remark</h3>"+
 							"<table>"+
 							"<tr>"+
-							"<td class='text-vertical-top'>Start Date</td><td class='td-colon'>:</td><td><input name='start_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Work_Start_Date' data-table='job' class='input-readonly' type='date' value='"+(obj['Job']['Work_Start_Date']==null?'':obj['Job']['Work_Start_Date'])+"' readonly='true'></td>"+
+							"<td class='text-vertical-top'>Start Date</td><td class='td-colon'>:</td><td><input name='start_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Work_Start_Date' data-table='job' class='input-readonly datepicker' type='text' value='"+(obj['Job']['Work_Start_Date']==null?'':obj['Job']['Work_Start_Date'])+"' readonly='true'></td>"+
 							"</tr>"+
 							"<tr>"+
-							"<td class='text-vertical-top'>Complete Date</td><td class='td-colon'>:</td><td><input name='complete_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Work_Complete_Date' data-table='job' class='input-readonly' type='date' value='"+(obj['Job']['Work_Complete_Date']==null?'':obj['Job']['Work_Complete_Date'])+"' readonly='true'></td>"+
+							"<td class='text-vertical-top'>Complete Date</td><td class='td-colon'>:</td><td><input name='complete_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Work_Complete_Date' data-table='job' class='input-readonly datepicker' type='text' value='"+(obj['Job']['Work_Complete_Date']==null?'':obj['Job']['Work_Complete_Date'])+"' readonly='true'></td>"+
 							"</tr>"+
 							"</table>"+
               //"<p class='purchase-each-detail'><span>Start Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Start_Date']==null?'-':obj['Job']['Work_Start_Date'])+"</span></span><span>Complete Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Complete_Date']==null?'-':obj['Job']['Work_Complete_Date'])+"</span></span></p>"+
@@ -701,7 +709,7 @@ $(document).ready(function(){
               //"<p class='purchase-each-detail' style='margin-left: 12px'><span>PO no</span><span class='t2_desc text_underline'>"+obj['PO_No']+"</span><span>Date</span><span class='t2_desc text_underline'>"+obj['Job']['PO_Date']+"</span></p>"+
               "<table class='purchase-each-detail'>"+
               "<tr><td class='text-vertical-top'>PO no.</td><td class='td-colon'>:</td><td><input name='po_no-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_No' data-table='po_asso' class='input-readonly' type='text' value='"+(obj['PO_No']==null?'':obj['PO_No'])+"' readonly='true'></td></tr>"+
-              "<tr><td class='text-vertical-top'>PO Date</td><td class='td-colon'>:</td><td><input name='po_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Date' data-table='job' class='input-readonly' type='date' value='"+(obj['Job']['PO_Date']==null?'':obj['Job']['PO_Date'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>PO Date</td><td class='td-colon'>:</td><td><input name='po_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Date' data-table='job' class='input-readonly datepicker' type='text' value='"+(obj['Job']['PO_Date']==null?'':obj['Job']['PO_Date'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td><input name='po_type-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Type' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['PO_Type']==null?'':obj['Job']['PO_Type'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>PO Amount</td><td class='td-colon'>:</td><td><p class='margin-padding-0'><input name='contract_value_thb-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_THB' data-table='job' class='input-readonly' type='text' value='"+thai_bath+"' readonly='true'>"+
               "<span class='currency'>THB</span></p>"+tr_currency+"</td></tr>"+
