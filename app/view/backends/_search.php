@@ -32,9 +32,11 @@
 	        <p>Description</p>
     	    <select class='payment_description' name="payment-description">
     	      <option value="">-</option>
-      	    <option value="Milestone Payment">Milestone Payment</option>
-      	    <option value="Retention Payment">Retention Payment</option>
-      	    <option value="Other Payment">Other Payment</option>
+      	    <option value="Advance Payment">Advance Payment</option>
+						<option value="Progress Payment">Progress Payment</option>
+						<option value="Milestone Payment">Milestone Payment</option>
+						<option value="Retention Payment">Retention Payment</option>
+						<option value="Other Payment">Other Payment</option>
       	  </select>
       	  <p>Amount</p>
       	  <div>
@@ -63,9 +65,13 @@
 	        <p>Description</p>
     	    <select class='guarantee_description' name="guarantee-description">
     	      <option value="">-</option>
-      	    <option value="Mechanical Guarantee">Mechanical Guarantee</option>
-      	    <option value="Performance Guarante">Performance Guarante</option>
-      	    <option value="Other Payment">Other Guarante</option>
+      	    <!--<option value="Mechanical Guarantee">Mechanical Guarantee</option>
+      	    <option value="Performance Guarantee">Performance Guarantee</option>-->
+      	    <option value="Advance Payment Bond">Advance Payment Bond</option>
+      	    <option value="Performance Bond">Performance Bond</option>
+      	    <option value="Warranty Bond">Warranty Bond</option>
+      	    <option value="Refund Bond">Refund Bond</option>
+      	    <option value="Other Guarantee">Other Guarantee</option>
       	  </select>
       	  <p>Amount</p>
       	  <div>

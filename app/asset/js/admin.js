@@ -533,6 +533,17 @@ $(document).ready(function(){
 	  }
 	  $("#new-payment-terms").text(count);
   });
+  
+  $("#admin-search-box-content").on("click", ".search-delete-payment", function(){
+    var jid = $(this).data("jid");
+    var type = $(this).data("type");
+    var terms = $(this).data("terms");
+    console.log(jid, type, terms)
+    if(true){
+      $(this).parent().parent().prev().find(".search-delete-payment").show();
+      $(this).parent().parent().remove();
+    }
+  })
 	
 	$("#confirm-yes").on("click", function() {
 			$.ajax({
@@ -702,11 +713,12 @@ $(document).ready(function(){
             var tr = "";
             if(n > 0){
               for(var i=0; i<n; i++){
-                var minus = '';
+                var dis = 'display: none';
                 if (i + 1 == n) {
-                  minus = "<i class='fa fa-trash-o search-delete-payment' style='display: inline-block;'></i>";
+                  dis = 'display: inline-block;';
                 }
                 var p_content = obj['Payment'][i];
+                var minus = "<i class='fa fa-trash-o search-delete-payment' data-type='"+p_content['Payment_Type']+"' data-terms='"+p_content['Terms']+"' data-jid='"+obj['Job']['JID']+"' style='"+dis+"'></i>";
                // var p_amount = (p_content['Amount_Actual_Percentage'] == "" || p_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)):p_content['Amount_Actual_Percentage']+"%";
                 tr += "<tr>"+
                 "<td style='vertical-align: text-top; position: relative;'>"+
@@ -751,8 +763,14 @@ $(document).ready(function(){
             $("#admin-search-box-content").append(
               "<article class='purchase-detail' id='serach-"+index+"'>" +
               "<h2 class='job-id'><span class='job-id-toggle'>"+keySearch+"</span>"+
-							"<i class='fa fa-trash-o admin-search-delete' data-jid='"+obj['Job']['JID']+"' data-index='serach-"+index+"'></i>"+
+							"<i class='fa fa-wheelchair purchase_status' data-jid='"+obj['Job']['JID']+"' data-index='serach-"+index+"'></i><i class='fa fa-trash-o admin-search-delete' data-jid='"+obj['Job']['JID']+"' data-index='serach-"+index+"'></i>"+
 							"</h2>"+
+							/*"<div id='purchase_status_"+index+"' class='purchase_status_box'>"+
+							"<div>"+
+							"<h3>Has PO</h3>"+
+							"<h3>Has Check List</h3>"+
+							"</div>"+
+							"</div>"+*/
               "<div style='width: 100%;display:none;'>"+
               "<div style='width: 100%'>"+
               "<section class='content-search-left'>"+

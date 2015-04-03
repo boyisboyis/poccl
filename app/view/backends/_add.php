@@ -91,9 +91,9 @@
 		</div>
 		<div style="float: left; width: 50%;">
 			<div class='table'>
-				<h3>Po Info.</h3>
+				<h3>PO Info.</h3>
 				<div class='table-row'>
-					<div class='table-cell'>Po No</div>
+					<div class='table-cell'>PO No</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
 						<input type="text" name="po_no" />
@@ -104,7 +104,7 @@
 					</div>
 				</div>
 				<div class='table-row'>
-					<div class='table-cell'>Po Date</div>
+					<div class='table-cell'>PO Date</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
 						<input type="text" name="po_date" class='datepicker' />
@@ -115,11 +115,14 @@
 					</div>
 				</div>
 				<div class='table-row'>
-					<div class='table-cell'>Po Type</div>
+					<div class='table-cell'>PO Type</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
 						<select name="po_type">
-							<option value="">---</option>
+							<option value="Fix Lump Sum">Fix Lump Sum</option>
+							<option value="Unit Price">Unit Price</option>
+							<option value="Cost Plus">Cost Plus</option>
+							<option value="Others">Others</option>
 						</select>
 					</div>
 					<div class='table-cell'>
@@ -128,7 +131,7 @@
 					</div>
 				</div>
 				<div class='table-row'>
-					<div class='table-cell'>Po Amount</div>
+					<div class='table-cell'>PO Amount</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
 						<input type="text" name="po_amount" />
@@ -213,8 +216,11 @@
 								<li class='table-cell colon'></li>
 								<li class='table-cell'>
 									<select name="payment_terms[0][payment_terms_select]">
-										<option value="">----</option>
 										<option value="Advance Payment">Advance Payment</option>
+										<option value="Progress Payment">Progress Payment</option>
+										<option value="Milestone Payment">Milestone Payment</option>
+										<option value="Retention Payment">Retention Payment</option>
+										<option value="Other Payment">Other Payment</option>
 									</select>
 								</li>
 							</ol>
@@ -270,8 +276,11 @@
 								<li class='table-cell colon'></li>
 								<li class='table-cell'>
 									<select name="bank_guarantee[0][bank_guarantee_select]">
-										<option value="">----</option>
-										<option value="Advance Guarantee">Advance Guarantee</option>
+										<option value="Advance Payment Bond">Advance Payment Bond</option>
+				      	    <option value="Performance Bond">Performance Bond</option>
+				      	    <option value="Warranty Bond">Warranty Bond</option>
+				      	    <option value="Refund Bond">Refund Bond</option>
+				      	    <option value="Other Guarantee">Other Guarantee</option>
 									</select>
 								</li>
 							</ol>
@@ -342,8 +351,11 @@
 				<li class='table-cell colon'></li>
 				<li class='table-cell'>
 					<select name="payment_terms[numbers][payment_terms_select]">
-						<option value="">----</option>
 						<option value="Advance Payment">Advance Payment</option>
+						<option value="Progress Payment">Progress Payment</option>
+						<option value="Milestone Payment">Milestone Payment</option>
+						<option value="Retention Payment">Retention Payment</option>
+						<option value="Other Payment">Other Payment</option>
 					</select>
 				</li>
 			</ol>
@@ -393,8 +405,11 @@
 				<li class='table-cell colon'></li>
 				<li class='table-cell'>
 					<select name="bank_guarantee[numbers][bank_guarantee_select]">
-						<option value="">----</option>
-						<option value="Advance Guarantee">Advance Guarantee</option>
+						<option value="Advance Payment Bond">Advance Payment Bond</option>
+      	    <option value="Performance Bond">Performance Bond</option>
+      	    <option value="Warranty Bond">Warranty Bond</option>
+      	    <option value="Refund Bond">Refund Bond</option>
+      	    <option value="Other Guarantee">Other Guarantee</option>
 					</select>
 				</li>
 			</ol>
