@@ -31,7 +31,7 @@
         </li>
         <li>
           <!--<a href="#config_type" class='sub-menu'><i class="fa fa-wrench"></i></i></a>-->
-          <a href="#" class='sub-menu'><i class="fa fa-wrench"></i></i></a>
+          <a class='sub-menu'><i class="fa fa-wrench"></i></i></a>
         </li>
         <li>
           <a href="#add_user" class='sub-menu'><i class="fa fa-user-plus"></i></a>
