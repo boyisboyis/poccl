@@ -378,35 +378,60 @@ $(document).ready(function(){
     var jid = $("#alert-box-payment-terms input[name=payment-temrs-jid]").val();
     var desc = $("#alert-box-payment-terms select[name=payment-description]").val();
     var amount = $("#alert-box-payment-terms input[name=Amount_Actual_Price]").val();
-    var amount_percentang = $("#alert-box-payment-terms input[name=Amount_Actual_Percentage]").val();
+    var amount_percentage = $("#alert-box-payment-terms input[name=Amount_Actual_Percentage]").val();
     var payment_date = $("#alert-box-payment-terms input[name=Payment_date_plan]").val();
     var i = $("#"+id).find(".content-search-left .purchase-each-detail .td-search-term").length + 1;
-    if(true){
-      var tr = "<tr>"+
-                "<td style='vertical-align: text-top; position: relative;'>"+
-                "<i class='fa fa-trash-o search-delete-payment' style='display: inline-block;'></i>"+
-                "Term : "+temrs+"</td>"+
-                "<td class='td-search-term'>"+
-                "<table>"+
-                "<tr>"+
-                "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+desc+"</td>"+
-                "</tr>"+
-                "<tr>"+
-                "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(amount).toFixed(2))+"' readonly='true'></td>"+
-                "</tr>"+
-                "<tr>"+
-                "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+amount_percentang+"' readonly='true'>%"+"</td>"+
-                "</tr>"+
-                "<tr>"+
-                "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+payment_date+"</td>"+
-                "</tr>"+
-                "</table>"+
-                "</td>"+
-                "</tr>";
-      
-      $("#"+id).find(".content-search-left .search-delete-payment").hide();
-      $("#"+id).find(".content-search-left table.payment_terms_add").append(tr);
-    }
+    var full_price = $("#"+id).find("input[name*=contract_value_thb]").val();
+    $.ajax({
+      method: "POST",
+      url: "adminsController",
+      dataType: "json",
+      data: {
+        action: "update_payment",
+        params: {
+          jid: jid,
+          temrs: temrs,
+          desc: desc,
+          amount: amount,
+          amount_percentage: amount_percentage,
+          payment_date: payment_date,
+          full_price: full_price
+        }
+      },
+      success: function(data) {
+        console.log(data);
+        if(data['status']){
+          var tr = "<tr>"+
+                    "<td style='vertical-align: text-top; position: relative;'>"+
+                    "<i class='fa fa-trash-o search-delete-payment' style='display: inline-block;'></i>"+
+                    "Term : "+temrs+"</td>"+
+                    "<td class='td-search-term'>"+
+                    "<table>"+
+                    "<tr>"+
+                    "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+desc+"</td>"+
+                    "</tr>"+
+                    "<tr>"+
+                    "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(amount).toFixed(2))+"' readonly='true'></td>"+
+                    "</tr>"+
+                    "<tr>"+
+                    "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+amount_percentage+"' readonly='true'>%"+"</td>"+
+                    "</tr>"+
+                    "<tr>"+
+                    "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+payment_date+"</td>"+
+                    "</tr>"+
+                    "</table>"+
+                    "</td>"+
+                    "</tr>";
+          
+          $("#"+id).find(".content-search-left .search-delete-payment").hide();
+          $("#"+id).find(".content-search-left table.payment_terms_add").append(tr);
+        }
+        else {
+          console.log('false');
+        }
+      }
+    });
+    
      $("#new-payment-terms").text(0);
      $("#alert-box-payment-terms input[name=payment-temrs-id]").val("");
      $("#alert-box-payment-terms input[name=payment-temrs-index]").val("");
