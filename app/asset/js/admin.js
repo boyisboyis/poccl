@@ -271,6 +271,66 @@ $(document).ready(function(){
     }
     return false;
   });
+  
+  $('#add-user').on('click', function() {
+    if($('#input-username').val().length == 0 || $('#input-password').val().length == 0 || $('#input-confirm').val().length == 0) {
+      $("#add-user-confirm").hide();
+      $("#msg-alert").html('Please, Input value.');
+      $('#add-user-msg-alert').show();
+      $('#admin-add-user-box-alert').show();
+    }
+    else if($('#input-username').val().length < 4 || $('#input-password').val().length < 4 || $('#input-confirm').val().length < 4) {
+      $("#add-user-confirm").hide();
+      $("#msg-alert").html('Please, Input more than 4.');
+      $('#add-user-msg-alert').show();
+      $('#admin-add-user-box-alert').show();
+    }
+    else {
+      $('#add-user-msg-alert').hide();
+      $('#msg-alert').html('Are you sure?');
+      $('#add-user-confirm').show();
+      $('#admin-add-user-box-alert').show();
+    }
+  });
+  
+  $('#add-user-confirm-yes').on('click', function() {
+    $('#admin-add-user-box-alert').hide();
+    var username = $('#input-username').val();
+    var password = $('#input-password').val();
+    var confirm = $('#input-confirm').val();
+    var auth = $('#select-auth').val();
+    if(password != confirm) {
+      $("#add-user-confirm").hide();
+      $("#msg-alert").html('Password not match.<br>Please, Try again.');
+      $('#add-user-msg-alert').show();
+      $('#admin-add-user-box-alert').show();
+    }
+    else {
+      $.ajax({
+        method: "POST",
+        url: "adminsController",
+        dataType: "json",
+        data: {
+          action: "add_user",
+          params: {
+            username: username,
+            password: password,
+            auth: auth
+          }
+        },
+        success: function(data) {
+          console.log(data);
+          $('#input-username').val('');
+          $('#input-password').val('');
+          $('#input-confirm').val('');
+        }
+      });
+    }
+  });
+  
+  $('#add-user-msg-button, #add-user-confirm-no').on('click', function() {
+    $('#admin-add-user-box-alert').hide();
+  });
 	
  	$('#admin-search-box-content').on('click', '.admin-search-delete', function() { 
 		delete_jid = $(this).data('jid');
