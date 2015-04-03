@@ -403,7 +403,7 @@ $(document).ready(function(){
         if(data['status']){
           var tr = "<tr>"+
                     "<td style='vertical-align: text-top; position: relative;'>"+
-                    "<i class='fa fa-trash-o search-delete-payment' style='display: inline-block;'></i>"+
+                    "<i class='fa fa-trash-o search-delete-payment' data-type='"+data['obj'][0]['Payment_Type']+"' data-terms='"+data['obj'][0]['Terms']+"' data-jid='"+jid+"' style='display: inline-block;'></i>"+
                     "Term : " + data['obj'][0]['Terms'] + "</td>"+
                     "<td class='td-search-term'>"+
                     "<table>"+
@@ -480,7 +480,7 @@ $(document).ready(function(){
         if(data['status']){
           var tr = "<tr>"+
                     "<td style='vertical-align: text-top; position: relative;'>"+
-                    "<i class='fa fa-trash-o search-delete-guarantee' style='display: inline-block;'></i>"+
+                    "<i class='fa fa-trash-o search-delete-guarantee' data-type='"+data['obj'][0]['Guarantee_Type']+"' data-terms='"+data['obj'][0]['Terms']+"' data-jid='"+jid+"' style='display: inline-block;'></i>"+
                     "Term : "+ data['obj'][0]['Terms'] +"</td>"+
                     "<td class='td-search-term'>"+
                     "<table>"+
@@ -543,7 +543,6 @@ $(document).ready(function(){
   });
   
   $("#alert-box-payment-terms").on("change", ".payment_description", function(){
-    //var jid = $(this).parent().parent().find("input[name=payment-temrs-jid]").val();
     var id = $(this).parent().parent().find("input[name=payment-temrs-id]").val();
     var description = $(this).val().toLowerCase();
     var count = 1;
@@ -557,7 +556,7 @@ $(document).ready(function(){
 	  }
 	  $("#new-payment-terms").text(count);
   });
-  
+ 
   $("#admin-search-box-content").on("click", ".search-delete-payment", function(){
     var jid = $(this).data("jid");
     var type = $(this).data("type");
@@ -567,7 +566,18 @@ $(document).ready(function(){
       $(this).parent().parent().prev().find(".search-delete-payment").show();
       $(this).parent().parent().remove();
     }
-  })
+  });
+  
+  $("#admin-search-box-content").on("click", ".search-delete-guarantee", function(){
+    var jid = $(this).data("jid");
+    var type = $(this).data("type");
+    var terms = $(this).data("terms");
+    console.log(jid, type, terms)
+    if(true){
+      $(this).parent().parent().prev().find(".search-delete-guarantee").show();
+      $(this).parent().parent().remove();
+    }
+  });
 	
 	$("#confirm-yes").on("click", function() {
 			$.ajax({
@@ -703,11 +713,12 @@ $(document).ready(function(){
             var tr = "";
             if(n > 0){
               for(var i=0;i<n;i++){
-                var minus = '';
+                var dis = 'display: none;';
                 if (i + 1 == n) {
-                  minus = "<i class='fa fa-trash-o search-delete-guarantee' style='display: inline-block;'></i>"
+                  dis = 'display: inline-block;';
                 }
                 var g_content = obj['Guarantee'][i];
+                var minus = "<i class='fa fa-trash-o search-delete-guarantee' data-type='"+g_content['Guarantee_Type']+"' data-terms='"+g_content['Terms']+"' data-jid='"+obj['Job']['JID']+"' style='"+dis+"'></i>"
                  tr += "<tr>"+
                 "<td class='text-vertical-top' style='position: relative;'>"+
                 minus+
