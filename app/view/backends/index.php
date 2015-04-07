@@ -24,6 +24,7 @@
 
 <body>
   <div id="wrapper-admin">
+
     <nav id="wrap-nav">
       <ul>
 				<li><a href="logout"><i class="fa fa-power-off"></i><a href="logout">Logout</a></li>
@@ -38,6 +39,7 @@
           </li>
           <li>
             <a href="#search" class='sub-menu'><i class="fa fa-search"></i></a>
+
           </li>
           <li>
             <!--<a href="#config_type" class='sub-menu'><i class="fa fa-wrench"></i></i></a>-->

@@ -13,7 +13,9 @@
 				case "update_guarantee" : adminController::updateGuarantee($params);break;
 				case "delete_payment" : adminController::deletePayment($params);break;
 				case "delete_guarantee" : adminController::deleteGuarantee($params);break;
-    		}		
+				case "get_type" : adminController::getType($params);break;
+				case "add_type" : adminController::addType($params);break;
+    		}
     	}
     }
     else{
@@ -263,6 +265,43 @@
             }
             else {
                 return 'null, null';
+            }
+        }
+        
+        public static function getType($params) {
+            $sql_get_po_type = "SELECT " . $params . ".Description FROM " . $params;
+            $result = DB::query($sql_get_po_type)->get();
+            
+            if(count($result != 0)) {
+                sort($result);
+                echo json_encode(array("status" => true, "obj" => $result));
+            }
+            else {
+                echo json_encode(array("status" => false));
+            }
+        }
+        
+        public static function addType($params) {
+            $sql_get_type = "SELECT " . $params['table'] . ".Description FROM " . $params['table'] . " WHERE " . $params['table'] . ".Description = '" . $params['desc'] . "'";
+            $result = DB::query($sql_get_type)->get();
+            
+            if(count($result) != 0) {
+                echo json_encode(array("status" => false));
+            }
+            else {
+                $sql_add_type = "INSERT INTO `" . $params['table'] . "` (`Description`) " .
+                                    "VALUES (" . self::nullValue($params['desc']) . ")";
+                DB::puts($sql_add_type);
+                
+                $sql_get_type_check = "SELECT " . $params['table'] . ".Description FROM " . $params['table'] . " WHERE " . $params['table'] . ".Description = '" . $params['desc'] . "'";
+                $result_check = DB::query($sql_get_type_check)->get();
+                
+                if(count($result_check) != 0) {
+                    echo json_encode(array("status" => true)); 
+                }
+                else {
+                    echo json_encode(array("status" => false));
+                }
             }
         }
     }

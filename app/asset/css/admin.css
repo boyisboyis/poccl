@@ -408,9 +408,11 @@ div#content-article {
 	position: static;
 }
 
-/*======================= 
-*/
-#admin-add-user-box-alert {
+
+/*======================= */
+
+#admin-add-user-box-alert, #add-po-type-alert, #add-payment-type-alert, #add-guarantee-type-alert {
+
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -419,7 +421,7 @@ div#content-article {
 	background-color: rgba(0,0,0,0.5);
 	z-index: 9999;
 }
-#admin-add-user-box-alert > section {
+#admin-add-user-box-alert > section, #add-po-type-alert > section, #add-payment-type-alert > section, #add-guarantee-type-alert > section {
 	position: absolute;
 	z-index: 9998;
 	width: 500px;
@@ -432,15 +434,15 @@ div#content-article {
 	border-radius: 10px;
 }
 
-#admin-add-user-box-alert h3 {
+#admin-add-user-box-alert h3, #add-po-type-alert h3, #add-payment-type-alert h3, #add-guarantee-type-alert h3 {
 	text-align: center;
 	margin-top: 50px;
 	font-size: 1.5em;
 }
-#admin-add-user-box-alert div {
+#admin-add-user-box-alert div, #add-po-type-alert div, #add-payment-type-alert div, #add-guarantee-type-alert div {
 	text-align: center;
 }
-#admin-add-user-box-alert button {
+#admin-add-user-box-alert button, #add-po-type-alert button, #add-payment-type-alert button, #add-guarantee-type-alert button {
 	position: static;
 }
 
