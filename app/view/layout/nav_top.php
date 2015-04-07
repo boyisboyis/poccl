@@ -4,7 +4,9 @@
 	<a class="sub-menu" href="#search"><i class="fa fa-search"></i>Search</a>
 	<a class="sub-menu" href="#report"><i class="fa fa-file-text-o"></i>Report</a>
 	<?php if(Session::getSessionUID() !== null){ ?>
-		<a class="sub-menu" href="admin"><i class="fa fa-wrench"></i>Admin</a>
+		<?php if(Session::getSessionAuth() == 1 || Session::getSessionAuth() == 0){ ?>
+			<a class="sub-menu" href="admin"><i class="fa fa-wrench"></i>Admin</a>
+		<?php } ?>
 		<a class="sub-menu" href="logout"><i class="fa fa-sign-out"></i>Logout</a>
 	<?php }else{ ?>
 		<a class="sub-menu" href="login"><i class="fa fa-sign-in"></i>Login</a>

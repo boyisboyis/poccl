@@ -4,7 +4,7 @@
 		<h2>New Purchase Order</h2>
 		<div>
 			<label for="">Job No : </label>
-			<input type="text" name="job_no" />
+			<input type="text" name="job_no" required />
 		</div>
 		<hr>
 		<div style="float: left; width: 50%;">
@@ -14,7 +14,7 @@
 					<div class='table-cell'>Contractor Name</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" name="contractor_name"  />
+						<input type="text" name="contractor_name" required />
 					</div>
 				</div>
 				<div class='table-row'>
@@ -72,7 +72,7 @@
 						<div class='table-cell'>Start Date</div>
 						<div class='table-cell colon'></div>
 						<div class='table-cell'>
-							<input type="text" name="start_date" class='datepicker' />
+							<input type="text" name="start_date" class='datepicker' required />
 						</div>
 					</div>
 					<div class='table-row'>
@@ -134,7 +134,7 @@
 					<div class='table-cell'>PO Amount</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" name="po_amount" />
+						<input type="text" name="po_amount" required />
 					</div>
 				</div>
 				<div class='table-row'>
@@ -159,7 +159,7 @@
 						<input type="text" id="foreign_currency_type" name="foreign_currency_type" />
 					</div>
 					<div class='table-cell'>
-						<label for="foreign_currency_rate">Rate : </label>
+						<span>Rate : </span>
 						<input type="text" id="foreign_currency_rate" name="foreign_currency_rate" />
 					</div>
 				</div>
@@ -209,7 +209,7 @@
 				<div id='show-payment-terms' style="display:none;">
 					<div id="list-payment-terms">
 						<div class='table'>
-							<i class='fa fa-minus delete-payment'></i>
+							<i class='fa fa-trash-o delete-payment'></i>
 							<ol class='table-row'>
 								<li class='table-cell'></li>
 								<li class='table-cell'>Description</li>
@@ -269,7 +269,7 @@
 				<div id='show-bank-guarantee' style='display: none;'>
 					<div id="list-bank-guarantee">
 						<div class='table'>
-							<i class='fa fa-minus delete-guarantee'></i>
+							<i class='fa fa-trash-o delete-guarantee'></i>
 							<ol class='table-row'>
 								<li class='table-cell'></li>
 								<li class='table-cell'>Description</li>
@@ -344,7 +344,7 @@
 	</form>
 	<div id="clone-payment-terms" style='display: none;'>
 		<div class='table'>
-			<i class='fa fa-minus delete-payment'></i>
+			<i class='fa fa-trash-o delete-payment'></i>
 			<ol class='table-row'>
 				<li class='table-cell'></li>
 				<li class='table-cell'>Description</li>
@@ -398,7 +398,7 @@
 	</div>
 	<div id="clone-bank-guarantee" style='display: none;'>
 		<div class='table'>
-			<i class='fa fa-minus delete-guarantee'></i>
+			<i class='fa fa-trash-o delete-guarantee'></i>
 			<ol class='table-row'>
 				<li class='table-cell'></li>
 				<li class='table-cell'>Description</li>
@@ -465,5 +465,16 @@
 				</li>
 			</ol>
 		</div>
+	</div>
+	<div id='alert-add-purchase' style='display: none;'>
+		<section id="alert-add-purchase-complete" style="display: none;">
+			<h3>Save Complete</h3>
+			<button id="alert-btn-purchase-complete">OK</button>
+		</section>
+		<section id="alert-add-purchase-error" style="display: none;">
+			<h3>Error</h3>
+			<p>Please check the values and the connection to the server.</p>
+			<button id="alert-btn-purchase-error">OK</button>
+		</section>
 	</div>
 </div>

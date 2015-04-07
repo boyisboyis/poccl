@@ -169,6 +169,14 @@ $(document).ready(function(){
 	  console.log($(this))
     //$(this).datepicker({"dateFormat": "yy-mm-dd"});
   });
+  
+  $("#alert-btn-purchase-complete").on("click", function (){
+    location.reload();
+  })
+  
+  $("#alert-btn-purchase-error").on("click", function () {
+      $("#alert-add-purchase, #alert-add-purchase-complete, #alert-add-purchase-error").hide();
+  });
 	
 	$("#admin-search-box-content").on("change",".datepicker , input[type=radio]",function(e){
 	  console.log(e);
@@ -300,6 +308,7 @@ $(document).ready(function(){
       $('input[name=late_payment][type=checkbox]').first().addClass('input-error');
       checkInput = false;
     }
+    $("#alert-add-purchase, #alert-add-purchase-complete, #alert-add-purchase-error").hide();
     console.log(formObj);
     console.log('====================================');
     if(checkInput) {
@@ -312,8 +321,20 @@ $(document).ready(function(){
           params: formObj
         },
         success: function(data) {
-          reset_form_add()
-          console.log(data);
+          if(data["status"] === true) {
+            $("#alert-add-purchase, #alert-add-purchase-complete").show();
+            /*setTimeout(function (){ 
+              location.reload();
+            }, 3000)*/
+          }
+          else {
+            $("#alert-add-purchase, #alert-add-purchase-error").show();
+           /* setTimeout(function (){ 
+              location.reload();
+            }, 3000)*/
+          }
+          //reset_form_add()
+          //console.log(data);
         }
       });
     }
@@ -593,6 +614,7 @@ $(document).ready(function(){
     var jid = $(this).data("jid");
     var type = $(this).data("type");
     var terms = $(this).data("terms");
+    var t = $(this);
     console.log(jid, type, terms);
     $.ajax({
       method: "POST",
@@ -609,8 +631,8 @@ $(document).ready(function(){
   			success: function(data) {
   			  console.log(data['status']);
   			  if(data['status']){
-            $(this).parent().parent().prev().find(".search-delete-payment").show();
-            $(this).parent().parent().remove();
+            t.parent().parent().prev().find(".search-delete-payment").show();
+            t.parent().parent().remove();
           }
   			}
     });
@@ -620,6 +642,7 @@ $(document).ready(function(){
     var jid = $(this).data("jid");
     var type = $(this).data("type");
     var terms = $(this).data("terms");
+    var t = $(this);
     console.log(jid, type, terms)
     $.ajax({
       method: "POST",
@@ -635,9 +658,11 @@ $(document).ready(function(){
   			},
   			success: function(data) {
   			  console.log(data['status']);
-  			  if(data['status']){
-            $(this).parent().parent().prev().find(".search-delete-guarantee").show();
-            $(this).parent().parent().remove();
+  			  console.log(t);
+  			  if(data['status'] == true){
+  			    console.log(t.parent().parent());
+            t.parent().parent().prev().find(".search-delete-guarantee").show();
+            t.parent().parent().remove();
           }
   			}
     });
@@ -654,7 +679,12 @@ $(document).ready(function(){
 			},
 			success: function(data) {
 				if(data['status']){
-					$("#"+delete_index).remove();
+					//$("#"+delete_index).remove();
+					$("#"+delete_index).hide( "drop", {}, 1000, function (){
+					  setTimeout(function() {
+              $("#"+delete_index).removeAttr( "style" ).hide().fadeIn();
+            }, 1000 );
+					});
 				}
 				$("#confirm-no").click();
 				console.log(data);
@@ -922,7 +952,10 @@ $(document).ready(function(){
               "<table class='purchase-each-detail'>"+
               "<tr><td class='text-vertical-top'>PO no.</td><td class='td-colon'>:</td><td><input name='po_no-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_No' data-table='po_asso' class='input-readonly' type='text' value='"+(obj['PO_No']==null?'':obj['PO_No'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>PO Date</td><td class='td-colon'>:</td><td><input name='po_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Date' data-table='job' class='input-readonly datepicker' type='text' value='"+(obj['Job']['PO_Date']==null?'':obj['Job']['PO_Date'])+"' readonly='true'></td></tr>"+
-              "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td><input name='po_type-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Type' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['PO_Type']==null?'':obj['Job']['PO_Type'])+"' readonly='true'></td></tr>"+
+              "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td>"+
+              "<select name='po_type-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Type' data-table='job' class='input-readonly'><option value='Fix Lump Sum'>Fix Lump Sum</option><option value='Unit Price'>Unit Price</option><option value='Cost Plus'>Cost Plus</option><option value='Others'>Others</option></select>"+
+              //"<input name='po_type-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Type' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['PO_Type']==null?'':obj['Job']['PO_Type'])+"' readonly='true'>"+
+              "</td></tr>"+
               "<tr><td class='text-vertical-top'>PO Amount</td><td class='td-colon'>:</td><td><p class='margin-padding-0'><input name='contract_value_thb-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_THB' data-table='job' class='input-readonly' type='text' value='"+thai_bath+"' readonly='true'>"+
               "<span class='currency'>THB</span></p>"+tr_currency+"</td></tr>"+
              // tr_currency+

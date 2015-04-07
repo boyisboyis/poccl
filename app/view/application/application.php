@@ -8,10 +8,12 @@
 		<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="maincss" type="text/css" />
     <link rel="stylesheet" href="fontcss" type="text/css" />
+    <!--<link rel="stylesheet" href="bootstrapcss" type="text/css" />-->
     <link rel="stylesheet" href="applicationcss" type="text/css" />
     <script type="text/javascript" src="jquery"></script>
 		<script type="text/javascript" src="pagenavi"></script>
     <script type="text/javascript" src="nanojs"></script>
+    <!--<script type="text/javascript" src="bootstrapjs"></script>-->
     <script type="text/javascript" src="applicationjs"></script>
   </head>
   <body>
