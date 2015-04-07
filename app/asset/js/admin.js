@@ -671,6 +671,102 @@ $(document).ready(function(){
 		delete_index = "";
 		$("#admin-search-box-alert").hide();
 	});
+	
+	/* =============================================================*/
+	
+	$("#admin-config-type #add_po_type").on('click', function() {
+	  $('#add-po-type-alert').show();
+	});
+	
+	$('#add-po-type-confirm-yes').on('click', function() {
+	  $.ajax({
+	    	method: "POST",
+				url: "adminsController",
+				dataType: "json",
+				data: {
+					action: "add_type",
+					params: {
+					  table: 'po_type',
+					  desc: $('#add-po-type-input').val()
+					}
+			},
+			success: function(data) {
+				console.log(data);
+				if(data['status']) {
+				  get_po_type();
+      	  $('#add-po-type-alert').hide();
+				}
+			}
+	  });
+	});
+	
+	$('#add-po-type-confirm-no').on('click', function() {
+	  $('#add-po-type-alert').hide();
+	});
+	
+	/* =============================================================*/
+	
+	$("#admin-config-type #add_payment_type").on('click', function() {
+	  $('#add-payment-type-alert').show();
+	});
+	
+	$('#add-payment-type-confirm-yes').on('click', function() {
+	  $.ajax({
+	    	method: "POST",
+				url: "adminsController",
+				dataType: "json",
+				data: {
+					action: "add_type",
+					params: {
+					  table: 'payment_type',
+					  desc: $('#add-payment-type-input').val()
+					}
+			},
+			success: function(data) {
+				console.log(data);
+				if(data['status']) {
+				  get_payment_type();
+	        $('#add-payment-type-alert').hide();
+				}
+			}
+	  });
+	});
+	
+	$('#add-payment-type-confirm-no').on('click', function() {
+	  $('#add-payment-type-alert').hide();
+	});
+	
+	/* =============================================================*/
+	
+	$("#admin-config-type #add_guarantee_type").on('click', function() {
+	  $('#add-guarantee-type-alert').show();
+	});
+	
+	$('#add-guarantee-type-confirm-yes').on('click', function() {
+	  $.ajax({
+	    	method: "POST",
+				url: "adminsController",
+				dataType: "json",
+				data: {
+					action: "add_type",
+					params: {
+					  table: 'guarantee_type',
+					  desc: $('#add-guarantee-type-input').val()
+					}
+			},
+			success: function(data) {
+				console.log(data);
+				if(data['status']) {
+				  get_guarantee_type();
+				  $('#add-guarantee-type-alert').hide();
+				}
+			}
+	  });
+	});
+	
+	$('#add-guarantee-type-confirm-no').on('click', function() {
+	  $('#add-guarantee-type-alert').hide();
+	});
   
   function getHash(){
     var hash = location.hash;
@@ -736,15 +832,69 @@ $(document).ready(function(){
   }
   
   function get_po_type() {
-    
+    $.ajax({
+      method: "POST",
+			url: "adminsController",
+			dataType: "json",
+			data: {
+				action: "get_type",
+				params: "po_type"
+			},
+			success: function(data) {
+			  console.log(data);
+			  if(data['status']) {
+  			  $('div#result_po_type').html('<div>');
+  			  for(var count in data['obj']) {
+  			     $('div#result_po_type').append('<div>' + data['obj'][count]['Description'] + '</div>');
+  			  }
+  			  $('div#result_po_type').append('</div>');
+			  }
+			}
+    });
   }
   
   function get_payment_type() {
-    
+    $.ajax({
+      method: "POST",
+			url: "adminsController",
+			dataType: "json",
+			data: {
+				action: "get_type",
+				params: "payment_type"
+			},
+			success: function(data) {
+			  console.log(data);
+			  if(data['status']) {
+  			  $('div#result_payment_type').html('<div>');
+  			  for(var count in data['obj']) {
+  			     $('div#result_payment_type').append('<div>' + data['obj'][count]['Description'] + '</div>');
+  			  }
+  			  $('div#result_payment_type').append('</div>');
+			  }
+			}
+    });
   }
   
   function get_guarantee_type() {
-    
+    $.ajax({
+      method: "POST",
+			url: "adminsController",
+			dataType: "json",
+			data: {
+				action: "get_type",
+				params: "guarantee_type"
+			},
+			success: function(data) {
+			  console.log(data);
+			  if(data['status']) {
+  			  $('div#result_guarantee_type').html('<div>');
+  			  for(var count in data['obj']) {
+  			     $('div#result_guarantee_type').append('<div>' + data['obj'][count]['Description'] + '</div>');
+  			  }
+  			  $('div#result_guarantee_type').append('</div>');
+			  }
+			}
+    });
   }
   
   function searchResult(search){
