@@ -123,7 +123,7 @@ $(document).ready(function(){
   });
   
  
-  $(".nano").nanoScroller();
+  $(".nano").nanoScroller({ alwaysVisible: true });
   $("#submit-report").on("click", function(){
     var months = $(".reports_month").map(function(){
       var m = $($(this)[0]);

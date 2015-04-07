@@ -40,13 +40,13 @@
       	  </select>
       	  <p>Amount</p>
       	  <div>
-      	   <input type="text" name="Amount_Actual_Price" data-type="Amount_Actual_Price" value="" />
+      	   <input type="text" id='alert-amount-actual-price' name="Amount_Actual_Price" data-type="Amount_Actual_Price" value="" />
       	  </div>
       	  <p>Amount Percentang</p>
       	  <div>
       	    <input type="text" name="Amount_Actual_Percentage" data-type="Amount_Actual_Percentage" value="" />
       	  </div>
-      	  <p>Payment Date Plan</p>
+      	  <p>Invoice Date</p>
       	  <div>
       	    <input type="text" name="Payment_date_plan" data-type="Payment_date_plan" value="" class='datepicker' />
       	  </div>

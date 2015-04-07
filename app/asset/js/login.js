@@ -1,3 +1,11 @@
+$(document).ready(function (){
+  $( document ).ajaxStart(function() {
+   $(".ajax-loading").show();
+  }).ajaxComplete(function() {
+   $(".ajax-loading").hide();
+  });
+});
+
 $(document).on("submit", "#form-login", function (e) {
     var u = $(this).find("#username").val();
     var p = $(this).find("#password").val();
@@ -18,9 +26,7 @@ $(document).on("submit", "#form-login", function (e) {
         },
         success: function(req){
           if(req['status'] == true){
-            setTimeout(function() {
-              window.location = "admin";
-            }, 2000);
+            window.location = "home";
           }
           else{
             openError(req['error'])
