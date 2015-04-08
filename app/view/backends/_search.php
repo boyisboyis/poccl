@@ -64,9 +64,6 @@
 	    <div>
 	        <p>Description</p>
     	    <select class='guarantee_description' name="guarantee-description">
-    	      <!--<option value="">-</option>-->
-      	    <!--<option value="Mechanical Guarantee">Mechanical Guarantee</option>
-      	    <option value="Performance Guarantee">Performance Guarantee</option>-->
       	    <option value="Advance Payment Bond">Advance Payment Bond</option>
       	    <option value="Performance Bond">Performance Bond</option>
       	    <option value="Warranty Bond">Warranty Bond</option>
