@@ -42,8 +42,8 @@
 
           </li>
           <li>
-            <!--<a href="#config_type" class='sub-menu'><i class="fa fa-wrench"></i></i></a>-->
-            <a class='sub-menu'><i class="fa fa-wrench"></i></i></a>
+            <a href="#config_type" class='sub-menu'><i class="fa fa-wrench"></i></i></a>
+            <!--<a class='sub-menu'><i class="fa fa-wrench"></i></i></a>-->
           </li>
           <?php if(Session::getSessionAuth() == 0){ ?>
             <li>
