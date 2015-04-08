@@ -26,61 +26,70 @@
     class adminController {
         public static function create($params) {
             
-            $sql_po_asso = 'INSERT INTO `po_asso` (`JID`, `Contractor_Name`, `PO_No`)' .
-                           'VALUES (' . self::nullValue($params['job_no']) . ', ' . 
-                                        self::nullValue($params['contractor_name']) . ', ' . 
-                                        self::nullValue($params['po_no']) . 
+            $sql_jid = "SELECT po_asso.JID FROM po_asso WHERE po_asso.JID = '" . $params['job_no'] . "'";
+            $same_jid = DB::query($sql_jid)->get();
+            
+            if(count($same_jid) == 0) {
+            
+                $sql_po_asso = 'INSERT INTO `po_asso` (`JID`, `Contractor_Name`, `PO_No`)' .
+                               'VALUES (' . self::nullValue($params['job_no']) . ', ' . 
+                                            self::nullValue($params['contractor_name']) . ', ' . 
+                                            self::nullValue($params['po_no']) . 
+                                        ')';
+                DB::puts($sql_po_asso);
+                
+                $sql_job = 'INSERT INTO `job` (`JID`, `Project_Name`, `Project_Location`, `Project_Owner`, `Secrecy_Agreement`, `Work_Start_Date`, `Work_Complete_Date`, `PO_Date`, `PO_Type`, `Contract_Value_THB`, `Contract_Value_Other`, `Contract_Value_Type`, `Contract_Value_Rate`, `Goveming_Law`, `Credit_Term` ,`Late_Pay_Finan_Charge`) ' .
+                           'VALUES (' . self::nullValue($params['job_no']) . ', ' .
+                                        self::nullValue($params['project_name']) . ', ' . 
+                                        self::nullValue($params['project_location']) . ', ' .
+                                        self::nullValue($params['project_owner_name']) . ', ' .
+                                        self::nullValue($params['secrecy_agreement']) . ', ' .
+                                        self::nullValue($params['start_date']) . ', ' .
+                                        self::nullValue($params['complete_date']) . ', ' .
+                                        self::nullValue($params['po_date']) . ', ' .
+                                        self::nullValue($params['po_type']) . ', ' .
+                                        self::nullValue($params['po_amount']) . ', ' .
+                                        self::nullValue($params['foreign_currency_value']) . ', ' .
+                                        self::nullValue($params['foreign_currency_type']) . ', ' .
+                                        self::nullValue($params['foreign_currency_rate']) . ', ' .
+                                        self::nullValue($params['goveming_law']) . ', ' .
+                                        self::nullValue($params['credit_term']) . ', ' .
+                                        self::nullValue($params['late_payment']) .
                                     ')';
-            DB::puts($sql_po_asso);
-            
-            $sql_job = 'INSERT INTO `job` (`JID`, `Project_Name`, `Project_Location`, `Project_Owner`, `Secrecy_Agreement`, `Work_Start_Date`, `Work_Complete_Date`, `PO_Date`, `PO_Type`, `Contract_Value_THB`, `Contract_Value_Other`, `Contract_Value_Type`, `Contract_Value_Rate`, `Goveming_Law`, `Credit_Term` ,`Late_Pay_Finan_Charge`) ' .
-                       'VALUES (' . self::nullValue($params['job_no']) . ', ' .
-                                    self::nullValue($params['project_name']) . ', ' . 
-                                    self::nullValue($params['project_location']) . ', ' .
-                                    self::nullValue($params['project_owner_name']) . ', ' .
-                                    self::nullValue($params['secrecy_agreement']) . ', ' .
-                                    self::nullValue($params['start_date']) . ', ' .
-                                    self::nullValue($params['complete_date']) . ', ' .
-                                    self::nullValue($params['po_date']) . ', ' .
-                                    self::nullValue($params['po_type']) . ', ' .
-                                    self::nullValue($params['po_amount']) . ', ' .
-                                    self::nullValue($params['foreign_currency_value']) . ', ' .
-                                    self::nullValue($params['foreign_currency_type']) . ', ' .
-                                    self::nullValue($params['foreign_currency_rate']) . ', ' .
-                                    self::nullValue($params['goveming_law']) . ', ' .
-                                    self::nullValue($params['credit_term']) . ', ' .
-                                    self::nullValue($params['late_payment']) .
-                                ')';
-            DB::puts($sql_job);
-            
-            if($params['payment_terms'] != '') {
-                foreach($params['payment_terms'] as &$payment) {
-                    $sql_payment = 'INSERT INTO `payment` (`JID`, `Terms`, `Payment_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Invoice_Date`) ' .
-                                   'VALUES (' . self::nullValue($params['job_no']) . ', ' .
-                                                self::nullValue($payment['payment_term']) . ', ' .
-                                                self::nullValue($payment['payment_terms_select']) . ', ' .
-                                                self::amountValue($payment['payment_terms_amount_thb'], $payment['payment_terms_amount_percentage'], $params['po_amount']) . ', ' .
-                                                self::nullValue($payment['payment_terms_date_plan']) .
-                                            ')';
-                    DB::puts($sql_payment);
+                DB::puts($sql_job);
+                
+                if($params['payment_terms'] != '') {
+                    foreach($params['payment_terms'] as &$payment) {
+                        $sql_payment = 'INSERT INTO `payment` (`JID`, `Terms`, `Payment_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Invoice_Date`) ' .
+                                       'VALUES (' . self::nullValue($params['job_no']) . ', ' .
+                                                    self::nullValue($payment['payment_term']) . ', ' .
+                                                    self::nullValue($payment['payment_terms_select']) . ', ' .
+                                                    self::amountValue($payment['payment_terms_amount_thb'], $payment['payment_terms_amount_percentage'], $params['po_amount']) . ', ' .
+                                                    self::nullValue($payment['payment_terms_date_plan']) .
+                                                ')';
+                        DB::puts($sql_payment);
+                    }
                 }
-            }
-            
-            if($params['bank_guarantee'] != '') {
-                foreach($params['bank_guarantee'] as &$guarantee) {
-                    $sql_guarantee = 'INSERT INTO `guarantee` (`JID`, `Terms`, `Guarantee_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Start_Plan`, `Until_Plan`) ' .
-                                   'VALUES (' . self::nullValue($params['job_no']) . ', ' .
-                                                self::nullValue($guarantee['bank_guarantee_term']) . ', ' .
-                                                self::nullValue($guarantee['bank_guarantee_select']) . ', ' .
-                                                self::amountValue($guarantee['bank_guarantee_amount_thb'], $guarantee['bank_guarantee_amount_percentage'], $params['po_amount']) . ', ' .
-                                                self::nullValue($guarantee['bank_guarantee_start_date']) . ', ' .
-                                                self::nullValue($guarantee['bank_guarantee_until_date']) .
-                                            ')';
-                    DB::puts($sql_guarantee);
+                
+                if($params['bank_guarantee'] != '') {
+                    foreach($params['bank_guarantee'] as &$guarantee) {
+                        $sql_guarantee = 'INSERT INTO `guarantee` (`JID`, `Terms`, `Guarantee_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Start_Plan`, `Until_Plan`) ' .
+                                       'VALUES (' . self::nullValue($params['job_no']) . ', ' .
+                                                    self::nullValue($guarantee['bank_guarantee_term']) . ', ' .
+                                                    self::nullValue($guarantee['bank_guarantee_select']) . ', ' .
+                                                    self::amountValue($guarantee['bank_guarantee_amount_thb'], $guarantee['bank_guarantee_amount_percentage'], $params['po_amount']) . ', ' .
+                                                    self::nullValue($guarantee['bank_guarantee_start_date']) . ', ' .
+                                                    self::nullValue($guarantee['bank_guarantee_until_date']) .
+                                                ')';
+                        DB::puts($sql_guarantee);
+                    }
                 }
+               
+                echo json_encode(array("status" => true));
             }
-           
-            echo json_encode(array("status" => true));
+            else {
+                echo json_encode(array("status" => false));
+            }
         }
         
         public static function search($params) {
