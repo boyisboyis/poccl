@@ -31,12 +31,16 @@
 	    <div>
 	        <p>Description</p>
     	    <select class='payment_description' name="payment-description">
-    	     <!-- <option value="">-</option>-->
-      	    <option value="Advance Payment">Advance Payment</option>
-						<option value="Progress Payment">Progress Payment</option>
-						<option value="Milestone Payment">Milestone Payment</option>
-						<option value="Retention Payment">Retention Payment</option>
-						<option value="Other Payment">Other Payment</option>
+
+    	    	<?php
+    	    		$result = DB::query("SELECT payment_type.Description FROM payment_type")->get();
+							for($count = 0; $count < count($result); $count++) {
+    	    	?>
+      	    	<option value="<?php echo $result[$count]->Description; ?>"><?php echo $result[$count]->Description; ?></option>
+						<?php
+							}
+						?>
+
       	  </select>
       	  <p>Amount</p>
       	  <div>
@@ -64,11 +68,16 @@
 	    <div>
 	        <p>Description</p>
     	    <select class='guarantee_description' name="guarantee-description">
-      	    <option value="Advance Payment Bond">Advance Payment Bond</option>
-      	    <option value="Performance Bond">Performance Bond</option>
-      	    <option value="Warranty Bond">Warranty Bond</option>
-      	    <option value="Refund Bond">Refund Bond</option>
-      	    <option value="Other Guarantee">Other Guarantee</option>
+
+    	      <?php
+    	    		$result = DB::query("SELECT guarantee_type.Description FROM guarantee_type")->get();
+							for($count = 0; $count < count($result); $count++) {
+    	    	?>
+      	    	<option value="<?php echo $result[$count]->Description; ?>"><?php echo $result[$count]->Description; ?></option>
+						<?php
+							}
+						?>
+
       	  </select>
       	  <p>Amount</p>
       	  <div>
@@ -106,6 +115,22 @@
   	    <option value="Other Payment">Other Payment</option>
   	  </select>-->
 	  </div>
+	</div>
+	
+	<div id='po-type-clone' style="display: none;">
+		<div id="po-description-clone">
+			<select id="po-type-select-block">
+				<option value=''></option>
+				<?php 
+					$result = DB::query("SELECT po_type.Description FROM po_type")->get();
+					for($count = 0; $count < count($result); $count++) {
+				?>
+					<option value="<?php echo $result[$count]->Description; ?>"><?php echo $result[$count]->Description; ?></option>
+				<?php
+					}
+				?>
+			</select>
+		</div>
 	</div>
 </div>
 <!-- <div id="admin-search" class='t1'>
