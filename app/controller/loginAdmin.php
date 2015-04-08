@@ -7,6 +7,7 @@ if(Check::isAjax()){
   	$status = $login->checkLogin();
   	if($status != false){
   		Session::setSessionUID($login->getUID());
+  		Session::setSessionAuth($login->getAuth());
   		echo json_encode(array("status" => true));
   	}
   	else{

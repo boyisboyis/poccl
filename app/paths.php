@@ -78,6 +78,10 @@ return array(
   	"file" => "lib/asset/js/pagenavi.js",
 	  "type" => "file_get_contents"
   ),
+  "bootstrapjs" => array(
+    "file" => "lib/asset/js/bootstrap.min.js",
+    "type" => "file_get_contents"
+  ),
   
     
     /*
@@ -89,7 +93,7 @@ return array(
       "type" => "file_get_contents"
     ),
     "jquery-ui-css" => array(
-      "file" => "lib/asset/css/jquery-ui.css",
+      "file" => "lib/asset/css/jquery-ui.min.css",
       "header" => "text/css",
       "type" => "file_get_contents"
     ),
@@ -110,6 +114,11 @@ return array(
     ),
     "admincss" => array(
       "file" => "app/asset/css/admin.css",
+      "header" => "text/css",
+      "type" => "file_get_contents"
+    ),
+    "bootstrapcss" => array(
+      "file" => "lib/asset/css/bootstrap.min.css",
       "header" => "text/css",
       "type" => "file_get_contents"
     )

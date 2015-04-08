@@ -44,6 +44,8 @@ nav#wrap-nav {
   width: 100%;
   height: 25px;
   padding: 5px 0;
+  background: #333;
+  z-index: 999;
 }
 
 nav#wrap-nav a {
@@ -55,10 +57,10 @@ nav#wrap-nav li {
 	list-style-type: none;
 }
 
-div#wrap-content {
+/*div#wrap-content {
   position: relative;
   padding: 5px 50px;
-}
+}*/
 
 nav#content-nav{
   position: fixed;
@@ -68,6 +70,7 @@ nav#content-nav{
   height: 100%;
   background-color: #333;
   padding-top: 150px;
+  z-index: 999;
 }
 
 nav#content-nav li {
@@ -124,10 +127,10 @@ div#content-article {
   height: 30px;
 }
 
-.input-error {
-  outline: 2px solid red !important;
+#admin-search, #admin-add {
+  padding: 0 20px;
+  position: relative;
 }
-
 
 #admin-search #admin-search-box-search {
   width: 100%;
@@ -165,7 +168,7 @@ div#content-article {
   margin-top: 20px;
 }
 
-#list-payment-terms i.fa.fa-minus, #list-bank-guarantee i.fa.fa-minus {
+#list-payment-terms i.fa.fa-trash-o, #list-bank-guarantee i.fa-trash-o {
   color: red;
   cursor: pointer;
 }
@@ -178,11 +181,6 @@ div#content-article {
   color: red;
   cursor: pointer;
 }
-
-
-
-
-
 
 
 /*
@@ -237,7 +235,12 @@ div#content-article {
 	width: 50%;
 }
 
-#admin-search-box-alert, #box-alert{
+.input-error {
+  outline: 1px solid red;
+  box-shadow: 0px 0px 5px red;
+}
+
+#admin-search-box-alert, #box-alert, #alert-add-purchase{
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -245,6 +248,64 @@ div#content-article {
 	height: 100%;
 	background-color: rgba(0,0,0,0.5);
 	z-index: 9999;
+}
+
+#alert-add-purchase-complete  {
+  position: absolute;
+	z-index: 9998;
+	width: 500px;
+	height: 150px;
+	top: 50%;
+	left: 50%;
+	margin-left: -250px;
+	margin-top: -75px;
+	background-color: #ecf0f1;
+	border-radius: 10px;
+	padding: 20px;
+	text-align: center;
+}
+
+#alert-add-purchase-error {
+  position: absolute;
+	z-index: 9998;
+	width: 500px;
+	height: 200px;
+	top: 50%;
+	left: 50%;
+	margin-left: -250px;
+	margin-top: -100px;
+	background-color: #ecf0f1;
+	border-radius: 10px;
+	padding: 20px;
+	text-align: center;
+}
+
+#alert-add-purchase-error p {
+  margin-top: 0;
+  text-align: center;
+}
+
+#alert-add-purchase-error h3 {
+  font-size: 2em;
+  text-align: center;
+  color: red;
+  font-style: capitalize;
+  margin-bottom: 0;
+   margin-top: 15px;
+}
+
+#alert-add-purchase-complete h3 {
+  font-size: 2em;
+  text-align: center;
+  color: green;
+   margin-bottom: 0;
+   margin-top: 15px;
+}
+
+#alert-add-purchase-complete button, #alert-add-purchase-error button { 
+  position: static;
+  top: 0;
+  right: 0;
 }
 
 #box-alert #alert-box-payment-terms{
@@ -347,9 +408,11 @@ div#content-article {
 	position: static;
 }
 
+
 /*======================= */
 
 #admin-add-user-box-alert, #add-po-type-alert, #add-payment-type-alert, #add-guarantee-type-alert {
+
 	position: fixed;
 	top: 0;
 	left: 0;

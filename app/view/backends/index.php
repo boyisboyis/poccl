@@ -1,7 +1,10 @@
 <?php
-  
+
   if(Session::getSessionUID() === null){
     Redirect::to("login");
+  }
+  else if(Session::getSessionAuth() > 1 ) {
+    Redirect::to("home");
   }
 
 ?>
@@ -21,41 +24,44 @@
 
 <body>
   <div id="wrapper-admin">
-    <nav id="content-nav">
-      <ol>
-        <li>
-          <a href="#add" class='sub-menu'><i class="fa fa-plus"></i></a>
-        </li>
-        <li>
-          <a href="#search" class='sub-menu'><i class="fa fa-search"></i></a>
-        </li>
-        <li>
-          <a href="#config_type" class='sub-menu'><i class="fa fa-wrench"></i></i></a>
-          <!--<a class='sub-menu'><i class="fa fa-wrench"></i></i></a>-->
-        </li>
-        <li>
-          <a href="#add_user" class='sub-menu'><i class="fa fa-user-plus"></i></a>
-        </li>
-      </ol>
-    </nav>
-    <div id="content-article">
-      <nav id="wrap-nav">
-        <ul>
-					<li><a href="logout"><i class="fa fa-power-off"></i><a href="logout">Logout</a>
-					<li><a href="home"><i class="fa fa-home"></i>Home</a>
-          </li>
-        </ul>
-      </nav>
-      <header id="wrap-header">
-        <section>
-          <h1>
-            Purchase Order / Contract Check List
-            <span>Manage purchase order / contract check list system</span>
-          </h1>
-        </section>
-      </header>
 
+    <nav id="wrap-nav">
+      <ul>
+				<li><a href="logout"><i class="fa fa-power-off"></i><a href="logout">Logout</a></li>
+				<li><a href="home"><i class="fa fa-home"></i>Home</a></li>
+      </ul>
+    </nav>    
+    <div id="content-article" >
+      <nav id="content-nav" >
+        <ol>
+          <li>
+            <a href="#add" class='sub-menu'><i class="fa fa-plus"></i></a>
+          </li>
+          <li>
+            <a href="#search" class='sub-menu'><i class="fa fa-search"></i></a>
+
+          </li>
+          <li>
+            <!--<a href="#config_type" class='sub-menu'><i class="fa fa-wrench"></i></i></a>-->
+            <a class='sub-menu'><i class="fa fa-wrench"></i></i></a>
+          </li>
+          <?php if(Session::getSessionAuth() == 0){ ?>
+            <li>
+              <a href="#add_user" class='sub-menu'><i class="fa fa-user-plus"></i></a>
+            </li>
+          <?php } ?>
+        </ol>
+      </nav>
+      
       <div id="wrap-content">
+        <header id="wrap-header">
+          <section>
+            <h1>
+              Purchase Order / Contract Check List
+              <span>Manage purchase order / contract check list system</span>
+            </h1>
+          </section>
+        </header>
         <?php include('_add.php'); ?>
         <?php include('_search.php'); ?>
         <?php include('_config_type.php'); ?>

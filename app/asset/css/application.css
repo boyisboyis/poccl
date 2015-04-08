@@ -101,7 +101,7 @@ a:hover, a:focus {
 	padding:0 10px;
 }
 
-.nano > .nano-pane > .nano-slider { background: red; }
+.nano > .nano-pane > .nano-slider { background: #ed8151; }
 
 
 
@@ -137,6 +137,7 @@ a:hover, a:focus {
 
 .report-panel label,.report-panel h3 {
 	color: #FFF;
+	display: inline-block;
 }
 
 .report-month, .report-month-big, .report-year {

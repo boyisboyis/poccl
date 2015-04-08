@@ -38,5 +38,11 @@
         </section>
       </form>
     </div>
+    
+  	<!--Loading-->
+    
+    <div class='ajax-loading' style="display: none;">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
   </body>
 </html>
