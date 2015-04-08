@@ -135,6 +135,14 @@ $(document).ready(function(){
 			$(this).prop("readonly", false);
 			update = $(this);
 		}
+	}).on('change','select.input-readonly',function (){
+	  
+	  //if(update === ""){
+	     console.log($(this));
+			//$(this).prop("readonly", false);
+			update = $(this);
+			save_element()
+		//}
 	});
 	
 	$(window).on('click', function(e) {
@@ -169,8 +177,9 @@ $(document).ready(function(){
 			save_element();
 			update = "";
 		}
-	}).on('change',".input-readonly", function(){
+	}).on('change',"select.input-readonly", function(){
 	  console.log($(this))
+	  save_element()
     //$(this).datepicker({"dateFormat": "yy-mm-dd"});
   });
   
