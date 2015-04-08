@@ -119,10 +119,14 @@
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
 						<select name="po_type">
-							<option value="Fix Lump Sum">Fix Lump Sum</option>
-							<option value="Unit Price">Unit Price</option>
-							<option value="Cost Plus">Cost Plus</option>
-							<option value="Others">Others</option>
+							<?php 
+								$result = DB::query("SELECT po_type.Description FROM po_type")->get();
+								for($count = 0; $count < count($result); $count++) {
+							?>
+								<option value="<?php echo $result[$count]->Description; ?>"><?php echo $result[$count]->Description; ?></option>
+							<?php
+								}
+							?>
 						</select>
 					</div>
 					<div class='table-cell'>
@@ -216,11 +220,14 @@
 								<li class='table-cell colon'></li>
 								<li class='table-cell'>
 									<select name="payment_terms[0][payment_terms_select]">
-										<option value="Advance Payment">Advance Payment</option>
-										<option value="Progress Payment">Progress Payment</option>
-										<option value="Milestone Payment">Milestone Payment</option>
-										<option value="Retention Payment">Retention Payment</option>
-										<option value="Other Payment">Other Payment</option>
+										<?php
+    	    								$result = DB::query("SELECT payment_type.Description FROM payment_type")->get();
+											for($count = 0; $count < count($result); $count++) {
+    	    							?>
+      	    									<option value="<?php echo $result[$count]->Description; ?>"><?php echo $result[$count]->Description; ?></option>
+										<?php
+											}
+									?>
 									</select>
 								</li>
 							</ol>
@@ -276,11 +283,14 @@
 								<li class='table-cell colon'></li>
 								<li class='table-cell'>
 									<select name="bank_guarantee[0][bank_guarantee_select]">
-										<option value="Advance Payment Bond">Advance Payment Bond</option>
-				      	    <option value="Performance Bond">Performance Bond</option>
-				      	    <option value="Warranty Bond">Warranty Bond</option>
-				      	    <option value="Refund Bond">Refund Bond</option>
-				      	    <option value="Other Guarantee">Other Guarantee</option>
+										<?php
+				    	    				$result = DB::query("SELECT guarantee_type.Description FROM guarantee_type")->get();
+											for($count = 0; $count < count($result); $count++) {
+				    	    			?>
+				      	    					<option value="<?php echo $result[$count]->Description; ?>"><?php echo $result[$count]->Description; ?></option>
+										<?php
+											}
+										?>
 									</select>
 								</li>
 							</ol>
@@ -351,11 +361,14 @@
 				<li class='table-cell colon'></li>
 				<li class='table-cell'>
 					<select name="payment_terms[numbers][payment_terms_select]">
-						<option value="Advance Payment">Advance Payment</option>
-						<option value="Progress Payment">Progress Payment</option>
-						<option value="Milestone Payment">Milestone Payment</option>
-						<option value="Retention Payment">Retention Payment</option>
-						<option value="Other Payment">Other Payment</option>
+						<?php
+    	    				$result = DB::query("SELECT payment_type.Description FROM payment_type")->get();
+							for($count = 0; $count < count($result); $count++) {
+    	    			?>
+      	    				<option value="<?php echo $result[$count]->Description; ?>"><?php echo $result[$count]->Description; ?></option>
+						<?php
+							}
+						?>
 					</select>
 				</li>
 			</ol>
@@ -405,11 +418,14 @@
 				<li class='table-cell colon'></li>
 				<li class='table-cell'>
 					<select name="bank_guarantee[numbers][bank_guarantee_select]">
-						<option value="Advance Payment Bond">Advance Payment Bond</option>
-      	    <option value="Performance Bond">Performance Bond</option>
-      	    <option value="Warranty Bond">Warranty Bond</option>
-      	    <option value="Refund Bond">Refund Bond</option>
-      	    <option value="Other Guarantee">Other Guarantee</option>
+						<?php
+		    	    		$result = DB::query("SELECT guarantee_type.Description FROM guarantee_type")->get();
+							for($count = 0; $count < count($result); $count++) {
+		    	    	?>
+		      	    		<option value="<?php echo $result[$count]->Description; ?>"><?php echo $result[$count]->Description; ?></option>
+						<?php
+							}
+						?>
 					</select>
 				</li>
 			</ol>

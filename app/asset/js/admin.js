@@ -1050,6 +1050,18 @@ $(document).ready(function(){
               keySearch = obj['PO_No'];
             }
             
+            var po_type_elem = "";
+            
+            $('#po-type-select-block option').each(function() {
+              if($(this).val() == obj['Job']['PO_Type']) {
+                $(this).attr('selected', 'selected');
+              }
+              else {
+                $(this).removeAttr('selected');
+              }
+            });
+            po_type_elem += $('#po-type-select-block').html();
+            
            // console.log(obj)
 						
             
@@ -1103,7 +1115,12 @@ $(document).ready(function(){
               "<tr><td class='text-vertical-top'>PO no.</td><td class='td-colon'>:</td><td><input name='po_no-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_No' data-table='po_asso' class='input-readonly' type='text' value='"+(obj['PO_No']==null?'':obj['PO_No'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>PO Date</td><td class='td-colon'>:</td><td><input name='po_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Date' data-table='job' class='input-readonly datepicker' type='text' value='"+(obj['Job']['PO_Date']==null?'':obj['Job']['PO_Date'])+"' readonly='true'></td></tr>"+
               "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td>"+
-              "<select name='po_type-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Type' data-table='job' class='input-readonly'><option value='Fix Lump Sum'>Fix Lump Sum</option><option value='Unit Price'>Unit Price</option><option value='Cost Plus'>Cost Plus</option><option value='Others'>Others</option></select>"+
+              "<select name='po_type-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Type' data-table='job' class='input-readonly'>" +
+              
+              po_type_elem +
+              // "<option value='Fix Lump Sum'>Fix Lump Sum</option><option value='Unit Price'>Unit Price</option><option value='Cost Plus'>Cost Plus</option><option value='Others'>Others</option>";
+              
+              "</select>"+
               //"<input name='po_type-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='PO_Type' data-table='job' class='input-readonly' type='text' value='"+(obj['Job']['PO_Type']==null?'':obj['Job']['PO_Type'])+"' readonly='true'>"+
               "</td></tr>"+
               "<tr><td class='text-vertical-top'>PO Amount</td><td class='td-colon'>:</td><td><p class='margin-padding-0'><input name='contract_value_thb-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Contract_Value_THB' data-table='job' class='input-readonly' type='text' value='"+thai_bath+"' readonly='true'>"+
