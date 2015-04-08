@@ -119,6 +119,7 @@
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
 						<select name="po_type">
+							<option value="null">-----</option>
 							<option value="Fix Lump Sum">Fix Lump Sum</option>
 							<option value="Unit Price">Unit Price</option>
 							<option value="Cost Plus">Cost Plus</option>
@@ -134,7 +135,7 @@
 					<div class='table-cell'>PO Amount</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" name="po_amount" required />
+						<input class='number-only' type="text" name="po_amount" required />
 					</div>
 				</div>
 				<div class='table-row'>
@@ -149,18 +150,18 @@
 					<div class='table-cell' style="text-align: right;">Value</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" id="foreign_currency_value" name="foreign_currency_value" />
+						<input class='number-only' type="text" id="foreign_currency_value" name="foreign_currency_value" />
 					</div>
 				</div>
 				<div class='table-row foreign_currency' style="display:none;">
 					<div class='table-cell' style="text-align: right;">Type</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" id="foreign_currency_type" name="foreign_currency_type" />
+						<input type="text" id="foreign_currency_type" name="foreign_currency_type" style="width: 60px"  />
 					</div>
 					<div class='table-cell'>
 						<span>Rate : </span>
-						<input type="text" id="foreign_currency_rate" name="foreign_currency_rate" />
+						<input type="text" id="foreign_currency_rate" name="foreign_currency_rate" class='number-only' style="width: 60px" />
 					</div>
 				</div>
 				<div class='table-row'>
@@ -178,7 +179,7 @@
 					<div class='table-cell'>Credit Term</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" name="credit_term" />
+						<input class='number-only' type="text" name="credit_term" />
 					</div>
 					<div class='table-cell'>
 						<input type="checkbox" name="credit_term" value="none" />
@@ -240,7 +241,7 @@
 								<li class='table-cell'>Amount</li>
 								<li class='table-cell colon'></li>
 								<li class='table-cell'>
-									<input type="text" class='payment_amount_value' name="payment_terms[0][payment_terms_amount_thb]" /> THB</li>
+									<input type="text" class='number-only payment_amount_value' name="payment_terms[0][payment_terms_amount_thb]" /> THB</li>
 							</ol>
 							<ol class='table-row'>
 								<li class='table-cell'>
@@ -249,7 +250,7 @@
 								<li class='table-cell'>Amount</li>
 								<li class='table-cell colon'></li>
 								<li class='table-cell'>
-									<input type="text" class='payment_amount_value' name="payment_terms[0][payment_terms_amount_percentage]" disabled='disabled' /> %</li>
+									<input type="text" class='number-only payment_amount_value' name="payment_terms[0][payment_terms_amount_percentage]" disabled='disabled' /> %</li>
 							</ol>
 							<ol class='table-row'>
 								<li class="table-cell"></li>
@@ -300,7 +301,7 @@
 								<li class='table-cell'>Amount</li>
 								<li class='table-cell colon'></li>
 								<li class='table-cell'>
-									<input type="text" class='bank_guarantee_value'  name="bank_guarantee[0][bank_guarantee_amount_thb]" /> THB</li>
+									<input type="text" class='number-only bank_guarantee_value'  name="bank_guarantee[0][bank_guarantee_amount_thb]" /> THB</li>
 							</ol>
 							<ol class='table-row'>
 								<li class='table-cell'>
@@ -309,7 +310,7 @@
 								<li class='table-cell'>Amount</li>
 								<li class='table-cell colon'></li>
 								<li class='table-cell'>
-									<input type="text" class='bank_guarantee_value' name="bank_guarantee[0][bank_guarantee_amount_percentage]" disabled='disabled' /> %</li>
+									<input type="text" class='number-only bank_guarantee_value' name="bank_guarantee[0][bank_guarantee_amount_percentage]" disabled='disabled' /> %</li>
 							</ol>
 							<ol class='table-row'>
 								<li class='table-cell'>
@@ -375,7 +376,7 @@
 				<li class='table-cell'>Amount</li>
 				<li class='table-cell colon'></li>
 				<li class='table-cell'>
-					<input type="text" class='payment_amount_value' name="payment_terms[numbers][payment_terms_amount_thb]" /> THB</li>
+					<input type="text" class='number-only payment_amount_value' name="payment_terms[numbers][payment_terms_amount_thb]" /> THB</li>
 			</ol>
 			<ol class='table-row'>
 				<li class='table-cell'>
@@ -384,7 +385,7 @@
 				<li class='table-cell'>Amount</li>
 				<li class='table-cell colon'></li>
 				<li class='table-cell'>
-					<input type="text" class='payment_amount_value' name="payment_terms[numbers][payment_terms_amount_percentage]" disabled='disabled' /> %</li>
+					<input type="text" class='number-only payment_amount_value' name="payment_terms[numbers][payment_terms_amount_percentage]" disabled='disabled' /> %</li>
 			</ol>
 			<ol class='table-row'>
 				<li class="table-cell"></li>
@@ -429,7 +430,7 @@
 				<li class='table-cell'>Amount</li>
 				<li class='table-cell colon'></li>
 				<li class='table-cell'>
-					<input type="text" class='bank_guarantee_value' name="bank_guarantee[numbers][bank_guarantee_amount_thb]" /> THB</li>
+					<input type="text" class='number-only bank_guarantee_value' name="bank_guarantee[numbers][bank_guarantee_amount_thb]" /> THB</li>
 			</ol>
 			<ol class='table-row'>
 				<li class='table-cell'>
@@ -438,7 +439,7 @@
 				<li class='table-cell'>Amount</li>
 				<li class='table-cell colon'></li>
 				<li class='table-cell'>
-					<input type="text" class='bank_guarantee_value' name="bank_guarantee[numbers][bank_guarantee_amount_percentage]" disabled='disabled' /> %</li>
+					<input type="text" class='number-only bank_guarantee_value' name="bank_guarantee[numbers][bank_guarantee_amount_percentage]" disabled='disabled' /> %</li>
 			</ol>
 			<ol class='table-row'>
 				<li class='table-cell'>
