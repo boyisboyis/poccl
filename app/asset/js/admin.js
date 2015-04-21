@@ -896,7 +896,7 @@ $(document).ready(function(){
 			  if(data['status']) {
   			  $('div#result_po_type').html('<div>');
   			  for(var count in data['obj']) {
-  			     $('div#result_po_type').append('<div>' + data['obj'][count]['Description'] + '</div>');
+  			     $('div#result_po_type').append('<div class=config-desc>' + data['obj'][count]['Description'] + '</div>');
   			  }
   			  $('div#result_po_type').append('</div>');
 			  }
@@ -918,7 +918,7 @@ $(document).ready(function(){
 			  if(data['status']) {
   			  $('div#result_payment_type').html('<div>');
   			  for(var count in data['obj']) {
-  			     $('div#result_payment_type').append('<div>' + data['obj'][count]['Description'] + '</div>');
+  			     $('div#result_payment_type').append('<div class=config-desc>' + data['obj'][count]['Description'] + '</div>');
   			  }
   			  $('div#result_payment_type').append('</div>');
 			  }
@@ -940,7 +940,7 @@ $(document).ready(function(){
 			  if(data['status']) {
   			  $('div#result_guarantee_type').html('<div>');
   			  for(var count in data['obj']) {
-  			     $('div#result_guarantee_type').append('<div>' + data['obj'][count]['Description'] + '</div>');
+  			     $('div#result_guarantee_type').append('<div class=config-desc>' + data['obj'][count]['Description'] + '</div>');
   			  }
   			  $('div#result_guarantee_type').append('</div>');
 			  }

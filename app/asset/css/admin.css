@@ -495,3 +495,44 @@ div#content-article {
 .purchase-detail input[type=text] {
 
 }
+
+#admin-config-type {
+  padding: 20px;
+}
+
+
+#admin-config-type .config-list input {
+  margin: 0 auto;
+  display: block;
+  width: 80%;
+  height: 30px;
+}
+
+#admin-config-type .config-desc {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+
+#admin-config-type .config-list {
+  margin-bottom: 10px;
+  display: inline-block;
+  width: 33%;
+  vertical-align: top;
+}
+
+#admin-config-type .config-list > div{
+  margin: 5px;
+  padding: 5px;
+  height: 100%;
+  box-shadow: 0 0 4px #7f8c8d;
+}
+
+#admin-config-type .config-list span{
+  font-size: 1.5em;
+}
+
+#admin-config-type .config-result{
+  margin-left: 10px;
+}
