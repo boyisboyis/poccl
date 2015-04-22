@@ -202,7 +202,7 @@ div#content-article {
 .purchase-detail .job-id .fa.fa-trash-o {
 	color: red;
 }
-.purchase-detail input[type="text"], .purchase-detail input[type="date"] {
+.purchase-detail input[type="text"], .purchase-detail input[type="date"], .purchase-detail select {
   width: 200px;
   height: 30px;
 }
