@@ -1103,7 +1103,7 @@ $(document).ready(function(){
               }
             });
             po_type_elem += $('#po-type-select-block').html();
-            
+            console.log(po_type_elem)
            // console.log(obj)
 
 						
