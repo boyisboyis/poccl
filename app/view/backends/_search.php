@@ -120,7 +120,7 @@
 	<div id='po-type-clone' style="display: none;">
 		<div id="po-description-clone">
 			<select id="po-type-select-block">
-				<option value=''></option>
+				<option value=''>None</option>
 				<?php 
 					$result = DB::query("SELECT po_type.Description FROM po_type")->get();
 					$result_count = count($result);
