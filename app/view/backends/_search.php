@@ -123,7 +123,8 @@
 				<option value=''></option>
 				<?php 
 					$result = DB::query("SELECT po_type.Description FROM po_type")->get();
-					for($count = 0; $count < count($result); $count++) {
+					$result_count = count($result);
+					for($count = 0; $count < $result_count; $count++) {
 				?>
 					<option value="<?php echo $result[$count]->Description; ?>"><?php echo $result[$count]->Description; ?></option>
 				<?php

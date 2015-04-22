@@ -446,13 +446,6 @@ $(document).ready(function(){
               var tr = "";
               for(var i=0;i<n;i++){
                 var g_content = obj['Guarantee'][i];
-                //console.log(g_content);
-                //if(g_content['Amount_Actual_Percentage'] != null && g_content['Amount_Actual_Price'] != null){
-                  //var g_amount = (g_content['Amount_Actual_Percentage'] == "" || g_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)):g_content['Amount_Actual_Percentage']+"%";
-                //}
-                //else{
-                 // var g_amount = '-';
-               // }
                  tr += "<tr>"+
                 "<td class='text-vertical-top'>Term : "+g_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
@@ -477,7 +470,12 @@ $(document).ready(function(){
               var tr = "";
               for(var i=0;i<n;i++){
                 var p_content = obj['Payment'][i];
-               // var p_amount = (p_content['Amount_Actual_Percentage'] == "" || p_content['Amount_Actual_Percentage'] == null)?addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2)):p_content['Amount_Actual_Percentage']+"%";
+                var complete_date = ""
+                if (p_content['Date_Actual'] != null){
+                  complete_date = "<tr>"+
+                    "<td class='text-vertical-top'>Payment Date Actual</td><td class='td-colon'>:</td><td class='text_underline'>"+p_content['Date_Actual']+"</td>"+
+                    "</tr>";
+                }
                 tr += "<tr>"+
                 "<td style='vertical-align: text-top;'>Term : "+p_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
@@ -491,6 +489,7 @@ $(document).ready(function(){
                 "<tr>"+
                 "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon'>:</td><td class='text_underline'>"+p_content['Payment_date_plan']+"</td>"+
                 "</tr>"+
+                complete_date+
                 "</table>"+
                 "</td>"+
                 "</tr>";

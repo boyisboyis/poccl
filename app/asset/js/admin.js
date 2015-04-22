@@ -178,9 +178,7 @@ $(document).ready(function(){
 			update = "";
 		}
 	}).on('change',"select.input-readonly", function(){
-	  console.log($(this))
 	  save_element()
-    //$(this).datepicker({"dateFormat": "yy-mm-dd"});
   });
   
   $("#alert-btn-purchase-complete").on("click", function (){
@@ -192,14 +190,16 @@ $(document).ready(function(){
   });
 	
 	$("#admin-search-box-content").on("change",".datepicker , input[type=radio]",function(e){
-	  console.log(e);
 	  update = $(this)
 	  if(update){
-			if(e.target.localName === 'input' && e.target.className === 'input-readonly'){
+			if(e.target.localName === 'input' && e.target.className.indexOf("input-readonly") >= 0){
 				if(update.data('jid') == $(e.target).data('jid')){
 					if(update.data('type') != $(e.target).data('type')){
 						save_element();
 					}
+					else if(e.target.type == 'radio'){
+  				  save_element();
+  				}
 				}
 				else {
 					save_element();
@@ -219,10 +219,14 @@ $(document).ready(function(){
 		var jid = update.data('jid');
 		var type = update.data('type');
 		var table = update.data('table');
+		var other = update.data('other');
 		var value = update.val();
 		$(".input-readonly").prop("readonly", true);
-		console.log(jid, type, value);
-		console.log("save");
+		if(typeof other == 'undefined'){
+		  other = "";
+		}
+		console.log(jid, table, type, value, other);
+		//console.log("save");
 		$("#show-save p").html("Saving").show();
 		$("#show-save").show();
 		$.ajax({
@@ -235,13 +239,28 @@ $(document).ready(function(){
           jid: jid, 
           type: type,
           table: table,
+          other: other,
           value: value
         }
       },
       success: function(data) {
-        console.log(data);
+       console.log(data);
         if(data['status'] == true) {
   	    	$("#show-save p").html("Saved");
+  	    	var obj = data["obj"];
+  	    	console.log(obj)
+  	    	if(obj["table"] == "payment"){
+  	    	  var value = obj["value"];
+  	    	  var value_count = value.length;
+  	    	  console.log(value_count);
+  	    	  for(var i=0; i<value_count; i++){
+  	    	    var pid = value[i]['PID'];
+  	    	    console.log($("#amount_actual_price_payment-"+pid))
+  	    	    $("#amount_actual_price_payment-"+pid).val(value[i]["Amount_Actual_Price"]);
+  	    	    $("#amount_actual_percentage_payment-"+pid).val(value[i]["Amount_Actual_Percentage"]);
+  	    	    // amount_actual_price_guarantee
+  	    	  }
+  	    	}
         }
         else {
           $("#show-save p").html("Failed");
@@ -961,6 +980,7 @@ $(document).ready(function(){
         if(req['status'] == true){
           $(".result-topics").html("<i class='fa fa-check color-success'></i>Result");
 					var index = -1;
+					console.log(req['obj']);
           $.each(req['obj'], function(){
             index++;
             var obj = $(this)[0];
@@ -1008,10 +1028,10 @@ $(document).ready(function(){
                 "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top guarantee_type'>"+g_content['Guarantee_Type']+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Price' data-table='guarantee' class='input-readonly number-only' type='text' value='"+g_content["Amount_Actual_Price"]+"' readonly='true'></td>"+
+                "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input id='amount_actual_price_guarantee-"+g_content['GID']+"' name='amount_actual_price-"+index+"-"+i+"' data-other="+g_content['GID']+" data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Price' data-table='guarantee' class='input-readonly number-only' type='text' value='"+g_content["Amount_Actual_Price"]+"' readonly='true'></td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Percentage' data-table='guarantee' class='input-readonly number-only' type='text' value='"+g_content["Amount_Actual_Percentage"]+"' readonly='true'>%</td>"+
+                "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input id='amount_actual_percentage_guarantee-"+g_content['GID']+"' name='amount_actual_percentage-"+index+"-"+i+"' data-other="+g_content['GID']+" data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Percentage' data-table='guarantee' class='input-readonly number-only' type='text' value='"+g_content["Amount_Actual_Percentage"]+"' readonly='true'>%</td>"+
                 "</tr>"+
                 "<tr>"+
                 "<td class='text-vertical-top'>Start Plan</td><td class='td-colon text-vertical-top'>:</td><td><span class='text_underline text-vertical-top' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></td>"+
@@ -1044,10 +1064,10 @@ $(document).ready(function(){
                 "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+p_content['Payment_Type']+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly number-only' type='text' value='"+ addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2))+"' readonly='true'></td>"+
+                "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input id='amount_actual_price_payment-"+p_content['PID']+"' name='amount_actual_price-"+index+"-"+i+"' data-other="+p_content['PID']+" data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly number-only' type='text' value='"+ addCommas(parseFloat(p_content['Amount_Actual_Price']).toFixed(2))+"' readonly='true'></td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly number-only' type='text' value='"+p_content['Amount_Actual_Percentage']+"' readonly='true'>%"+"</td>"+
+                "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input id='amount_actual_percentage_payment-"+p_content['PID']+"' name='amount_actual_percentage-"+index+"-"+i+"' data-other="+p_content['PID']+" data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly number-only' type='text' value='"+p_content['Amount_Actual_Percentage']+"' readonly='true'>%"+"</td>"+
                 "</tr>"+
                 "<tr>"+
                 "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+p_content['Payment_date_plan']+"</td>"+

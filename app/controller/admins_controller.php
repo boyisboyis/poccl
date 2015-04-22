@@ -123,13 +123,104 @@
 		
 		public static function update($params) {
 		    $sql_update = "UPDATE " . $params['table'] . " SET " . $params['table'] . "." . $params['type'] . " = '" . $params['value'] . "' WHERE " . $params['table'] . ".JID" . " = '" . $params['jid'] . "'";
+		    if(trim($params['other']) != ''){
+		        if($params["table"] == "payment"){
+		            $sql_update .= " AND " . $params['table'] . ".PID = '" . $params['other'] . "'";
+		        }
+		        else if($params["table"] == "guarantee"){
+		            $sql_update .= " AND " . $params['table'] . ".GID = '" . $params['other'] . "'";
+		        }
+		    }
 		    DB::puts($sql_update);
 		    
-		    $sql_select_check = "SELECT " .  $params['table'] . "." . $params['type'] . " FROM " . $params['table'] .  " WHERE " . $params['table'] . ".JID" . " = '" . $params['jid'] . "'";
-		    $result = DB::query($sql_select_check)->get();
+		    if(trim($params['other']) != ''){
+		        
+		        $amount_data = DB::query("SELECT job.Contract_Value_THB FROM job WHERE job.JID='".$params['jid']."'")->get();
+
+		        $amount = $amount_data[0]->Contract_Value_THB;
+		        
+		        if($params['type'] == "Amount_Actual_Price"){
+		           $columns = "Amount_Actual_Percentage";
+		        }
+		        else if($params['type'] == "Amount_Actual_Percentage"){
+		           $columns = "Amount_Actual_Price";
+		        }
+		        
+		        if($params["table"] == "payment"){
+		            $sql_select_update = "SELECT ". $params['table'] . ".PID, " . $params['table'] . ".".$params['type']." FROM " . $params['table']. " WHERE " . $params['table'] . ".JID" . " = '" . $params['jid'] . "'";
+		        }
+		        else if($params["table"] == "guarantee"){
+		            $sql_select_update = "SELECT ". $params['table'] . ".GID, " . $params['table'] . ".".$params['type']." FROM " . $params['table']. " WHERE " . $params['table'] . ".JID" . " = '" . $params['jid'] . "'";
+		        }
+		        if($params["table"] == "payment"){
+	                $sql_select_update .= " AND ". $params['table'] . ".PID = ".$params['other'];
+	            }
+	            else if($params["table"] == "guarantee"){
+	                $sql_select_update .= " AND ". $params['table'] . ".GID = ".$params['other'];
+	            }
+
+		        $reup = DB::query($sql_select_update)->get();
+		        //$reup_count = count($reup);
+
+		        //for($i=0; $i < $reup_count; $i++){
+	            $data = $reup[0];
+	            if($params['type'] == "Amount_Actual_Percentage") {
+	                $value = ($amount * $data->Amount_Actual_Percentage) / 100;
+	            }
+	            else{
+	                $value = ($data->Amount_Actual_Price * 100)/$amount;
+	            }
+	            
+                //echo $value;
+	            $sql_update = "UPDATE " . $params['table'] . " SET " . $params['table'] . ".".$columns." = '" . $value . "' WHERE " . $params['table'] . ".JID" . " = '" . $params['jid'] . "'";
+	            if($params["table"] == "payment"){
+	                $sql_update .= " AND ". $params['table'] . ".PID = ".$data->PID;
+	            }
+	            else if($params["table"] == "guarantee"){
+	                $sql_update .= " AND ". $params['table'] . ".GID = ".$data->GID;
+	            }
+	            DB::puts($sql_update);
+		        //}
+		       
+		        
+		    }
 		    
+		    $sql_select_check = "SELECT ";
+		    if($params["table"] == "payment"){
+		        $sql_select_check .=  $params['table'] . ".PID, " . $params['type'] . ", " .  $params['table'] . ".Amount_Actual_Price, " .  $params['table'] . ".Amount_Actual_Percentage FROM " . $params['table'];
+		    }
+		    else if($params["table"] == "guarantee"){
+		        $sql_select_check .=  $params['table'] . ".GID, " . $params['type'] . ", " .  $params['table'] . ".Amount_Actual_Price, " .  $params['table'] . ".Amount_Actual_Percentage FROM " . $params['table'];
+		    }
+		    else{
+		       $sql_select_check .=  $params['table'] . "." . $params['type'] . " FROM " . $params['table'];
+		    }
+		    
+		    $sql_select_check .= " WHERE " . $params['table'] . ".JID" . " = '" . $params['jid'] . "'";
+		    if($params["table"] == "payment"){
+                $sql_select_check .= " AND ". $params['table'] . ".PID = ".$params['other'];
+            }
+            else if($params["table"] == "guarantee"){
+                $sql_select_check .= " AND ". $params['table'] . ".GID = ".$params['other'];
+            }
+		 
+		    $result = DB::query($sql_select_check)->get();
+		    //echo $result[0]->$params['type'];
+		    //echo $params['value'];
+
 		    if($result[0]->$params['type'] == $params['value']) {
-		        echo json_encode(array("status" => true));
+		        $ret = array();
+		        $ret["table"] = $params["table"];
+		        if($params["table"] == "payment"){
+		            $ret["value"] = $result;
+		        }
+		        else if($params["table"] == "guarantee"){
+		            $ret["value"] = $result;
+		        }
+		        else{
+		            $ret["value"] = $result[0]->$params['type'];
+		        }
+		        echo json_encode(array("status" => true, 'obj' => $ret));
 		    }
 		    else {
 		        echo json_encode(array("status" => false, "obj" => $params, "sql" => $sql_update));
