@@ -261,6 +261,20 @@ $(document).ready(function(){
   	    	    // amount_actual_price_guarantee
   	    	  }
   	    	}
+  	    	else if(obj["task"] == "new_po_amount") {
+  	    	  var value = obj["value_payment"];
+  	    	  var value_count = value.length;
+  	    	  for(var i = 0; i < value_count; i++) {
+  	    	    var pid =value[i]['PID'];
+  	    	    $("#amount_actual_percentage_payment-"+pid).val(value[i]["Amount_Actual_Percentage"]);
+  	    	  }
+  	    	  value = obj["value_guarantee"];
+  	    	  value_count = value.length;
+  	    	  for(var i = 0; i < value_count; i++) {
+  	    	    var gid = value[i]['GID'];
+  	    	    $("#amount_actual_percentage_guaranteet-"+gid).val(value[i]["Amount_Actual_Percentage"]);
+  	    	  }
+  	    	}
         }
         else {
           $("#show-save p").html("Failed");
