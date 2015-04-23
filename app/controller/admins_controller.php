@@ -152,6 +152,11 @@
 		            DB::puts("UPDATE guarantee SET guarantee.Amount_Actual_Percentage = '" . $result_old_guarantee_value[$i]->New_Percentage . "' WHERE guarantee.GID = '" . $result_old_guarantee_value[$i]->GID . "'");
 		        }
 		    }
+		    else if($params['type'] == "Contract_Value_Other") {
+		        $result_old_value_other = DB::query("SELECT job.Amount_Actual_Price FROM job WHERE job.JID = '" . $params['jid'] . "'")->get();
+		        
+		        
+		    }
 		    
 		    if(trim($params['other']) != ''){
 		        
