@@ -124,7 +124,14 @@
 	
 	<div id="admin-checklist" style="display: none;">
 		<div>
-			
+			<div class="section group">
+				<div class="col span_1_of_2">
+					adfasdf
+				</div>
+				<div class="col span_1_of_2">
+					asfasdf
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
