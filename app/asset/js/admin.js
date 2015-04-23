@@ -284,6 +284,7 @@ $(document).ready(function(){
 		var type = update.data('type');
 		var table = update.data('table');
 		var other = update.data('other');
+		var block_id = update.data('id');
 		var value = update.val();
 		$(".input-readonly").prop("readonly", true);
 		if(typeof other == 'undefined'){
@@ -338,6 +339,16 @@ $(document).ready(function(){
   	    	    var gid = value[i]['GID'];
   	    	    $("#amount_actual_percentage_guaranteet-"+gid).val(value[i]["Amount_Actual_Percentage"]);
   	    	  }
+  	    	  value = obj["value_other"];
+  	    	  $("#"+block_id).find("input[name^=contract_value_other]").val(value[0]["Contract_Value_Other"]);
+  	    	}
+  	    	else if(obj["task"] == "new_value_other") {
+  	    	  var value = obj["value_rate"];
+  	    	  $("#"+block_id).find("input[name^=contract_value_rate]").val(value[0]["Contract_Value_Rate"]);
+  	    	}
+  	    	else if(obj["task"] == "new_value_rate") {
+  	    	  var value = obj["value_other"];
+  	    	  $("#"+block_id).find("input[name^=contract_value_other]").val(value[0]["Contract_Value_Other"]);
   	    	}
         }
         else {
@@ -551,10 +562,11 @@ $(document).ready(function(){
       amount = parseFloat(amount.replace(",", ""));
     }
     if(amount_percentage != null && amount_percentage!= ""){
-      amount_percentage = parseFloat(amount_percentage.replace(",", ""));
+      amount_percentage = parseFloat(amount_percentage.replace(/,/g, ""));
     }
     if(full_price != null && full_price!= ""){
-      full_price = parseFloat(full_price.replace(",", ""));
+      console.log(full_price.replace(/,/g, ""))
+      full_price = parseFloat(full_price.replace(/,/g, ""));
     }
     // 
     // 
