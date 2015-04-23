@@ -122,7 +122,7 @@
 		}
 		
 		public static function update($params) {
-		    if($params['type'] == "Contract_Value_THB") {
+		    if($params['type'] == "Contract_Value_THB" || $params['type'] == "Contract_Value_Other") {
 		        if($params['value'] == '' || intval($params['value']) <= 0) {
 		            $params['value'] = 1;
 		        }
@@ -142,6 +142,9 @@
 		    if($params['type'] == "Contract_Value_THB") {
 		        $result_old_payment_value = DB::query("SELECT payment.PID, payment.Amount_Actual_Price FROM payment WHERE payment.JID" . " = '" . $params['jid'] . "'")->get();
 		        $result_old_guarantee_value = DB::query("SELECT guarantee.GID, .Amount_Actual_Price FROM guarantee WHERE guarantee.JID" . " = '" . $params['jid'] . "'")->get();
+		        $result_old_value_other = DB::query("SELECT job.Contract_Value_Rate FROM job WHERE job.JID = '" . $params['jid'] . "'")->get();
+		        $new_value_other = $params['value'] / $result_old_value_other[0]->Contract_Value_Rate;
+		        DB::puts("UPDATE job SET job.Contract_Value_Other = '" . $new_value_other . "' WHERE job.JID = '" . $params['jid'] . "'");
 		        
 		        for($i = 0; $i < count($result_old_payment_value); $i++) {
 		            $result_old_payment_value[$i]->New_Percentage = ($result_old_payment_value[$i]->Amount_Actual_Price * 100)/$params['value'];
@@ -151,6 +154,16 @@
 		            $result_old_guarantee_value[$i]->New_Percentage = ($result_old_guarantee_value[$i]->Amount_Actual_Price * 100)/$params['value'];
 		            DB::puts("UPDATE guarantee SET guarantee.Amount_Actual_Percentage = '" . $result_old_guarantee_value[$i]->New_Percentage . "' WHERE guarantee.GID = '" . $result_old_guarantee_value[$i]->GID . "'");
 		        }
+		    }
+		    else if($params['type'] == "Contract_Value_Other") {
+		        $result_old_value_other = DB::query("SELECT job.Contract_Value_THB FROM job WHERE job.JID = '" . $params['jid'] . "'")->get();
+		        $new_value_other = $result_old_value_other[0]->Contract_Value_THB / $params['value'];
+		        DB::puts("UPDATE job SET job.Contract_Value_Rate = '" . $new_value_other . "' WHERE job.JID = '" . $params['jid'] . "'");
+		    }
+		    else if($params['type'] == "Contract_Value_Rate") {
+		        $result_old_value_other = DB::query("SELECT job.Contract_Value_THB FROM job WHERE job.JID = '" . $params['jid'] . "'")->get();
+		        $new_value_other = $result_old_value_other[0]->Contract_Value_THB / $params['value'];
+		        DB::puts("UPDATE job SET job.Contract_Value_Other = '" . $new_value_other . "' WHERE job.JID = '" . $params['jid'] . "'");
 		    }
 		    
 		    if(trim($params['other']) != ''){
@@ -226,8 +239,22 @@
 		 
 		    $result = DB::query($sql_select_check)->get();
 		    
-	        $result_new_payment_value = DB::query("SELECT payment.PID, payment.Amount_Actual_Price, payment.Amount_Actual_Percentage FROM payment WHERE payment.JID" . " = '" . $params['jid'] . "'")->get();
-	        $result_new_guarantee_value = DB::query("SELECT guarantee.GID, .Amount_Actual_Price, guarantee.Amount_Actual_Percentage FROM guarantee WHERE guarantee.JID" . " = '" . $params['jid'] . "'")->get();
+	        $result_new_payment_value;
+	        $result_new_guarantee_value;
+	        $result_new_value_other;
+	        $result_new_value_rate;
+	        
+	        if($params['type'] == "Contract_Value_THB") {
+	            $result_new_payment_value = DB::query("SELECT payment.PID, payment.Amount_Actual_Price, payment.Amount_Actual_Percentage FROM payment WHERE payment.JID" . " = '" . $params['jid'] . "'")->get();
+	            $result_new_guarantee_value = DB::query("SELECT guarantee.GID, .Amount_Actual_Price, guarantee.Amount_Actual_Percentage FROM guarantee WHERE guarantee.JID" . " = '" . $params['jid'] . "'")->get();
+	            $result_new_value_other = DB::query("SELECT job.Contract_Value_Other FROM job WHERE job.JID = '" . $params['jid'] . "'")->get();
+	        }
+	        else if($params['type'] == "Contract_Value_Other") {
+	            $result_new_value_rate = DB::query("SELECT job.Contract_Value_Rate FROM job WHERE job.JID = '" . $params['jid'] . "'")->get();
+	        }
+	        else if($params['type'] == "Contract_Value_Rate") {
+	            $result_new_value_other = DB::query("SELECT job.Contract_Value_Other FROM job WHERE job.JID = '" . $params['jid'] . "'")->get();
+	        }
 		    //echo $result[0]->$params['type'];
 		    //echo $params['value'];
 
@@ -245,7 +272,15 @@
     		        $ret["task"] = "new_po_amount";
 		            $ret["value_payment"] = $result_new_payment_value;
 		            $ret["value_guarantee"] = $result_new_guarantee_value;
-		            
+		            $ret["value_other"] = $result_new_value_other;
+		        }
+		        else if($params['type'] == "Contract_Value_Other") {
+    		        $ret["task"] = "new_value_other";
+		            $ret["value_rate"] = $result_new_value_rate;
+		        }
+		        else if($params['type'] == "Contract_Value_Rate") {
+    		        $ret["task"] = "new_value_rate";
+		            $ret["value_other"] = $result_new_value_other;
 		        }
 		        else{
 		            $ret["value"] = $result[0]->$params['type'];
@@ -386,7 +421,7 @@
         
         public static function amountValue($amount_thb, $amount_percentage, $full_price) {
             if(is_null($amount_thb) && !is_null($amount_percentage)) {
-                $baht = intval($full_price) * (intval($amount_percentage) / 100);
+                $baht = ($full_price * ($amount_percentage / 100));
                 return '\'' . $baht . '\', \'' . $amount_percentage . '\'';
             }
             else if(!is_null($amount_thb) && is_null($amount_percentage)) {
