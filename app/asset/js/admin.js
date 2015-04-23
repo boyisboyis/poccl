@@ -83,6 +83,17 @@ $(document).ready(function(){
     }
   });
   */
+  
+  $("#input-search").on("keyup", function(e){
+    if ( e.which == 13 ) {
+     var data = {
+        "type" : $("#select-search").val(),
+        "search" : $("#input-search").val()
+      };
+      searchResult(data);
+    }
+  });
+  
   $("#search-now").on("click", function(){
     var data = {
       "type" : $("#select-search").val(),
@@ -578,10 +589,10 @@ $(document).ready(function(){
                     "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+data['obj'][0]['Payment_Type']+"</td>"+
                     "</tr>"+
                     "<tr>"+
-                    "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+data['obj'][0]['PID']+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-other='"+data['obj'][0]['PID']+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ (data['obj'][0]['Amount_Actual_Price']==null?"":addCommas(parseFloat(data['obj'][0]['Amount_Actual_Price']).toFixed(2)))+"' readonly='true'></td>"+
+                    "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input id='amount_actual_price_payment-"+data['obj'][0]['PID']+"' name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-other='"+data['obj'][0]['PID']+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ (data['obj'][0]['Amount_Actual_Price']==null?"":addCommas(parseFloat(data['obj'][0]['Amount_Actual_Price']).toFixed(2)))+"' readonly='true'></td>"+
                     "</tr>"+
                     "<tr>"+
-                    "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+data['obj'][0]['PID']+"' data-id='serach-"+index+"' data-other='"+data['obj'][0]['PID']+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+(data['obj'][0]['Amount_Actual_Percentage']==null?"":data['obj'][0]['Amount_Actual_Percentage'])+"' readonly='true'>%"+"</td>"+
+                    "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input id='amount_actual_percentage_payment-"+data['obj'][0]['PID']+"' name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-other='"+data['obj'][0]['PID']+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+(data['obj'][0]['Amount_Actual_Percentage']==null?"":data['obj'][0]['Amount_Actual_Percentage'])+"' readonly='true'>%"+"</td>"+
                     "</tr>"+
                     "<tr>"+
                     "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+data['obj'][0]['Invoice_Date']+"</td>"+
