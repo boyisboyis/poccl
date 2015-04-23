@@ -133,6 +133,20 @@
 		    }
 		    DB::puts($sql_update);
 		    
+		    if($params['type'] == "Contract_Value_THB") {
+		        $result_old_payment_value = DB::query("SELECT payment.PID, payment.Amount_Actual_Price FROM payment WHERE payment.JID" . " = '" . $params['jid'] . "'")->get();
+		        $result_old_guarantee_value = DB::query("SELECT guarantee.GID, .Amount_Actual_Price FROM guarantee WHERE guarantee.JID" . " = '" . $params['jid'] . "'")->get();
+		        
+		        for($i = 0; $i < count($result_old_payment_value); $i++) {
+		            $result_old_payment_value[$i]->New_Percentage = ($result_old_payment_value[$i]->Amount_Actual_Price * 100)/$params['value'];
+		            DB::puts("UPDATE payment SET payment.Amount_Actual_Percentage = '" . $result_old_payment_value[$i]->New_Percentage . "' WHERE payment.PID = '" . $result_old_payment_value[$i]->PID . "'");
+		        }
+		        for($i = 0; $i < count($result_old_guarantee_value); $i++) {
+		            $result_old_guarantee_value[$i]->New_Percentage = ($result_old_guarantee_value[$i]->Amount_Actual_Price * 100)/$params['value'];
+		            DB::puts("UPDATE guarantee SET guarantee.Amount_Actual_Percentage = '" . $result_old_guarantee_value[$i]->New_Percentage . "' WHERE guarantee.GID = '" . $result_old_guarantee_value[$i]->GID . "'");
+		        }
+		    }
+		    
 		    if(trim($params['other']) != ''){
 		        
 		        $amount_data = DB::query("SELECT job.Contract_Value_THB FROM job WHERE job.JID='".$params['jid']."'")->get();
@@ -205,17 +219,27 @@
             }
 		 
 		    $result = DB::query($sql_select_check)->get();
+		    
+	        $result_new_payment_value = DB::query("SELECT payment.PID, payment.Amount_Actual_Price, payment.Amount_Actual_Percentage FROM payment WHERE payment.JID" . " = '" . $params['jid'] . "'")->get();
+	        $result_new_guarantee_value = DB::query("SELECT guarantee.GID, .Amount_Actual_Price, guarantee.Amount_Actual_Percentage FROM guarantee WHERE guarantee.JID" . " = '" . $params['jid'] . "'")->get();
 		    //echo $result[0]->$params['type'];
 		    //echo $params['value'];
 
 		    if($result[0]->$params['type'] == $params['value']) {
 		        $ret = array();
-		        $ret["table"] = $params["table"];
 		        if($params["table"] == "payment"){
+    		        $ret["table"] = $params["table"];
 		            $ret["value"] = $result;
 		        }
 		        else if($params["table"] == "guarantee"){
+    		        $ret["table"] = $params["table"];
 		            $ret["value"] = $result;
+		        }
+		        else if($params['type'] == "Contract_Value_THB") {
+    		        $ret["task"] = "new_po_amount";
+		            $ret["value_payment"] = $result_new_payment_value;
+		            $ret["value_guarantee"] = $result_new_guarantee_value;
+		            
 		        }
 		        else{
 		            $ret["value"] = $result[0]->$params['type'];
