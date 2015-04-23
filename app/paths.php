@@ -78,8 +78,8 @@ return array(
   	"file" => "lib/asset/js/pagenavi.js",
 	  "type" => "file_get_contents"
   ),
-  "bootstrapjs" => array(
-    "file" => "lib/asset/js/bootstrap.min.js",
+  "match-height" => array(
+    "file" => "lib/asset/js/match-height.min.js",
     "type" => "file_get_contents"
   ),
   

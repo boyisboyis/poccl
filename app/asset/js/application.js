@@ -110,7 +110,7 @@ $(document).ready(function(){
 	$("#content-payment-news").pagenavi({showPerPage: 10, position: "center"});
 	$("#content-guarantee-news").pagenavi({showPerPage: 10, position: "center"});
 	
-  $("#content-payment-news, #content-guarantee-news, #content-poidnull-news").on("click", '.search-from-news', function(){
+  $("#content-payment-news, #content-guarantee-news, #content-poidnull-news, #content-comingsoon-news, #content-checklistnil-news").on("click", '.search-from-news', function(){
     document.location.hash = $(this).attr("href");
     var search = $(this).data('jid');
     getHash();

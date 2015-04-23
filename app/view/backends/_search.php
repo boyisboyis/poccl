@@ -43,12 +43,12 @@
 
       	  </select>
       	  <p>Amount</p>
-      	  <div>
-      	   <input type="text" id='alert-amount-actual-price' name="Amount_Actual_Price" data-type="Amount_Actual_Price" value="" />
+      	  <div style="padding-right: 19px;">
+      	   <input type='radio' class="payment-radio-amount" name="payment-radio-amount" value="price" checked/><input type="text" class="number-only" id='alert-amount-actual-price' name="Amount_Actual_Price" data-type="Amount_Actual_Price" value=""/>
       	  </div>
       	  <p>Amount Percentang</p>
-      	  <div>
-      	    <input type="text" name="Amount_Actual_Percentage" data-type="Amount_Actual_Percentage" value="" />
+      	  <div style="padding-right: 19px;">
+      	   <input type='radio' class="payment-radio-amount" name="payment-radio-amount" value="percentage" /><input class="read-only number-only" type="text" id="alert-amount-actual-percentage" name="Amount_Actual_Percentage" data-type="Amount_Actual_Percentage" value="" readonly/>
       	  </div>
       	  <p>Invoice Date</p>
       	  <div>
@@ -103,20 +103,7 @@
 	  </div>
 	</div>
 	
-	<div id='search-clone' style="display: none;">
-	   <div id="payment_description_clone">
-	     
-	   </div>
-	  <!--<div id="payment_description_clone">
-	      <select class='payment_description'>
-	      <option value="">-</option>
-  	    <option value="Milestone Payment">Milestone Payment</option>
-  	    <option value="Retention Payment">Retention Payment</option>
-  	    <option value="Other Payment">Other Payment</option>
-  	  </select>-->
-	  </div>
-	</div>
-	
+
 	<div id='po-type-clone' style="display: none;">
 		<div id="po-description-clone">
 			<select id="po-type-select-block">
@@ -133,31 +120,12 @@
 			</select>
 		</div>
 	</div>
+	
+	
+	<div id="admin-checklist" style="display: none;">
+		<div>
+			
+		</div>
+	</div>
 </div>
-<!-- <div id="admin-search" class='t1'>
-  <div id='admin-search-box-search'>
-    <div id="front-message">Search By : </div>
-    <select id="select-search">
-      <option value="contract">Contract Name</option>
-      <option value="job">Job No</option>
-      <option value="poid">PO No</option>
-    </select>
-    <input type="search" id="input-search" name="input-search" />
-    <button id="search-now">search</button>
-		<button class="admin-search-delete" style="margin-right: 200px;">delete test</button>
-  </div>
-  <table id="admin-search-box-result">
-    <thead>
-      <tr>
-        <th>JID</th>
-        <th>Contactor Name</th>
-        <th>Po No</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      
-    </tbody>
-  </table>
-</div> -->
+
