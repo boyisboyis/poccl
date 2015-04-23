@@ -122,7 +122,13 @@
 		}
 		
 		public static function update($params) {
-		    $sql_update = "UPDATE " . $params['table'] . " SET " . $params['table'] . "." . $params['type'] . " = '" . $params['value'] . "' WHERE " . $params['table'] . ".JID" . " = '" . $params['jid'] . "'";
+		    if($params['type'] == "Contract_Value_THB") {
+		        if($params['value'] == '' || intval($params['value']) <= 0) {
+		            $params['value'] = 1;
+		        }
+		    }
+		    
+		    $sql_update = "UPDATE " . $params['table'] . " SET " . $params['table'] . "." . $params['type'] . " = " . self::nullValue($params['value']) . " WHERE " . $params['table'] . ".JID" . " = '" . $params['jid'] . "'";
 		    if(trim($params['other']) != ''){
 		        if($params["table"] == "payment"){
 		            $sql_update .= " AND " . $params['table'] . ".PID = '" . $params['other'] . "'";
