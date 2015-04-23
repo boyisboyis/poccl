@@ -1,6 +1,6 @@
 <div id="admin-config-type" class='t2'>
-    <div id='admin-config-type-block'>
-        <div class='config-list'>
+    <div id='admin-config-type-block' class='section group'>
+        <div class='col span_1_of_3 matchheight'>
             <div>
                 <span>PO Type</span>
                 <a href="#config_type" id="add_po_type"><i class="fa fa-plus"></i></a>
@@ -21,7 +21,7 @@
             </div>
         </div>
         
-        <div class='config-list'>
+        <div class='col span_1_of_3 matchheight'>
             <div>
                 <span>Payment Type</span>
                 <a href="#config_type" id="add_payment_type"><i class="fa fa-plus"></i></a>
@@ -40,11 +40,11 @@
                         
                 </div>
             </div>
-            
+            <div style="clear:both;"></div>
         </div>
         
         
-        <div class='config-list'>
+        <div class='col span_1_of_3 matchheight'>
             <div>
                 <span>Guarantee Type</span>
                 <a href="#config_type" id="add_guarantee_type"><i class="fa fa-plus"></i></a>

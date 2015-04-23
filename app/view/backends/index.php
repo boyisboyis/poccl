@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="admincss" type="text/css" />
   <script type="text/javascript" src="jquery"></script>
   <script type="text/javascript" src="jquery-ui"></script>
+  <script type="text/javascript" src="match-height"></script>
   <script type="text/javascript" src="adminjs"></script>
 </head>
 
