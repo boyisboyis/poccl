@@ -446,7 +446,15 @@ $(document).ready(function(){
             if(n > 0){
               var tr = "";
               for(var i=0;i<n;i++){
+              
                 var g_content = obj['Guarantee'][i];
+                var actual = "";
+                if(g_content['Start_Actual'] != null || g_content['Until_Actual'] != null){
+                  actual = "<tr>"+
+                    "<td class='text-vertical-top'>Start Actual</td><td class='td-colon'>:</td><td><span class='text_underline' style='margin-right: 10px;'>"+(g_content['Start_Actual']==null?"":g_content['Start_Actual'])+"</span>Until Actual : <span class='text_underline'>"+(g_content['Until_Actual']==null?"":g_content['Until_Actual'])+"</span></td>"+
+                    "</tr>";
+                }
+                
                  tr += "<tr>"+
                 "<td class='text-vertical-top'>Term : "+g_content['Terms']+"</td>"+
                 "<td class='td-search-term'>"+
@@ -455,11 +463,12 @@ $(document).ready(function(){
                 "<td class='text-vertical-top'>Description</td><td class='td-colon'>:</td><td class='text_underline'>"+g_content['Guarantee_Type']+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+ addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2)) + ' (' +g_content['Amount_Actual_Percentage']+"%)</td>"+
+                "<td class='text-vertical-top'>Amount</td><td class='td-colon'>:</td><td class='text_underline'>"+ (g_content['Amount_Actual_Price']==null?"":addCommas(parseFloat(g_content['Amount_Actual_Price']).toFixed(2))) + ' (' +(g_content['Amount_Actual_Percentage']==null?"":g_content['Amount_Actual_Percentage'])+"%)</td>"+
                 "</tr>"+
                 "<tr>"+
                 "<td class='text-vertical-top'>Start Plan</td><td class='td-colon'>:</td><td><span class='text_underline' style='margin-right: 10px;'>"+g_content['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+g_content['Until_Plan']+"</span></td>"+
                 "</tr>"+
+                actual+
                 "</table>"+
                 "</td>"+
                 "</tr>";

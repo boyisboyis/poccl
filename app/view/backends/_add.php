@@ -1,7 +1,7 @@
 <div id="admin-add" class='t0'>
 	<form id="form_add" name="form_add" method="POST" action="addPurchase">
 		<button type="submit" name="submit"><i class="fa fa-plus">Add</i></button>
-		<h2>New Purchase Order</h2>
+		<h2>New JOB</h2>
 		<div>
 			<label for="">Job No : </label>
 			<input type="text" name="job_no" required />
