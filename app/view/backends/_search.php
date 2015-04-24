@@ -52,7 +52,7 @@
       	  </div>
       	  <p>Invoice Date</p>
       	  <div>
-      	    <input type="text" name="Payment_date_plan" data-type="Payment_date_plan" value="" class='datepicker' />
+      	    <input type="text" name="Payment_date_plan" data-type="Payment_date_plan" value="" class='datepicker' required/>
       	  </div>
 	    </div>
 	    <div>
