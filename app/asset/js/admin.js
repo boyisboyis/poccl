@@ -1012,6 +1012,27 @@ $(document).ready(function(){
 	
 	/* =============================================================*/
 	
+	$("#backup-db-btn").on('click', function() {
+	  $("#alert-backup-db").show();
+	});
+	
+	$("#alert-btn-backup-no").on('click', function() {
+	  $("#alert-backup-db").hide();
+	});
+	
+	$("#alert-btn-backup-yes").on('click', function() {
+	  $.ajax({
+    	method: "POST",
+			url: "backupDBController",
+			dataType: "json",
+			success: function(data) {
+				// console.log(data);
+			}
+	  });
+	});
+	
+	/* =============================================================*/
+	
 	$("#admin-config-type #add_po_type").on('click', function() {
 	  $('#add-po-type-alert').show();
 	});

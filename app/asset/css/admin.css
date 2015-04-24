@@ -411,7 +411,7 @@ div#content-article {
 
 /*======================= */
 
-#admin-add-user-box-alert, #add-po-type-alert, #add-payment-type-alert, #add-guarantee-type-alert, #admin-checklist {
+#admin-add-user-box-alert, #add-po-type-alert, #add-payment-type-alert, #add-guarantee-type-alert, #admin-checklist, #alert-backup-db {
 
 	position: fixed;
 	top: 0;
@@ -432,7 +432,7 @@ div#content-article {
 	padding: 10px;
 }
 
-#admin-add-user-box-alert > section, #add-po-type-alert > section, #add-payment-type-alert > section, #add-guarantee-type-alert > section {
+#admin-add-user-box-alert > section, #add-po-type-alert > section, #add-payment-type-alert > section, #add-guarantee-type-alert > section, #alert-backup-db-complete  {
 	position: absolute;
 	z-index: 9998;
 	width: 500px;
@@ -445,15 +445,15 @@ div#content-article {
 	border-radius: 10px;
 }
 
-#admin-add-user-box-alert h3, #add-po-type-alert h3, #add-payment-type-alert h3, #add-guarantee-type-alert h3 {
+#admin-add-user-box-alert h3, #add-po-type-alert h3, #add-payment-type-alert h3, #add-guarantee-type-alert h3, #alert-backup-db-complete h3 {
 	text-align: center;
 	margin-top: 50px;
 	font-size: 1.5em;
 }
-#admin-add-user-box-alert div, #add-po-type-alert div, #add-payment-type-alert div, #add-guarantee-type-alert div {
+#admin-add-user-box-alert div, #add-po-type-alert div, #add-payment-type-alert div, #add-guarantee-type-alert div, #alert-backup-db-complete div {
 	text-align: center;
 }
-#admin-add-user-box-alert button, #add-po-type-alert button, #add-payment-type-alert button, #add-guarantee-type-alert button {
+#admin-add-user-box-alert button, #add-po-type-alert button, #add-payment-type-alert button, #add-guarantee-type-alert button, #alert-backup-db-complete button {
 	position: static;
 }
 
