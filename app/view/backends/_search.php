@@ -125,12 +125,7 @@
 	<div id="admin-checklist" style="display: none;">
 		<input type="hidden" id="checklist-jid" name="checklist-jid" value=""/>
 		<div>
-			<div id="checklist-close">
-				<span class="fa-stack fa-lg">
-				  <i class="fa fa-circle fa-stack-2x" style="color: white; font-size: 3em; top: -11px;"></i>
-				  <i class="fa fa-stack-1x fa-times-circle-o" style="font-size: 3em;"></i>
-				</span>
-			</div>
+			
 			<div class="header">
 				<section>
 					<h4 style="display:inline-block;">Has Checklist</h4>
@@ -147,37 +142,20 @@
 					<h4>Payment</h4>
 					<div class='checklist-content nano'>
 						<div class='nano-content payment_checklist'>
-							<?php 
-							
-									for($i=0;$i<0;$i++){
-										echo "<div style='position: relative;'>";
-										echo "<p class='checklist-desc'>Description: $i </p>";
-										echo "<div class='checklist-detail' style='position: absolute; top:22px;left:30px; height: 50px; width: 100px; background:white; display: none; z-index: 9'>";
-										echo "<div>asdfsf</div>";
-										echo "</div>";
-										echo "</div>";
-									}
-							
-							?>
 						</div>
 					</div>
 				</section>
 				<section class="col span_1_of_2">
 					<h4>Guarantee</h4>
 					<div class='checklist-content nano'>
-						<div class='nano-content'>
-							<?php 
-									
-								for($i=0;$i<0;$i++){
-									echo "<div>";
-									echo "<p>Description: $i </p>";
-									echo "</div>";
-								}
-							
-							?>
+						<div class='nano-content guarantee_checklist'>
+
 						</div>
 					</div>
 				</section>
+			</div>
+			<div>
+				<button id="checklist-close" style="position: relative; top: 0; left: 0; width: 100%; height: 50px; margin: 0; color: #FFFFFF; font-size: 20px;">Close</button>
 			</div>
 		</div>
 	</div>
