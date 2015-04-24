@@ -1,3 +1,11 @@
+<?php
+  if($GLOBALS['IPCLIENT'] != FIXEDIP) {
+    if(Session::getSessionUID() == null){
+      Redirect::to("login");
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
