@@ -46,6 +46,21 @@ $(document).ready(function(){
     }
   });
   
+  $(".guarantee-radio-amount").on("change", function (){
+    var value = $(this).val();
+    $("#guarantee-alert-amount-actual-price, #alert-amount-actual-percentage").removeClass("input-error");
+    if(value=="price"){
+      $("#guarantee-alert-amount-actual-price").removeClass("read-only").prop("readonly", false).val("");
+      $("#guarantee-alert-amount-actual-percentage").addClass("read-only").prop("readonly", true).val("");
+      console.log(value);
+    }
+    else if(value=="percentage"){
+      $("#guarantee-alert-amount-actual-price").addClass("read-only").prop("readonly", true).val("");
+      $("#guarantee-alert-amount-actual-percentage").removeClass("read-only").prop("readonly", false).val("");
+      console.log(value);
+    }
+  });
+  
   $("#admin-checklist").on("change", ".admin-checklist-date", function(){
     // console.log($(this).val());
     var jid = $("#checklist-jid").val();
@@ -752,11 +767,11 @@ $(document).ready(function(){
     if(payment_date == ""){
       $("#alert-box-payment-terms input[name=Payment_date_plan]").addClass("input-error");
     }
-    // 
-    // 
-    // 
-    console.log(amount, amount_percentage, full_price);
-    if(payment_date != ""){ 
+    else{
+      $("#alert-box-payment-terms input[name=Payment_date_plan]").removeClass("input-error");
+    }
+
+    if(payment_date != "" && (amount != "" || amount_percentage!="")){ 
        $.ajax({
         method: "POST",
         url: "adminsController",
@@ -775,6 +790,8 @@ $(document).ready(function(){
         },
         success: function(data) {
           console.log(data);
+          $("#alert-amount-actual-price, #alert-amount-actual-percentage").removeClass("input-error");
+
           if(data['status']){
             var tr = "<tr>"+
                       "<td style='vertical-align: text-top; position: relative;'>"+
@@ -837,69 +854,99 @@ $(document).ready(function(){
     var full_price = $("#"+id).find("input[name*=contract_value_thb]").val();
     // console.log(temrs, id,index , jid, desc, amount, amount_percentage, start_date, until_date)
     
-    $.ajax({
-      method: "POST",
-      url: "adminsController",
-      dataType: "json",
-      data: {
-        action: "update_guarantee",
-        params: {
-          jid: jid,
-          terms: terms,
-          desc: desc,
-          amount: amount,
-          amount_percentage: amount_percentage,
-          start_date: start_date,
-          until_date: until_date,
-          full_price: full_price
+    if(amount == "" && amount_percentage == ""){
+      $(".guarantee-radio-amount").each(function(){
+        if($(this).prop("checked")) {
+          if($(this).val() == 'price'){
+            $("#alert-box-guarantee-terms input[name=Amount_Actual_Price]").addClass("input-error");
+          }
+          else{
+            $("#alert-box-guarantee-terms input[name=Amount_Actual_Percentage]").addClass("input-error");
+          }
         }
-      },
-      success: function(data) {
-        console.log(data);
-        if(data['status']){
-          var tr = "<tr>"+
-                    "<td style='vertical-align: text-top; position: relative;'>"+
-                    "<i class='fa fa-trash-o search-delete-guarantee' data-type='"+data['obj'][0]['Guarantee_Type']+"' data-terms='"+data['obj'][0]['Terms']+"' data-jid='"+jid+"' style='display: inline-block;'></i>"+
-                    "Term : "+ data['obj'][0]['Terms'] +"</td>"+
-                    "<td class='td-search-term'>"+
-                    "<table>"+
-                    "<tr>"+
-                    "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+ data['obj'][0]['Guarantee_Type'] +"</td>"+
-                    "</tr>"+
-                    "<tr>"+
-                    "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(data['obj'][0]['Amount_Actual_Price']).toFixed(2))+"' readonly='true'></td>"+
-                    "</tr>"+
-                    "<tr>"+
-                    "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+data['obj'][0]['Amount_Actual_Percentage']+"' readonly='true'>%"+"</td>"+
-                    "</tr>"+
-                    "<tr>"+
-                    "<td class='text-vertical-top'>Start Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><span class='text_underline text-vertical-top' style='margin-right: 10px;'>"+data['obj'][0]['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+data['obj'][0]['Until_Plan']+"</span></td>"+
-                    "</tr>"+
-                    "</table>"+
-                    "</td>"+
-                    "</tr>";
-          
-          $("#"+id).find(".content-search-right .search-delete-payment").hide();
-          $("#"+id).find(".content-search-right table.guarantee_terms_add").append(tr);
-        }
-        else {
-          console.log('false');
-        }
-      }
-    });
+      });
+    }
     
+    if(start_date == ""){
+      $("#alert-box-guarantee-terms input[name=Start_plan]").addClass("input-error");
+    }
+    else{
+      $("#alert-box-guarantee-terms input[name=Start_plan]").removeClass("input-error");
+    }
     
-
-     $("#new-guarantee-terms").text(0);
-     $("#alert-box-guarantee-terms input[name=guarantee-temrs-id]").val("");
-     $("#alert-box-guarantee-terms input[name=guarantee-temrs-index]").val("");
-     $("#alert-box-guarantee-terms input[name=guarantee-temrs-jid]").val("");
-     $("#alert-box-guarantee-terms select[name=guarantee-description]").val("");
-     $("#alert-box-guarantee-terms input[name=Amount_Actual_Price]").val("");
-     $("#alert-box-guarantee-terms input[name=Amount_Actual_Percentage]").val("");
-     $("#alert-box-guarantee-terms input[name=Start_plan]").val("");
-     $("#alert-box-guarantee-terms input[name=until_plan]").val("");
-     $("#alert-box-guarantee-terms, #box-alert").hide();
+    if(until_date == ""){
+      $("#alert-box-guarantee-terms input[name=until_plan]").addClass("input-error");
+    }
+    else{
+      $("#alert-box-guarantee-terms input[name=until_plan]").removeClass("input-error");
+    }
+    
+    if(start_date != '' && until_date != '' && (amount !="" || amount_percentage != "")){
+       $.ajax({
+        method: "POST",
+        url: "adminsController",
+        dataType: "json",
+        data: {
+          action: "update_guarantee",
+          params: {
+            jid: jid,
+            terms: terms,
+            desc: desc,
+            amount: amount,
+            amount_percentage: amount_percentage,
+            start_date: start_date,
+            until_date: until_date,
+            full_price: full_price
+          }
+        },
+        success: function(data) {
+          console.log(data);
+          if(data['status']){
+            var tr = "<tr>"+
+                      "<td style='vertical-align: text-top; position: relative;'>"+
+                      "<i class='fa fa-trash-o search-delete-guarantee' data-type='"+data['obj'][0]['Guarantee_Type']+"' data-terms='"+data['obj'][0]['Terms']+"' data-jid='"+jid+"' style='display: inline-block;'></i>"+
+                      "Term : "+ data['obj'][0]['Terms'] +"</td>"+
+                      "<td class='td-search-term'>"+
+                      "<table>"+
+                      "<tr>"+
+                      "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+ data['obj'][0]['Guarantee_Type'] +"</td>"+
+                      "</tr>"+
+                      "<tr>"+
+                      "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(data['obj'][0]['Amount_Actual_Price']).toFixed(2))+"' readonly='true'></td>"+
+                      "</tr>"+
+                      "<tr>"+
+                      "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+data['obj'][0]['Amount_Actual_Percentage']+"' readonly='true'>%"+"</td>"+
+                      "</tr>"+
+                      "<tr>"+
+                      "<td class='text-vertical-top'>Start Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><span class='text_underline text-vertical-top' style='margin-right: 10px;'>"+data['obj'][0]['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+data['obj'][0]['Until_Plan']+"</span></td>"+
+                      "</tr>"+
+                      "</table>"+
+                      "</td>"+
+                      "</tr>";
+            
+            $("#"+id).find(".content-search-right .search-delete-payment").hide();
+            $("#"+id).find(".content-search-right table.guarantee_terms_add").append(tr);
+          }
+          else {
+            console.log('false');
+          }
+        }
+      });
+      
+      
+  
+       $("#new-guarantee-terms").text(0);
+       $("#alert-box-guarantee-terms input[name=guarantee-temrs-id]").val("");
+       $("#alert-box-guarantee-terms input[name=guarantee-temrs-index]").val("");
+       $("#alert-box-guarantee-terms input[name=guarantee-temrs-jid]").val("");
+       $("#alert-box-guarantee-terms select[name=guarantee-description]").val("");
+       $("#alert-box-guarantee-terms input[name=Amount_Actual_Price]").val("");
+       $("#alert-box-guarantee-terms input[name=Amount_Actual_Percentage]").val("");
+       $("#alert-box-guarantee-terms input[name=Start_plan]").val("");
+       $("#alert-box-guarantee-terms input[name=until_plan]").val("");
+       $("#alert-box-guarantee-terms, #box-alert").hide();
+    }
+   
   });
   
   $("#alert-box-guarantee-terms").on("change", ".guarantee_description", function(){
