@@ -20,6 +20,7 @@
   <script type="text/javascript" src="jquery"></script>
   <script type="text/javascript" src="jquery-ui"></script>
   <script type="text/javascript" src="match-height"></script>
+  <script type="text/javascript" src="nanojs"></script>
   <script type="text/javascript" src="adminjs"></script>
 </head>
 

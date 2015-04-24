@@ -46,43 +46,140 @@ $(document).ready(function(){
   });
   
   $("#admin-search-box-content").on("click",".admin-checklist",function(){
-    console.log($(this));
-    var width = $(window).width();
-    var height = $(window).height();
-    width = ((width * 90 ) / 100);
-    height = ((height * 90) / 100);
-    $("#admin-checklist > div").css({"width":width + 'px', "height":height +'px', "margin-top": ((height/2)*-1) + 'px', "margin-left": ((width/2)*-1) + 'px'});
-    $("#admin-checklist").show();
+    $("#admin-checklist .payment_checklist").html("");
+    var jid = $(this).data("jid");
+    $("#checklist-jid").val(jid);
+    $.ajax({
+		  dataType: 'json',
+		  method: 'POST',
+		  url: "adminsController",
+      data: {
+        action: "get_checklist",
+        params: {
+          jid: jid
+        }
+      },
+      success: function(data) {
+        console.log(data);
+        if(data.status){
+          var obj = data.obj;
+          var check_list = parseInt(obj.Check_list);
+          var payment = obj.payment;
+          console.log(payment)
+          if(check_list == 0){
+            $(".checklist-true").removeClass("select");
+            $(".checklist-false").addClass("select");
+          }
+          else{
+            $(".checklist-true").addClass("select");
+            $(".checklist-false").removeClass("select");
+          }
+          
+          if(payment.length > 0){
+            var payment_length = payment.length;
+            for(var i =0 ; i<payment.length; i++){
+              var p = payment[i];
+              var str = "<div style='position: relative;'>";
+              str += "<p class='checklist-desc'>"+p.Payment_Type+": "+p.Terms+" </p>";
+              str += "<div class='checklist-detail' style='position: absolute; top:22px;left:30px; height: 50px; width: 100px; background:white; display: none; z-index: 9'>";
+              str += "<div>asdfsf</div>";
+							str += "</div>";
+							str += "</div>";
+							$("#admin-checklist .payment_checklist").append(str);
+            }
+          }
+           
+          var width = $(window).width();
+          var height = $(window).height();
+          width = ((width * 90 ) / 100);
+          height = ((height * 90) / 100);
+          $("#admin-checklist > div").css({"width":width + 'px', "height":height +'px', "margin-top": ((height/2)*-1) + 'px', "margin-left": ((width/2)*-1) + 'px'});
+          
+         
+          
+          $("#admin-checklist").show();
+          var head = $("#admin-checklist .header").outerHeight(true);
+          var hr = $("#admin-checklist > div > hr").outerHeight(true);
+          var h4 = $("#admin-checklist .content h4").outerHeight(true);
+          var sum = head + hr + h4;
+          var cheight = height - sum - 80;
+          console.log(head, hr, h4);
+          $(".checklist-content").css({"max-height": cheight+'px'});
+          $(".nano").nanoScroller({ alwaysVisible: true });
+          //console.log(obj.Check_List);
+        }
+        else{
+          
+        }
+      }
+    });
   });
   
- /* $("#alert-amount-actual-price").on("keyup", function(){
-    var value = $(this).val();
-    var id = $("#payment-temrs-id").val();
-    var po_amount = $("#"+id).find("input[name^=contract_value_thb]").val();
-    po_amount = parseFloat(po_amount.replace(/,/g, ""));
-    if(po_amount > 0){
-      var percentage = (value / po_amount) * 100;
-      $("#alert-amount-actual-percentage").val(addCommas(percentage.toFixed(2)));
-    }
-    else{
-      $("#alert-amount-actual-percentage").val(0);
-    }
+  $(".has-checklist").on("click", function(){
+   
+    var value = parseInt($(this).data("value"));
+    var jid = $("#checklist-jid").val();
+    $.ajax({
+		  dataType: 'json',
+		  method: 'POST',
+		  url: "adminsController",
+      data: {
+        action: "update",
+        params: {
+          jid: jid, 
+          type: "Check_list",
+          table: "job",
+          other: "",
+          value: value
+        }
+      },
+      success: function(data) {
+        console.log(data)
+        if(data.status){
+          var checklist = parseInt(data.obj.value);
+          if(checklist == 0){
+            $(".checklist-true").removeClass("select");
+            $(".checklist-false").addClass("select");
+          }
+          else{
+            $(".checklist-true").addClass("select");
+            $(".checklist-false").removeClass("select");
+          }
+        
+        }
+        else{
+          if(value == 0){
+            $(".checklist-true").addClass("select");
+            $(".checklist-false").removeClass("select");
+          }
+          else{
+            $(".checklist-true").removeClass("select");
+            $(".checklist-false").addClass("select");
+          }
+        }
+      }
+		});
+    
+    // console.log(value);
+    // if(value==true){
+    //   $(this).addClass("select");
+    //   $(".checklist-false").removeClass("select");
+    // }
+    // else{
+    //   $(this).addClass("select");
+    //   $(".checklist-true").removeClass("select");
+    // }
   });
   
-  $("#alert-amount-actual-percentage").on("keyup", function(){
-    var value = $(this).val();
-    var id = $("#payment-temrs-id").val();
-    var po_amount = $("#"+id).find("input[name^=contract_value_thb]").val();
-    po_amount = parseFloat(po_amount.replace(/,/g, ""));
-    if(po_amount > 0){
-      var price = (po_amount * value) / 100;
-      $("#alert-amount-actual-price").val(addCommas(price.toFixed(2)));
-    }
-    else{
-      $("#alert-amount-actual-price").val(0);
-    }
+  $("#checklist-close").on("click", function(){
+    $("#admin-checklist").hide();
   });
-  */
+  
+  $(".checklist-desc").on("click", function(){
+    $(".checklist-detail").hide();
+    $(this).siblings('.checklist-detail').show();
+  });
+  
   
   $("#input-search").on("keyup", function(e){
     if ( e.which == 13 ) {

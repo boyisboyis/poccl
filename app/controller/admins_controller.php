@@ -15,6 +15,8 @@
 				case "delete_guarantee" : adminController::deleteGuarantee($params);break;
 				case "get_type" : adminController::getType($params);break;
 				case "add_type" : adminController::addType($params);break;
+				case "get_checklist" : adminController::getChecklist($params);break;
+				case "set_checklist" : adminController::setChecklist($params);break;
     		}
     	}
     }
@@ -434,5 +436,28 @@
                 }
             }
         }
+        
+        public static function getChecklist($params) {
+            $sql_get_checklist = "SELECT job.Check_List FROM job WHERE job.JID = '".$params["jid"]."'";
+            $result = DB::query($sql_get_checklist)->get();
+            
+            $sql_get_payment = "SELECT `PID`,`Terms`,`Payment_Type`,`Invoice_Date`,`Date_Actual`  FROM `payment` WHERE `JID` = '".$params["jid"]."' ORDER BY `Payment_Type` ASC, `Terms` ASC";
+            
+            $result2 = DB::query($sql_get_payment)->get();
+            
+            $ret = array("Check_list" => $result[0]->Check_List, "payment" => $result2, "sql" => $sql_get_payment);
+            
+            if(count($result != 0)) {
+                sort($result);
+                echo json_encode(array("status" => true, "obj" => $ret));
+            }
+            else {
+                echo json_encode(array("status" => false));
+            }
+        }
+        
+        // public static function setChecklist($params) {
+        //     $sql_set_checklist = "UPDATE job ";
+        // }
     }
 ?>

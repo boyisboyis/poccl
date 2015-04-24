@@ -123,14 +123,61 @@
 	
 	
 	<div id="admin-checklist" style="display: none;">
+		<input type="hidden" id="checklist-jid" name="checklist-jid" value=""/>
 		<div>
-			<div class="section group">
-				<div class="col span_1_of_2">
-					adfasdf
-				</div>
-				<div class="col span_1_of_2">
-					asfasdf
-				</div>
+			<div id="checklist-close">
+				<span class="fa-stack fa-lg">
+				  <i class="fa fa-circle fa-stack-2x" style="color: white; font-size: 3em; top: -11px;"></i>
+				  <i class="fa fa-stack-1x fa-times-circle-o" style="font-size: 3em;"></i>
+				</span>
+			</div>
+			<div class="header">
+				<section>
+					<h4 style="display:inline-block;">Has Checklist</h4>
+					<div style="display:inline-block; margin-left: 50px;">
+						<span class='has-checklist checklist-true' data-value="1">True</span>
+						<span style="margin: 0 5px;">/</span>
+						<span class='has-checklist checklist-false select' data-value="0">False</span>
+					</div>
+				</section>
+			</div>
+			<hr/>
+			<div class="section group content">
+				<section class="col span_1_of_2">
+					<h4>Payment</h4>
+					<div class='checklist-content nano'>
+						<div class='nano-content payment_checklist'>
+							<?php 
+							
+									for($i=0;$i<0;$i++){
+										echo "<div style='position: relative;'>";
+										echo "<p class='checklist-desc'>Description: $i </p>";
+										echo "<div class='checklist-detail' style='position: absolute; top:22px;left:30px; height: 50px; width: 100px; background:white; display: none; z-index: 9'>";
+										echo "<div>asdfsf</div>";
+										echo "</div>";
+										echo "</div>";
+									}
+							
+							?>
+						</div>
+					</div>
+				</section>
+				<section class="col span_1_of_2">
+					<h4>Guarantee</h4>
+					<div class='checklist-content nano'>
+						<div class='nano-content'>
+							<?php 
+									
+								for($i=0;$i<0;$i++){
+									echo "<div>";
+									echo "<p>Description: $i </p>";
+									echo "</div>";
+								}
+							
+							?>
+						</div>
+					</div>
+				</section>
 			</div>
 		</div>
 	</div>
