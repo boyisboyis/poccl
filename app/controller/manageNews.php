@@ -49,7 +49,7 @@ class News {
 		}
 	}
 	public static function guaranteesAlert() {
-		$result = DB::query("SELECT guarantee.JID, guarantee.Until_Plan FROM guarantee, job WHERE guarantee.Until_Plan <= '" . date("Y-m-d") . "' AND guarantee.Status_Return is null AND guarantee.JID = job.JID ORDER BY  guarantee.Until_Plan")->get();
+		$result = DB::query("SELECT guarantee.JID, guarantee.Until_Plan FROM guarantee, job WHERE guarantee.Until_Plan <= '" . date("Y-m-d") . "' AND guarantee.Until_Actual is null AND guarantee.JID = job.JID ORDER BY  guarantee.Until_Plan")->get();
 		$n = count($result);
 		if($n > 0){
 			$time_now = new DateTime("now");

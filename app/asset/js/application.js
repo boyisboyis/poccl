@@ -294,6 +294,7 @@ $(document).ready(function(){
       url : "managenews",
       cache: false,
       success: function(req){
+        // console.log(req);
         if(req['status'] == true){
           var length = req['obj'].length;
           $("#content-guarantee-news").html("<h2 class='main-topics'>Bank Gurantees is not return</h2><div class='page-list'></div>");
