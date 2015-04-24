@@ -41,6 +41,10 @@ return array(
     "file" => "app/controller/admins_controller.php" ,
     "type" => "require"
   ),
+  "backupDBController" => array(
+    "file" => "app/controller/backup_db_controller.php" ,
+    "type" => "require"
+  ),
   
   /*
    *Javascript file
