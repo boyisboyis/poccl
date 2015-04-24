@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var hash_str = ["#add", "#search", "#config_type", "#add_user"];
+  var hash_str = ["#add", "#search", "#config_type", "#add_user", "#backup-db"];
 	var delete_jid = "";
 	var delete_index = "";
 	
@@ -1026,6 +1026,7 @@ $(document).ready(function(){
 			url: "backupDBController",
 			dataType: "json",
 			success: function(data) {
+			  $("#alert-backup-db").hide();
 				// console.log(data);
 			}
 	  });
@@ -1187,6 +1188,7 @@ $(document).ready(function(){
         $(".t0, .t1, .t2").hide();
         $(".t3").show();
         break;
+      case 4: 
       default:
         $(".t1, .t2, .t3").hide();
         $(".t0").show();
