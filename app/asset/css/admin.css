@@ -567,6 +567,16 @@ input[type=text].read-only {
   cursor: pointer;
 }
 
+#admin-checklist .checklist-desc{
+  margin: 5px 0;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#admin-checklist .checklist-desc:hover{
+  font-weight: bold;
+}
+
 #admin-checklist .checklist-true.select {
   color: #2ecc71;
   font-weight: bold;

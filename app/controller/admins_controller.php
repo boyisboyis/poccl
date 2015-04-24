@@ -168,7 +168,7 @@
 		        DB::puts("UPDATE job SET job.Contract_Value_Other = '" . $new_value_other . "' WHERE job.JID = '" . $params['jid'] . "'");
 		    }
 		    
-		    if(trim($params['other']) != ''){
+		    if(trim($params['other']) != '' && $params['type'] != "Date_Actual"){
 		        
 		        $amount_data = DB::query("SELECT job.Contract_Value_THB FROM job WHERE job.JID='".$params['jid']."'")->get();
 
@@ -480,7 +480,11 @@
             
             $result2 = DB::query($sql_get_payment)->get();
             
-            $ret = array("Check_list" => $result[0]->Check_List, "payment" => $result2, "sql" => $sql_get_payment);
+            $sql_get_guarantee = "SELECT `GID`,`Terms`,`Guarantee_Type`,`Start_Actual`,`Until_Actual`  FROM `guarantee` WHERE `JID` = '".$params["jid"]."' ORDER BY `Guarantee_Type` ASC, `Terms` ASC";
+            
+            $result3 = DB::query($sql_get_guarantee)->get();
+            
+            $ret = array("Check_list" => $result[0]->Check_List, "payment" => $result2, "guarantee" => $result3, "sql" => $sql_get_payment);
             
             if(count($result != 0)) {
                 sort($result);

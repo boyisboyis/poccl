@@ -45,8 +45,38 @@ $(document).ready(function(){
     }
   });
   
+  $("#admin-checklist").on("change", ".admin-checklist-date", function(){
+    // console.log($(this).val());
+    var jid = $("#checklist-jid").val();
+    var value = $(this).val();
+    var table = $(this).data('table');
+    var other = $(this).data('other');
+    var type = $(this).data('type');
+    var t = $(this);
+    console.log(jid, value, table, other, type);
+     $.ajax({
+		  dataType: 'json',
+		  method: 'POST',
+		  url: "adminsController",
+      data: {
+        action: "update",
+        params: {
+          jid: jid, 
+          type: type,
+          table: table,
+          other: other,
+          value: value
+        }
+      },
+      success: function(data){
+        
+      }
+     });
+  });
+  
   $("#admin-search-box-content").on("click",".admin-checklist",function(){
     $("#admin-checklist .payment_checklist").html("");
+    $("#admin-checklist .guarantee_checklist").html("");
     var jid = $(this).data("jid");
     $("#checklist-jid").val(jid);
     $.ajax({
@@ -65,7 +95,8 @@ $(document).ready(function(){
           var obj = data.obj;
           var check_list = parseInt(obj.Check_list);
           var payment = obj.payment;
-          console.log(payment)
+          var guarantee = obj.guarantee;
+          // console.log(payment)
           if(check_list == 0){
             $(".checklist-true").removeClass("select");
             $(".checklist-false").addClass("select");
@@ -77,15 +108,51 @@ $(document).ready(function(){
           
           if(payment.length > 0){
             var payment_length = payment.length;
-            for(var i =0 ; i<payment.length; i++){
+            for(var i =0 ; i<payment_length; i++){
               var p = payment[i];
               var str = "<div style='position: relative;'>";
               str += "<p class='checklist-desc'>"+p.Payment_Type+": "+p.Terms+" </p>";
-              str += "<div class='checklist-detail' style='position: absolute; top:22px;left:30px; height: 50px; width: 100px; background:white; display: none; z-index: 9'>";
-              str += "<div>asdfsf</div>";
+              str += "";
+              str += "<div class='checklist-detail' style='width: 360px; padding: 7px; background:white; display: none; z-index: 9; border-radius: 10px;'>";
+             
+              str += "<table><tr>";
+              str += "<td>Invoid Date</td>";
+              str += "<td>"+(p.Invoice_Date==null?"":p.Invoice_Date)+"</td>"
+              str += "</tr>";
+              
+              str += "<tr>";
+              str += "<td>Actual Date</td>";
+              str += "<td><input data-other='"+p.PID+"' data-table='payment' data-type='Date_Actual'  class='datepicker admin-checklist-date' type='text' style='height: 30px; width: 80%' value='"+(p.Date_Actual==null?"":p.Date_Actual)+"' readonly></td>";
+              str += "</table>";
+              
 							str += "</div>";
 							str += "</div>";
 							$("#admin-checklist .payment_checklist").append(str);
+            }
+          }
+          
+          if(guarantee.length > 0){
+            var guarantee_length = guarantee.length;
+            for(var i =0 ; i<guarantee_length; i++){
+              var g = guarantee[i];
+              var str = "<div style='position: relative;'>";
+              str += "<p class='checklist-desc'>"+g.Guarantee_Type+": "+g.Terms+" </p>";
+              str += "";
+              str += "<div class='checklist-detail' style='width: 360px; padding: 7px; background:white; display: none; z-index: 9; border-radius: 10px;'>";
+             
+              str += "<table><tr>";
+              str += "<td>Start Actual</td>";
+              str += "<td>"+(g.Start_Actual==null?"":g.Start_Actual)+"</td>"
+              str += "</tr>";
+              
+              str += "<tr>";
+              str += "<td>Until Actual</td>";
+              str += "<td><input data-other='"+g.GID+"' data-table='guarantee' data-type='Until_Actual'  class='datepicker admin-checklist-date' type='text' style='height: 30px; width: 80%' value='"+(g.Until_Actual==null?"":g.Until_Actual)+"' readonly></td>";
+              str += "</table>";
+              
+							str += "</div>";
+							str += "</div>";
+							$("#admin-checklist .guarantee_checklist").append(str);
             }
           }
            
@@ -102,9 +169,9 @@ $(document).ready(function(){
           var hr = $("#admin-checklist > div > hr").outerHeight(true);
           var h4 = $("#admin-checklist .content h4").outerHeight(true);
           var sum = head + hr + h4;
-          var cheight = height - sum - 80;
+          var cheight = height - sum - 120;
           console.log(head, hr, h4);
-          $(".checklist-content").css({"max-height": cheight+'px'});
+          $(".checklist-content").css({"height": cheight+'px'});
           $(".nano").nanoScroller({ alwaysVisible: true });
           //console.log(obj.Check_List);
         }
@@ -175,9 +242,10 @@ $(document).ready(function(){
     $("#admin-checklist").hide();
   });
   
-  $(".checklist-desc").on("click", function(){
-    $(".checklist-detail").hide();
-    $(this).siblings('.checklist-detail').show();
+  $("#admin-checklist").on("click", ".checklist-desc", function(){
+    // $(".checklist-detail").hide();
+    var popup = $(this).siblings('.checklist-detail');
+    popup.toggle();
   });
   
   
@@ -527,8 +595,8 @@ $(document).ready(function(){
       checkInput = false;
     }
     $("#alert-add-purchase, #alert-add-purchase-complete, #alert-add-purchase-error").hide();
-    console.log(formObj);
-    console.log('====================================');
+    // console.log(formObj);
+    // console.log('====================================');
     if(checkInput) {
       $.ajax({
         dataType: 'json',
