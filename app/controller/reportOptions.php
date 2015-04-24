@@ -43,7 +43,7 @@ class reportOptions{
     }
     
     public static function getYears(){
-        $result = DB::query("SELECT min(payment.Invoice_Date) as max, max(payment.Invoice_Date) as min FROM payment")->get();
+        $result = DB::query("SELECT min(payment.Invoice_Date) as min, max(payment.Invoice_Date) as max FROM payment")->get();
         if(count($result) > 0){
             $max = explode("-", $result[0]->max);
             $min = explode("-", $result[0]->min);

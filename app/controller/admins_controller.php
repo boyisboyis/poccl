@@ -168,7 +168,7 @@
 		        DB::puts("UPDATE job SET job.Contract_Value_Other = '" . $new_value_other . "' WHERE job.JID = '" . $params['jid'] . "'");
 		    }
 		    
-		    if(trim($params['other']) != '' && $params['type'] != "Date_Actual"){
+		    if(trim($params['other']) != '' && $params['type'] != "Date_Actual" && $params['type'] != "Until_Actual" && $params["type"] != "Start_Actual" && $params['type'] != "Work_Complete_Date"){
 		        
 		        $amount_data = DB::query("SELECT job.Contract_Value_THB FROM job WHERE job.JID='".$params['jid']."'")->get();
 
