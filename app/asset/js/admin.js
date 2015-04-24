@@ -158,7 +158,8 @@ $(document).ready(function(){
              
               str += "<table><tr>";
               str += "<td>Start Actual</td>";
-              str += "<td>"+(g.Start_Actual==null?"":g.Start_Actual)+"</td>"
+              str += "<td><input data-other='"+g.GID+"' data-table='guarantee' data-type='Start_Actual'  class='datepicker admin-checklist-date' type='text' style='height: 30px; width: 80%' value='"+(g.Start_Actual==null?"":g.Start_Actual)+"' readonly></td>"
+              //str += "<td>"+(g.Start_Actual==null?"":g.Start_Actual)+"</td>"
               str += "</tr>";
               
               str += "<tr>";
@@ -384,6 +385,7 @@ $(document).ready(function(){
 	  
 	  //if(update === ""){
 	     console.log($(this));
+	     console.log(update);
 			//$(this).prop("readonly", false);
 			update = $(this);
 			save_element()
@@ -423,7 +425,8 @@ $(document).ready(function(){
 			update = "";
 		}
 	}).on('change',"select.input-readonly", function(){
-	  save_element()
+	  console.log(update)
+	  save_element();
   });
   
   $("#alert-btn-purchase-complete").on("click", function (){
@@ -435,7 +438,10 @@ $(document).ready(function(){
   });
 	
 	$("#admin-search-box-content").on("change",".datepicker , input[type=radio]",function(e){
-	  update = $(this)
+	  if(update != ""){
+	    save_element();
+	  }
+	  update = $(this);
 	  if(update){
 			if(e.target.localName === 'input' && e.target.className.indexOf("input-readonly") >= 0){
 				if(update.data('jid') == $(e.target).data('jid')){
