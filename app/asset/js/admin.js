@@ -558,6 +558,18 @@ $(document).ready(function(){
   	    	    // amount_actual_price_guarantee
   	    	  }
   	    	}
+  	    	else if(obj["table"] == "guarantee"){
+  	    	  var value = obj["value"];
+  	    	  var value_count = value.length;
+  	    	  console.log(value_count);
+  	    	  for(var i=0; i<value_count; i++){
+  	    	    var gid = value[i]['GID'];
+  	    	    console.log($("#amount_actual_price_payment-"+gid))
+  	    	    $("#amount_actual_price_guarantee-"+gid).val(value[i]["Amount_Actual_Price"]);
+  	    	    $("#amount_actual_percentage_guarantee-"+gid).val(value[i]["Amount_Actual_Percentage"]);
+  	    	    // amount_actual_price_guarantee
+  	    	  }
+  	    	}
   	    	else if(obj["task"] == "new_po_amount") {
   	    	  var value = obj["value_payment"];
   	    	  var value_count = value.length;
@@ -904,19 +916,28 @@ $(document).ready(function(){
     var i = $("#"+id).find(".content-search-right .purchase-each-detail .td-search-term").length + 1;
     var full_price = $("#"+id).find("input[name*=contract_value_thb]").val();
     // console.log(temrs, id,index , jid, desc, amount, amount_percentage, start_date, until_date)
-    
-    if(amount == "" && amount_percentage == ""){
-      $(".guarantee-radio-amount").each(function(){
-        if($(this).prop("checked")) {
-          if($(this).val() == 'price'){
-            $("#alert-box-guarantee-terms input[name=Amount_Actual_Price]").addClass("input-error");
-          }
-          else{
-            $("#alert-box-guarantee-terms input[name=Amount_Actual_Percentage]").addClass("input-error");
-          }
-        }
-      });
+    if(amount != null && amount!= ""){
+      amount = parseFloat(amount.replace(",", ""));
     }
+    if(amount_percentage != null && amount_percentage!= ""){
+      amount_percentage = parseFloat(amount_percentage.replace(/,/g, ""));
+    }
+    if(full_price != null && full_price!= ""){
+      console.log(full_price.replace(/,/g, ""))
+      full_price = parseFloat(full_price.replace(/,/g, ""));
+    }
+    // if(amount == "" && amount_percentage == ""){
+    //   $(".guarantee-radio-amount").each(function(){
+    //     if($(this).prop("checked")) {
+    //       if($(this).val() == 'price'){
+    //         $("#alert-box-guarantee-terms input[name=Amount_Actual_Price]").addClass("input-error");
+    //       }
+    //       else{
+    //         $("#alert-box-guarantee-terms input[name=Amount_Actual_Percentage]").addClass("input-error");
+    //       }
+    //     }
+    //   });
+    // }
     
     if(start_date == ""){
       $("#alert-box-guarantee-terms input[name=Start_plan]").addClass("input-error");
@@ -932,7 +953,7 @@ $(document).ready(function(){
       $("#alert-box-guarantee-terms input[name=until_plan]").removeClass("input-error");
     }
     
-    if(start_date != '' && until_date != '' && (amount !="" || amount_percentage != "")){
+    if(start_date != '' && until_date != ''){
        $.ajax({
         method: "POST",
         url: "adminsController",
@@ -963,10 +984,10 @@ $(document).ready(function(){
                       "<td class='text-vertical-top'>Description</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top payment_type'>"+ data['obj'][0]['Guarantee_Type'] +"</td>"+
                       "</tr>"+
                       "<tr>"+
-                      "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ addCommas(parseFloat(data['obj'][0]['Amount_Actual_Price']).toFixed(2))+"' readonly='true'></td>"+
+                      "<td class='text-vertical-top'>Amount</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input id='amount_actual_price_guarantee-"+data['obj'][0]['GID']+"' name='amount_actual_price-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Price' data-table='payment' class='input-readonly' type='text' value='"+ (data['obj'][0]['Amount_Actual_Price']==null?"":addCommas(parseFloat(data['obj'][0]['Amount_Actual_Price']).toFixed(2)))+"' readonly='true'></td>"+
                       "</tr>"+
                       "<tr>"+
-                      "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+data['obj'][0]['Amount_Actual_Percentage']+"' readonly='true'>%"+"</td>"+
+                      "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input id='amount_actual_price_guarantee-"+data['obj'][0]['GID']+"' name='amount_actual_percentage-"+index+"-"+i+"' data-id='serach-"+index+"' data-jid='"+jid+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly' type='text' value='"+(data['obj'][0]['Amount_Actual_Percentage']==null?"":data['obj'][0]['Amount_Actual_Percentage'])+"' readonly='true'>%"+"</td>"+
                       "</tr>"+
                       "<tr>"+
                       "<td class='text-vertical-top'>Start Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><span class='text_underline text-vertical-top' style='margin-right: 10px;'>"+data['obj'][0]['Start_Plan']+"</span>Until Plan : <span class='text_underline'>"+data['obj'][0]['Until_Plan']+"</span></td>"+
