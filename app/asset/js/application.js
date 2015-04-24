@@ -82,6 +82,7 @@ $(document).ready(function(){
     getHash();
   });
   
+ 
   $("#content-search").on("click", ".job-id", function(){
     $(this).next().slideToggle();
   });
@@ -518,6 +519,23 @@ $(document).ready(function(){
               keySearch = "<h2 class='job-id'>"+obj['PO_No']+"</h2>"
             }
             
+            var complete_str = "";
+						
+						if( obj.Job.Work_Complete_Date == null){
+						  var complete_length = 0;
+						}
+						else{
+						  var complete_split = obj.Job.Work_Complete_Date.split(",");
+						  var complete_length = complete_split.length;
+						}
+            
+            if(complete_length > 0){
+						  for(var i=0;i<complete_length; i++){
+						    var complete = complete_split[i];
+						    complete_str += "<span class='t2_desc text_underline'>"+complete+"</span><br>";
+						  }
+						}
+            
            // console.log(obj)
             
             $("#content-search").append(
@@ -536,7 +554,14 @@ $(document).ready(function(){
               "<tr><td class='text-vertical-top'>Secrecy Agreement</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Secrecy_Agreement']==null?'-':obj['Job']['Secrecy_Agreement'] == 0?"NO":"YES")+"</td></tr>"+
               "</table>"+
               "<h3>Working Remark</h3>"+
-              "<p class='purchase-each-detail'><span>Start Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Start_Date']==null?'-':obj['Job']['Work_Start_Date'])+"</span></span><span>Complete Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Complete_Date']==null?'-':obj['Job']['Work_Complete_Date'])+"</span></span></p>"+
+              "<table class='purchase-each-detail'>"+
+              "<tr>"+
+              "<td class='text-vertical-top'>Start Date</td><td class='td-colon'>:</td><td><span class='t2_desc text_underline'>"+(obj['Job']['Work_Start_Date']==null?'-':obj['Job']['Work_Start_Date'])+"</span></td>"+
+              "</tr><tr>"+
+              "<td class='text-vertical-top'>Complete Date</td><td class='td-colon'>:</td><td>"+complete_str+"</td>"+
+              "<tr/>"+
+              "</table>"+
+             // "<p class='purchase-each-detail'><span>Start Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Start_Date']==null?'-':obj['Job']['Work_Start_Date'])+"</span></span><span>Complete Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Complete_Date']==null?'-':obj['Job']['Work_Complete_Date'])+"</span></span></p>"+
               "</section>"+
               "<section class='content-search-right'>"+
               "<h3>PO info</h3>"+

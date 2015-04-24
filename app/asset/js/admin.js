@@ -61,6 +61,33 @@ $(document).ready(function(){
     }
   });
   
+   $("#admin-search-box-content").on("click", ".admin-complete-date-delete", function(){
+     var jid = $(this).data("jid");
+     var id = $(this).data('id');
+     var index = $(this).data("index");
+     var other = $(this).data("other");
+     var name = $(this).data('name');
+     console.log(index)
+     var loop = 0;
+     $("#"+id).find(".tr-complete-date").eq(other).remove();
+     $("#"+id).find(".tr-complete-date").each(function(){
+       var input = $(this).find('input');
+       var itag = $(this).find('i');
+       console.log(loop);
+       input.data("other", loop);
+       input.attr("name", "complete_date-"+index+"-"+loop);
+       itag.data('other', loop);
+       itag.data("name", "complete_date-"+index+"-"+loop);
+       itag.data("other", loop);
+       loop++;
+     });
+     
+     update = $("#"+id).find(".tr-complete-date input").first();
+    // console.log(update);
+    save_element();
+  });
+  
+  
   $("#admin-checklist").on("change", ".admin-checklist-date", function(){
     // console.log($(this).val());
     var jid = $("#checklist-jid").val();
@@ -373,10 +400,6 @@ $(document).ready(function(){
 		}
 	}).on('change','select.input-readonly',function (){
 	  
-	  //if(update === ""){
-	     console.log($(this));
-	     console.log(update);
-			//$(this).prop("readonly", false);
 			update = $(this);
 			save_element()
 		//}
@@ -417,6 +440,8 @@ $(document).ready(function(){
 	}).on('change',"select.input-readonly", function(){
 	  console.log(update)
 	  save_element();
+  }).on("change", "input.datepicker", function (){
+    console.log($(this));
   });
   
   $("#alert-btn-purchase-complete").on("click", function (){
@@ -464,7 +489,8 @@ $(document).ready(function(){
       var str = "<tr class='tr-complete-date'>";
       str += "<td class='text-vertical-top'>Complete Date</td>";
       str += "<td class='td-colon'>:</td>";
-      str += "<td><input name='complete_date-"+index+"-"+l_exit+"' data-id='"+id+"' data-table='job' data-type='Work_Complete_Date' data-index='"+index+"' data-jid='"+jid+"' data-other='"+l_exit+"' data-type='Work_Complete_Date' data-table='job' class='input-readonly datepicker' type='text' value='' readonly>"
+      str += "<td><input name='complete_date-"+index+"-"+l_exit+"' data-id='"+id+"' data-table='job' data-type='Work_Complete_Date' data-index='"+index+"' data-jid='"+jid+"' data-other='"+l_exit+"' data-type='Work_Complete_Date' data-table='job' class='input-readonly datepicker' type='text' value='' readonly>";
+      str += "<i style='margin-left: 10px; color: red; cursor: pointer;' class='fa fa-trash-o admin-complete-date-delete' data-name='complete_date-"+index+"-"+l_exit+"' data-index='"+index+"' data-other='"+l_exit+"' data-id='"+id+"' data-jid='"+jid+"'></i>";
       str += "</td></tr>";
       
       $("#"+id).find(".add-work-remark").append(str);
@@ -1515,14 +1541,14 @@ $(document).ready(function(){
 						    complete_str += "<tr class='tr-complete-date'>";
 							  complete_str += "<td class='text-vertical-top'>Complete Date</td><td class='td-colon'>:</td><td><input name='complete_date-"+index+"-"+i+"' data-table='job' data-index='"+index+"' data-other='"+i+"' data-type='Work_Complete_Date' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Work_Complete_Date' data-table='job' class='input-readonly datepicker' type='text' value='"+complete+"' readonly='true'>";
 							  if(i > 0){
-							    complete_str += "<i  style='margin-left: 10px; color: red; cursor: pointer;' class='fa fa-trash-o admin-complete-date-delete' data-index='"+index+"' data-other='"+i+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"'></i>"
+							    complete_str += "<i  style='margin-left: 10px; color: red; cursor: pointer;' class='fa fa-trash-o admin-complete-date-delete' data-name='complete_date-"+index+"-"+i+"' data-index='"+index+"' data-other='"+i+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"'></i>"
 							  }
 							  complete_str += "</td></tr>";
 						  }
 						}
 						else{
 						  complete_str += "<tr class='tr-complete-date'>"+
-							    "<td class='text-vertical-top'>Complete Date</td><td class='td-colon'>:</td><td><input name='complete_date-"+index+"-0' data-table='job' data-index='"+index+"' data-type='Work_Complete_Date' data-other=0 data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Work_Complete_Date' data-table='job' class='input-readonly datepicker' type='text' value='' readonly='true'></td>"+
+							    "<td class='text-vertical-top'>Complete Date</td><td class='td-colon'>:</td><td><input name='complete_date-"+index+"-0' data-name='complete_date-"+index+"-0' data-table='job' data-index='"+index+"' data-type='Work_Complete_Date' data-other=0 data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Work_Complete_Date' data-table='job' class='input-readonly datepicker' type='text' value='' readonly='true'></td>"+
 							    "</tr>";
 						}
 						
@@ -1532,7 +1558,7 @@ $(document).ready(function(){
               "<article class='purchase-detail' id='serach-"+index+"'>" +
               "<h2 class='job-id'><span class='job-id-toggle'>"+keySearch+"</span>"+
 							"<i class='fa fa-trash-o admin-search-delete' data-jid='"+obj['Job']['JID']+"' data-index='serach-"+index+"'></i>"+
-							"<i class='fa fa-exclamation admin-checklist' data-jid='"+obj['Job']['JID']+"' data-index='serach-"+index+"'></i>"+
+							"<i class='fa fa-pencil-square-o admin-checklist' data-jid='"+obj['Job']['JID']+"' data-index='serach-"+index+"'></i>"+
 							"</h2>"+
 							/*"<div id='purchase_status_"+index+"' class='purchase_status_box'>"+
 							"<div>"+
@@ -1571,7 +1597,7 @@ $(document).ready(function(){
 						// 	"<td class='text-vertical-top'>Complete Date</td><td class='td-colon'>:</td><td><input name='complete_date-"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Work_Complete_Date' data-table='job' class='input-readonly datepicker' type='text' value='"+(obj['Job']['Work_Complete_Date']==null?'':obj['Job']['Work_Complete_Date'])+"' readonly='true'></td>"+
 						// 	"</tr>"+
 							"</table>"+
-							"<p class='add-complete-data' style='display: inline-block' data-index='"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"'><i class='fa fa-plus'></i> Add Complete Date</p>"+
+							"<p class='add-complete-data' style='display: inline-block; color: #ed8151; cursor: pointer;' data-index='"+index+"' data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"'><i class='fa fa-plus'></i> Add Complete Date</p>"+
               
               "</section>"+
               "<section class='content-search-right'>"+
