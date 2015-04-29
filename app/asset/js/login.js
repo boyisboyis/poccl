@@ -9,7 +9,6 @@ $(document).ready(function (){
 $(document).on("submit", "#form-login", function (e) {
     var u = $(this).find("#username").val();
     var p = $(this).find("#password").val();
-    console.log(u,p);
     if(u == "" || p == ""){
       openError(1);
     }

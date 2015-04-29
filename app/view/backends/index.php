@@ -89,7 +89,7 @@
   
 	<div id='alert-backup-db' style='display: none;'>
 		<section id="alert-backup-db-complete" style="text-align:center;">
-			<h3>Save Complete</h3>
+			<h3>Do you need to backup your data?</h3>
 			<button id="alert-btn-backup-yes" style="width: 30%;">Yes</button>
 			<button id="alert-btn-backup-no" style="width: 30%;">No</button>
 		</section>
