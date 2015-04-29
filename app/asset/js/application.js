@@ -31,7 +31,6 @@ $(document).ready(function(){
 	
 	$("#report-update-years").on("click", ".report-year", function(e){
 		 var checkbox = $(this).find("input");
-		 console.log($(this));
      if(checkbox.prop("checked")){
        checkbox.prop("checked", false);
        $(this).removeClass("shadow");
@@ -227,7 +226,6 @@ $(document).ready(function(){
             "</span>" +
             " not found !! Please, Select again."
           );
-          console.log("false");
         }
       }
     });
@@ -278,7 +276,6 @@ $(document).ready(function(){
           });
         }
         else{
-          console.log("false");
         }
       }
     });
@@ -295,7 +292,6 @@ $(document).ready(function(){
       url : "managenews",
       cache: false,
       success: function(req){
-        // console.log(req);
         if(req['status'] == true){
           var length = req['obj'].length;
           $("#content-guarantee-news").html("<h2 class='main-topics'>Bank Gurantees is not return</h2><div class='page-list'></div>");
@@ -311,7 +307,6 @@ $(document).ready(function(){
           });
         }
         else{
-          console.log("false");
         }
       }
     });
@@ -343,14 +338,12 @@ $(document).ready(function(){
           });
         }
         else{
-          console.log("false");
         }
       }
     });
   }
   
   function getPaymentNearAlertFeeds(){
-		console.log("test");
     $.ajaxSetup({ cache: false });
     $.ajax({
       type: "POST",
@@ -377,7 +370,6 @@ $(document).ready(function(){
 					});
 				}
 				else {
-					console.log("false");
 				}
       }
     });
@@ -394,7 +386,6 @@ $(document).ready(function(){
       url : "managenews",
       cache: false,
       success: function(req){
-        //console.log(req);
 				if(req['status'] === true){
 					var length = req['obj'].length;
 					$("#content-checklistnil-news").html("<h2 class='main-topics'>Checklist is nil</h2><div class='page-list'></div>");
@@ -410,14 +401,12 @@ $(document).ready(function(){
 					});
 				}
 				else {
-					console.log("false");
 				}
       }
     });
   }
   
   function searchResult(search){
-    //console.log(search);
     $.ajaxSetup({ cache: false });
     $.ajax({
       type: "POST",
@@ -536,8 +525,7 @@ $(document).ready(function(){
 						  }
 						}
             
-           // console.log(obj)
-            
+
             $("#content-search").append(
               "<article class='purchase-detail'>" +
               keySearch +
@@ -616,7 +604,6 @@ $(document).ready(function(){
             "</span>" +
             " not found !! Please, Input again."
           );
-          console.log("false");
         }
       }
     });
@@ -716,7 +703,6 @@ $(document).ready(function(){
   function elementScroll(){
     var scroll = $(window).scrollTop();
     var cheight = $("#main-report-content").height();
-    console.log($("#main-report-content").height())
     if(cheight > 800){
       if(scroll >= 135){
         $("#wrap-report").addClass('wrap-fixed');
@@ -728,8 +714,6 @@ $(document).ready(function(){
     else{
       $("#wrap-report").removeClass('wrap-fixed');
     }
-   // console.log(scroll)
-    
   }
   
   $( document ).ajaxStart(function() {
