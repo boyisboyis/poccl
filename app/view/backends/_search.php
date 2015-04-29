@@ -81,11 +81,11 @@
       	  </select>
       	  <p>Amount</p>
       	  <div style="padding-right: 19px;">
-      	   <input type='radio' class="guarantee-radio-amount" name="payment-radio-amount" value="price" checked/><input id="guarantee-alert-amount-actual-price" type="text" name="Amount_Actual_Price" data-type="Amount_Actual_Price" value="" />
+      	   <input type='radio' class="guarantee-radio-amount" name="guarantee-radio-amount" value="price" checked/><input id="guarantee-alert-amount-actual-price" type="text" name="Amount_Actual_Price" data-type="Amount_Actual_Price" value="" />
       	  </div>
       	  <p>Amount Percentang</p>
       	  <div style="padding-right: 19px;">
-      	    <input type='radio' class="guarantee-radio-amount" name="payment-radio-amount" value="percentage"/><input id="guarantee-alert-amount-actual-percentage" class='read-only' type="text" name="Amount_Actual_Percentage" data-type="Amount_Actual_Percentage" value="" />
+      	    <input type='radio' class="guarantee-radio-amount" name="guarantee-radio-amount" value="percentage"/><input id="guarantee-alert-amount-actual-percentage" class='read-only' type="text" name="Amount_Actual_Percentage" data-type="Amount_Actual_Percentage" value="" />
       	  </div>
       	  <p>Start Plan</p>
       	  <div>
