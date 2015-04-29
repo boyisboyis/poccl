@@ -537,9 +537,8 @@ $(document).ready(function(){
   	    	  var value_count = value.length;
   	    	  for(var i=0; i<value_count; i++){
   	    	    var pid = value[i]['PID'];
-  	    	    $("#amount_actual_price_payment-"+pid).val(value[i]["Amount_Actual_Price"]);
+  	    	    $("#amount_actual_price_payment-"+pid).val(addCommas(parseFloat(value[i]["Amount_Actual_Price"]).toFixed(2)));
   	    	    $("#amount_actual_percentage_payment-"+pid).val(value[i]["Amount_Actual_Percentage"]);
-  	    	    // amount_actual_price_guarantee
   	    	  }
   	    	}
   	    	else if(obj["table"] == "guarantee"){
@@ -547,9 +546,8 @@ $(document).ready(function(){
   	    	  var value_count = value.length;
   	    	  for(var i=0; i<value_count; i++){
   	    	    var gid = value[i]['GID'];
-  	    	    $("#amount_actual_price_guarantee-"+gid).val(value[i]["Amount_Actual_Price"]);
+  	    	    $("#amount_actual_price_guarantee-"+gid).val(addCommas(parseFloat(value[i]["Amount_Actual_Price"]).toFixed(2)));
   	    	    $("#amount_actual_percentage_guarantee-"+gid).val(value[i]["Amount_Actual_Percentage"]);
-  	    	    // amount_actual_price_guarantee
   	    	  }
   	    	}
   	    	else if(obj["task"] == "new_po_amount") {
@@ -566,7 +564,7 @@ $(document).ready(function(){
   	    	    $("#amount_actual_percentage_guaranteet-"+gid).val(value[i]["Amount_Actual_Percentage"]);
   	    	  }
   	    	  value = obj["value_other"];
-  	    	  $("#"+block_id).find("input[name^=contract_value_other]").val(value[0]["Contract_Value_Other"]);
+  	    	  $("#"+block_id).find("input[name^=contract_value_other]").val(addCommas(parseFloat(value[0]["Contract_Value_Other"]).toFixed(2)));
   	    	}
   	    	else if(obj["task"] == "new_value_other") {
   	    	  var value = obj["value_rate"];
