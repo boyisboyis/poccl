@@ -62,8 +62,9 @@
                 
                 if($params['payment_terms'] != '') {
                     foreach($params['payment_terms'] as &$payment) {
-                        $sql_payment = 'INSERT INTO `payment` (`JID`, `Terms`, `Payment_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Invoice_Date`) ' .
-                                       'VALUES (' . self::nullValue($params['job_no']) . ', ' .
+                        $sql_payment = 'INSERT INTO `payment` (`PID`, `JID`, `Terms`, `Payment_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Invoice_Date`) ' .
+                                       'VALUES (' . self::nullValue(round(microtime(true) * 1000) . $params['job_no']) . ', ' .
+                                       				self::nullValue($params['job_no']) . ', ' .
                                                     self::nullValue($payment['payment_term']) . ', ' .
                                                     self::nullValue($payment['payment_terms_select']) . ', ' .
                                                     self::amountValue($payment['payment_terms_amount_thb'], $payment['payment_terms_amount_percentage'], $params['po_amount']) . ', ' .
@@ -75,8 +76,9 @@
                 
                 if($params['bank_guarantee'] != '') {
                     foreach($params['bank_guarantee'] as &$guarantee) {
-                        $sql_guarantee = 'INSERT INTO `guarantee` (`JID`, `Terms`, `Guarantee_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Start_Plan`, `Until_Plan`) ' .
-                                       'VALUES (' . self::nullValue($params['job_no']) . ', ' .
+                        $sql_guarantee = 'INSERT INTO `guarantee` (`GID`, `JID`, `Terms`, `Guarantee_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Start_Plan`, `Until_Plan`) ' .
+                                       'VALUES (' . self::nullValue(round(microtime(true) * 1000) . $params['job_no']) . ', ' .
+                                       				self::nullValue($params['job_no']) . ', ' .
                                                     self::nullValue($guarantee['bank_guarantee_term']) . ', ' .
                                                     self::nullValue($guarantee['bank_guarantee_select']) . ', ' .
                                                     self::amountValue($guarantee['bank_guarantee_amount_thb'], $guarantee['bank_guarantee_amount_percentage'], $params['po_amount']) . ', ' .
@@ -187,11 +189,12 @@
 		        else if($params["table"] == "guarantee"){
 		            $sql_select_update = "SELECT ". $params['table'] . ".GID, " . $params['table'] . ".".$params['type']." FROM " . $params['table']. " WHERE " . $params['table'] . ".JID" . " = '" . $params['jid'] . "'";
 		        }
+		    
 		        if($params["table"] == "payment"){
-	                $sql_select_update .= " AND ". $params['table'] . ".PID = ".$params['other'];
+	                $sql_select_update .= " AND ". $params['table'] . ".PID = '" . $params['other'] . "'";
 	            }
 	            else if($params["table"] == "guarantee"){
-	                $sql_select_update .= " AND ". $params['table'] . ".GID = ".$params['other'];
+	                $sql_select_update .= " AND ". $params['table'] . ".GID = '" . $params['other'] . "'";
 	            }
 
 		        $reup = DB::query($sql_select_update)->get();
@@ -209,10 +212,10 @@
                 //echo $value;
 	            $sql_update = "UPDATE " . $params['table'] . " SET " . $params['table'] . ".".$columns." = '" . $value . "' WHERE " . $params['table'] . ".JID" . " = '" . $params['jid'] . "'";
 	            if($params["table"] == "payment"){
-	                $sql_update .= " AND ". $params['table'] . ".PID = ".$data->PID;
+	                $sql_update .= " AND ". $params['table'] . ".PID = '" . $data->PID . "'";
 	            }
 	            else if($params["table"] == "guarantee"){
-	                $sql_update .= " AND ". $params['table'] . ".GID = ".$data->GID;
+	                $sql_update .= " AND ". $params['table'] . ".GID = '" . $data->GID . "'";
 	            }
 	            DB::puts($sql_update);
 		        //}
@@ -233,10 +236,10 @@
 		    
 		    $sql_select_check .= " WHERE " . $params['table'] . ".JID" . " = '" . $params['jid'] . "'";
 		    if($params["table"] == "payment"){
-                $sql_select_check .= " AND ". $params['table'] . ".PID = ".$params['other'];
+                $sql_select_check .= " AND ". $params['table'] . ".PID = '" . $params['other'] . "'";
             }
             else if($params["table"] == "guarantee"){
-                $sql_select_check .= " AND ". $params['table'] . ".GID = ".$params['other'];
+                $sql_select_check .= " AND ". $params['table'] . ".GID = '" . $params['other'] . "'";
             }
 		 
 		    $result = DB::query($sql_select_check)->get();
@@ -337,8 +340,9 @@
 		    if($params['amount_percentage'] == "") {
 		        $params['amount_percentage'] = null;
 		    }
-		    $sql_payment = 'INSERT INTO `payment` (`JID`, `Terms`, `Payment_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Invoice_Date`) ' .
-                          'VALUES (' . self::nullValue($params['jid']) . ', ' .
+		    $sql_payment = 'INSERT INTO `payment` (`PID`, `JID`, `Terms`, `Payment_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Invoice_Date`) ' .
+                          'VALUES (' . 	self::nullValue(round(microtime(true) * 1000) . $params['jid']) . ', ' .
+                          				self::nullValue($params['jid']) . ', ' .
                                         self::nullValue($params['terms']) . ', ' .
                                         self::nullValue($params['desc']) . ', ' .
                                         self::amountValue($params['amount'], $params['amount_percentage'], $params['full_price']) . ', ' .
@@ -364,8 +368,9 @@
 		    if($params['amount_percentage'] == "") {
 		        $params['amount_percentage'] = null;
 		    }
-		    $sql_guarantee = 'INSERT INTO `guarantee` (`JID`, `Terms`, `Guarantee_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Start_Plan`, `Until_Plan`) ' .
-                           'VALUES (' . self::nullValue($params['jid']) . ', ' .
+		    $sql_guarantee = 'INSERT INTO `guarantee` (`GID`, `JID`, `Terms`, `Guarantee_Type`, `Amount_Actual_Price`, `Amount_Actual_Percentage`, `Start_Plan`, `Until_Plan`) ' .
+                           'VALUES (' . self::nullValue(round(microtime(true) * 1000) . $params['jid']) . ', ' .
+                           				self::nullValue($params['jid']) . ', ' .
                                         self::nullValue($params['terms']) . ', ' .
                                         self::nullValue($params['desc']) . ', ' .
                                         self::amountValue($params['amount'], $params['amount_percentage'], $params['full_price']) . ', ' .
