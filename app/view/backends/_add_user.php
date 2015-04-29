@@ -21,7 +21,7 @@
     </div>
   </section>
   <div id="admin-add-user-box-alert" style="display: none;">
-		<section>
+		<section style="height: 250px; margin-top: -125px;">
 			<h3 id="msg-alert"></h3>
 			<div id="add-user-confirm">
 				<button id="add-user-confirm-yes">Yes</button>
