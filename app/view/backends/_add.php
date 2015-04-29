@@ -4,7 +4,7 @@
 		<h2>New JOB</h2>
 		<div>
 			<label for="">Job No : </label>
-			<input type="text" name="job_no" required />
+			<input type="text" name="job_no" maxlength="20" style="width: 250px;" required />
 		</div>
 		<hr>
 		<div style="float: left; width: 50%;">
@@ -14,14 +14,14 @@
 					<div class='table-cell'>Contractor Name</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" name="contractor_name" required />
+						<input type="text" name="contractor_name" maxlength="100" required />
 					</div>
 				</div>
 				<div class='table-row'>
 					<div class='table-cell'>Project Name</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" name="project_name" />
+						<input type="text" name="project_name" maxlength="100" />
 					</div>
 					<div class='table-cell'>
 						<input type="checkbox" name="project_name" value="none" />
@@ -32,7 +32,7 @@
 					<div class='table-cell'>Project Location</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" name="project_location" />
+						<input type="text" name="project_location" maxlength="50" />
 					</div>
 					<div class='table-cell'>
 						<input type="checkbox" name="project_location" value="none" />
@@ -43,7 +43,7 @@
 					<div class='table-cell'>Project Owner's Name</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" name="project_owner_name" />
+						<input type="text" name="project_owner_name" maxlength="100" />
 					</div>
 					<div class='table-cell'>
 						<input type="checkbox" name="project_owner_name" value="none" />
@@ -96,7 +96,7 @@
 					<div class='table-cell'>PO No</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" name="po_no" />
+						<input type="text" name="po_no" maxlength="65" />
 					</div>
 					<div class='table-cell'>
 						<input type="checkbox" name="po_no" value="none" />
@@ -162,7 +162,7 @@
 					<div class='table-cell' style="text-align: right;">Type</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" id="foreign_currency_type" name="foreign_currency_type" style="width: 60px"  />
+						<input type="text" id="foreign_currency_type" name="foreign_currency_type" maxlength="4" style="width: 60px"  />
 					</div>
 					<div class='table-cell'>
 						<span>Rate : </span>
@@ -173,7 +173,7 @@
 					<div class='table-cell'>Goveming Law</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
-						<input type="text" name="goveming_law" />
+						<input type="text" name="goveming_law" maxlength="15" />
 					</div>
 					<div class='table-cell'>
 						<input type="checkbox" name="goveming_law" value="none" />
@@ -209,7 +209,7 @@
 		</div>
 		<div class='clearfix'></div>
 		<hr>
-		<div>
+		<!--<div>
 			<div style="float: left; width: 50%;">
 				<h3><input type="checkbox" id="check-payment-terms"  name="payment_terms_checkbox" value="check" />Payments</h3>
 				<div id='show-payment-terms' style="display:none;">
@@ -352,7 +352,7 @@
 					<p id="add-bank-guarantee" style="color: #ed8151; cursor: pointer;"> <i class="fa fa-plus"></i> Add Bank Guarantee.</p>
 				</div>
 			</div>
-		</div>
+		</div>-->
 	</form>
 	<div id="clone-payment-terms" style='display: none;'>
 		<div class='table'>
