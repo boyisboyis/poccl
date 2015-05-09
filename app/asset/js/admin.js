@@ -132,7 +132,7 @@ $(document).ready(function(){
         }
       },
       success: function(data) {
-        console.log(data);
+
         if(data.status){
           var obj = data.obj;
           var check_list = parseInt(obj.Check_list);
