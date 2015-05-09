@@ -478,13 +478,16 @@
         }
         
         public static function getChecklist($params) {
-            $sql_get_checklist = "SELECT job.Check_List FROM job WHERE job.JID = '".$params["jid"]."'";
+            $sql_get_checklist = "SELECT job.Check_List, job.Credit_Term FROM job WHERE job.JID = '".$params["jid"]."'";
             $result = DB::query($sql_get_checklist)->get();
             
             $sql_get_payment = "SELECT `PID`,`Terms`,`Payment_Type`,`Invoice_Date`,`Date_Actual`  FROM `payment` WHERE `JID` = '".$params["jid"]."' ORDER BY `Payment_Type` ASC, `Terms` ASC";
             
             $result2 = DB::query($sql_get_payment)->get();
-            
+            $np = count($result2);
+            for($j=0;$j<$np;$j++){
+			 	$result2[$j]->Payment_date_plan = dateTimes::calculationDate($result[0]->Credit_Term, $result2[$j]->Invoice_Date);
+			}
             $sql_get_guarantee = "SELECT `GID`,`Terms`,`Guarantee_Type`,`Start_Actual`,`Until_Actual`  FROM `guarantee` WHERE `JID` = '".$params["jid"]."' ORDER BY `Guarantee_Type` ASC, `Terms` ASC";
             
             $result3 = DB::query($sql_get_guarantee)->get();
