@@ -157,11 +157,12 @@ $(document).ready(function(){
               str += "<div class='checklist-detail' style='width: 360px; padding: 7px; background:white; display: none; z-index: 9; border-radius: 10px;'>";
              
               str += "<table><tr>";
-              str += "<td>Payment Date Plan</td>";
-              str += "<td>"+(p.Payment_date_plan==null?"":p.Payment_date_plan)+"</td>"
-              str += "</tr><tr>";
               str += "<td>Invoid Date</td>";
               str += "<td>"+(p.Invoice_Date==null?"":p.Invoice_Date)+"</td>"
+              
+              str += "</tr><tr>";
+              str += "<td>Payment Date Plan</td>";
+              str += "<td>"+(p.Payment_date_plan==null?"":p.Payment_date_plan)+"</td>"
               str += "</tr>";
               
               str += "<tr>";
@@ -1468,11 +1469,12 @@ $(document).ready(function(){
                 "<td class='text-vertical-top'>Amount Percentang</td><td class='td-colon text-vertical-top'>:</td><td class='text-vertical-top'><input id='amount_actual_percentage_payment-"+p_content['PID']+"' name='amount_actual_percentage-"+index+"-"+i+"' data-other="+p_content['PID']+" data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Amount_Actual_Percentage' data-table='payment' class='input-readonly number-only' type='text' value='"+(p_content["Amount_Actual_Percentage"]==null?'':p_content["Amount_Actual_Percentage"])+"' readonly='true'>%"+"</td>"+
                 "</tr>"+
                 "<tr>"+
-                "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+p_content['Payment_date_plan']+"</td>"+
-                "</tr>"+
-                 "<tr>"+
                 "<td class='text-vertical-top'>Invoice Date</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'><input id='invoice_date_payment-"+p_content['PID']+"' name='invoice_date_payment-"+index+"-"+i+"' data-other="+p_content['PID']+" data-id='serach-"+index+"' data-jid='"+obj['Job']['JID']+"' data-type='Invoice_Date' data-table='payment' class='input-readonly datepicker' type='text' value='"+(p_content["Invoice_Date"]==null?'':p_content["Invoice_Date"])+"'></td>"+
                 "</tr>"+
+                "<tr>"+
+                "<td class='text-vertical-top'>Payment Date Plan</td><td class='td-colon text-vertical-top'>:</td><td class='text_underline text-vertical-top'>"+p_content['Payment_date_plan']+"</td>"+
+                "</tr>"+
+               
                 "</table>"+
                 "</td>"+
                 "</tr>";
