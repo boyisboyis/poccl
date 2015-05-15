@@ -352,8 +352,17 @@
             
             $sql_select = "SELECT * FROM payment WHERE payment.JID = '" . $params['jid'] . "' AND payment.Payment_Type = '" . $params['desc'] . "' AND payment.Terms = '" . $params['terms'] . "'";
             $result = DB::query($sql_select)->get();
+            $sql_select_credit = "SELECT job.Credit_Term FROM job WHERE job.JID = '" . $params['jid'] . "'";
+            $result_credit = DB::query($sql_select_credit)->get();
+            if(count($result_credit[0]->Credit_Term) == 0) {
+            	$invoice_plus_credit = $result[0]->Invoice_Date;
+            }
+            else {
+            	$invoice_plus_credit = date('Y-m-d', strtotime($result[0]->Invoice_Date . '+' . $result_credit[0]->Credit_Term . 'days'));
+            }
+            
             if(count($result) > 0) {
-                echo json_encode(array("status" => true, "obj" => $result));
+                echo json_encode(array("status" => true, "obj" => $result, "credit" => $invoice_plus_credit));
             }
             else {
                 echo json_encode(array("status" => false));
