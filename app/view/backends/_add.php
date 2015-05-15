@@ -11,7 +11,7 @@
 			<div class='table'>
 				<h3>Project Summary</h3>
 				<div class='table-row'>
-					<div class='table-cell'>Contractor Name</div>
+					<div class='table-cell'>Purchase Name</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
 						<input type="text" name="contractor_name" maxlength="100" required />
@@ -93,7 +93,7 @@
 			<div class='table'>
 				<h3>PO Info.</h3>
 				<div class='table-row'>
-					<div class='table-cell'>PO No</div>
+					<div class='table-cell'>PO No.</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
 						<input type="text" name="po_no" maxlength="65" />
@@ -159,7 +159,7 @@
 					</div>
 				</div>
 				<div class='table-row foreign_currency' style="display:none;">
-					<div class='table-cell' style="text-align: right;">Type</div>
+					<div class='table-cell' style="text-align: right;">Currency</div>
 					<div class='table-cell colon'></div>
 					<div class='table-cell'>
 						<input type="text" id="foreign_currency_type" name="foreign_currency_type" maxlength="4" style="width: 60px"  />
