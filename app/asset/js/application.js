@@ -151,6 +151,7 @@ $(document).ready(function(){
       success: function(req){
         if(req['status'] === true){
           $(".report-topics").html("<i class='fa fa-check color-success'></i>Report");
+          $(".report-topics").append("<button id='show_report_all' class='report-topics-show-all-bt'>Show All</button><button id='hide_report_all' class='report-topics-hide-all-bt'>Hide All</button>");
           var obj = req["obj"];
           var reports = [];
           var reports_year = [];
@@ -229,6 +230,20 @@ $(document).ready(function(){
         }
       }
     });
+  });
+  
+  $(".report-topics").on("click", "#show_report_all", function(){
+    $(".reports-details-month").show();
+    $(".reports-details-jid").show();
+    $("#show_report_all").hide();
+    $("#hide_report_all").show();
+  });
+  
+  $(".report-topics").on("click", "#hide_report_all", function(){
+    $(".reports-details-month").hide();
+    $(".reports-details-jid").hide();
+    $("#show_report_all").show();
+    $("#hide_report_all").hide();
   });
   
   /*
@@ -535,7 +550,7 @@ $(document).ready(function(){
               "<h3>Project Summary</h3>"+
               "<table class='purchase-each-detail'>"+
               "<tr><td class='text-vertical-top'>JOB NO</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['JID']==null?'-':obj['Job']['JID'])+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>Contract Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Contractor_Name']==null?'-':obj['Contractor_Name'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>Purchase Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Contractor_Name']==null?'-':obj['Contractor_Name'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Project Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Name']==null?'-':obj['Job']['Project_Name'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Project Location</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Location']==null?'-':obj['Job']['Project_Location'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>Project Owner's Name</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Project_Owner']==null?'-':obj['Job']['Project_Owner'])+"</td></tr>"+
@@ -552,12 +567,12 @@ $(document).ready(function(){
              // "<p class='purchase-each-detail'><span>Start Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Start_Date']==null?'-':obj['Job']['Work_Start_Date'])+"</span></span><span>Complete Date</span><span> : <span class='t2_desc text_underline'>"+(obj['Job']['Work_Complete_Date']==null?'-':obj['Job']['Work_Complete_Date'])+"</span></span></p>"+
               "</section>"+
               "<section class='content-search-right'>"+
-              "<h3>PO info</h3>"+
+              "<h3>PO Info</h3>"+
               //"<p class='purchase-each-detail' style='margin-left: 12px'><span>PO no</span><span class='t2_desc text_underline'>"+obj['PO_No']+"</span><span>Date</span><span class='t2_desc text_underline'>"+obj['Job']['PO_Date']+"</span></p>"+
               "<table class='purchase-each-detail'>"+
-              "<tr><td class='text-vertical-top'>PO no.</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['PO_No']==null?'-':obj['PO_No'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>PO No.</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['PO_No']==null?'-':obj['PO_No'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>PO Date</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['PO_Date']==null?'-':obj['Job']['PO_Date'])+"</td></tr>"+
-              "<tr><td class='text-vertical-top'>PO type</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['PO_Type']==null?'-':obj['Job']['PO_Type'])+"</td></tr>"+
+              "<tr><td class='text-vertical-top'>PO Type</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['PO_Type']==null?'-':obj['Job']['PO_Type'])+"</td></tr>"+
               "<tr><td class='text-vertical-top'>PO Amount</td><td class='td-colon'>:</td><td><p class='margin-padding-0 text_underline'>"+thai_bath+"<span class='currency'>THB</span></p>"+tr_currency+"</td></tr>"+
              // tr_currency+
               "<tr><td class='text-vertical-top'>Goveming Law</td><td class='td-colon'>:</td><td class='text_underline'>"+(obj['Job']['Goveming_Law']==null?'-':obj['Job']['Goveming_Law'])+"</td></tr>"+
