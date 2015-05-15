@@ -828,7 +828,7 @@ $(document).ready(function(){
           }
         },
         success: function(data) {
-          
+  
           $("#alert-amount-actual-price, #alert-amount-actual-percentage").removeClass("input-error");
 
           if(data['status']){

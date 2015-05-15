@@ -53,17 +53,18 @@
       <!-- Block report -->
       
       
-      
+     <!--     <section id="main-news" class="t0">-->
+     <!--     <div id="content-payment-news"></div>-->
+     <!--     <div id="content-guarantee-news"></div>-->
+     <!--     <div id="content-poidnull-news"></div>-->
+					<!--<div id="content-comingsoon-news"></div>-->
+					<!--<div id="content-checklistnil-news"></div>-->
+     <!--   </section>-->
      <!-- Block content main-->
+    
       
       <div id="wrap-main" class="clearfix pagenavi">
-        <section id="main-news" class="t0">
-          <div id="content-payment-news"></div>
-          <div id="content-guarantee-news"></div>
-          <div id="content-poidnull-news"></div>
-					<div id="content-comingsoon-news"></div>
-					<div id="content-checklistnil-news"></div>
-        </section>
+        <?php include_once(__DIR__.'/_sidebar.php'); ?>
         <section id="main-search" class="t1" style="display: none;">
           <h2 class="result-topics"></h2>
           <div id="content-search" class='page-list'></div>

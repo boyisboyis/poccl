@@ -7,6 +7,15 @@ $(document).ready(function(){
   * event
   */
   
+  $(".main_menu").on("click", function (){
+    var id = $(this).data("id");
+    $(".main_menu").removeClass('active');
+    $(this).addClass("active");
+    
+    $(".main_details").hide();
+    $("#"+id).show();
+  });
+  
   $(".report-month").on("click", function(e) {
       var checkbox = $(this).find("input");
      if(checkbox.prop("checked")){
@@ -103,12 +112,12 @@ $(document).ready(function(){
     searchResult(data);
   });
 	
-	$("#content-poidnull-news").pagenavi({showPerPage: 10, position: "center"});
+	$("#content-poidnull-news").pagenavi({showPerPage: 20, position: "center"});
   $("#main-search").pagenavi({showPerPage: 15, position: "center"});
-	$("#content-comingsoon-news").pagenavi({showPerPage: 10, position: "center"});
-	$("#content-checklistnil-news").pagenavi({showPerPage: 10, position: "center"});
-	$("#content-payment-news").pagenavi({showPerPage: 10, position: "center"});
-	$("#content-guarantee-news").pagenavi({showPerPage: 10, position: "center"});
+	$("#content-comingsoon-news").pagenavi({showPerPage: 20, position: "center"});
+	$("#content-checklistnil-news").pagenavi({showPerPage: 20, position: "center"});
+	$("#content-payment-news").pagenavi({showPerPage: 20, position: "center"});
+	$("#content-guarantee-news").pagenavi({showPerPage: 20, position: "center"});
 	
   $("#content-payment-news, #content-guarantee-news, #content-poidnull-news, #content-comingsoon-news, #content-checklistnil-news").on("click", '.search-from-news', function(){
     document.location.hash = $(this).attr("href");
@@ -263,7 +272,7 @@ $(document).ready(function(){
       success: function(req){
         if(req['status'] == true){
           var length = req['obj'].length;
-          $("#content-payment-news").html("<h2 class='main-topics'>Arrears of payments</h2><div class='page-list'></div>");
+          $("#content-payment-news").html("<div class='page-list'></div>");
           $.each(req['obj'], function(){
             var _obj = $(this)[0];
             $("#content-payment-news > div").append(
@@ -325,13 +334,13 @@ $(document).ready(function(){
       success: function(req){
         if(req['status'] === true){
           var length = req['obj'].length;
-          $("#content-poidnull-news").html("<h2 class='main-topics'>Purchase Order is nil</h2><div class='page-list'></div>");
+          $("#content-poidnull-news").html("<div class='page-list'></div>");
           $.each(req['obj'], function(){
             var _obj = $(this)[0];
             $("#content-poidnull-news > div").append(
               "<p class='p-news'>"+
               "<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
-              "<span class='has-arrears-at'>purchase order is nil</span>"+
+              "<span class='has-arrears-at'>purchase order is later</span>"+
               // "<b class='news-payment'>"+_obj['Guarantee']+"</b>"+
               "</p>"
             );
@@ -357,13 +366,13 @@ $(document).ready(function(){
 
 				if(req['status'] === true){
 					var length = req['obj'].length;
-					$("#content-comingsoon-news").html("<h2 class='main-topics'>Payment is coming soon</h2><div class='page-list'></div>");
+					$("#content-comingsoon-news").html("<div class='page-list'></div>");
 					$.each(req['obj'], function(){
 						var _obj = $(this)[0];
 						$("#content-comingsoon-news > div").append(
 							"<p class='p-news'>"+
 							"<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
-							"<span class='has-arrears-at'>day to payment</span>"+
+							"<span class='has-arrears-at'>date to payment</span>"+
 							"<b class='news-payment'>"+_obj['Invoice_plus_credit_date']+"</b>"+
 							"</p>"
 						);
@@ -388,13 +397,13 @@ $(document).ready(function(){
       success: function(req){
 				if(req['status'] === true){
 					var length = req['obj'].length;
-					$("#content-checklistnil-news").html("<h2 class='main-topics'>Checklist is nil</h2><div class='page-list'></div>");
+					$("#content-checklistnil-news").html("<div class='page-list'></div>");
 					$.each(req['obj'], function(){
 						var _obj = $(this)[0];
 						$("#content-checklistnil-news > div").append(
 							"<p class='p-news'>"+
 							"<b><a href='#search' class='search-from-news' data-jid='"+_obj['JID']+"'>"+_obj['JID']+"</a></b>"+
-							"<span class='has-arrears-at'>checklist is nil</span>"+
+							"<span class='has-arrears-at'>checklist is later</span>"+
 							//"<b class='news-payment'>"+_obj['Invoice_plus_credit_date']+"</b>"+
 							"</p>"
 						);

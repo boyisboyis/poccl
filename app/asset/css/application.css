@@ -6,7 +6,6 @@ h1{
 
 h2{
   margin: 0;  
-  
 }
 table{
 	border-spacing: 2px 10px;
@@ -244,6 +243,78 @@ a:hover, a:focus {
   margin: 10px auto 0;
 }
 
+
+
+#main-feed {
+	width: 960px;
+	display: table;
+	margin: 40px auto 0;
+  background-color: #fbfcfc;
+}
+
+#main-feed > .main_news {
+	display: table-cell;
+	width: 70%;
+	vertical-align: top;
+}
+
+#main-feed > .main_news:first-child {
+	width: 30%
+}
+
+#main-feed > .main_news:first-child ul {
+	list-style: none;
+	border-bottom: none;
+	background-color: #f8f7ee;
+}
+
+#main-feed > .main_news:first-child ul  li{
+	padding: 10px;	
+	cursor: pointer;
+	border-left: 2px solid #bdc3c7;
+	white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  font-size: 1.1em;
+}
+
+#main-feed > .main_news:first-child ul  li:hover {
+	font-weight: bold;
+}
+
+#main-feed > .main_news:last-child ul li{
+	list-style: none;
+}
+
+#main-feed > .main_news:first-child ul li.active {
+	background-color: #FFF;
+	border-left: 2px solid #ed8151;
+	color: #000;
+}
+
+#main_details {
+	padding: 0 20px;
+	text-align: center;
+}
+
+#main_details .main_details{
+	display: none;
+}
+#main_details .main_details.active{
+	display: block;
+}
+
+#main_details h2{
+	margin-bottom: 20px;
+}
+
+#main_details .main_details .no-data{
+	color: red;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
 #wrap-main > section {
 	width: 960px;
 	margin: 0 auto;
@@ -359,6 +430,22 @@ a:hover, a:focus {
 	}
 }
 @media screen and (max-width: 960px){
+	
+	#wrap-nav {
+		width: 100%;
+	}
+	
+	#wrap-nav .sub-menu {
+		margin: 0;
+		width: 20%;
+		float: left;
+		text-align: center;
+		white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+	}
+	
+	
 	#wrap-main > section {
 		width: 100%;
 		padding: 0 20px;
@@ -368,6 +455,46 @@ a:hover, a:focus {
 		width: 100%;
 		margin-bottom: 50px;	
 	}
+	
+	
+	#main-feed{
+		width: 100%;
+		margin-bottom: 50px;
+		display: block;
+	}
+	
+	
+	#main-feed > .main_news {
+		display: block;
+		width: 100%!important;
+	}
+
+	#main-feed > .main_news:first-child ul li{
+		float: left;
+		border: none;
+		border-top: 2px solid #bdc3c7;
+		background-color: #f8f7ee;
+		width: 20%;
+		white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+	}
+
+	#main-feed > .main_news:first-child ul li:hover{
+		color: #000;
+	}
+	#main-feed  #sidebar .main_menu.active {
+		border: none;
+		border-left: none!important;
+		border-top: 2px solid #ed8151!important;
+		background-color: #FFF;
+		color: #000;
+	}
+	
+	#main_details {
+		padding: 20px;
+	}
+	
 	.nano-pane {
 		display: none;
 	}
