@@ -12,15 +12,15 @@
   <div id="main_details" class="main_news">
     <ul>
       <li class="main_details active" id="payment-news">
-        <h2>Late of payments</h2>
+        <h2>Late of Payments</h2>
         <div id="content-payment-news"><p class="no-data"><i class="fa fa-ban"></i> No Data</p></div>
       </li>
       <li class="main_details" id="comingsoon-news">
-        <h2>Payment is coming soon</h2>
+        <h2>Payment is Coming Soon</h2>
         <div id="content-comingsoon-news"><p class="no-data"<i class="fa fa-ban"></i> No Data</p></div>
       </li>
       <li class="main_details" id="guarantee-news">
-        <h2>Bank Gurantees is not return</h2>
+        <h2>Bank Gurantees is Not Return</h2>
         <div id="content-guarantee-news"<p class="no-data"><i class="fa fa-ban"></i> No Data</p></div>
       </li>
       <li class="main_details" id="poidnull-news">
