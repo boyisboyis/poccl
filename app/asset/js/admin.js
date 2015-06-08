@@ -403,6 +403,7 @@ $(document).ready(function(){
 	});
 	
 	$(window).on('click', function(e) {
+	  console.log(update);
 		if(update){
 		  
 			if(e.target.localName === 'input' && e.target.className.indexOf('input-readonly') >= 0  && e.target.className.indexOf("datepicker") < 0){
@@ -418,9 +419,12 @@ $(document).ready(function(){
 				update = $(e.target);
 			}
 			else if(e.target.localName === 'input' && e.target.className.indexOf("datepicker") >= 0){
+			  save_element();
 			  update = "";
 			}
 			else if(e.target.localName === 'select'){
+			  save_element();
+			  update = "";
 			}
 			else{
 				save_element();
@@ -502,10 +506,15 @@ $(document).ready(function(){
 		var other = update.data('other');
 		var block_id = update.data('id');
 		var value = update.val();
+		var text_class = update.attr("class");
 		$(".input-readonly").prop("readonly", true);
 		if(typeof other == 'undefined'){
 		  other = "";
 		}
+		if(text_class.indexOf("number-only") >= 0){
+		  value = value.replace(/\,/g, "");
+		}
+		console.log(value);
 		
 		if(type == "Work_Complete_Date"){
 		  var ar = [];
