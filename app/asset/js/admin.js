@@ -403,7 +403,6 @@ $(document).ready(function(){
 	});
 	
 	$(window).on('click', function(e) {
-	  console.log(update);
 		if(update){
 		  
 			if(e.target.localName === 'input' && e.target.className.indexOf('input-readonly') >= 0  && e.target.className.indexOf("datepicker") < 0){
@@ -514,7 +513,6 @@ $(document).ready(function(){
 		if(text_class.indexOf("number-only") >= 0){
 		  value = value.replace(/\,/g, "");
 		}
-		console.log(value);
 		
 		if(type == "Work_Complete_Date"){
 		  var ar = [];
