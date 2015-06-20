@@ -561,7 +561,7 @@ $(document).ready(function(){
   	    	    $("#amount_actual_percentage_guarantee-"+gid).val(value[i]["Amount_Actual_Percentage"]);
   	    	  }
   	    	}
-  	    	else if(obj["task"] == "new_po_amount") {
+  	    	/*else if(obj["task"] == "new_po_amount") {
   	    	  var value = obj["value_payment"];
   	    	  var value_count = value.length;
   	    	  for(var i = 0; i < value_count; i++) {
@@ -584,7 +584,7 @@ $(document).ready(function(){
   	    	else if(obj["task"] == "new_value_rate") {
   	    	  var value = obj["value_other"];
   	    	  $("#"+block_id).find("input[name^=contract_value_other]").val(value[0]["Contract_Value_Other"]);
-  	    	}
+  	    	}*/
         }
         else {
           $("#show-save p").html("Failed");
